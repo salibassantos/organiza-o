@@ -1,0 +1,8 @@
+{
+ "dias": 30,
+ "semente": 1,
+ "nulo": "sem_deriva",
+ "segundos": 145.3,
+ "segundos_por_dia_simulado": 4.84,
+ "memoria_maxima_mb": 88.2
+}

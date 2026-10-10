@@ -1,0 +1,23 @@
+t,numero,equipe,texto
+2102,1,operação,"Rota pedido: 103 requisições, 0 com erro e latência média de 69 ms na última meia hora; versão 1.0; volume do banco com 91% livre; fila de trabalhos com 2."
+2441,2,atendimento,"No atendimento há 4 chamados abertos, 0 ainda sem primeira resposta. De pagamento: 2 abertos, 0 escalados."
+3875,3,operação,"Rota frete: 104 requisições, 0 com erro e latência média de 210 ms na última meia hora; versão 1.1, no ar há 25 h; volume do banco com 83% livre; fila de trabalhos com 6. Rodamos 3 testes de frete contra a versão no ar: todos passam."
+5001,4,vendas,"No funil: 0 leads, 10 em qualificação, 6 propostas e 7 em negociação; 0 negócios ganhos nos últimos sete dias."
+6356,5,desenvolvimento,"Reunião marcada para dia 4, 10h30, 30 minutos, com 15 pessoas da equipe de desenvolvimento."
+10949,6,gestão,"Somos 50 pessoas; 48 trabalhando agora, 1 de férias hoje; 1 vagas abertas com 0 candidatos; 444 clientes ativos."
+12571,7,operação,"Rota busca: 147 requisições, 0 com erro e latência média de 65 ms na última meia hora; versão 1.1, no ar há 1 h; volume do banco com 61% livre; fila de trabalhos com 2. Rodamos 8 testes de catálogo e busca contra a versão no ar: todos passam."
+13624,8,qualidade,"Na qualidade há 3 itens esperando teste; nas últimas 24 h foram 13 execuções, 42 testes e 5 falhas. Refizemos os 4 testes de pedido e carrinho na versão no ar: passam."
+15405,9,atendimento,"No atendimento há 13 chamados abertos, 4 ainda sem primeira resposta. De login e conta: 1 abertos, 0 escalados. Nas próximas quatro horas respondemos primeiro os de login e conta."
+16457,10,produto,No produto há 27 histórias no backlog e em refinamento e 40 prontas para desenvolver.
+20939,11,operação,"Visão geral: versão 1.8, no ar há 66 h; volume do banco com 43% livre; fila de trabalhos com 4. 0 respostas com erro em todas as rotas na última meia hora."
+22641,12,operação,"Rota catálogo: 191 requisições, 0 com erro e latência média de 35 ms na última meia hora; versão 1.9, no ar há 2 h; volume do banco com 35% livre; fila de trabalhos com 6. Rodamos 8 testes de catálogo e busca contra a versão no ar: todos passam."
+23759,13,desenvolvimento,No desenvolvimento há 19 itens em andamento e 0 em revisão. Bugs abertos em relatórios: 0. Rodamos os 4 testes do componente na versão no ar: passam.
+25450,14,qualidade,"Na qualidade há 4 itens esperando teste; nas últimas 24 h foram 5 execuções, 5 testes e 1 falhas."
+26533,15,vendas,"No funil: 0 leads, 4 em qualificação, 7 propostas e 9 em negociação; 6 negócios ganhos nos últimos sete dias. Nos próximos dois dias a equipe retoma primeiro as propostas e negociações paradas."
+31150,16,operação,"Reunião marcada para dia 21, 16h00, 30 minutos, com 4 pessoas da equipe de operação."
+32665,17,atendimento,"No atendimento há 11 chamados abertos, 5 ainda sem primeira resposta. De frete: 2 abertos, 0 escalados."
+33876,18,gestão,"Somos 50 pessoas; 46 trabalhando agora, 3 de férias hoje; 1 vagas abertas com 0 candidatos; 452 clientes ativos. A direção marcou um alinhamento com as lideranças para dia 23, 16h30."
+35566,19,operação,"Rota pedido: 126 requisições, 0 com erro e latência média de 73 ms na última meia hora; versão 1.13, no ar há 1 h; volume do banco com 70% livre; fila de trabalhos com 89. Rodamos 4 testes de pedido e carrinho contra a versão no ar: todos passam."
+36797,20,produto,No produto há 18 histórias no backlog e em refinamento e 39 prontas para desenvolver. Registramos a história PROD-152 com prioridade alta.
+40913,21,qualidade,"Reunião marcada para dia 28, 13h30, 30 minutos, com 5 pessoas da equipe de qualidade."
+42767,22,desenvolvimento,No desenvolvimento há 19 itens em andamento e 1 em revisão. Bugs abertos em frete: 0.

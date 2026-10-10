@@ -1198,7 +1198,7 @@ class Empresa:
             else:
                 crm.adiar(t, n[0], t + s.randint(2, 4) * MINUTOS_DIA)
             return
-        ganho = 0.145 * (1.6 if fim_mes else 1.0)
+        ganho = 0.135 * (1.6 if fim_mes else 1.0)
         r = s.random()
         if r < ganho:
             crm.mover(t, n[0], "ganho")

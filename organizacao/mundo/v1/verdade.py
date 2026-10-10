@@ -39,6 +39,7 @@ class Verdade:
         self.latencia_dia = {r: [] for r in ROTAS}     # (dia, média da latência no horário comercial)
         self._lat = {r: [0.0, 0] for r in ROTAS}
         self.queda_processo = []
+        self.quedas = []
         self._caindo = None
         self.chamados_por_causa = {"defeito": 0, "incidente": 0, "queda do processo": 0, "outros": 0}
 
@@ -111,6 +112,8 @@ class Verdade:
             self._causa_chamado(item, achou)
             return
         inc = self.incidente_aberto or (self.incidentes[-1] if self.incidentes else None)
+        if inc is not None and inc["causa"] != "volume do banco cheio":
+            inc = self.incidentes[-1] if self.incidentes else None
         if motivo in ("erro", "lentidão") and inc is not None and quando is not None and inc["inicio"] <= quando <= (inc["fim"] or t):
             inc["chamados"] += 1
             if inc["primeiro_chamado"] is None:
@@ -138,7 +141,10 @@ class Verdade:
             self.incidente_aberto = {"inicio": t, "fim": None, "causa": "volume do banco cheio" if livre < 200 else "processo parado",
                                      "primeiro_chamado": None, "chamados": 0, "primeira_escalacao": None, "escalacoes": 0,
                                      "folga_dada_em_dias": None, "registros_apagados": None}
-            self.incidentes.append(self.incidente_aberto)
+            if self.incidente_aberto["causa"] == "volume do banco cheio":
+                self.incidentes.append(self.incidente_aberto)
+            else:
+                self.quedas.append(self.incidente_aberto)        # a queda curta do processo por falta de memória (um defeito no ar)
         elif not falhando and self.incidente_aberto is not None:
             self.incidente_aberto["fim"] = t
             self.incidente_aberto["duracao_min"] = t - self.incidente_aberto["inicio"]
@@ -252,7 +258,7 @@ class Verdade:
             "sprints_de_pressa": [s for s in self.sprints if s["pressa"]],
             "defeitos_escritos": self.defeitos_escritos,
             "defeitos_barrados_antes_do_ar": self.defeitos_barrados,
-            "quedas_do_processo_por_memoria": self.queda_processo,
+            "quedas_do_processo_por_memoria": {"erros_no_registro": self.queda_processo, "sonda_parada": self.quedas},
             "pessoal": self.pessoal or [],
             "chamados_por_causa": self.chamados_por_causa,
             "atos": self.atos,

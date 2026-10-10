@@ -227,7 +227,7 @@ class Mundo:
         s = self.mercado
         n = self.clientes.ativos() if t % 60 == 0 or not hasattr(self, "_n_cache") else self._n_cache
         self._n_cache = n
-        lam = (0.0019 if (cal.util and 8 * 60 <= cal.minuto < 20 * 60) else 0.0003) * n / 400.0
+        lam = (0.0016 if (cal.util and 8 * 60 <= cal.minuto < 20 * 60) else 0.00025) * n / 400.0
         if s.random() < lam:
             plano = _plano(s)
             self.crm.novo(t, "site", plano, VALOR_PLANO[plano], proxima=t + s.randint(10, 180))

@@ -1,0 +1,1821 @@
+{
+ "semente": 1,
+ "nulo": null,
+ "minutos": 43200,
+ "convencao_do_tempo": "t = 0 é a criação (segunda-feira, 0h); cada passo avança t e faz acontecer o minuto t",
+ "ciclos": {
+  "dia_util": "as pessoas trabalham das 8h às 18h nos dias úteis; os clientes usam o produto no horário comercial deles, com almoço mais vazio e picos às 10h e às 15h; tarefas agendadas do servidor rodam de madrugada (cópia às 2h, limpeza de sessões às 3h, reposição de estoque às 4h, resumo às 7h)",
+  "semana": "segunda-feira com mais uso e mais chamados (inclusive os guardados do fim de semana); sexta com menos uso e gente saindo mais cedo; liberações às terças e quintas a partir das 15h; reindexação aos domingos 4h30",
+  "sprint": "sprints de duas semanas que começam às segundas; planejamento no primeiro dia, revisão e retrospectiva na sexta da segunda semana, liberação extra nessa sexta de manhã; a pressa cresce no fim quando o sprint está atrasado",
+  "mes": "faturamento no dia 1 às 6h (fila de trabalhos cheia); reunião mensal no primeiro dia útil; vendas fecham mais nos últimos seis dias do mês; as lojas tiram mais relatórios no fim do mês",
+  "fins_de_sprint": [
+   {
+    "t": 20805,
+    "projeto": "SUP",
+    "numero": 1
+   },
+   {
+    "t": 20820,
+    "projeto": "INFRA",
+    "numero": 1
+   },
+   {
+    "t": 20910,
+    "projeto": "PROD",
+    "numero": 1
+   },
+   {
+    "t": 21120,
+    "projeto": "PLAT",
+    "numero": 1
+   },
+   {
+    "t": 40965,
+    "projeto": "SUP",
+    "numero": 2
+   },
+   {
+    "t": 40980,
+    "projeto": "INFRA",
+    "numero": 2
+   },
+   {
+    "t": 41070,
+    "projeto": "PROD",
+    "numero": 2
+   },
+   {
+    "t": 41280,
+    "projeto": "PLAT",
+    "numero": 2
+   }
+  ],
+  "fins_de_mes": [
+   41760
+  ]
+ },
+ "liberacoes": [
+  {
+   "t": 2369,
+   "versao": "1.1",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 5235,
+   "versao": "1.2",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "ler_quantidade",
+     "um_digito"
+    ],
+    [
+     "paginar",
+     "ultima_pagina"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 5269,
+   "versao": "1.1",
+   "tipo": "reversão",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "ler_quantidade",
+     "um_digito"
+    ],
+    [
+     "paginar",
+     "ultima_pagina"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 12450,
+   "versao": "1.3",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "enviar_email",
+     "nome_fantasia"
+    ],
+    [
+     "paginar",
+     "ultima_pagina"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 12506,
+   "versao": "1.1",
+   "tipo": "reversão",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "enviar_email",
+     "nome_fantasia"
+    ],
+    [
+     "paginar",
+     "ultima_pagina"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 15325,
+   "versao": "1.4",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "emitir_nota",
+     "aliquota_regional"
+    ],
+    [
+     "enviar_email",
+     "nome_fantasia"
+    ],
+    [
+     "ler_quantidade",
+     "um_digito"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": [
+    "listar_notas"
+   ]
+  },
+  {
+   "t": 15355,
+   "versao": "1.5",
+   "tipo": "correção",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "emitir_nota",
+     "aliquota_regional"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 15444,
+   "versao": "1.6",
+   "tipo": "correção",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "ler_quantidade",
+     "um_digito"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 16519,
+   "versao": "1.7",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 16945,
+   "versao": "1.8",
+   "tipo": "correção",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "enviar_email",
+     "nome_fantasia"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 22521,
+   "versao": "1.9",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 25408,
+   "versao": "1.10",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "normalizar_login",
+     "ascii"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 25444,
+   "versao": "1.9",
+   "tipo": "reversão",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "normalizar_login",
+     "ascii"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 32610,
+   "versao": "1.11",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "enviar_email",
+     "nome_fantasia"
+    ],
+    [
+     "guardar_sessao",
+     "sem_expiracao"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 34027,
+   "versao": "1.12",
+   "tipo": "correção",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "enviar_email",
+     "nome_fantasia"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 35476,
+   "versao": "1.13",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "emitir_nota",
+     "aliquota_regional"
+    ],
+    [
+     "registrar_cobranca",
+     "sem_verificacao"
+    ]
+   ],
+   "defeitos_que_sairam": [
+    [
+     "guardar_sessao",
+     "sem_expiracao"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 36681,
+   "versao": "1.14",
+   "tipo": "correção",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "registrar_cobranca",
+     "sem_verificacao"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 36692,
+   "versao": "1.15",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "calcular_frete",
+     "numerico"
+    ],
+    [
+     "paginar",
+     "ultima_pagina"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 36796,
+   "versao": "1.14",
+   "tipo": "reversão",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "calcular_frete",
+     "numerico"
+    ],
+    [
+     "paginar",
+     "ultima_pagina"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 36807,
+   "versao": "1.16",
+   "tipo": "correção",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "emitir_nota",
+     "aliquota_regional"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 42694,
+   "versao": "1.17",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "guardar_sessao",
+     "sem_expiracao"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": [
+    "recomendar",
+    "verificar_senha"
+   ]
+  }
+ ],
+ "liberacoes_com_defeito": [
+  {
+   "t": 5235,
+   "versao": "1.2",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "ler_quantidade",
+     "um_digito"
+    ],
+    [
+     "paginar",
+     "ultima_pagina"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 12450,
+   "versao": "1.3",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "enviar_email",
+     "nome_fantasia"
+    ],
+    [
+     "paginar",
+     "ultima_pagina"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 15325,
+   "versao": "1.4",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "emitir_nota",
+     "aliquota_regional"
+    ],
+    [
+     "enviar_email",
+     "nome_fantasia"
+    ],
+    [
+     "ler_quantidade",
+     "um_digito"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": [
+    "listar_notas"
+   ]
+  },
+  {
+   "t": 25408,
+   "versao": "1.10",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "normalizar_login",
+     "ascii"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 32610,
+   "versao": "1.11",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "enviar_email",
+     "nome_fantasia"
+    ],
+    [
+     "guardar_sessao",
+     "sem_expiracao"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 35476,
+   "versao": "1.13",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "emitir_nota",
+     "aliquota_regional"
+    ],
+    [
+     "registrar_cobranca",
+     "sem_verificacao"
+    ]
+   ],
+   "defeitos_que_sairam": [
+    [
+     "guardar_sessao",
+     "sem_expiracao"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 36692,
+   "versao": "1.15",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "calcular_frete",
+     "numerico"
+    ],
+    [
+     "paginar",
+     "ultima_pagina"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 42694,
+   "versao": "1.17",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "guardar_sessao",
+     "sem_expiracao"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": [
+    "recomendar",
+    "verificar_senha"
+   ]
+  }
+ ],
+ "episodios_de_defeito_no_ar": [
+  {
+   "funcao": "ler_quantidade",
+   "implementacao": "um_digito",
+   "componente": "pedido",
+   "como_aparece": "exceção",
+   "descricao": "carrinho e pedido quebram com quantidade de dois algarismos ou mais",
+   "liberado_em": 5235,
+   "versao": "1.2",
+   "primeiro_erro": 5236,
+   "erros": 114,
+   "primeiro_chamado": 5245,
+   "chamados": 7,
+   "primeira_escalacao": 5270,
+   "escalacoes": 7,
+   "saiu_do_ar": 5269,
+   "saiu_por": "reversão"
+  },
+  {
+   "funcao": "paginar",
+   "implementacao": "ultima_pagina",
+   "componente": "catalogo",
+   "como_aparece": "exceção",
+   "descricao": "a última página incompleta do catálogo quebra",
+   "liberado_em": 5235,
+   "versao": "1.2",
+   "primeiro_erro": 5236,
+   "erros": 195,
+   "primeiro_chamado": 5250,
+   "chamados": 7,
+   "primeira_escalacao": 5270,
+   "escalacoes": 7,
+   "saiu_do_ar": 5269,
+   "saiu_por": "reversão"
+  },
+  {
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "componente": "notificacao",
+   "como_aparece": "fila",
+   "descricao": "o e-mail falha para cliente sem nome fantasia e a fila cresce",
+   "liberado_em": 12450,
+   "versao": "1.3",
+   "primeiro_erro": 12451,
+   "erros": 59,
+   "primeiro_chamado": null,
+   "chamados": 0,
+   "primeira_escalacao": null,
+   "escalacoes": 0,
+   "saiu_do_ar": 12506,
+   "saiu_por": "reversão"
+  },
+  {
+   "funcao": "paginar",
+   "implementacao": "ultima_pagina",
+   "componente": "catalogo",
+   "como_aparece": "exceção",
+   "descricao": "a última página incompleta do catálogo quebra",
+   "liberado_em": 12450,
+   "versao": "1.3",
+   "primeiro_erro": 12451,
+   "erros": 363,
+   "primeiro_chamado": 12457,
+   "chamados": 11,
+   "primeira_escalacao": 12552,
+   "escalacoes": 11,
+   "saiu_do_ar": 12506,
+   "saiu_por": "reversão"
+  },
+  {
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "componente": "fiscal",
+   "como_aparece": "fila",
+   "descricao": "a nota falha para clientes fora do Sul e do Sudeste e a fila cresce",
+   "liberado_em": 15325,
+   "versao": "1.4",
+   "primeiro_erro": 15326,
+   "erros": 27,
+   "primeiro_chamado": null,
+   "chamados": 0,
+   "primeira_escalacao": null,
+   "escalacoes": 0,
+   "saiu_do_ar": 15355,
+   "saiu_por": "correção"
+  },
+  {
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "componente": "notificacao",
+   "como_aparece": "fila",
+   "descricao": "o e-mail falha para cliente sem nome fantasia e a fila cresce",
+   "liberado_em": 15325,
+   "versao": "1.4",
+   "primeiro_erro": 15326,
+   "erros": 1671,
+   "primeiro_chamado": null,
+   "chamados": 0,
+   "primeira_escalacao": null,
+   "escalacoes": 0,
+   "saiu_do_ar": 16945,
+   "saiu_por": "correção"
+  },
+  {
+   "funcao": "ler_quantidade",
+   "implementacao": "um_digito",
+   "componente": "pedido",
+   "como_aparece": "exceção",
+   "descricao": "carrinho e pedido quebram com quantidade de dois algarismos ou mais",
+   "liberado_em": 15325,
+   "versao": "1.4",
+   "primeiro_erro": 15327,
+   "erros": 432,
+   "primeiro_chamado": 15348,
+   "chamados": 14,
+   "primeira_escalacao": 15402,
+   "escalacoes": 14,
+   "saiu_do_ar": 15444,
+   "saiu_por": "correção"
+  },
+  {
+   "funcao": "normalizar_login",
+   "implementacao": "ascii",
+   "componente": "login",
+   "como_aparece": "exceção",
+   "descricao": "o login quebra para quem tem acento no nome de usuário",
+   "liberado_em": 25408,
+   "versao": "1.10",
+   "primeiro_erro": 25409,
+   "erros": 282,
+   "primeiro_chamado": 25412,
+   "chamados": 13,
+   "primeira_escalacao": 25436,
+   "escalacoes": 13,
+   "saiu_do_ar": 25444,
+   "saiu_por": "reversão"
+  },
+  {
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "componente": "notificacao",
+   "como_aparece": "fila",
+   "descricao": "o e-mail falha para cliente sem nome fantasia e a fila cresce",
+   "liberado_em": 32610,
+   "versao": "1.11",
+   "primeiro_erro": 32611,
+   "erros": 1860,
+   "primeiro_chamado": null,
+   "chamados": 0,
+   "primeira_escalacao": null,
+   "escalacoes": 0,
+   "saiu_do_ar": 34027,
+   "saiu_por": "correção"
+  },
+  {
+   "funcao": "guardar_sessao",
+   "implementacao": "sem_expiracao",
+   "componente": "login",
+   "como_aparece": "memória",
+   "descricao": "as sessões nunca saem do cache e a memória cresce até o processo cair",
+   "liberado_em": 32610,
+   "versao": "1.11",
+   "primeiro_erro": null,
+   "erros": 0,
+   "primeiro_chamado": null,
+   "chamados": 0,
+   "primeira_escalacao": null,
+   "escalacoes": 0,
+   "saiu_do_ar": 35476,
+   "saiu_por": "regular"
+  },
+  {
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "componente": "fiscal",
+   "como_aparece": "fila",
+   "descricao": "a nota falha para clientes fora do Sul e do Sudeste e a fila cresce",
+   "liberado_em": 35476,
+   "versao": "1.13",
+   "primeiro_erro": 35478,
+   "erros": 2378,
+   "primeiro_chamado": null,
+   "chamados": 0,
+   "primeira_escalacao": null,
+   "escalacoes": 0,
+   "saiu_do_ar": 36807,
+   "saiu_por": "correção"
+  },
+  {
+   "funcao": "registrar_cobranca",
+   "implementacao": "sem_verificacao",
+   "componente": "pagamento",
+   "como_aparece": "gravação dupla",
+   "descricao": "o clique duplo cobra e grava o pagamento duas vezes",
+   "liberado_em": 35476,
+   "versao": "1.13",
+   "primeiro_erro": null,
+   "erros": 0,
+   "primeiro_chamado": 35876,
+   "chamados": 25,
+   "primeira_escalacao": 36540,
+   "escalacoes": 25,
+   "saiu_do_ar": 36681,
+   "saiu_por": "correção"
+  },
+  {
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "componente": "frete",
+   "como_aparece": "exceção",
+   "descricao": "frete e pedido quebram para CEP que começa com zero",
+   "liberado_em": 36692,
+   "versao": "1.15",
+   "primeiro_erro": 36693,
+   "erros": 45,
+   "primeiro_chamado": 36773,
+   "chamados": 2,
+   "primeira_escalacao": 36909,
+   "escalacoes": 2,
+   "saiu_do_ar": 36796,
+   "saiu_por": "reversão"
+  },
+  {
+   "funcao": "paginar",
+   "implementacao": "ultima_pagina",
+   "componente": "catalogo",
+   "como_aparece": "exceção",
+   "descricao": "a última página incompleta do catálogo quebra",
+   "liberado_em": 36692,
+   "versao": "1.15",
+   "primeiro_erro": 36693,
+   "erros": 318,
+   "primeiro_chamado": 36717,
+   "chamados": 12,
+   "primeira_escalacao": 36814,
+   "escalacoes": 12,
+   "saiu_do_ar": 36796,
+   "saiu_por": "reversão"
+  },
+  {
+   "funcao": "guardar_sessao",
+   "implementacao": "sem_expiracao",
+   "componente": "login",
+   "como_aparece": "memória",
+   "descricao": "as sessões nunca saem do cache e a memória cresce até o processo cair",
+   "liberado_em": 42694,
+   "versao": "1.17",
+   "primeiro_erro": null,
+   "erros": 0,
+   "primeiro_chamado": null,
+   "chamados": 0,
+   "primeira_escalacao": null,
+   "escalacoes": 0,
+   "saiu_do_ar": null,
+   "saiu_por": null
+  }
+ ],
+ "incidentes": [
+  {
+   "inicio": 35214,
+   "fim": 35266,
+   "causa": "volume do banco cheio",
+   "primeiro_chamado": 35222,
+   "chamados": 27,
+   "primeira_escalacao": 35231,
+   "escalacoes": 27,
+   "folga_dada_em_dias": 33,
+   "registros_apagados": 628452,
+   "causa_diagnosticada": "volume do banco cheio",
+   "duracao_min": 52
+  }
+ ],
+ "mudancas_de_regime": [
+  {
+   "t": 15325,
+   "versao": "1.4",
+   "funcao": "listar_notas",
+   "de": "todas",
+   "para": "paginada",
+   "rotas": [
+    "notas"
+   ],
+   "tipo": "mudança de regime",
+   "latencia_media_7_dias_antes": [
+    46.5
+   ],
+   "latencia_media_7_dias_depois": [
+    33.1
+   ]
+  },
+  {
+   "t": 42694,
+   "versao": "1.17",
+   "funcao": "recomendar",
+   "de": "nenhuma",
+   "para": "historico",
+   "rotas": [
+    "catalogo"
+   ],
+   "tipo": "mudança de regime",
+   "latencia_media_7_dias_antes": [
+    36.2
+   ],
+   "latencia_media_7_dias_depois": [
+    null
+   ]
+  },
+  {
+   "t": 42694,
+   "versao": "1.17",
+   "funcao": "verificar_senha",
+   "de": "simples",
+   "para": "reforcada",
+   "rotas": [
+    "login"
+   ],
+   "tipo": "mudança de regime",
+   "latencia_media_7_dias_antes": [
+    45.0
+   ],
+   "latencia_media_7_dias_depois": [
+    null
+   ]
+  }
+ ],
+ "deriva": {
+  "carteira_por_dia": [
+   [
+    1,
+    440
+   ],
+   [
+    1440,
+    440
+   ],
+   [
+    2880,
+    440
+   ],
+   [
+    4320,
+    440
+   ],
+   [
+    5760,
+    440
+   ],
+   [
+    7200,
+    441
+   ],
+   [
+    8640,
+    441
+   ],
+   [
+    10080,
+    441
+   ],
+   [
+    11520,
+    444
+   ],
+   [
+    12960,
+    444
+   ],
+   [
+    14400,
+    443
+   ],
+   [
+    15840,
+    444
+   ],
+   [
+    17280,
+    444
+   ],
+   [
+    18720,
+    444
+   ],
+   [
+    20160,
+    444
+   ],
+   [
+    21600,
+    446
+   ],
+   [
+    23040,
+    447
+   ],
+   [
+    24480,
+    449
+   ],
+   [
+    25920,
+    449
+   ],
+   [
+    27360,
+    453
+   ],
+   [
+    28800,
+    453
+   ],
+   [
+    30240,
+    453
+   ],
+   [
+    31680,
+    453
+   ],
+   [
+    33120,
+    451
+   ],
+   [
+    34560,
+    452
+   ],
+   [
+    36000,
+    455
+   ],
+   [
+    37440,
+    457
+   ],
+   [
+    38880,
+    457
+   ],
+   [
+    40320,
+    457
+   ],
+   [
+    41760,
+    461
+   ],
+   [
+    43200,
+    464
+   ]
+  ],
+  "crescimento_por_semana_em_porcento": [
+   0.23,
+   0.68,
+   2.03,
+   0.88
+  ],
+  "entradas_e_saidas": [
+   [
+    6572,
+    "entrada",
+    "básico"
+   ],
+   [
+    10723,
+    "entrada",
+    "básico"
+   ],
+   [
+    10730,
+    "entrada",
+    "básico"
+   ],
+   [
+    10874,
+    "entrada",
+    "pro"
+   ],
+   [
+    13825,
+    "saída",
+    "pro"
+   ],
+   [
+    15272,
+    "entrada",
+    "básico"
+   ],
+   [
+    20813,
+    "entrada",
+    "básico"
+   ],
+   [
+    20846,
+    "entrada",
+    "básico"
+   ],
+   [
+    20936,
+    "entrada",
+    "básico"
+   ],
+   [
+    20998,
+    "saída",
+    "básico"
+   ],
+   [
+    22336,
+    "entrada",
+    "básico"
+   ],
+   [
+    23706,
+    "entrada",
+    "pro"
+   ],
+   [
+    23856,
+    "entrada",
+    "básico"
+   ],
+   [
+    26784,
+    "entrada",
+    "básico"
+   ],
+   [
+    26796,
+    "entrada",
+    "básico"
+   ],
+   [
+    26871,
+    "entrada",
+    "empresarial"
+   ],
+   [
+    26881,
+    "entrada",
+    "básico"
+   ],
+   [
+    32329,
+    "saída",
+    "pro"
+   ],
+   [
+    32362,
+    "saída",
+    "básico"
+   ],
+   [
+    33815,
+    "entrada",
+    "básico"
+   ],
+   [
+    35316,
+    "entrada",
+    "básico"
+   ],
+   [
+    35489,
+    "entrada",
+    "básico"
+   ],
+   [
+    35524,
+    "entrada",
+    "pro"
+   ],
+   [
+    36919,
+    "entrada",
+    "básico"
+   ],
+   [
+    37070,
+    "entrada",
+    "pro"
+   ],
+   [
+    40888,
+    "entrada",
+    "básico"
+   ],
+   [
+    41140,
+    "entrada",
+    "básico"
+   ],
+   [
+    41297,
+    "entrada",
+    "pro"
+   ],
+   [
+    41378,
+    "entrada",
+    "pro"
+   ],
+   [
+    42494,
+    "entrada",
+    "pro"
+   ],
+   [
+    42712,
+    "entrada",
+    "básico"
+   ],
+   [
+    42717,
+    "entrada",
+    "pro"
+   ]
+  ]
+ },
+ "sprints": [
+  {
+   "projeto": "PROD",
+   "numero": 1,
+   "inicio": 750,
+   "meta_pontos": 54,
+   "capacidade_pontos": 54,
+   "meta_sobre_capacidade": 1.0,
+   "pressa": false,
+   "fim": 20910,
+   "pontos_feitos": 41
+  },
+  {
+   "projeto": "PLAT",
+   "numero": 1,
+   "inicio": 960,
+   "meta_pontos": 36,
+   "capacidade_pontos": 36,
+   "meta_sobre_capacidade": 1.0,
+   "pressa": false,
+   "fim": 21120,
+   "pontos_feitos": 34
+  },
+  {
+   "projeto": "PROD",
+   "numero": 2,
+   "inicio": 20910,
+   "meta_pontos": 86,
+   "capacidade_pontos": 38,
+   "meta_sobre_capacidade": 2.26,
+   "pressa": true,
+   "fim": 41070,
+   "pontos_feitos": 117
+  },
+  {
+   "projeto": "PLAT",
+   "numero": 2,
+   "inicio": 21120,
+   "meta_pontos": 35,
+   "capacidade_pontos": 35,
+   "meta_sobre_capacidade": 1.0,
+   "pressa": false,
+   "fim": 41280,
+   "pontos_feitos": 63
+  },
+  {
+   "projeto": "PROD",
+   "numero": 3,
+   "inicio": 41070,
+   "meta_pontos": 72,
+   "capacidade_pontos": 72,
+   "meta_sobre_capacidade": 1.0,
+   "pressa": false,
+   "fim": null,
+   "pontos_feitos": null
+  },
+  {
+   "projeto": "PLAT",
+   "numero": 3,
+   "inicio": 41280,
+   "meta_pontos": 40,
+   "capacidade_pontos": 39,
+   "meta_sobre_capacidade": 1.03,
+   "pressa": false,
+   "fim": null,
+   "pontos_feitos": null
+  }
+ ],
+ "sprints_de_pressa": [
+  {
+   "projeto": "PROD",
+   "numero": 2,
+   "inicio": 20910,
+   "meta_pontos": 86,
+   "capacidade_pontos": 38,
+   "meta_sobre_capacidade": 2.26,
+   "pressa": true,
+   "fim": 41070,
+   "pontos_feitos": 117
+  }
+ ],
+ "defeitos_escritos": [
+  {
+   "t": 4920,
+   "item": 17,
+   "projeto": "PROD",
+   "funcao": "paginar",
+   "implementacao": "ultima_pagina",
+   "pressa_do_squad": 1.53
+  },
+  {
+   "t": 4987,
+   "item": 25,
+   "projeto": "PROD",
+   "funcao": "ler_quantidade",
+   "implementacao": "um_digito",
+   "pressa_do_squad": 1.53
+  },
+  {
+   "t": 5227,
+   "item": 46,
+   "projeto": "PROD",
+   "funcao": "normalizar_termo",
+   "implementacao": "ascii",
+   "pressa_do_squad": 1.53
+  },
+  {
+   "t": 7000,
+   "item": 18,
+   "projeto": "PROD",
+   "funcao": "paginar",
+   "implementacao": "ultima_pagina",
+   "pressa_do_squad": 1.78
+  },
+  {
+   "t": 10989,
+   "item": 47,
+   "projeto": "PROD",
+   "funcao": "normalizar_termo",
+   "implementacao": "ascii",
+   "pressa_do_squad": 1.93
+  },
+  {
+   "t": 11001,
+   "item": 65,
+   "projeto": "PLAT",
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "pressa_do_squad": 1.98
+  },
+  {
+   "t": 11061,
+   "item": 69,
+   "projeto": "PLAT",
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "pressa_do_squad": 1.98
+  },
+  {
+   "t": 12082,
+   "item": 34,
+   "projeto": "PROD",
+   "funcao": "ler_quantidade",
+   "implementacao": "um_digito",
+   "pressa_do_squad": 2.26
+  },
+  {
+   "t": 12223,
+   "item": 20,
+   "projeto": "PROD",
+   "funcao": "ler_quantidade",
+   "implementacao": "um_digito",
+   "pressa_do_squad": 2.26
+  },
+  {
+   "t": 12352,
+   "item": 64,
+   "projeto": "PLAT",
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "pressa_do_squad": 2.47
+  },
+  {
+   "t": 13574,
+   "item": 31,
+   "projeto": "PROD",
+   "funcao": "montar_relatorio",
+   "implementacao": "sem_filtro",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 13774,
+   "item": 24,
+   "projeto": "PROD",
+   "funcao": "montar_relatorio",
+   "implementacao": "sem_filtro",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 15000,
+   "item": 71,
+   "projeto": "PLAT",
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 16398,
+   "item": 54,
+   "projeto": "PLAT",
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 16489,
+   "item": 59,
+   "projeto": "PLAT",
+   "funcao": "guardar_sessao",
+   "implementacao": "sem_expiracao",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 16550,
+   "item": 32,
+   "projeto": "PROD",
+   "funcao": "normalizar_termo",
+   "implementacao": "ascii",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 22156,
+   "item": 63,
+   "projeto": "PLAT",
+   "funcao": "normalizar_login",
+   "implementacao": "ascii",
+   "pressa_do_squad": 1.12
+  },
+  {
+   "t": 22760,
+   "item": 110,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 2.18
+  },
+  {
+   "t": 23830,
+   "item": 106,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 1.94
+  },
+  {
+   "t": 25285,
+   "item": 497,
+   "projeto": "PLAT",
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "pressa_do_squad": 0.99
+  },
+  {
+   "t": 25444,
+   "item": 113,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 2.02
+  },
+  {
+   "t": 31271,
+   "item": 67,
+   "projeto": "PLAT",
+   "funcao": "guardar_sessao",
+   "implementacao": "sem_expiracao",
+   "pressa_do_squad": 2.46
+  },
+  {
+   "t": 32780,
+   "item": 503,
+   "projeto": "PROD",
+   "funcao": "normalizar_termo",
+   "implementacao": "ascii",
+   "pressa_do_squad": 2.33
+  },
+  {
+   "t": 33668,
+   "item": 78,
+   "projeto": "PLAT",
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 33908,
+   "item": 512,
+   "projeto": "PROD",
+   "funcao": "registrar_cobranca",
+   "implementacao": "sem_verificacao",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 34037,
+   "item": 51,
+   "projeto": "PLAT",
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 34160,
+   "item": 466,
+   "projeto": "PROD",
+   "funcao": "paginar",
+   "implementacao": "ultima_pagina",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 34264,
+   "item": 672,
+   "projeto": "PROD",
+   "funcao": "exportar_csv",
+   "implementacao": "n_mais_um",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 35578,
+   "item": 2,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 35618,
+   "item": 62,
+   "projeto": "PLAT",
+   "funcao": "atualizar_conta",
+   "implementacao": "telefone",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 35697,
+   "item": 810,
+   "projeto": "PROD",
+   "funcao": "paginar",
+   "implementacao": "ultima_pagina",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 36628,
+   "item": 583,
+   "projeto": "PROD",
+   "funcao": "normalizar_termo",
+   "implementacao": "ascii",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 37029,
+   "item": 202,
+   "projeto": "PLAT",
+   "funcao": "guardar_sessao",
+   "implementacao": "sem_expiracao",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 42558,
+   "item": 4,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 1.23
+  },
+  {
+   "t": 42778,
+   "item": 11,
+   "projeto": "PROD",
+   "funcao": "registrar_cobranca",
+   "implementacao": "sem_verificacao",
+   "pressa_do_squad": 1.23
+  }
+ ],
+ "defeitos_barrados_antes_do_ar": [
+  {
+   "t": 6755,
+   "item": 33,
+   "funcao": "normalizar_termo",
+   "por": "qualidade"
+  },
+  {
+   "t": 11063,
+   "item": 65,
+   "funcao": "enviar_email",
+   "por": "revisão de código"
+  },
+  {
+   "t": 12149,
+   "item": 34,
+   "funcao": "ler_quantidade",
+   "por": "revisão de código"
+  },
+  {
+   "t": 12330,
+   "item": 47,
+   "funcao": "recomendar",
+   "por": "qualidade"
+  },
+  {
+   "t": 13538,
+   "item": 72,
+   "funcao": "enviar_email",
+   "por": "qualidade"
+  },
+  {
+   "t": 13570,
+   "item": 47,
+   "funcao": "normalizar_termo",
+   "por": "qualidade"
+  },
+  {
+   "t": 14059,
+   "item": 24,
+   "funcao": "montar_relatorio",
+   "por": "qualidade"
+  },
+  {
+   "t": 14941,
+   "item": 31,
+   "funcao": "montar_relatorio",
+   "por": "qualidade"
+  },
+  {
+   "t": 15045,
+   "item": 64,
+   "funcao": "emitir_nota",
+   "por": "regressão"
+  },
+  {
+   "t": 16536,
+   "item": 54,
+   "funcao": "emitir_nota",
+   "por": "qualidade"
+  },
+  {
+   "t": 16942,
+   "item": 318,
+   "funcao": "guardar_sessao",
+   "por": "qualidade"
+  },
+  {
+   "t": 20702,
+   "item": 32,
+   "funcao": "normalizar_termo",
+   "por": "qualidade"
+  },
+  {
+   "t": 22823,
+   "item": 110,
+   "funcao": "calcular_frete",
+   "por": "revisão de código"
+  },
+  {
+   "t": 24117,
+   "item": 106,
+   "funcao": "calcular_frete",
+   "por": "qualidade"
+  },
+  {
+   "t": 27009,
+   "item": 115,
+   "funcao": "calcular_frete",
+   "por": "qualidade"
+  },
+  {
+   "t": 33732,
+   "item": 503,
+   "funcao": "normalizar_termo",
+   "por": "qualidade"
+  },
+  {
+   "t": 33733,
+   "item": 78,
+   "funcao": "emitir_nota",
+   "por": "revisão de código"
+  },
+  {
+   "t": 35201,
+   "item": 672,
+   "funcao": "exportar_csv",
+   "por": "revisão de código"
+  },
+  {
+   "t": 35217,
+   "item": 466,
+   "funcao": "paginar",
+   "por": "regressão"
+  },
+  {
+   "t": 35251,
+   "item": 465,
+   "funcao": "paginar",
+   "por": "qualidade"
+  },
+  {
+   "t": 35251,
+   "item": 465,
+   "funcao": "recomendar",
+   "por": "qualidade"
+  },
+  {
+   "t": 36884,
+   "item": 583,
+   "funcao": "normalizar_termo",
+   "por": "qualidade"
+  },
+  {
+   "t": 36884,
+   "item": 583,
+   "funcao": "recomendar",
+   "por": "qualidade"
+  },
+  {
+   "t": 40795,
+   "item": 499,
+   "funcao": "atualizar_conta",
+   "por": "qualidade"
+  },
+  {
+   "t": 40930,
+   "item": 202,
+   "funcao": "atualizar_conta",
+   "por": "qualidade"
+  },
+  {
+   "t": 40991,
+   "item": 276,
+   "funcao": "atualizar_conta",
+   "por": "qualidade"
+  },
+  {
+   "t": 42497,
+   "item": 276,
+   "funcao": "guardar_sessao",
+   "por": "qualidade"
+  },
+  {
+   "t": 42767,
+   "item": 4,
+   "funcao": "calcular_frete",
+   "por": "qualidade"
+  }
+ ],
+ "quedas_do_processo_por_memoria": {
+  "erros_no_registro": [],
+  "sonda_parada": []
+ },
+ "pessoal": [
+  {
+   "t": 23040,
+   "tipo": "contratação",
+   "equipe": "atendimento"
+  },
+  {
+   "t": 24480,
+   "tipo": "saída",
+   "equipe": "qualidade"
+  }
+ ],
+ "chamados_por_causa": {
+  "defeito": 91,
+  "incidente": 27,
+  "queda do processo": 0,
+  "outros": 609
+ },
+ "atos": {
+  "1": {
+   "recebido": 2040,
+   "equipe": "operação",
+   "tipo": "pergunta",
+   "respondido": 2102
+  },
+  "2": {
+   "recebido": 2430,
+   "equipe": "atendimento",
+   "tipo": "pergunta",
+   "respondido": 2441
+  },
+  "3": {
+   "recebido": 3825,
+   "equipe": "operação",
+   "tipo": "pedido",
+   "respondido": 3875
+  },
+  "4": {
+   "recebido": 4980,
+   "equipe": "vendas",
+   "tipo": "pergunta",
+   "respondido": 5001
+  },
+  "5": {
+   "recebido": 6330,
+   "equipe": "desenvolvimento",
+   "tipo": "convocacao",
+   "respondido": 6356
+  },
+  "6": {
+   "recebido": 10920,
+   "equipe": "gestão",
+   "tipo": "pergunta",
+   "respondido": 10949
+  },
+  "7": {
+   "recebido": 12500,
+   "equipe": "operação",
+   "tipo": "pedido",
+   "respondido": 12571
+  },
+  "8": {
+   "recebido": 13575,
+   "equipe": "qualidade",
+   "tipo": "pedido",
+   "respondido": 13624
+  },
+  "9": {
+   "recebido": 15370,
+   "equipe": "atendimento",
+   "tipo": "pedido",
+   "respondido": 15405
+  },
+  "10": {
+   "recebido": 16430,
+   "equipe": "produto",
+   "tipo": "pergunta",
+   "respondido": 16457
+  },
+  "11": {
+   "recebido": 20850,
+   "equipe": "operação",
+   "tipo": "pergunta",
+   "respondido": 20939
+  },
+  "12": {
+   "recebido": 22565,
+   "equipe": "operação",
+   "tipo": "pedido",
+   "respondido": 22641
+  },
+  "13": {
+   "recebido": 23680,
+   "equipe": "desenvolvimento",
+   "tipo": "pedido",
+   "respondido": 23759
+  },
+  "14": {
+   "recebido": 25430,
+   "equipe": "qualidade",
+   "tipo": "pergunta",
+   "respondido": 25450
+  },
+  "15": {
+   "recebido": 26480,
+   "equipe": "vendas",
+   "tipo": "pedido",
+   "respondido": 26533
+  },
+  "16": {
+   "recebido": 31090,
+   "equipe": "operação",
+   "tipo": "convocacao",
+   "respondido": 31150
+  },
+  "17": {
+   "recebido": 32655,
+   "equipe": "atendimento",
+   "tipo": "pergunta",
+   "respondido": 32665
+  },
+  "18": {
+   "recebido": 33750,
+   "equipe": "gestão",
+   "tipo": "pedido",
+   "respondido": 33876
+  },
+  "19": {
+   "recebido": 35515,
+   "equipe": "operação",
+   "tipo": "pedido",
+   "respondido": 35566
+  },
+  "20": {
+   "recebido": 36670,
+   "equipe": "produto",
+   "tipo": "pedido",
+   "respondido": 36797
+  },
+  "21": {
+   "recebido": 40900,
+   "equipe": "qualidade",
+   "tipo": "convocacao",
+   "respondido": 40913
+  },
+  "22": {
+   "recebido": 42740,
+   "equipe": "desenvolvimento",
+   "tipo": "pergunta",
+   "respondido": 42767
+  }
+ }
+}

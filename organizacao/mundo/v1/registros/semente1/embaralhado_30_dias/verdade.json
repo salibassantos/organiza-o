@@ -1,0 +1,3229 @@
+{
+ "semente": 1,
+ "nulo": "embaralhado",
+ "minutos": 43200,
+ "convencao_do_tempo": "t = 0 é a criação (segunda-feira, 0h); cada passo avança t e faz acontecer o minuto t",
+ "ciclos": {
+  "ausentes": "nulo embaralhado: os processos vivem num calendário sorteado em blocos; nenhum ciclo de hora, de dia da semana, de sprint ou de mês corresponde ao relógio da porta",
+  "blocos_do_calendario": [
+   {
+    "inicio": 1,
+    "fim": 74,
+    "hora": "07:20",
+    "dia_da_semana": 6,
+    "dia_do_mes": 21
+   },
+   {
+    "inicio": 74,
+    "fim": 284,
+    "hora": "06:24",
+    "dia_da_semana": 6,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 284,
+    "fim": 450,
+    "hora": "09:09",
+    "dia_da_semana": 2,
+    "dia_do_mes": 19
+   },
+   {
+    "inicio": 450,
+    "fim": 574,
+    "hora": "01:40",
+    "dia_da_semana": 0,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 574,
+    "fim": 719,
+    "hora": "02:34",
+    "dia_da_semana": 3,
+    "dia_do_mes": 6
+   },
+   {
+    "inicio": 719,
+    "fim": 943,
+    "hora": "18:24",
+    "dia_da_semana": 6,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 943,
+    "fim": 1085,
+    "hora": "18:14",
+    "dia_da_semana": 4,
+    "dia_do_mes": 7
+   },
+   {
+    "inicio": 1085,
+    "fim": 1268,
+    "hora": "02:47",
+    "dia_da_semana": 1,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 1268,
+    "fim": 1387,
+    "hora": "05:33",
+    "dia_da_semana": 5,
+    "dia_do_mes": 1
+   },
+   {
+    "inicio": 1387,
+    "fim": 1528,
+    "hora": "07:22",
+    "dia_da_semana": 3,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 1528,
+    "fim": 1576,
+    "hora": "23:30",
+    "dia_da_semana": 1,
+    "dia_do_mes": 16
+   },
+   {
+    "inicio": 1576,
+    "fim": 1686,
+    "hora": "10:58",
+    "dia_da_semana": 6,
+    "dia_do_mes": 25
+   },
+   {
+    "inicio": 1686,
+    "fim": 1837,
+    "hora": "07:21",
+    "dia_da_semana": 0,
+    "dia_do_mes": 30
+   },
+   {
+    "inicio": 1837,
+    "fim": 2010,
+    "hora": "14:41",
+    "dia_da_semana": 6,
+    "dia_do_mes": 25
+   },
+   {
+    "inicio": 2010,
+    "fim": 2194,
+    "hora": "18:15",
+    "dia_da_semana": 2,
+    "dia_do_mes": 6
+   },
+   {
+    "inicio": 2194,
+    "fim": 2250,
+    "hora": "18:13",
+    "dia_da_semana": 4,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 2250,
+    "fim": 2429,
+    "hora": "20:51",
+    "dia_da_semana": 5,
+    "dia_do_mes": 19
+   },
+   {
+    "inicio": 2429,
+    "fim": 2601,
+    "hora": "04:08",
+    "dia_da_semana": 4,
+    "dia_do_mes": 2
+   },
+   {
+    "inicio": 2601,
+    "fim": 2768,
+    "hora": "11:25",
+    "dia_da_semana": 5,
+    "dia_do_mes": 5
+   },
+   {
+    "inicio": 2768,
+    "fim": 2890,
+    "hora": "22:49",
+    "dia_da_semana": 1,
+    "dia_do_mes": 15
+   },
+   {
+    "inicio": 2890,
+    "fim": 3052,
+    "hora": "14:14",
+    "dia_da_semana": 1,
+    "dia_do_mes": 16
+   },
+   {
+    "inicio": 3052,
+    "fim": 3165,
+    "hora": "02:06",
+    "dia_da_semana": 5,
+    "dia_do_mes": 6
+   },
+   {
+    "inicio": 3165,
+    "fim": 3253,
+    "hora": "06:21",
+    "dia_da_semana": 3,
+    "dia_do_mes": 30
+   },
+   {
+    "inicio": 3253,
+    "fim": 3483,
+    "hora": "03:46",
+    "dia_da_semana": 4,
+    "dia_do_mes": 11
+   },
+   {
+    "inicio": 3483,
+    "fim": 3549,
+    "hora": "15:30",
+    "dia_da_semana": 1,
+    "dia_do_mes": 27
+   },
+   {
+    "inicio": 3549,
+    "fim": 3779,
+    "hora": "17:09",
+    "dia_da_semana": 6,
+    "dia_do_mes": 10
+   },
+   {
+    "inicio": 3779,
+    "fim": 3843,
+    "hora": "17:35",
+    "dia_da_semana": 5,
+    "dia_do_mes": 20
+   },
+   {
+    "inicio": 3843,
+    "fim": 3933,
+    "hora": "09:47",
+    "dia_da_semana": 6,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 3933,
+    "fim": 4077,
+    "hora": "05:27",
+    "dia_da_semana": 3,
+    "dia_do_mes": 11
+   },
+   {
+    "inicio": 4077,
+    "fim": 4260,
+    "hora": "13:21",
+    "dia_da_semana": 5,
+    "dia_do_mes": 7
+   },
+   {
+    "inicio": 4260,
+    "fim": 4322,
+    "hora": "19:25",
+    "dia_da_semana": 0,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 4322,
+    "fim": 4422,
+    "hora": "15:25",
+    "dia_da_semana": 6,
+    "dia_do_mes": 21
+   },
+   {
+    "inicio": 4422,
+    "fim": 4484,
+    "hora": "19:12",
+    "dia_da_semana": 4,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 4484,
+    "fim": 4669,
+    "hora": "10:39",
+    "dia_da_semana": 0,
+    "dia_do_mes": 17
+   },
+   {
+    "inicio": 4669,
+    "fim": 4766,
+    "hora": "14:28",
+    "dia_da_semana": 3,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 4766,
+    "fim": 4828,
+    "hora": "07:22",
+    "dia_da_semana": 1,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 4828,
+    "fim": 4972,
+    "hora": "04:11",
+    "dia_da_semana": 6,
+    "dia_do_mes": 17
+   },
+   {
+    "inicio": 4972,
+    "fim": 5008,
+    "hora": "06:36",
+    "dia_da_semana": 1,
+    "dia_do_mes": 27
+   },
+   {
+    "inicio": 5008,
+    "fim": 5046,
+    "hora": "18:58",
+    "dia_da_semana": 5,
+    "dia_do_mes": 1
+   },
+   {
+    "inicio": 5046,
+    "fim": 5194,
+    "hora": "13:35",
+    "dia_da_semana": 6,
+    "dia_do_mes": 21
+   },
+   {
+    "inicio": 5194,
+    "fim": 5264,
+    "hora": "00:40",
+    "dia_da_semana": 1,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 5264,
+    "fim": 5296,
+    "hora": "04:25",
+    "dia_da_semana": 3,
+    "dia_do_mes": 30
+   },
+   {
+    "inicio": 5296,
+    "fim": 5447,
+    "hora": "18:20",
+    "dia_da_semana": 4,
+    "dia_do_mes": 31
+   },
+   {
+    "inicio": 5447,
+    "fim": 5572,
+    "hora": "10:30",
+    "dia_da_semana": 6,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 5572,
+    "fim": 5787,
+    "hora": "01:37",
+    "dia_da_semana": 3,
+    "dia_do_mes": 25
+   },
+   {
+    "inicio": 5787,
+    "fim": 5848,
+    "hora": "10:04",
+    "dia_da_semana": 3,
+    "dia_do_mes": 3
+   },
+   {
+    "inicio": 5848,
+    "fim": 6085,
+    "hora": "13:32",
+    "dia_da_semana": 1,
+    "dia_do_mes": 18
+   },
+   {
+    "inicio": 6085,
+    "fim": 6300,
+    "hora": "04:15",
+    "dia_da_semana": 3,
+    "dia_do_mes": 22
+   },
+   {
+    "inicio": 6300,
+    "fim": 6495,
+    "hora": "08:57",
+    "dia_da_semana": 5,
+    "dia_do_mes": 3
+   },
+   {
+    "inicio": 6495,
+    "fim": 6558,
+    "hora": "15:09",
+    "dia_da_semana": 6,
+    "dia_do_mes": 1
+   },
+   {
+    "inicio": 6558,
+    "fim": 6771,
+    "hora": "00:07",
+    "dia_da_semana": 4,
+    "dia_do_mes": 7
+   },
+   {
+    "inicio": 6771,
+    "fim": 6929,
+    "hora": "22:20",
+    "dia_da_semana": 2,
+    "dia_do_mes": 10
+   },
+   {
+    "inicio": 6929,
+    "fim": 7068,
+    "hora": "12:54",
+    "dia_da_semana": 1,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 7068,
+    "fim": 7171,
+    "hora": "05:38",
+    "dia_da_semana": 6,
+    "dia_do_mes": 30
+   },
+   {
+    "inicio": 7171,
+    "fim": 7292,
+    "hora": "10:21",
+    "dia_da_semana": 2,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 7292,
+    "fim": 7498,
+    "hora": "16:10",
+    "dia_da_semana": 4,
+    "dia_do_mes": 5
+   },
+   {
+    "inicio": 7498,
+    "fim": 7673,
+    "hora": "12:14",
+    "dia_da_semana": 4,
+    "dia_do_mes": 1
+   },
+   {
+    "inicio": 7673,
+    "fim": 7864,
+    "hora": "09:18",
+    "dia_da_semana": 6,
+    "dia_do_mes": 24
+   },
+   {
+    "inicio": 7864,
+    "fim": 8104,
+    "hora": "05:31",
+    "dia_da_semana": 5,
+    "dia_do_mes": 2
+   },
+   {
+    "inicio": 8104,
+    "fim": 8275,
+    "hora": "01:03",
+    "dia_da_semana": 0,
+    "dia_do_mes": 15
+   },
+   {
+    "inicio": 8275,
+    "fim": 8423,
+    "hora": "15:24",
+    "dia_da_semana": 6,
+    "dia_do_mes": 30
+   },
+   {
+    "inicio": 8423,
+    "fim": 8562,
+    "hora": "06:27",
+    "dia_da_semana": 0,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 8562,
+    "fim": 8775,
+    "hora": "11:19",
+    "dia_da_semana": 3,
+    "dia_do_mes": 25
+   },
+   {
+    "inicio": 8775,
+    "fim": 8903,
+    "hora": "16:36",
+    "dia_da_semana": 3,
+    "dia_do_mes": 6
+   },
+   {
+    "inicio": 8903,
+    "fim": 8998,
+    "hora": "08:59",
+    "dia_da_semana": 5,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 8998,
+    "fim": 9065,
+    "hora": "17:18",
+    "dia_da_semana": 0,
+    "dia_do_mes": 3
+   },
+   {
+    "inicio": 9065,
+    "fim": 9146,
+    "hora": "02:12",
+    "dia_da_semana": 6,
+    "dia_do_mes": 7
+   },
+   {
+    "inicio": 9146,
+    "fim": 9257,
+    "hora": "21:42",
+    "dia_da_semana": 2,
+    "dia_do_mes": 12
+   },
+   {
+    "inicio": 9257,
+    "fim": 9373,
+    "hora": "21:56",
+    "dia_da_semana": 3,
+    "dia_do_mes": 17
+   },
+   {
+    "inicio": 9373,
+    "fim": 9511,
+    "hora": "03:10",
+    "dia_da_semana": 0,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 9511,
+    "fim": 9658,
+    "hora": "10:36",
+    "dia_da_semana": 5,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 9658,
+    "fim": 9802,
+    "hora": "06:34",
+    "dia_da_semana": 3,
+    "dia_do_mes": 25
+   },
+   {
+    "inicio": 9802,
+    "fim": 9894,
+    "hora": "12:47",
+    "dia_da_semana": 4,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 9894,
+    "fim": 9947,
+    "hora": "10:34",
+    "dia_da_semana": 2,
+    "dia_do_mes": 2
+   },
+   {
+    "inicio": 9947,
+    "fim": 10030,
+    "hora": "16:39",
+    "dia_da_semana": 1,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 10030,
+    "fim": 10250,
+    "hora": "12:45",
+    "dia_da_semana": 5,
+    "dia_do_mes": 6
+   },
+   {
+    "inicio": 10250,
+    "fim": 10372,
+    "hora": "02:45",
+    "dia_da_semana": 4,
+    "dia_do_mes": 29
+   },
+   {
+    "inicio": 10372,
+    "fim": 10459,
+    "hora": "06:49",
+    "dia_da_semana": 4,
+    "dia_do_mes": 31
+   },
+   {
+    "inicio": 10459,
+    "fim": 10643,
+    "hora": "14:14",
+    "dia_da_semana": 3,
+    "dia_do_mes": 3
+   },
+   {
+    "inicio": 10643,
+    "fim": 10671,
+    "hora": "12:49",
+    "dia_da_semana": 2,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 10671,
+    "fim": 10753,
+    "hora": "08:02",
+    "dia_da_semana": 0,
+    "dia_do_mes": 16
+   },
+   {
+    "inicio": 10753,
+    "fim": 10912,
+    "hora": "04:21",
+    "dia_da_semana": 6,
+    "dia_do_mes": 20
+   },
+   {
+    "inicio": 10912,
+    "fim": 11140,
+    "hora": "22:21",
+    "dia_da_semana": 3,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 11140,
+    "fim": 11358,
+    "hora": "19:16",
+    "dia_da_semana": 1,
+    "dia_do_mes": 28
+   },
+   {
+    "inicio": 11358,
+    "fim": 11404,
+    "hora": "11:05",
+    "dia_da_semana": 0,
+    "dia_do_mes": 3
+   },
+   {
+    "inicio": 11404,
+    "fim": 11478,
+    "hora": "20:32",
+    "dia_da_semana": 2,
+    "dia_do_mes": 28
+   },
+   {
+    "inicio": 11478,
+    "fim": 11557,
+    "hora": "08:49",
+    "dia_da_semana": 3,
+    "dia_do_mes": 17
+   },
+   {
+    "inicio": 11557,
+    "fim": 11750,
+    "hora": "04:26",
+    "dia_da_semana": 4,
+    "dia_do_mes": 16
+   },
+   {
+    "inicio": 11750,
+    "fim": 11867,
+    "hora": "23:50",
+    "dia_da_semana": 0,
+    "dia_do_mes": 31
+   },
+   {
+    "inicio": 11867,
+    "fim": 12016,
+    "hora": "01:37",
+    "dia_da_semana": 0,
+    "dia_do_mes": 20
+   },
+   {
+    "inicio": 12016,
+    "fim": 12052,
+    "hora": "09:44",
+    "dia_da_semana": 1,
+    "dia_do_mes": 5
+   },
+   {
+    "inicio": 12052,
+    "fim": 12153,
+    "hora": "15:36",
+    "dia_da_semana": 6,
+    "dia_do_mes": 6
+   },
+   {
+    "inicio": 12153,
+    "fim": 12324,
+    "hora": "08:35",
+    "dia_da_semana": 2,
+    "dia_do_mes": 29
+   },
+   {
+    "inicio": 12324,
+    "fim": 12538,
+    "hora": "14:59",
+    "dia_da_semana": 5,
+    "dia_do_mes": 29
+   },
+   {
+    "inicio": 12538,
+    "fim": 12745,
+    "hora": "04:28",
+    "dia_da_semana": 0,
+    "dia_do_mes": 19
+   },
+   {
+    "inicio": 12745,
+    "fim": 12889,
+    "hora": "17:44",
+    "dia_da_semana": 5,
+    "dia_do_mes": 5
+   },
+   {
+    "inicio": 12889,
+    "fim": 12969,
+    "hora": "17:15",
+    "dia_da_semana": 2,
+    "dia_do_mes": 12
+   },
+   {
+    "inicio": 12969,
+    "fim": 13177,
+    "hora": "07:19",
+    "dia_da_semana": 1,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 13177,
+    "fim": 13387,
+    "hora": "05:03",
+    "dia_da_semana": 0,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 13387,
+    "fim": 13559,
+    "hora": "05:41",
+    "dia_da_semana": 4,
+    "dia_do_mes": 30
+   },
+   {
+    "inicio": 13559,
+    "fim": 13772,
+    "hora": "09:05",
+    "dia_da_semana": 3,
+    "dia_do_mes": 5
+   },
+   {
+    "inicio": 13772,
+    "fim": 13968,
+    "hora": "05:53",
+    "dia_da_semana": 2,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 13968,
+    "fim": 14164,
+    "hora": "01:34",
+    "dia_da_semana": 4,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 14164,
+    "fim": 14385,
+    "hora": "21:05",
+    "dia_da_semana": 4,
+    "dia_do_mes": 24
+   },
+   {
+    "inicio": 14385,
+    "fim": 14519,
+    "hora": "11:03",
+    "dia_da_semana": 1,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 14519,
+    "fim": 14685,
+    "hora": "01:01",
+    "dia_da_semana": 0,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 14685,
+    "fim": 14763,
+    "hora": "16:53",
+    "dia_da_semana": 1,
+    "dia_do_mes": 21
+   },
+   {
+    "inicio": 14763,
+    "fim": 14910,
+    "hora": "20:48",
+    "dia_da_semana": 3,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 14910,
+    "fim": 14976,
+    "hora": "22:05",
+    "dia_da_semana": 1,
+    "dia_do_mes": 27
+   },
+   {
+    "inicio": 14976,
+    "fim": 15190,
+    "hora": "16:40",
+    "dia_da_semana": 2,
+    "dia_do_mes": 17
+   },
+   {
+    "inicio": 15190,
+    "fim": 15420,
+    "hora": "09:31",
+    "dia_da_semana": 2,
+    "dia_do_mes": 11
+   },
+   {
+    "inicio": 15420,
+    "fim": 15501,
+    "hora": "03:53",
+    "dia_da_semana": 3,
+    "dia_do_mes": 24
+   },
+   {
+    "inicio": 15501,
+    "fim": 15670,
+    "hora": "10:17",
+    "dia_da_semana": 4,
+    "dia_do_mes": 2
+   },
+   {
+    "inicio": 15670,
+    "fim": 15804,
+    "hora": "01:22",
+    "dia_da_semana": 4,
+    "dia_do_mes": 21
+   },
+   {
+    "inicio": 15804,
+    "fim": 15841,
+    "hora": "14:08",
+    "dia_da_semana": 6,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 15841,
+    "fim": 15950,
+    "hora": "06:44",
+    "dia_da_semana": 3,
+    "dia_do_mes": 24
+   },
+   {
+    "inicio": 15950,
+    "fim": 16066,
+    "hora": "10:09",
+    "dia_da_semana": 0,
+    "dia_do_mes": 25
+   },
+   {
+    "inicio": 16066,
+    "fim": 16301,
+    "hora": "02:31",
+    "dia_da_semana": 6,
+    "dia_do_mes": 20
+   },
+   {
+    "inicio": 16301,
+    "fim": 16536,
+    "hora": "20:42",
+    "dia_da_semana": 3,
+    "dia_do_mes": 1
+   },
+   {
+    "inicio": 16536,
+    "fim": 16683,
+    "hora": "04:08",
+    "dia_da_semana": 2,
+    "dia_do_mes": 10
+   },
+   {
+    "inicio": 16683,
+    "fim": 16748,
+    "hora": "02:58",
+    "dia_da_semana": 2,
+    "dia_do_mes": 29
+   },
+   {
+    "inicio": 16748,
+    "fim": 16886,
+    "hora": "10:19",
+    "dia_da_semana": 6,
+    "dia_do_mes": 21
+   },
+   {
+    "inicio": 16886,
+    "fim": 17120,
+    "hora": "14:32",
+    "dia_da_semana": 2,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 17120,
+    "fim": 17311,
+    "hora": "05:26",
+    "dia_da_semana": 0,
+    "dia_do_mes": 19
+   },
+   {
+    "inicio": 17311,
+    "fim": 17534,
+    "hora": "17:25",
+    "dia_da_semana": 6,
+    "dia_do_mes": 29
+   },
+   {
+    "inicio": 17534,
+    "fim": 17632,
+    "hora": "17:17",
+    "dia_da_semana": 2,
+    "dia_do_mes": 7
+   },
+   {
+    "inicio": 17632,
+    "fim": 17679,
+    "hora": "14:24",
+    "dia_da_semana": 5,
+    "dia_do_mes": 28
+   },
+   {
+    "inicio": 17679,
+    "fim": 17749,
+    "hora": "05:29",
+    "dia_da_semana": 6,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 17749,
+    "fim": 17918,
+    "hora": "19:21",
+    "dia_da_semana": 3,
+    "dia_do_mes": 15
+   },
+   {
+    "inicio": 17918,
+    "fim": 17964,
+    "hora": "11:16",
+    "dia_da_semana": 6,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 17964,
+    "fim": 18006,
+    "hora": "11:23",
+    "dia_da_semana": 6,
+    "dia_do_mes": 16
+   },
+   {
+    "inicio": 18006,
+    "fim": 18232,
+    "hora": "18:14",
+    "dia_da_semana": 2,
+    "dia_do_mes": 14
+   },
+   {
+    "inicio": 18232,
+    "fim": 18264,
+    "hora": "20:06",
+    "dia_da_semana": 1,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 18264,
+    "fim": 18376,
+    "hora": "16:32",
+    "dia_da_semana": 6,
+    "dia_do_mes": 21
+   },
+   {
+    "inicio": 18376,
+    "fim": 18606,
+    "hora": "05:08",
+    "dia_da_semana": 2,
+    "dia_do_mes": 19
+   },
+   {
+    "inicio": 18606,
+    "fim": 18757,
+    "hora": "19:47",
+    "dia_da_semana": 2,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 18757,
+    "fim": 18922,
+    "hora": "19:55",
+    "dia_da_semana": 5,
+    "dia_do_mes": 17
+   },
+   {
+    "inicio": 18922,
+    "fim": 19125,
+    "hora": "13:25",
+    "dia_da_semana": 1,
+    "dia_do_mes": 21
+   },
+   {
+    "inicio": 19125,
+    "fim": 19227,
+    "hora": "21:18",
+    "dia_da_semana": 5,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 19227,
+    "fim": 19436,
+    "hora": "19:27",
+    "dia_da_semana": 1,
+    "dia_do_mes": 19
+   },
+   {
+    "inicio": 19436,
+    "fim": 19498,
+    "hora": "11:57",
+    "dia_da_semana": 2,
+    "dia_do_mes": 12
+   },
+   {
+    "inicio": 19498,
+    "fim": 19545,
+    "hora": "02:40",
+    "dia_da_semana": 6,
+    "dia_do_mes": 2
+   },
+   {
+    "inicio": 19545,
+    "fim": 19683,
+    "hora": "19:58",
+    "dia_da_semana": 4,
+    "dia_do_mes": 16
+   },
+   {
+    "inicio": 19683,
+    "fim": 19782,
+    "hora": "23:10",
+    "dia_da_semana": 2,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 19782,
+    "fim": 19866,
+    "hora": "00:46",
+    "dia_da_semana": 3,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 19866,
+    "fim": 19928,
+    "hora": "03:48",
+    "dia_da_semana": 3,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 19928,
+    "fim": 19979,
+    "hora": "23:15",
+    "dia_da_semana": 6,
+    "dia_do_mes": 6
+   },
+   {
+    "inicio": 19979,
+    "fim": 20137,
+    "hora": "23:01",
+    "dia_da_semana": 6,
+    "dia_do_mes": 29
+   },
+   {
+    "inicio": 20137,
+    "fim": 20223,
+    "hora": "09:35",
+    "dia_da_semana": 2,
+    "dia_do_mes": 27
+   },
+   {
+    "inicio": 20223,
+    "fim": 20293,
+    "hora": "14:49",
+    "dia_da_semana": 1,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 20293,
+    "fim": 20496,
+    "hora": "07:05",
+    "dia_da_semana": 2,
+    "dia_do_mes": 20
+   },
+   {
+    "inicio": 20496,
+    "fim": 20717,
+    "hora": "12:53",
+    "dia_da_semana": 5,
+    "dia_do_mes": 29
+   },
+   {
+    "inicio": 20717,
+    "fim": 20829,
+    "hora": "06:45",
+    "dia_da_semana": 4,
+    "dia_do_mes": 10
+   },
+   {
+    "inicio": 20829,
+    "fim": 20951,
+    "hora": "03:30",
+    "dia_da_semana": 2,
+    "dia_do_mes": 5
+   },
+   {
+    "inicio": 20951,
+    "fim": 21191,
+    "hora": "23:58",
+    "dia_da_semana": 3,
+    "dia_do_mes": 28
+   },
+   {
+    "inicio": 21191,
+    "fim": 21414,
+    "hora": "09:02",
+    "dia_da_semana": 0,
+    "dia_do_mes": 10
+   },
+   {
+    "inicio": 21414,
+    "fim": 21593,
+    "hora": "23:16",
+    "dia_da_semana": 6,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 21593,
+    "fim": 21631,
+    "hora": "13:53",
+    "dia_da_semana": 5,
+    "dia_do_mes": 5
+   },
+   {
+    "inicio": 21631,
+    "fim": 21778,
+    "hora": "03:40",
+    "dia_da_semana": 2,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 21778,
+    "fim": 22010,
+    "hora": "17:59",
+    "dia_da_semana": 0,
+    "dia_do_mes": 27
+   },
+   {
+    "inicio": 22010,
+    "fim": 22237,
+    "hora": "02:21",
+    "dia_da_semana": 6,
+    "dia_do_mes": 14
+   },
+   {
+    "inicio": 22237,
+    "fim": 22285,
+    "hora": "04:50",
+    "dia_da_semana": 5,
+    "dia_do_mes": 20
+   },
+   {
+    "inicio": 22285,
+    "fim": 22440,
+    "hora": "01:27",
+    "dia_da_semana": 6,
+    "dia_do_mes": 3
+   },
+   {
+    "inicio": 22440,
+    "fim": 22663,
+    "hora": "16:06",
+    "dia_da_semana": 4,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 22663,
+    "fim": 22870,
+    "hora": "03:18",
+    "dia_da_semana": 5,
+    "dia_do_mes": 5
+   },
+   {
+    "inicio": 22870,
+    "fim": 22935,
+    "hora": "06:20",
+    "dia_da_semana": 1,
+    "dia_do_mes": 27
+   },
+   {
+    "inicio": 22935,
+    "fim": 23052,
+    "hora": "03:12",
+    "dia_da_semana": 4,
+    "dia_do_mes": 28
+   },
+   {
+    "inicio": 23052,
+    "fim": 23176,
+    "hora": "13:57",
+    "dia_da_semana": 5,
+    "dia_do_mes": 6
+   },
+   {
+    "inicio": 23176,
+    "fim": 23293,
+    "hora": "01:47",
+    "dia_da_semana": 2,
+    "dia_do_mes": 29
+   },
+   {
+    "inicio": 23293,
+    "fim": 23344,
+    "hora": "18:47",
+    "dia_da_semana": 3,
+    "dia_do_mes": 24
+   },
+   {
+    "inicio": 23344,
+    "fim": 23467,
+    "hora": "21:42",
+    "dia_da_semana": 6,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 23467,
+    "fim": 23516,
+    "hora": "06:24",
+    "dia_da_semana": 6,
+    "dia_do_mes": 19
+   },
+   {
+    "inicio": 23516,
+    "fim": 23692,
+    "hora": "20:26",
+    "dia_da_semana": 1,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 23692,
+    "fim": 23833,
+    "hora": "19:52",
+    "dia_da_semana": 3,
+    "dia_do_mes": 18
+   },
+   {
+    "inicio": 23833,
+    "fim": 23955,
+    "hora": "03:18",
+    "dia_da_semana": 4,
+    "dia_do_mes": 14
+   },
+   {
+    "inicio": 23955,
+    "fim": 24071,
+    "hora": "19:49",
+    "dia_da_semana": 5,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 24071,
+    "fim": 24297,
+    "hora": "23:22",
+    "dia_da_semana": 0,
+    "dia_do_mes": 14
+   },
+   {
+    "inicio": 24297,
+    "fim": 24409,
+    "hora": "07:40",
+    "dia_da_semana": 4,
+    "dia_do_mes": 2
+   },
+   {
+    "inicio": 24409,
+    "fim": 24446,
+    "hora": "11:26",
+    "dia_da_semana": 4,
+    "dia_do_mes": 14
+   },
+   {
+    "inicio": 24446,
+    "fim": 24584,
+    "hora": "08:59",
+    "dia_da_semana": 4,
+    "dia_do_mes": 12
+   },
+   {
+    "inicio": 24584,
+    "fim": 24697,
+    "hora": "11:30",
+    "dia_da_semana": 2,
+    "dia_do_mes": 18
+   },
+   {
+    "inicio": 24697,
+    "fim": 24754,
+    "hora": "23:30",
+    "dia_da_semana": 6,
+    "dia_do_mes": 12
+   },
+   {
+    "inicio": 24754,
+    "fim": 24870,
+    "hora": "03:45",
+    "dia_da_semana": 2,
+    "dia_do_mes": 10
+   },
+   {
+    "inicio": 24870,
+    "fim": 24966,
+    "hora": "11:14",
+    "dia_da_semana": 1,
+    "dia_do_mes": 15
+   },
+   {
+    "inicio": 24966,
+    "fim": 25076,
+    "hora": "13:31",
+    "dia_da_semana": 2,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 25076,
+    "fim": 25158,
+    "hora": "08:09",
+    "dia_da_semana": 6,
+    "dia_do_mes": 16
+   },
+   {
+    "inicio": 25158,
+    "fim": 25276,
+    "hora": "15:29",
+    "dia_da_semana": 0,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 25276,
+    "fim": 25402,
+    "hora": "13:54",
+    "dia_da_semana": 0,
+    "dia_do_mes": 22
+   },
+   {
+    "inicio": 25402,
+    "fim": 25439,
+    "hora": "22:58",
+    "dia_da_semana": 2,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 25439,
+    "fim": 25516,
+    "hora": "08:29",
+    "dia_da_semana": 5,
+    "dia_do_mes": 25
+   },
+   {
+    "inicio": 25516,
+    "fim": 25686,
+    "hora": "08:20",
+    "dia_da_semana": 0,
+    "dia_do_mes": 3
+   },
+   {
+    "inicio": 25686,
+    "fim": 25864,
+    "hora": "00:23",
+    "dia_da_semana": 0,
+    "dia_do_mes": 1
+   },
+   {
+    "inicio": 25864,
+    "fim": 26091,
+    "hora": "00:12",
+    "dia_da_semana": 5,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 26091,
+    "fim": 26312,
+    "hora": "15:18",
+    "dia_da_semana": 6,
+    "dia_do_mes": 1
+   },
+   {
+    "inicio": 26312,
+    "fim": 26384,
+    "hora": "18:13",
+    "dia_da_semana": 1,
+    "dia_do_mes": 15
+   },
+   {
+    "inicio": 26384,
+    "fim": 26614,
+    "hora": "05:27",
+    "dia_da_semana": 6,
+    "dia_do_mes": 28
+   },
+   {
+    "inicio": 26614,
+    "fim": 26713,
+    "hora": "02:02",
+    "dia_da_semana": 4,
+    "dia_do_mes": 11
+   },
+   {
+    "inicio": 26713,
+    "fim": 26887,
+    "hora": "05:54",
+    "dia_da_semana": 4,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 26887,
+    "fim": 26929,
+    "hora": "05:32",
+    "dia_da_semana": 1,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 26929,
+    "fim": 27082,
+    "hora": "16:02",
+    "dia_da_semana": 4,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 27082,
+    "fim": 27216,
+    "hora": "15:10",
+    "dia_da_semana": 3,
+    "dia_do_mes": 31
+   },
+   {
+    "inicio": 27216,
+    "fim": 27408,
+    "hora": "18:09",
+    "dia_da_semana": 2,
+    "dia_do_mes": 2
+   },
+   {
+    "inicio": 27408,
+    "fim": 27456,
+    "hora": "13:02",
+    "dia_da_semana": 3,
+    "dia_do_mes": 10
+   },
+   {
+    "inicio": 27456,
+    "fim": 27495,
+    "hora": "07:28",
+    "dia_da_semana": 0,
+    "dia_do_mes": 14
+   },
+   {
+    "inicio": 27495,
+    "fim": 27672,
+    "hora": "04:13",
+    "dia_da_semana": 1,
+    "dia_do_mes": 1
+   },
+   {
+    "inicio": 27672,
+    "fim": 27902,
+    "hora": "10:15",
+    "dia_da_semana": 6,
+    "dia_do_mes": 3
+   },
+   {
+    "inicio": 27902,
+    "fim": 28098,
+    "hora": "21:21",
+    "dia_da_semana": 0,
+    "dia_do_mes": 15
+   },
+   {
+    "inicio": 28098,
+    "fim": 28228,
+    "hora": "04:23",
+    "dia_da_semana": 3,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 28228,
+    "fim": 28428,
+    "hora": "03:35",
+    "dia_da_semana": 0,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 28428,
+    "fim": 28544,
+    "hora": "14:44",
+    "dia_da_semana": 2,
+    "dia_do_mes": 24
+   },
+   {
+    "inicio": 28544,
+    "fim": 28728,
+    "hora": "11:36",
+    "dia_da_semana": 0,
+    "dia_do_mes": 1
+   },
+   {
+    "inicio": 28728,
+    "fim": 28935,
+    "hora": "04:07",
+    "dia_da_semana": 1,
+    "dia_do_mes": 29
+   },
+   {
+    "inicio": 28935,
+    "fim": 28967,
+    "hora": "17:15",
+    "dia_da_semana": 6,
+    "dia_do_mes": 27
+   },
+   {
+    "inicio": 28967,
+    "fim": 29051,
+    "hora": "02:20",
+    "dia_da_semana": 3,
+    "dia_do_mes": 15
+   },
+   {
+    "inicio": 29051,
+    "fim": 29164,
+    "hora": "14:40",
+    "dia_da_semana": 2,
+    "dia_do_mes": 10
+   },
+   {
+    "inicio": 29164,
+    "fim": 29272,
+    "hora": "05:16",
+    "dia_da_semana": 3,
+    "dia_do_mes": 18
+   },
+   {
+    "inicio": 29272,
+    "fim": 29465,
+    "hora": "15:32",
+    "dia_da_semana": 0,
+    "dia_do_mes": 20
+   },
+   {
+    "inicio": 29465,
+    "fim": 29522,
+    "hora": "12:26",
+    "dia_da_semana": 1,
+    "dia_do_mes": 21
+   },
+   {
+    "inicio": 29522,
+    "fim": 29586,
+    "hora": "08:30",
+    "dia_da_semana": 5,
+    "dia_do_mes": 21
+   },
+   {
+    "inicio": 29586,
+    "fim": 29728,
+    "hora": "23:06",
+    "dia_da_semana": 4,
+    "dia_do_mes": 7
+   },
+   {
+    "inicio": 29728,
+    "fim": 29932,
+    "hora": "20:42",
+    "dia_da_semana": 3,
+    "dia_do_mes": 11
+   },
+   {
+    "inicio": 29932,
+    "fim": 30036,
+    "hora": "08:01",
+    "dia_da_semana": 6,
+    "dia_do_mes": 7
+   },
+   {
+    "inicio": 30036,
+    "fim": 30072,
+    "hora": "19:01",
+    "dia_da_semana": 0,
+    "dia_do_mes": 22
+   },
+   {
+    "inicio": 30072,
+    "fim": 30299,
+    "hora": "14:40",
+    "dia_da_semana": 2,
+    "dia_do_mes": 24
+   },
+   {
+    "inicio": 30299,
+    "fim": 30468,
+    "hora": "13:07",
+    "dia_da_semana": 2,
+    "dia_do_mes": 5
+   },
+   {
+    "inicio": 30468,
+    "fim": 30528,
+    "hora": "23:52",
+    "dia_da_semana": 6,
+    "dia_do_mes": 7
+   },
+   {
+    "inicio": 30528,
+    "fim": 30677,
+    "hora": "15:16",
+    "dia_da_semana": 2,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 30677,
+    "fim": 30914,
+    "hora": "16:50",
+    "dia_da_semana": 6,
+    "dia_do_mes": 10
+   },
+   {
+    "inicio": 30914,
+    "fim": 31018,
+    "hora": "11:36",
+    "dia_da_semana": 1,
+    "dia_do_mes": 14
+   },
+   {
+    "inicio": 31018,
+    "fim": 31239,
+    "hora": "01:54",
+    "dia_da_semana": 6,
+    "dia_do_mes": 11
+   },
+   {
+    "inicio": 31239,
+    "fim": 31332,
+    "hora": "19:37",
+    "dia_da_semana": 1,
+    "dia_do_mes": 18
+   },
+   {
+    "inicio": 31332,
+    "fim": 31496,
+    "hora": "15:31",
+    "dia_da_semana": 5,
+    "dia_do_mes": 19
+   },
+   {
+    "inicio": 31496,
+    "fim": 31659,
+    "hora": "00:25",
+    "dia_da_semana": 5,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 31659,
+    "fim": 31761,
+    "hora": "22:12",
+    "dia_da_semana": 6,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 31761,
+    "fim": 31937,
+    "hora": "01:58",
+    "dia_da_semana": 6,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 31937,
+    "fim": 32066,
+    "hora": "00:48",
+    "dia_da_semana": 1,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 32066,
+    "fim": 32228,
+    "hora": "10:51",
+    "dia_da_semana": 5,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 32228,
+    "fim": 32354,
+    "hora": "14:08",
+    "dia_da_semana": 4,
+    "dia_do_mes": 27
+   },
+   {
+    "inicio": 32354,
+    "fim": 32473,
+    "hora": "15:06",
+    "dia_da_semana": 6,
+    "dia_do_mes": 2
+   },
+   {
+    "inicio": 32473,
+    "fim": 32545,
+    "hora": "15:35",
+    "dia_da_semana": 3,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 32545,
+    "fim": 32776,
+    "hora": "15:18",
+    "dia_da_semana": 5,
+    "dia_do_mes": 19
+   },
+   {
+    "inicio": 32776,
+    "fim": 32914,
+    "hora": "14:49",
+    "dia_da_semana": 1,
+    "dia_do_mes": 18
+   },
+   {
+    "inicio": 32914,
+    "fim": 33102,
+    "hora": "21:05",
+    "dia_da_semana": 5,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 33102,
+    "fim": 33150,
+    "hora": "05:42",
+    "dia_da_semana": 2,
+    "dia_do_mes": 9
+   },
+   {
+    "inicio": 33150,
+    "fim": 33183,
+    "hora": "14:35",
+    "dia_da_semana": 4,
+    "dia_do_mes": 12
+   },
+   {
+    "inicio": 33183,
+    "fim": 33235,
+    "hora": "11:47",
+    "dia_da_semana": 0,
+    "dia_do_mes": 15
+   },
+   {
+    "inicio": 33235,
+    "fim": 33268,
+    "hora": "06:53",
+    "dia_da_semana": 6,
+    "dia_do_mes": 21
+   },
+   {
+    "inicio": 33268,
+    "fim": 33322,
+    "hora": "17:43",
+    "dia_da_semana": 0,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 33322,
+    "fim": 33521,
+    "hora": "08:20",
+    "dia_da_semana": 3,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 33521,
+    "fim": 33648,
+    "hora": "07:22",
+    "dia_da_semana": 3,
+    "dia_do_mes": 7
+   },
+   {
+    "inicio": 33648,
+    "fim": 33887,
+    "hora": "04:22",
+    "dia_da_semana": 3,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 33887,
+    "fim": 34003,
+    "hora": "03:08",
+    "dia_da_semana": 4,
+    "dia_do_mes": 15
+   },
+   {
+    "inicio": 34003,
+    "fim": 34160,
+    "hora": "05:18",
+    "dia_da_semana": 2,
+    "dia_do_mes": 15
+   },
+   {
+    "inicio": 34160,
+    "fim": 34377,
+    "hora": "07:57",
+    "dia_da_semana": 2,
+    "dia_do_mes": 30
+   },
+   {
+    "inicio": 34377,
+    "fim": 34426,
+    "hora": "15:21",
+    "dia_da_semana": 0,
+    "dia_do_mes": 5
+   },
+   {
+    "inicio": 34426,
+    "fim": 34548,
+    "hora": "05:48",
+    "dia_da_semana": 4,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 34548,
+    "fim": 34645,
+    "hora": "09:34",
+    "dia_da_semana": 4,
+    "dia_do_mes": 1
+   },
+   {
+    "inicio": 34645,
+    "fim": 34725,
+    "hora": "21:12",
+    "dia_da_semana": 0,
+    "dia_do_mes": 29
+   },
+   {
+    "inicio": 34725,
+    "fim": 34952,
+    "hora": "10:55",
+    "dia_da_semana": 4,
+    "dia_do_mes": 5
+   },
+   {
+    "inicio": 34952,
+    "fim": 35132,
+    "hora": "18:58",
+    "dia_da_semana": 0,
+    "dia_do_mes": 22
+   },
+   {
+    "inicio": 35132,
+    "fim": 35263,
+    "hora": "20:48",
+    "dia_da_semana": 4,
+    "dia_do_mes": 27
+   },
+   {
+    "inicio": 35263,
+    "fim": 35315,
+    "hora": "18:37",
+    "dia_da_semana": 3,
+    "dia_do_mes": 22
+   },
+   {
+    "inicio": 35315,
+    "fim": 35353,
+    "hora": "12:50",
+    "dia_da_semana": 5,
+    "dia_do_mes": 22
+   },
+   {
+    "inicio": 35353,
+    "fim": 35528,
+    "hora": "23:51",
+    "dia_da_semana": 2,
+    "dia_do_mes": 16
+   },
+   {
+    "inicio": 35528,
+    "fim": 35725,
+    "hora": "23:59",
+    "dia_da_semana": 2,
+    "dia_do_mes": 28
+   },
+   {
+    "inicio": 35725,
+    "fim": 35904,
+    "hora": "15:53",
+    "dia_da_semana": 0,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 35904,
+    "fim": 36136,
+    "hora": "18:22",
+    "dia_da_semana": 2,
+    "dia_do_mes": 15
+   },
+   {
+    "inicio": 36136,
+    "fim": 36197,
+    "hora": "05:08",
+    "dia_da_semana": 0,
+    "dia_do_mes": 12
+   },
+   {
+    "inicio": 36197,
+    "fim": 36372,
+    "hora": "06:45",
+    "dia_da_semana": 1,
+    "dia_do_mes": 8
+   },
+   {
+    "inicio": 36372,
+    "fim": 36540,
+    "hora": "03:18",
+    "dia_da_semana": 4,
+    "dia_do_mes": 5
+   },
+   {
+    "inicio": 36540,
+    "fim": 36676,
+    "hora": "08:26",
+    "dia_da_semana": 0,
+    "dia_do_mes": 22
+   },
+   {
+    "inicio": 36676,
+    "fim": 36776,
+    "hora": "23:45",
+    "dia_da_semana": 5,
+    "dia_do_mes": 18
+   },
+   {
+    "inicio": 36776,
+    "fim": 36856,
+    "hora": "12:25",
+    "dia_da_semana": 1,
+    "dia_do_mes": 17
+   },
+   {
+    "inicio": 36856,
+    "fim": 36928,
+    "hora": "12:10",
+    "dia_da_semana": 4,
+    "dia_do_mes": 25
+   },
+   {
+    "inicio": 36928,
+    "fim": 37031,
+    "hora": "21:57",
+    "dia_da_semana": 5,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 37031,
+    "fim": 37113,
+    "hora": "10:33",
+    "dia_da_semana": 0,
+    "dia_do_mes": 16
+   },
+   {
+    "inicio": 37113,
+    "fim": 37338,
+    "hora": "13:20",
+    "dia_da_semana": 1,
+    "dia_do_mes": 11
+   },
+   {
+    "inicio": 37338,
+    "fim": 37422,
+    "hora": "04:36",
+    "dia_da_semana": 3,
+    "dia_do_mes": 14
+   },
+   {
+    "inicio": 37422,
+    "fim": 37498,
+    "hora": "02:56",
+    "dia_da_semana": 5,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 37498,
+    "fim": 37541,
+    "hora": "10:33",
+    "dia_da_semana": 2,
+    "dia_do_mes": 20
+   },
+   {
+    "inicio": 37541,
+    "fim": 37719,
+    "hora": "15:22",
+    "dia_da_semana": 3,
+    "dia_do_mes": 18
+   },
+   {
+    "inicio": 37719,
+    "fim": 37817,
+    "hora": "13:00",
+    "dia_da_semana": 1,
+    "dia_do_mes": 20
+   },
+   {
+    "inicio": 37817,
+    "fim": 38028,
+    "hora": "16:43",
+    "dia_da_semana": 1,
+    "dia_do_mes": 27
+   },
+   {
+    "inicio": 38028,
+    "fim": 38161,
+    "hora": "14:06",
+    "dia_da_semana": 3,
+    "dia_do_mes": 18
+   },
+   {
+    "inicio": 38161,
+    "fim": 38201,
+    "hora": "17:17",
+    "dia_da_semana": 6,
+    "dia_do_mes": 28
+   },
+   {
+    "inicio": 38201,
+    "fim": 38412,
+    "hora": "02:35",
+    "dia_da_semana": 6,
+    "dia_do_mes": 6
+   },
+   {
+    "inicio": 38412,
+    "fim": 38550,
+    "hora": "00:58",
+    "dia_da_semana": 4,
+    "dia_do_mes": 14
+   },
+   {
+    "inicio": 38550,
+    "fim": 38593,
+    "hora": "16:00",
+    "dia_da_semana": 0,
+    "dia_do_mes": 14
+   },
+   {
+    "inicio": 38593,
+    "fim": 38627,
+    "hora": "19:40",
+    "dia_da_semana": 1,
+    "dia_do_mes": 28
+   },
+   {
+    "inicio": 38627,
+    "fim": 38853,
+    "hora": "02:55",
+    "dia_da_semana": 2,
+    "dia_do_mes": 17
+   },
+   {
+    "inicio": 38853,
+    "fim": 38962,
+    "hora": "12:00",
+    "dia_da_semana": 0,
+    "dia_do_mes": 1
+   },
+   {
+    "inicio": 38962,
+    "fim": 39176,
+    "hora": "23:24",
+    "dia_da_semana": 0,
+    "dia_do_mes": 4
+   },
+   {
+    "inicio": 39176,
+    "fim": 39218,
+    "hora": "13:51",
+    "dia_da_semana": 5,
+    "dia_do_mes": 20
+   },
+   {
+    "inicio": 39218,
+    "fim": 39361,
+    "hora": "16:17",
+    "dia_da_semana": 5,
+    "dia_do_mes": 20
+   },
+   {
+    "inicio": 39361,
+    "fim": 39588,
+    "hora": "16:21",
+    "dia_da_semana": 6,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 39588,
+    "fim": 39775,
+    "hora": "17:11",
+    "dia_da_semana": 5,
+    "dia_do_mes": 15
+   },
+   {
+    "inicio": 39775,
+    "fim": 39928,
+    "hora": "02:04",
+    "dia_da_semana": 3,
+    "dia_do_mes": 11
+   },
+   {
+    "inicio": 39928,
+    "fim": 40008,
+    "hora": "21:18",
+    "dia_da_semana": 1,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 40008,
+    "fim": 40162,
+    "hora": "19:11",
+    "dia_da_semana": 4,
+    "dia_do_mes": 1
+   },
+   {
+    "inicio": 40162,
+    "fim": 40333,
+    "hora": "16:28",
+    "dia_da_semana": 6,
+    "dia_do_mes": 20
+   },
+   {
+    "inicio": 40333,
+    "fim": 40384,
+    "hora": "11:22",
+    "dia_da_semana": 6,
+    "dia_do_mes": 24
+   },
+   {
+    "inicio": 40384,
+    "fim": 40539,
+    "hora": "08:13",
+    "dia_da_semana": 4,
+    "dia_do_mes": 25
+   },
+   {
+    "inicio": 40539,
+    "fim": 40644,
+    "hora": "07:12",
+    "dia_da_semana": 3,
+    "dia_do_mes": 27
+   },
+   {
+    "inicio": 40644,
+    "fim": 40707,
+    "hora": "00:27",
+    "dia_da_semana": 1,
+    "dia_do_mes": 26
+   },
+   {
+    "inicio": 40707,
+    "fim": 40786,
+    "hora": "05:34",
+    "dia_da_semana": 4,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 40786,
+    "fim": 40952,
+    "hora": "22:14",
+    "dia_da_semana": 3,
+    "dia_do_mes": 3
+   },
+   {
+    "inicio": 40952,
+    "fim": 41161,
+    "hora": "12:37",
+    "dia_da_semana": 2,
+    "dia_do_mes": 25
+   },
+   {
+    "inicio": 41161,
+    "fim": 41344,
+    "hora": "05:08",
+    "dia_da_semana": 1,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 41344,
+    "fim": 41576,
+    "hora": "15:43",
+    "dia_da_semana": 1,
+    "dia_do_mes": 23
+   },
+   {
+    "inicio": 41576,
+    "fim": 41607,
+    "hora": "04:04",
+    "dia_da_semana": 0,
+    "dia_do_mes": 19
+   },
+   {
+    "inicio": 41607,
+    "fim": 41651,
+    "hora": "11:44",
+    "dia_da_semana": 1,
+    "dia_do_mes": 7
+   },
+   {
+    "inicio": 41651,
+    "fim": 41703,
+    "hora": "14:54",
+    "dia_da_semana": 5,
+    "dia_do_mes": 2
+   },
+   {
+    "inicio": 41703,
+    "fim": 41905,
+    "hora": "22:38",
+    "dia_da_semana": 6,
+    "dia_do_mes": 31
+   },
+   {
+    "inicio": 41905,
+    "fim": 42060,
+    "hora": "05:58",
+    "dia_da_semana": 2,
+    "dia_do_mes": 17
+   },
+   {
+    "inicio": 42060,
+    "fim": 42279,
+    "hora": "09:11",
+    "dia_da_semana": 3,
+    "dia_do_mes": 13
+   },
+   {
+    "inicio": 42279,
+    "fim": 42408,
+    "hora": "17:50",
+    "dia_da_semana": 5,
+    "dia_do_mes": 10
+   },
+   {
+    "inicio": 42408,
+    "fim": 42515,
+    "hora": "15:48",
+    "dia_da_semana": 2,
+    "dia_do_mes": 14
+   },
+   {
+    "inicio": 42515,
+    "fim": 42680,
+    "hora": "09:13",
+    "dia_da_semana": 4,
+    "dia_do_mes": 12
+   },
+   {
+    "inicio": 42680,
+    "fim": 42885,
+    "hora": "10:34",
+    "dia_da_semana": 2,
+    "dia_do_mes": 12
+   },
+   {
+    "inicio": 42885,
+    "fim": 42968,
+    "hora": "05:05",
+    "dia_da_semana": 6,
+    "dia_do_mes": 24
+   },
+   {
+    "inicio": 42968,
+    "fim": 43177,
+    "hora": "10:54",
+    "dia_da_semana": 5,
+    "dia_do_mes": 10
+   },
+   {
+    "inicio": 43177,
+    "fim": 43380,
+    "hora": "15:17",
+    "dia_da_semana": 6,
+    "dia_do_mes": 30
+   }
+  ]
+ },
+ "liberacoes": [
+  {
+   "t": 2951,
+   "versao": "1.1",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 4723,
+   "versao": "1.2",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 5960,
+   "versao": "1.3",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 10519,
+   "versao": "1.4",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 15566,
+   "versao": "1.5",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 19040,
+   "versao": "1.6",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "calcular_frete",
+     "numerico"
+    ],
+    [
+     "ler_quantidade",
+     "um_digito"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 19097,
+   "versao": "1.5",
+   "tipo": "reversão",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "calcular_frete",
+     "numerico"
+    ],
+    [
+     "ler_quantidade",
+     "um_digito"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 20257,
+   "versao": "1.7",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "calcular_frete",
+     "numerico"
+    ],
+    [
+     "exportar_csv",
+     "n_mais_um"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 21382,
+   "versao": "1.5",
+   "tipo": "reversão",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "calcular_frete",
+     "numerico"
+    ],
+    [
+     "exportar_csv",
+     "n_mais_um"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 24459,
+   "versao": "1.8",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "exportar_csv",
+     "n_mais_um"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 27107,
+   "versao": "1.9",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 32497,
+   "versao": "1.10",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "calcular_frete",
+     "numerico"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": [
+    "recomendar"
+   ]
+  },
+  {
+   "t": 32883,
+   "versao": "1.11",
+   "tipo": "correção",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "calcular_frete",
+     "numerico"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 37569,
+   "versao": "1.12",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": [
+    "listar_notas"
+   ]
+  },
+  {
+   "t": 41371,
+   "versao": "1.13",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "enviar_email",
+     "nome_fantasia"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 42577,
+   "versao": "1.14",
+   "tipo": "correção",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [
+    [
+     "enviar_email",
+     "nome_fantasia"
+    ]
+   ],
+   "funcoes_que_mudaram_de_comportamento": []
+  }
+ ],
+ "liberacoes_com_defeito": [
+  {
+   "t": 19040,
+   "versao": "1.6",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "calcular_frete",
+     "numerico"
+    ],
+    [
+     "ler_quantidade",
+     "um_digito"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 20257,
+   "versao": "1.7",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "calcular_frete",
+     "numerico"
+    ],
+    [
+     "exportar_csv",
+     "n_mais_um"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 24459,
+   "versao": "1.8",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "exportar_csv",
+     "n_mais_um"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 32497,
+   "versao": "1.10",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "calcular_frete",
+     "numerico"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": [
+    "recomendar"
+   ]
+  },
+  {
+   "t": 41371,
+   "versao": "1.13",
+   "tipo": "regular",
+   "defeitos_que_entraram": [
+    [
+     "enviar_email",
+     "nome_fantasia"
+    ]
+   ],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  }
+ ],
+ "episodios_de_defeito_no_ar": [
+  {
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "componente": "frete",
+   "como_aparece": "exceção",
+   "descricao": "frete e pedido quebram para CEP que começa com zero",
+   "liberado_em": 19040,
+   "versao": "1.6",
+   "primeiro_erro": 19047,
+   "erros": 33,
+   "primeiro_chamado": 19064,
+   "chamados": 1,
+   "primeira_escalacao": 19092,
+   "escalacoes": 1,
+   "saiu_do_ar": 19097,
+   "saiu_por": "reversão"
+  },
+  {
+   "funcao": "ler_quantidade",
+   "implementacao": "um_digito",
+   "componente": "pedido",
+   "como_aparece": "exceção",
+   "descricao": "carrinho e pedido quebram com quantidade de dois algarismos ou mais",
+   "liberado_em": 19040,
+   "versao": "1.6",
+   "primeiro_erro": 19041,
+   "erros": 321,
+   "primeiro_chamado": 19056,
+   "chamados": 11,
+   "primeira_escalacao": 19090,
+   "escalacoes": 11,
+   "saiu_do_ar": 19097,
+   "saiu_por": "reversão"
+  },
+  {
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "componente": "frete",
+   "como_aparece": "exceção",
+   "descricao": "frete e pedido quebram para CEP que começa com zero",
+   "liberado_em": 20257,
+   "versao": "1.7",
+   "primeiro_erro": 20258,
+   "erros": 483,
+   "primeiro_chamado": 20263,
+   "chamados": 20,
+   "primeira_escalacao": 20415,
+   "escalacoes": 20,
+   "saiu_do_ar": 21382,
+   "saiu_por": "reversão"
+  },
+  {
+   "funcao": "exportar_csv",
+   "implementacao": "n_mais_um",
+   "componente": "relatorio",
+   "como_aparece": "lento",
+   "descricao": "a exportação faz uma consulta por pedido",
+   "liberado_em": 20257,
+   "versao": "1.7",
+   "primeiro_erro": null,
+   "erros": 0,
+   "primeiro_chamado": null,
+   "chamados": 0,
+   "primeira_escalacao": null,
+   "escalacoes": 0,
+   "saiu_do_ar": 21382,
+   "saiu_por": "reversão"
+  },
+  {
+   "funcao": "exportar_csv",
+   "implementacao": "n_mais_um",
+   "componente": "relatorio",
+   "como_aparece": "lento",
+   "descricao": "a exportação faz uma consulta por pedido",
+   "liberado_em": 24459,
+   "versao": "1.8",
+   "primeiro_erro": null,
+   "erros": 0,
+   "primeiro_chamado": null,
+   "chamados": 0,
+   "primeira_escalacao": null,
+   "escalacoes": 0,
+   "saiu_do_ar": null,
+   "saiu_por": null
+  },
+  {
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "componente": "frete",
+   "como_aparece": "exceção",
+   "descricao": "frete e pedido quebram para CEP que começa com zero",
+   "liberado_em": 32497,
+   "versao": "1.10",
+   "primeiro_erro": 32501,
+   "erros": 210,
+   "primeiro_chamado": 32571,
+   "chamados": 6,
+   "primeira_escalacao": 32805,
+   "escalacoes": 6,
+   "saiu_do_ar": 32883,
+   "saiu_por": "correção"
+  },
+  {
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "componente": "notificacao",
+   "como_aparece": "fila",
+   "descricao": "o e-mail falha para cliente sem nome fantasia e a fila cresce",
+   "liberado_em": 41371,
+   "versao": "1.13",
+   "primeiro_erro": 41372,
+   "erros": 1478,
+   "primeiro_chamado": null,
+   "chamados": 0,
+   "primeira_escalacao": null,
+   "escalacoes": 0,
+   "saiu_do_ar": 42577,
+   "saiu_por": "correção"
+  }
+ ],
+ "incidentes": [
+  {
+   "inicio": 37077,
+   "fim": 37130,
+   "causa": "volume do banco cheio",
+   "primeiro_chamado": 37087,
+   "chamados": 26,
+   "primeira_escalacao": 37122,
+   "escalacoes": 26,
+   "folga_dada_em_dias": 35,
+   "registros_apagados": 620218,
+   "causa_diagnosticada": "volume do banco cheio",
+   "duracao_min": 53
+  }
+ ],
+ "mudancas_de_regime": [
+  {
+   "t": 32497,
+   "versao": "1.10",
+   "funcao": "recomendar",
+   "de": "nenhuma",
+   "para": "historico",
+   "rotas": [
+    "catalogo"
+   ],
+   "tipo": "mudança de regime",
+   "latencia_media_7_dias_antes": [
+    35.4
+   ],
+   "latencia_media_7_dias_depois": [
+    57.4
+   ]
+  },
+  {
+   "t": 37569,
+   "versao": "1.12",
+   "funcao": "listar_notas",
+   "de": "todas",
+   "para": "paginada",
+   "rotas": [
+    "notas"
+   ],
+   "tipo": "mudança de regime",
+   "latencia_media_7_dias_antes": [
+    47.6
+   ],
+   "latencia_media_7_dias_depois": [
+    35.7
+   ]
+  }
+ ],
+ "deriva": {
+  "carteira_por_dia": [
+   [
+    1,
+    440
+   ],
+   [
+    943,
+    440
+   ],
+   [
+    3165,
+    440
+   ],
+   [
+    4972,
+    440
+   ],
+   [
+    5848,
+    440
+   ],
+   [
+    7292,
+    440
+   ],
+   [
+    9373,
+    442
+   ],
+   [
+    10912,
+    441
+   ],
+   [
+    12016,
+    441
+   ],
+   [
+    13559,
+    443
+   ],
+   [
+    15190,
+    443
+   ],
+   [
+    16886,
+    443
+   ],
+   [
+    17679,
+    443
+   ],
+   [
+    19227,
+    443
+   ],
+   [
+    20496,
+    444
+   ],
+   [
+    21778,
+    444
+   ],
+   [
+    23692,
+    444
+   ],
+   [
+    25686,
+    446
+   ],
+   [
+    27902,
+    446
+   ],
+   [
+    29272,
+    446
+   ],
+   [
+    30299,
+    446
+   ],
+   [
+    32228,
+    446
+   ],
+   [
+    33887,
+    446
+   ],
+   [
+    35132,
+    449
+   ],
+   [
+    36856,
+    450
+   ],
+   [
+    37719,
+    452
+   ],
+   [
+    39176,
+    452
+   ],
+   [
+    41344,
+    454
+   ],
+   [
+    43177,
+    454
+   ]
+  ],
+  "crescimento_por_semana_em_porcento": [
+   0.23,
+   0.68,
+   0.45,
+   1.79
+  ],
+  "entradas_e_saidas": [
+   [
+    1775,
+    "saída",
+    "pro"
+   ],
+   [
+    2969,
+    "entrada",
+    "básico"
+   ],
+   [
+    8748,
+    "entrada",
+    "básico"
+   ],
+   [
+    8821,
+    "entrada",
+    "básico"
+   ],
+   [
+    10501,
+    "saída",
+    "básico"
+   ],
+   [
+    12240,
+    "entrada",
+    "básico"
+   ],
+   [
+    12269,
+    "entrada",
+    "básico"
+   ],
+   [
+    20255,
+    "entrada",
+    "pro"
+   ],
+   [
+    24494,
+    "entrada",
+    "básico"
+   ],
+   [
+    24551,
+    "entrada",
+    "básico"
+   ],
+   [
+    34296,
+    "entrada",
+    "básico"
+   ],
+   [
+    34321,
+    "entrada",
+    "básico"
+   ],
+   [
+    34345,
+    "entrada",
+    "pro"
+   ],
+   [
+    36659,
+    "entrada",
+    "básico"
+   ],
+   [
+    36891,
+    "entrada",
+    "básico"
+   ],
+   [
+    37568,
+    "entrada",
+    "pro"
+   ],
+   [
+    41024,
+    "entrada",
+    "pro"
+   ],
+   [
+    41082,
+    "entrada",
+    "básico"
+   ]
+  ]
+ },
+ "sprints": [
+  {
+   "projeto": "PROD",
+   "numero": 1,
+   "inicio": 11404,
+   "meta_pontos": 67,
+   "capacidade_pontos": 54,
+   "meta_sobre_capacidade": 1.24,
+   "pressa": true,
+   "fim": 37113,
+   "pontos_feitos": 95
+  },
+  {
+   "projeto": "PLAT",
+   "numero": 1,
+   "inicio": 25189,
+   "meta_pontos": 30,
+   "capacidade_pontos": 30,
+   "meta_sobre_capacidade": 1.0,
+   "pressa": false,
+   "fim": null,
+   "pontos_feitos": null
+  },
+  {
+   "projeto": "PROD",
+   "numero": 2,
+   "inicio": 37113,
+   "meta_pontos": 66,
+   "capacidade_pontos": 66,
+   "meta_sobre_capacidade": 1.0,
+   "pressa": false,
+   "fim": null,
+   "pontos_feitos": null
+  }
+ ],
+ "sprints_de_pressa": [
+  {
+   "projeto": "PROD",
+   "numero": 1,
+   "inicio": 11404,
+   "meta_pontos": 67,
+   "capacidade_pontos": 54,
+   "meta_sobre_capacidade": 1.24,
+   "pressa": true,
+   "fim": 37113,
+   "pontos_feitos": 95
+  }
+ ],
+ "defeitos_escritos": [
+  {
+   "t": 11504,
+   "item": 54,
+   "projeto": "PLAT",
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "pressa_do_squad": 1.0
+  },
+  {
+   "t": 12911,
+   "item": 10,
+   "projeto": "PROD",
+   "funcao": "paginar",
+   "implementacao": "ultima_pagina",
+   "pressa_do_squad": 1.72
+  },
+  {
+   "t": 15413,
+   "item": 24,
+   "projeto": "PROD",
+   "funcao": "exportar_csv",
+   "implementacao": "n_mais_um",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 15527,
+   "item": 26,
+   "projeto": "PROD",
+   "funcao": "ler_quantidade",
+   "implementacao": "um_digito",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 17617,
+   "item": 111,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 1.65
+  },
+  {
+   "t": 25638,
+   "item": 226,
+   "projeto": "PLAT",
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "pressa_do_squad": 0.93
+  },
+  {
+   "t": 27027,
+   "item": 387,
+   "projeto": "PLAT",
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "pressa_do_squad": 1.54
+  },
+  {
+   "t": 27207,
+   "item": 117,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 1.44
+  },
+  {
+   "t": 32478,
+   "item": 51,
+   "projeto": "PLAT",
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 32517,
+   "item": 285,
+   "projeto": "PROD",
+   "funcao": "ler_quantidade",
+   "implementacao": "um_digito",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 33422,
+   "item": 64,
+   "projeto": "PLAT",
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 33442,
+   "item": 93,
+   "projeto": "PLAT",
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 34252,
+   "item": 403,
+   "projeto": "PROD",
+   "funcao": "registrar_cobranca",
+   "implementacao": "sem_verificacao",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 34270,
+   "item": 119,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 34886,
+   "item": 76,
+   "projeto": "PLAT",
+   "funcao": "atualizar_conta",
+   "implementacao": "telefone",
+   "pressa_do_squad": 1.08
+  },
+  {
+   "t": 37171,
+   "item": 430,
+   "projeto": "PROD",
+   "funcao": "montar_relatorio",
+   "implementacao": "sem_filtro",
+   "pressa_do_squad": 1.0
+  },
+  {
+   "t": 37299,
+   "item": 74,
+   "projeto": "PLAT",
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "pressa_do_squad": 0.69
+  },
+  {
+   "t": 37708,
+   "item": 610,
+   "projeto": "PROD",
+   "funcao": "ler_quantidade",
+   "implementacao": "um_digito",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 40988,
+   "item": 667,
+   "projeto": "PROD",
+   "funcao": "exportar_csv",
+   "implementacao": "n_mais_um",
+   "pressa_do_squad": 2.1
+  },
+  {
+   "t": 41107,
+   "item": 622,
+   "projeto": "PROD",
+   "funcao": "montar_relatorio",
+   "implementacao": "sem_filtro",
+   "pressa_do_squad": 2.1
+  }
+ ],
+ "defeitos_barrados_antes_do_ar": [
+  {
+   "t": 12987,
+   "item": 54,
+   "funcao": "emitir_nota",
+   "por": "qualidade"
+  },
+  {
+   "t": 13154,
+   "item": 10,
+   "funcao": "paginar",
+   "por": "qualidade"
+  },
+  {
+   "t": 21256,
+   "item": 110,
+   "funcao": "calcular_frete",
+   "por": "qualidade"
+  },
+  {
+   "t": 28711,
+   "item": 387,
+   "funcao": "enviar_email",
+   "por": "qualidade"
+  },
+  {
+   "t": 33500,
+   "item": 93,
+   "funcao": "emitir_nota",
+   "por": "revisão de código"
+  },
+  {
+   "t": 34418,
+   "item": 403,
+   "funcao": "registrar_cobranca",
+   "por": "qualidade"
+  },
+  {
+   "t": 35810,
+   "item": 312,
+   "funcao": "calcular_frete",
+   "por": "qualidade"
+  },
+  {
+   "t": 36776,
+   "item": 429,
+   "funcao": "exportar_csv",
+   "por": "qualidade"
+  },
+  {
+   "t": 37309,
+   "item": 550,
+   "funcao": "exportar_csv",
+   "por": "qualidade"
+  },
+  {
+   "t": 37693,
+   "item": 550,
+   "funcao": "montar_relatorio",
+   "por": "qualidade"
+  },
+  {
+   "t": 37753,
+   "item": 610,
+   "funcao": "ler_quantidade",
+   "por": "revisão de código"
+  },
+  {
+   "t": 42181,
+   "item": 666,
+   "funcao": "exportar_csv",
+   "por": "qualidade"
+  }
+ ],
+ "quedas_do_processo_por_memoria": {
+  "erros_no_registro": [],
+  "sonda_parada": []
+ },
+ "pessoal": [
+  {
+   "t": 25686,
+   "tipo": "saída",
+   "equipe": "qualidade"
+  }
+ ],
+ "chamados_por_causa": {
+  "defeito": 38,
+  "incidente": 26,
+  "queda do processo": 0,
+  "outros": 605
+ },
+ "atos": {}
+}

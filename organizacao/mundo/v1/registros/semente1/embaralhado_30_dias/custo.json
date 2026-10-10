@@ -1,0 +1,8 @@
+{
+ "dias": 30,
+ "semente": 1,
+ "nulo": "embaralhado",
+ "segundos": 131.0,
+ "segundos_por_dia_simulado": 4.37,
+ "memoria_maxima_mb": 87.5
+}

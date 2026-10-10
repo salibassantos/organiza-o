@@ -1,0 +1,1152 @@
+[
+ {
+  "nome": "rota login",
+  "campos": [
+   "requisições no minuto",
+   "respostas com erro no minuto",
+   "respostas recusadas no minuto",
+   "latência média em ms",
+   "latência do percentil 95 em ms",
+   "clientes distintos no minuto"
+  ]
+ },
+ {
+  "nome": "rota catálogo",
+  "campos": [
+   "requisições no minuto",
+   "respostas com erro no minuto",
+   "respostas recusadas no minuto",
+   "latência média em ms",
+   "latência do percentil 95 em ms",
+   "clientes distintos no minuto"
+  ]
+ },
+ {
+  "nome": "rota busca",
+  "campos": [
+   "requisições no minuto",
+   "respostas com erro no minuto",
+   "respostas recusadas no minuto",
+   "latência média em ms",
+   "latência do percentil 95 em ms",
+   "clientes distintos no minuto"
+  ]
+ },
+ {
+  "nome": "rota produto",
+  "campos": [
+   "requisições no minuto",
+   "respostas com erro no minuto",
+   "respostas recusadas no minuto",
+   "latência média em ms",
+   "latência do percentil 95 em ms",
+   "clientes distintos no minuto"
+  ]
+ },
+ {
+  "nome": "rota carrinho",
+  "campos": [
+   "requisições no minuto",
+   "respostas com erro no minuto",
+   "respostas recusadas no minuto",
+   "latência média em ms",
+   "latência do percentil 95 em ms",
+   "clientes distintos no minuto"
+  ]
+ },
+ {
+  "nome": "rota frete",
+  "campos": [
+   "requisições no minuto",
+   "respostas com erro no minuto",
+   "respostas recusadas no minuto",
+   "latência média em ms",
+   "latência do percentil 95 em ms",
+   "clientes distintos no minuto"
+  ]
+ },
+ {
+  "nome": "rota pedido",
+  "campos": [
+   "requisições no minuto",
+   "respostas com erro no minuto",
+   "respostas recusadas no minuto",
+   "latência média em ms",
+   "latência do percentil 95 em ms",
+   "clientes distintos no minuto"
+  ]
+ },
+ {
+  "nome": "rota pagamento",
+  "campos": [
+   "requisições no minuto",
+   "respostas com erro no minuto",
+   "respostas recusadas no minuto",
+   "latência média em ms",
+   "latência do percentil 95 em ms",
+   "clientes distintos no minuto"
+  ]
+ },
+ {
+  "nome": "rota relatório",
+  "campos": [
+   "requisições no minuto",
+   "respostas com erro no minuto",
+   "respostas recusadas no minuto",
+   "latência média em ms",
+   "latência do percentil 95 em ms",
+   "clientes distintos no minuto"
+  ]
+ },
+ {
+  "nome": "rota exportação",
+  "campos": [
+   "requisições no minuto",
+   "respostas com erro no minuto",
+   "respostas recusadas no minuto",
+   "latência média em ms",
+   "latência do percentil 95 em ms",
+   "clientes distintos no minuto"
+  ]
+ },
+ {
+  "nome": "rota notas fiscais",
+  "campos": [
+   "requisições no minuto",
+   "respostas com erro no minuto",
+   "respostas recusadas no minuto",
+   "latência média em ms",
+   "latência do percentil 95 em ms",
+   "clientes distintos no minuto"
+  ]
+ },
+ {
+  "nome": "rota conta",
+  "campos": [
+   "requisições no minuto",
+   "respostas com erro no minuto",
+   "respostas recusadas no minuto",
+   "latência média em ms",
+   "latência do percentil 95 em ms",
+   "clientes distintos no minuto"
+  ]
+ },
+ {
+  "nome": "servidor da aplicação",
+  "campos": [
+   "uso de processador em %",
+   "memória em uso em MB",
+   "reinícios do processo no minuto"
+  ]
+ },
+ {
+  "nome": "banco do produto",
+  "campos": [
+   "tamanho ocupado em MB",
+   "espaço livre no volume em MB",
+   "consultas no minuto",
+   "escritas no minuto",
+   "instruções executadas em milhares"
+  ]
+ },
+ {
+  "nome": "fila de trabalhos",
+  "campos": [
+   "trabalhos pendentes",
+   "trabalhos concluídos no minuto",
+   "falhas de trabalho no minuto",
+   "idade do trabalho pendente mais antigo em minutos"
+  ]
+ },
+ {
+  "nome": "gateway de pagamento",
+  "campos": [
+   "chamadas no minuto",
+   "recusas no minuto"
+  ]
+ },
+ {
+  "nome": "transportadoras",
+  "campos": [
+   "cotações de frete no minuto",
+   "cotações com erro no minuto"
+  ]
+ },
+ {
+  "nome": "sonda de disponibilidade",
+  "campos": [
+   "verificações no minuto",
+   "verificações com falha no minuto"
+  ]
+ },
+ {
+  "nome": "implantação",
+  "campos": [
+   "implantações no minuto",
+   "commits incluídos no minuto",
+   "itens incluídos no minuto"
+  ]
+ },
+ {
+  "nome": "tarefas agendadas do servidor",
+  "campos": [
+   "tarefas em execução",
+   "linhas processadas no minuto"
+  ]
+ },
+ {
+  "nome": "e-mails do produto",
+  "campos": [
+   "enviados no minuto",
+   "com falha no minuto"
+  ]
+ },
+ {
+  "nome": "pedidos",
+  "campos": [
+   "pedidos criados no minuto",
+   "valor dos pedidos no minuto em reais",
+   "itens nos pedidos do minuto"
+  ]
+ },
+ {
+  "nome": "pagamentos",
+  "campos": [
+   "pagamentos aprovados no minuto",
+   "pedidos pagos no minuto",
+   "pagamentos recusados no minuto"
+  ]
+ },
+ {
+  "nome": "notas fiscais",
+  "campos": [
+   "notas emitidas no minuto",
+   "emissões com falha no minuto"
+  ]
+ },
+ {
+  "nome": "estoque",
+  "campos": [
+   "produtos sem estoque",
+   "unidades repostas no minuto"
+  ]
+ },
+ {
+  "nome": "sessões dos clientes",
+  "campos": [
+   "sessões iniciadas no minuto",
+   "sessões abandonadas depois de erro no minuto",
+   "sessões ativas",
+   "usuários conectados"
+  ]
+ },
+ {
+  "nome": "faturamento",
+  "campos": [
+   "faturas emitidas no minuto",
+   "faturas pagas no minuto",
+   "faturas em aberto",
+   "estornos feitos no minuto"
+  ]
+ },
+ {
+  "nome": "região São Paulo",
+  "campos": [
+   "clientes ativos",
+   "pedidos no minuto",
+   "cotações de frete no minuto",
+   "cotações com erro no minuto"
+  ]
+ },
+ {
+  "nome": "região Rio de Janeiro e Espírito Santo",
+  "campos": [
+   "clientes ativos",
+   "pedidos no minuto",
+   "cotações de frete no minuto",
+   "cotações com erro no minuto"
+  ]
+ },
+ {
+  "nome": "região Minas Gerais",
+  "campos": [
+   "clientes ativos",
+   "pedidos no minuto",
+   "cotações de frete no minuto",
+   "cotações com erro no minuto"
+  ]
+ },
+ {
+  "nome": "região Norte e Nordeste",
+  "campos": [
+   "clientes ativos",
+   "pedidos no minuto",
+   "cotações de frete no minuto",
+   "cotações com erro no minuto"
+  ]
+ },
+ {
+  "nome": "região Centro-Oeste",
+  "campos": [
+   "clientes ativos",
+   "pedidos no minuto",
+   "cotações de frete no minuto",
+   "cotações com erro no minuto"
+  ]
+ },
+ {
+  "nome": "região Sul",
+  "campos": [
+   "clientes ativos",
+   "pedidos no minuto",
+   "cotações de frete no minuto",
+   "cotações com erro no minuto"
+  ]
+ },
+ {
+  "nome": "carteira de clientes",
+  "campos": [
+   "clientes ativos",
+   "entradas no minuto",
+   "cancelamentos no minuto",
+   "pedidos de cancelamento abertos"
+  ]
+ },
+ {
+  "nome": "clientes do plano básico",
+  "campos": [
+   "clientes ativos",
+   "sessões ativas",
+   "pedidos no minuto",
+   "chamados abertos no minuto"
+  ]
+ },
+ {
+  "nome": "clientes do plano pro",
+  "campos": [
+   "clientes ativos",
+   "sessões ativas",
+   "pedidos no minuto",
+   "chamados abertos no minuto"
+  ]
+ },
+ {
+  "nome": "clientes do plano empresarial",
+  "campos": [
+   "clientes ativos",
+   "sessões ativas",
+   "pedidos no minuto",
+   "chamados abertos no minuto"
+  ]
+ },
+ {
+  "nome": "pesquisa de satisfação",
+  "campos": [
+   "respostas no minuto",
+   "soma das notas no minuto"
+  ]
+ },
+ {
+  "nome": "canal de atendimento chat",
+  "campos": [
+   "contatos recebidos no minuto"
+  ]
+ },
+ {
+  "nome": "canal de atendimento e-mail",
+  "campos": [
+   "contatos recebidos no minuto"
+  ]
+ },
+ {
+  "nome": "canal de atendimento telefone",
+  "campos": [
+   "contatos recebidos no minuto"
+  ]
+ },
+ {
+  "nome": "projeto Produto: entrada",
+  "campos": [
+   "histórias no backlog",
+   "histórias em refinamento",
+   "bugs abertos ou em triagem",
+   "épicos em andamento",
+   "tarefas no backlog"
+  ]
+ },
+ {
+  "nome": "projeto Produto: desenvolvimento",
+  "campos": [
+   "prontos para desenvolver",
+   "em desenvolvimento",
+   "em revisão",
+   "em qualidade",
+   "prontos para liberar"
+  ]
+ },
+ {
+  "nome": "projeto Produto: movimento",
+  "campos": [
+   "itens criados no minuto",
+   "transições no minuto",
+   "itens liberados no minuto",
+   "reprovações no minuto",
+   "reaberturas no minuto",
+   "comentários no minuto"
+  ]
+ },
+ {
+  "nome": "projeto Produto: sprint",
+  "campos": [
+   "itens no sprint",
+   "pontos planejados",
+   "pontos do sprint",
+   "pontos concluídos",
+   "pontos restantes",
+   "itens de prioridade alta ou crítica no sprint"
+  ]
+ },
+ {
+  "nome": "projeto Produto: prioridades",
+  "campos": [
+   "itens abertos de prioridade baixa",
+   "itens abertos de prioridade média",
+   "itens abertos de prioridade alta",
+   "itens abertos de prioridade crítica"
+  ]
+ },
+ {
+  "nome": "projeto Produto: idade",
+  "campos": [
+   "itens abertos",
+   "idade média dos itens abertos em horas"
+  ]
+ },
+ {
+  "nome": "projeto Plataforma: entrada",
+  "campos": [
+   "histórias no backlog",
+   "histórias em refinamento",
+   "bugs abertos ou em triagem",
+   "épicos em andamento",
+   "tarefas no backlog"
+  ]
+ },
+ {
+  "nome": "projeto Plataforma: desenvolvimento",
+  "campos": [
+   "prontos para desenvolver",
+   "em desenvolvimento",
+   "em revisão",
+   "em qualidade",
+   "prontos para liberar"
+  ]
+ },
+ {
+  "nome": "projeto Plataforma: movimento",
+  "campos": [
+   "itens criados no minuto",
+   "transições no minuto",
+   "itens liberados no minuto",
+   "reprovações no minuto",
+   "reaberturas no minuto",
+   "comentários no minuto"
+  ]
+ },
+ {
+  "nome": "projeto Plataforma: sprint",
+  "campos": [
+   "itens no sprint",
+   "pontos planejados",
+   "pontos do sprint",
+   "pontos concluídos",
+   "pontos restantes",
+   "itens de prioridade alta ou crítica no sprint"
+  ]
+ },
+ {
+  "nome": "projeto Plataforma: prioridades",
+  "campos": [
+   "itens abertos de prioridade baixa",
+   "itens abertos de prioridade média",
+   "itens abertos de prioridade alta",
+   "itens abertos de prioridade crítica"
+  ]
+ },
+ {
+  "nome": "projeto Plataforma: idade",
+  "campos": [
+   "itens abertos",
+   "idade média dos itens abertos em horas"
+  ]
+ },
+ {
+  "nome": "projeto Infraestrutura: itens",
+  "campos": [
+   "tarefas no backlog",
+   "tarefas prontas",
+   "em andamento",
+   "bugs abertos",
+   "concluídos no minuto"
+  ]
+ },
+ {
+  "nome": "projeto Infraestrutura: movimento",
+  "campos": [
+   "itens criados no minuto",
+   "transições no minuto",
+   "comentários no minuto"
+  ]
+ },
+ {
+  "nome": "projeto Infraestrutura: sprint",
+  "campos": [
+   "itens no sprint",
+   "pontos planejados",
+   "pontos do sprint",
+   "pontos concluídos",
+   "pontos restantes",
+   "itens de prioridade alta ou crítica no sprint"
+  ]
+ },
+ {
+  "nome": "projeto Infraestrutura: prioridades",
+  "campos": [
+   "itens abertos de prioridade baixa",
+   "itens abertos de prioridade média",
+   "itens abertos de prioridade alta",
+   "itens abertos de prioridade crítica"
+  ]
+ },
+ {
+  "nome": "projeto Infraestrutura: idade",
+  "campos": [
+   "itens abertos",
+   "idade média dos itens abertos em horas"
+  ]
+ },
+ {
+  "nome": "projeto Suporte: chamados por estado",
+  "campos": [
+   "abertos sem primeira resposta",
+   "em atendimento",
+   "aguardando cliente",
+   "escalados",
+   "resolvidos aguardando fechamento"
+  ]
+ },
+ {
+  "nome": "projeto Suporte: movimento",
+  "campos": [
+   "chamados novos no minuto",
+   "primeiras respostas no minuto",
+   "resolvidos no minuto",
+   "fechados no minuto",
+   "reabertos no minuto",
+   "comentários no minuto"
+  ]
+ },
+ {
+  "nome": "projeto Suporte: prazos",
+  "campos": [
+   "chamados fora do prazo de primeira resposta",
+   "espera do chamado mais antigo sem resposta em minutos"
+  ]
+ },
+ {
+  "nome": "projeto Suporte: prioridades",
+  "campos": [
+   "chamados abertos de prioridade baixa",
+   "chamados abertos de prioridade média",
+   "chamados abertos de prioridade alta",
+   "chamados abertos de prioridade crítica"
+  ]
+ },
+ {
+  "nome": "projeto Suporte: sprint",
+  "campos": [
+   "itens no sprint",
+   "pontos planejados",
+   "pontos do sprint",
+   "pontos concluídos",
+   "pontos restantes",
+   "itens de prioridade alta ou crítica no sprint"
+  ]
+ },
+ {
+  "nome": "projeto Suporte: idade",
+  "campos": [
+   "chamados abertos",
+   "idade média dos chamados abertos em horas"
+  ]
+ },
+ {
+  "nome": "chamados de login e conta",
+  "campos": [
+   "abertos",
+   "novos no minuto",
+   "escalados",
+   "resolvidos no minuto"
+  ]
+ },
+ {
+  "nome": "chamados de catálogo e busca",
+  "campos": [
+   "abertos",
+   "novos no minuto",
+   "escalados",
+   "resolvidos no minuto"
+  ]
+ },
+ {
+  "nome": "chamados de pedido e carrinho",
+  "campos": [
+   "abertos",
+   "novos no minuto",
+   "escalados",
+   "resolvidos no minuto"
+  ]
+ },
+ {
+  "nome": "chamados de frete",
+  "campos": [
+   "abertos",
+   "novos no minuto",
+   "escalados",
+   "resolvidos no minuto"
+  ]
+ },
+ {
+  "nome": "chamados de pagamento",
+  "campos": [
+   "abertos",
+   "novos no minuto",
+   "escalados",
+   "resolvidos no minuto"
+  ]
+ },
+ {
+  "nome": "chamados de fiscal",
+  "campos": [
+   "abertos",
+   "novos no minuto",
+   "escalados",
+   "resolvidos no minuto"
+  ]
+ },
+ {
+  "nome": "chamados de relatórios",
+  "campos": [
+   "abertos",
+   "novos no minuto",
+   "escalados",
+   "resolvidos no minuto"
+  ]
+ },
+ {
+  "nome": "chamados de notificações",
+  "campos": [
+   "abertos",
+   "novos no minuto",
+   "escalados",
+   "resolvidos no minuto"
+  ]
+ },
+ {
+  "nome": "chamados de infraestrutura",
+  "campos": [
+   "abertos",
+   "novos no minuto",
+   "escalados",
+   "resolvidos no minuto"
+  ]
+ },
+ {
+  "nome": "bugs de login e conta",
+  "campos": [
+   "abertos",
+   "criados no minuto",
+   "liberados no minuto"
+  ]
+ },
+ {
+  "nome": "bugs de catálogo e busca",
+  "campos": [
+   "abertos",
+   "criados no minuto",
+   "liberados no minuto"
+  ]
+ },
+ {
+  "nome": "bugs de pedido e carrinho",
+  "campos": [
+   "abertos",
+   "criados no minuto",
+   "liberados no minuto"
+  ]
+ },
+ {
+  "nome": "bugs de frete",
+  "campos": [
+   "abertos",
+   "criados no minuto",
+   "liberados no minuto"
+  ]
+ },
+ {
+  "nome": "bugs de pagamento",
+  "campos": [
+   "abertos",
+   "criados no minuto",
+   "liberados no minuto"
+  ]
+ },
+ {
+  "nome": "bugs de fiscal",
+  "campos": [
+   "abertos",
+   "criados no minuto",
+   "liberados no minuto"
+  ]
+ },
+ {
+  "nome": "bugs de relatórios",
+  "campos": [
+   "abertos",
+   "criados no minuto",
+   "liberados no minuto"
+  ]
+ },
+ {
+  "nome": "bugs de notificações",
+  "campos": [
+   "abertos",
+   "criados no minuto",
+   "liberados no minuto"
+  ]
+ },
+ {
+  "nome": "bugs de infraestrutura",
+  "campos": [
+   "abertos",
+   "criados no minuto",
+   "liberados no minuto"
+  ]
+ },
+ {
+  "nome": "fluxo da equipe de produto",
+  "campos": [
+   "itens abertos sob responsabilidade da equipe",
+   "transições no minuto",
+   "comentários no minuto",
+   "itens criados no minuto"
+  ]
+ },
+ {
+  "nome": "fluxo da equipe de desenvolvimento",
+  "campos": [
+   "itens abertos sob responsabilidade da equipe",
+   "transições no minuto",
+   "comentários no minuto",
+   "itens criados no minuto"
+  ]
+ },
+ {
+  "nome": "fluxo da equipe de qualidade",
+  "campos": [
+   "itens abertos sob responsabilidade da equipe",
+   "transições no minuto",
+   "comentários no minuto",
+   "itens criados no minuto"
+  ]
+ },
+ {
+  "nome": "fluxo da equipe de atendimento",
+  "campos": [
+   "itens abertos sob responsabilidade da equipe",
+   "transições no minuto",
+   "comentários no minuto",
+   "itens criados no minuto"
+  ]
+ },
+ {
+  "nome": "fluxo da equipe de vendas",
+  "campos": [
+   "itens abertos sob responsabilidade da equipe",
+   "transições no minuto",
+   "comentários no minuto",
+   "itens criados no minuto"
+  ]
+ },
+ {
+  "nome": "fluxo da equipe de operação",
+  "campos": [
+   "itens abertos sob responsabilidade da equipe",
+   "transições no minuto",
+   "comentários no minuto",
+   "itens criados no minuto"
+  ]
+ },
+ {
+  "nome": "fluxo da equipe de gestão",
+  "campos": [
+   "itens abertos sob responsabilidade da equipe",
+   "transições no minuto",
+   "comentários no minuto",
+   "itens criados no minuto"
+  ]
+ },
+ {
+  "nome": "épicos",
+  "campos": [
+   "abertos",
+   "em andamento",
+   "concluídos no minuto"
+  ]
+ },
+ {
+  "nome": "repositório de código",
+  "campos": [
+   "commits no minuto",
+   "linhas alteradas no minuto",
+   "revisões aprovadas no minuto",
+   "revisões que pediram mudança no minuto",
+   "ramos abertos"
+  ]
+ },
+ {
+  "nome": "código de login e conta",
+  "campos": [
+   "commits no minuto",
+   "testes executados no minuto",
+   "testes com falha no minuto"
+  ]
+ },
+ {
+  "nome": "código de catálogo e busca",
+  "campos": [
+   "commits no minuto",
+   "testes executados no minuto",
+   "testes com falha no minuto"
+  ]
+ },
+ {
+  "nome": "código de pedido e carrinho",
+  "campos": [
+   "commits no minuto",
+   "testes executados no minuto",
+   "testes com falha no minuto"
+  ]
+ },
+ {
+  "nome": "código de frete",
+  "campos": [
+   "commits no minuto",
+   "testes executados no minuto",
+   "testes com falha no minuto"
+  ]
+ },
+ {
+  "nome": "código de pagamento",
+  "campos": [
+   "commits no minuto",
+   "testes executados no minuto",
+   "testes com falha no minuto"
+  ]
+ },
+ {
+  "nome": "código de fiscal",
+  "campos": [
+   "commits no minuto",
+   "testes executados no minuto",
+   "testes com falha no minuto"
+  ]
+ },
+ {
+  "nome": "código de relatórios",
+  "campos": [
+   "commits no minuto",
+   "testes executados no minuto",
+   "testes com falha no minuto"
+  ]
+ },
+ {
+  "nome": "código de notificações",
+  "campos": [
+   "commits no minuto",
+   "testes executados no minuto",
+   "testes com falha no minuto"
+  ]
+ },
+ {
+  "nome": "código de infraestrutura",
+  "campos": [
+   "commits no minuto",
+   "testes executados no minuto",
+   "testes com falha no minuto"
+  ]
+ },
+ {
+  "nome": "funil de vendas",
+  "campos": [
+   "leads",
+   "em qualificação",
+   "propostas",
+   "em negociação",
+   "ganhos no minuto",
+   "perdidos no minuto",
+   "valor em aberto em milhares de reais"
+  ]
+ },
+ {
+  "nome": "atividades de vendas",
+  "campos": [
+   "ligações no minuto",
+   "e-mails no minuto",
+   "propostas enviadas no minuto",
+   "tarefas internas abertas"
+  ]
+ },
+ {
+  "nome": "leads de site",
+  "campos": [
+   "novos no minuto",
+   "em aberto no funil"
+  ]
+ },
+ {
+  "nome": "leads de indicação",
+  "campos": [
+   "novos no minuto",
+   "em aberto no funil"
+  ]
+ },
+ {
+  "nome": "leads de prospecção",
+  "campos": [
+   "novos no minuto",
+   "em aberto no funil"
+  ]
+ },
+ {
+  "nome": "agenda da equipe de produto",
+  "campos": [
+   "pessoas em reunião",
+   "reuniões em curso",
+   "minutos de reunião no dia"
+  ]
+ },
+ {
+  "nome": "agenda da equipe de desenvolvimento",
+  "campos": [
+   "pessoas em reunião",
+   "reuniões em curso",
+   "minutos de reunião no dia"
+  ]
+ },
+ {
+  "nome": "agenda da equipe de qualidade",
+  "campos": [
+   "pessoas em reunião",
+   "reuniões em curso",
+   "minutos de reunião no dia"
+  ]
+ },
+ {
+  "nome": "agenda da equipe de atendimento",
+  "campos": [
+   "pessoas em reunião",
+   "reuniões em curso",
+   "minutos de reunião no dia"
+  ]
+ },
+ {
+  "nome": "agenda da equipe de vendas",
+  "campos": [
+   "pessoas em reunião",
+   "reuniões em curso",
+   "minutos de reunião no dia"
+  ]
+ },
+ {
+  "nome": "agenda da equipe de operação",
+  "campos": [
+   "pessoas em reunião",
+   "reuniões em curso",
+   "minutos de reunião no dia"
+  ]
+ },
+ {
+  "nome": "agenda da equipe de gestão",
+  "campos": [
+   "pessoas em reunião",
+   "reuniões em curso",
+   "minutos de reunião no dia"
+  ]
+ },
+ {
+  "nome": "reuniões do tipo diária",
+  "campos": [
+   "em curso",
+   "pessoas"
+  ]
+ },
+ {
+  "nome": "reuniões do tipo planejamento",
+  "campos": [
+   "em curso",
+   "pessoas"
+  ]
+ },
+ {
+  "nome": "reuniões do tipo refinamento",
+  "campos": [
+   "em curso",
+   "pessoas"
+  ]
+ },
+ {
+  "nome": "reuniões do tipo revisão e retrospectiva",
+  "campos": [
+   "em curso",
+   "pessoas"
+  ]
+ },
+ {
+  "nome": "reuniões do tipo semanal",
+  "campos": [
+   "em curso",
+   "pessoas"
+  ]
+ },
+ {
+  "nome": "reuniões do tipo liderança",
+  "campos": [
+   "em curso",
+   "pessoas"
+  ]
+ },
+ {
+  "nome": "reuniões do tipo mensal",
+  "campos": [
+   "em curso",
+   "pessoas"
+  ]
+ },
+ {
+  "nome": "reuniões do tipo com cliente",
+  "campos": [
+   "em curso",
+   "pessoas"
+  ]
+ },
+ {
+  "nome": "reuniões do tipo entrevista",
+  "campos": [
+   "em curso",
+   "pessoas"
+  ]
+ },
+ {
+  "nome": "reuniões do tipo alinhamento",
+  "campos": [
+   "em curso",
+   "pessoas"
+  ]
+ },
+ {
+  "nome": "quadro da equipe de produto",
+  "campos": [
+   "pessoas no quadro",
+   "presentes agora",
+   "em almoço",
+   "ausentes por férias hoje",
+   "ausentes por falta hoje",
+   "horas extras no dia"
+  ]
+ },
+ {
+  "nome": "quadro da equipe de desenvolvimento",
+  "campos": [
+   "pessoas no quadro",
+   "presentes agora",
+   "em almoço",
+   "ausentes por férias hoje",
+   "ausentes por falta hoje",
+   "horas extras no dia"
+  ]
+ },
+ {
+  "nome": "quadro da equipe de qualidade",
+  "campos": [
+   "pessoas no quadro",
+   "presentes agora",
+   "em almoço",
+   "ausentes por férias hoje",
+   "ausentes por falta hoje",
+   "horas extras no dia"
+  ]
+ },
+ {
+  "nome": "quadro da equipe de atendimento",
+  "campos": [
+   "pessoas no quadro",
+   "presentes agora",
+   "em almoço",
+   "ausentes por férias hoje",
+   "ausentes por falta hoje",
+   "horas extras no dia"
+  ]
+ },
+ {
+  "nome": "quadro da equipe de vendas",
+  "campos": [
+   "pessoas no quadro",
+   "presentes agora",
+   "em almoço",
+   "ausentes por férias hoje",
+   "ausentes por falta hoje",
+   "horas extras no dia"
+  ]
+ },
+ {
+  "nome": "quadro da equipe de operação",
+  "campos": [
+   "pessoas no quadro",
+   "presentes agora",
+   "em almoço",
+   "ausentes por férias hoje",
+   "ausentes por falta hoje",
+   "horas extras no dia"
+  ]
+ },
+ {
+  "nome": "quadro da equipe de gestão",
+  "campos": [
+   "pessoas no quadro",
+   "presentes agora",
+   "em almoço",
+   "ausentes por férias hoje",
+   "ausentes por falta hoje",
+   "horas extras no dia"
+  ]
+ },
+ {
+  "nome": "quadro geral",
+  "campos": [
+   "pessoas no quadro",
+   "entradas no mês",
+   "saídas no mês",
+   "vagas abertas",
+   "candidatos em processo",
+   "solicitações abertas à gestão"
+  ]
+ },
+ {
+  "nome": "ponto",
+  "campos": [
+   "entradas registradas no minuto",
+   "saídas registradas no minuto"
+  ]
+ }
+]

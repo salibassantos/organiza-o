@@ -1,0 +1,1049 @@
+{
+ "semente": 1,
+ "nulo": "sem_defeito",
+ "minutos": 43200,
+ "convencao_do_tempo": "t = 0 é a criação (segunda-feira, 0h); cada passo avança t e faz acontecer o minuto t",
+ "ciclos": {
+  "dia_util": "as pessoas trabalham das 8h às 18h nos dias úteis; os clientes usam o produto no horário comercial deles, com almoço mais vazio e picos às 10h e às 15h; tarefas agendadas do servidor rodam de madrugada (cópia às 2h, limpeza de sessões às 3h, reposição de estoque às 4h, resumo às 7h)",
+  "semana": "segunda-feira com mais uso e mais chamados (inclusive os guardados do fim de semana); sexta com menos uso e gente saindo mais cedo; liberações às terças e quintas a partir das 15h; reindexação aos domingos 4h30",
+  "sprint": "sprints de duas semanas que começam às segundas; planejamento no primeiro dia, revisão e retrospectiva na sexta da segunda semana, liberação extra nessa sexta de manhã; a pressa cresce no fim quando o sprint está atrasado",
+  "mes": "faturamento no dia 1 às 6h (fila de trabalhos cheia); reunião mensal no primeiro dia útil; vendas fecham mais nos últimos seis dias do mês; as lojas tiram mais relatórios no fim do mês",
+  "fins_de_sprint": [
+   {
+    "t": 20805,
+    "projeto": "SUP",
+    "numero": 1
+   },
+   {
+    "t": 20820,
+    "projeto": "INFRA",
+    "numero": 1
+   },
+   {
+    "t": 20910,
+    "projeto": "PROD",
+    "numero": 1
+   },
+   {
+    "t": 21120,
+    "projeto": "PLAT",
+    "numero": 1
+   },
+   {
+    "t": 40965,
+    "projeto": "SUP",
+    "numero": 2
+   },
+   {
+    "t": 40980,
+    "projeto": "INFRA",
+    "numero": 2
+   },
+   {
+    "t": 41070,
+    "projeto": "PROD",
+    "numero": 2
+   },
+   {
+    "t": 41280,
+    "projeto": "PLAT",
+    "numero": 2
+   }
+  ],
+  "fins_de_mes": [
+   41760
+  ]
+ },
+ "liberacoes": [
+  {
+   "t": 2368,
+   "versao": "1.1",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 5235,
+   "versao": "1.2",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 12440,
+   "versao": "1.3",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 15325,
+   "versao": "1.4",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 16522,
+   "versao": "1.5",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": [
+    "recomendar"
+   ]
+  },
+  {
+   "t": 22529,
+   "versao": "1.6",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": [
+    "listar_notas"
+   ]
+  },
+  {
+   "t": 25401,
+   "versao": "1.7",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 32608,
+   "versao": "1.8",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 35486,
+   "versao": "1.9",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 36680,
+   "versao": "1.10",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  },
+  {
+   "t": 42687,
+   "versao": "1.11",
+   "tipo": "regular",
+   "defeitos_que_entraram": [],
+   "defeitos_que_sairam": [],
+   "funcoes_que_mudaram_de_comportamento": []
+  }
+ ],
+ "liberacoes_com_defeito": [],
+ "episodios_de_defeito_no_ar": [],
+ "incidentes": [
+  {
+   "inicio": 35150,
+   "fim": 35203,
+   "causa": "volume do banco cheio",
+   "primeiro_chamado": 35158,
+   "chamados": 30,
+   "primeira_escalacao": 35168,
+   "escalacoes": 30,
+   "folga_dada_em_dias": 26,
+   "registros_apagados": 749538,
+   "causa_diagnosticada": "volume do banco cheio",
+   "duracao_min": 53
+  }
+ ],
+ "mudancas_de_regime": [
+  {
+   "t": 16522,
+   "versao": "1.5",
+   "funcao": "recomendar",
+   "de": "nenhuma",
+   "para": "historico",
+   "rotas": [
+    "catalogo"
+   ],
+   "tipo": "mudança de regime",
+   "latencia_media_7_dias_antes": [
+    35.4
+   ],
+   "latencia_media_7_dias_depois": [
+    54.0
+   ]
+  },
+  {
+   "t": 22529,
+   "versao": "1.6",
+   "funcao": "listar_notas",
+   "de": "todas",
+   "para": "paginada",
+   "rotas": [
+    "notas"
+   ],
+   "tipo": "mudança de regime",
+   "latencia_media_7_dias_antes": [
+    46.7
+   ],
+   "latencia_media_7_dias_depois": [
+    33.4
+   ]
+  }
+ ],
+ "deriva": {
+  "carteira_por_dia": [
+   [
+    1,
+    440
+   ],
+   [
+    1440,
+    440
+   ],
+   [
+    2880,
+    440
+   ],
+   [
+    4320,
+    440
+   ],
+   [
+    5760,
+    441
+   ],
+   [
+    7200,
+    442
+   ],
+   [
+    8640,
+    442
+   ],
+   [
+    10080,
+    442
+   ],
+   [
+    11520,
+    444
+   ],
+   [
+    12960,
+    444
+   ],
+   [
+    14400,
+    444
+   ],
+   [
+    15840,
+    445
+   ],
+   [
+    17280,
+    445
+   ],
+   [
+    18720,
+    445
+   ],
+   [
+    20160,
+    445
+   ],
+   [
+    21600,
+    447
+   ],
+   [
+    23040,
+    447
+   ],
+   [
+    24480,
+    447
+   ],
+   [
+    25920,
+    449
+   ],
+   [
+    27360,
+    449
+   ],
+   [
+    28800,
+    449
+   ],
+   [
+    30240,
+    449
+   ],
+   [
+    31680,
+    451
+   ],
+   [
+    33120,
+    449
+   ],
+   [
+    34560,
+    449
+   ],
+   [
+    36000,
+    450
+   ],
+   [
+    37440,
+    454
+   ],
+   [
+    38880,
+    454
+   ],
+   [
+    40320,
+    454
+   ],
+   [
+    41760,
+    456
+   ],
+   [
+    43200,
+    459
+   ]
+  ],
+  "crescimento_por_semana_em_porcento": [
+   0.45,
+   0.68,
+   0.9,
+   1.11
+  ],
+  "entradas_e_saidas": [
+   [
+    5116,
+    "entrada",
+    "básico"
+   ],
+   [
+    6572,
+    "entrada",
+    "básico"
+   ],
+   [
+    10887,
+    "entrada",
+    "básico"
+   ],
+   [
+    10891,
+    "entrada",
+    "pro"
+   ],
+   [
+    13851,
+    "entrada",
+    "pro"
+   ],
+   [
+    13864,
+    "saída",
+    "empresarial"
+   ],
+   [
+    15288,
+    "entrada",
+    "básico"
+   ],
+   [
+    20827,
+    "entrada",
+    "básico"
+   ],
+   [
+    20850,
+    "entrada",
+    "básico"
+   ],
+   [
+    20931,
+    "entrada",
+    "empresarial"
+   ],
+   [
+    20944,
+    "saída",
+    "básico"
+   ],
+   [
+    25297,
+    "entrada",
+    "básico"
+   ],
+   [
+    25325,
+    "entrada",
+    "básico"
+   ],
+   [
+    26705,
+    "entrada",
+    "básico"
+   ],
+   [
+    26849,
+    "saída",
+    "básico"
+   ],
+   [
+    30935,
+    "entrada",
+    "básico"
+   ],
+   [
+    31021,
+    "entrada",
+    "básico"
+   ],
+   [
+    32324,
+    "saída",
+    "empresarial"
+   ],
+   [
+    32343,
+    "saída",
+    "empresarial"
+   ],
+   [
+    35608,
+    "entrada",
+    "básico"
+   ],
+   [
+    36909,
+    "entrada",
+    "básico"
+   ],
+   [
+    36918,
+    "entrada",
+    "pro"
+   ],
+   [
+    36974,
+    "entrada",
+    "pro"
+   ],
+   [
+    37106,
+    "entrada",
+    "pro"
+   ],
+   [
+    40853,
+    "entrada",
+    "básico"
+   ],
+   [
+    40880,
+    "entrada",
+    "pro"
+   ],
+   [
+    42354,
+    "entrada",
+    "empresarial"
+   ],
+   [
+    42631,
+    "entrada",
+    "básico"
+   ],
+   [
+    42688,
+    "entrada",
+    "pro"
+   ]
+  ]
+ },
+ "sprints": [
+  {
+   "projeto": "PROD",
+   "numero": 1,
+   "inicio": 750,
+   "meta_pontos": 54,
+   "capacidade_pontos": 54,
+   "meta_sobre_capacidade": 1.0,
+   "pressa": false,
+   "fim": 20910,
+   "pontos_feitos": 36
+  },
+  {
+   "projeto": "PLAT",
+   "numero": 1,
+   "inicio": 960,
+   "meta_pontos": 36,
+   "capacidade_pontos": 36,
+   "meta_sobre_capacidade": 1.0,
+   "pressa": false,
+   "fim": 21120,
+   "pontos_feitos": 34
+  },
+  {
+   "projeto": "PROD",
+   "numero": 2,
+   "inicio": 20910,
+   "meta_pontos": 91,
+   "capacidade_pontos": 36,
+   "meta_sobre_capacidade": 2.53,
+   "pressa": true,
+   "fim": 41070,
+   "pontos_feitos": 99
+  },
+  {
+   "projeto": "PLAT",
+   "numero": 2,
+   "inicio": 21120,
+   "meta_pontos": 35,
+   "capacidade_pontos": 35,
+   "meta_sobre_capacidade": 1.0,
+   "pressa": false,
+   "fim": 41280,
+   "pontos_feitos": 67
+  },
+  {
+   "projeto": "PROD",
+   "numero": 3,
+   "inicio": 41070,
+   "meta_pontos": 85,
+   "capacidade_pontos": 71,
+   "meta_sobre_capacidade": 1.2,
+   "pressa": true,
+   "fim": null,
+   "pontos_feitos": null
+  },
+  {
+   "projeto": "PLAT",
+   "numero": 3,
+   "inicio": 41280,
+   "meta_pontos": 45,
+   "capacidade_pontos": 40,
+   "meta_sobre_capacidade": 1.12,
+   "pressa": false,
+   "fim": null,
+   "pontos_feitos": null
+  }
+ ],
+ "sprints_de_pressa": [
+  {
+   "projeto": "PROD",
+   "numero": 2,
+   "inicio": 20910,
+   "meta_pontos": 91,
+   "capacidade_pontos": 36,
+   "meta_sobre_capacidade": 2.53,
+   "pressa": true,
+   "fim": 41070,
+   "pontos_feitos": 99
+  },
+  {
+   "projeto": "PROD",
+   "numero": 3,
+   "inicio": 41070,
+   "meta_pontos": 85,
+   "capacidade_pontos": 71,
+   "meta_sobre_capacidade": 1.2,
+   "pressa": true,
+   "fim": null,
+   "pontos_feitos": null
+  }
+ ],
+ "defeitos_escritos": [
+  {
+   "t": 4920,
+   "item": 17,
+   "projeto": "PROD",
+   "funcao": "paginar",
+   "implementacao": "ultima_pagina",
+   "pressa_do_squad": 1.53
+  },
+  {
+   "t": 4987,
+   "item": 25,
+   "projeto": "PROD",
+   "funcao": "ler_quantidade",
+   "implementacao": "um_digito",
+   "pressa_do_squad": 1.53
+  },
+  {
+   "t": 5227,
+   "item": 46,
+   "projeto": "PROD",
+   "funcao": "paginar",
+   "implementacao": "ultima_pagina",
+   "pressa_do_squad": 1.53
+  },
+  {
+   "t": 6970,
+   "item": 18,
+   "projeto": "PROD",
+   "funcao": "paginar",
+   "implementacao": "ultima_pagina",
+   "pressa_do_squad": 1.71
+  },
+  {
+   "t": 10971,
+   "item": 65,
+   "projeto": "PLAT",
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "pressa_do_squad": 1.98
+  },
+  {
+   "t": 11114,
+   "item": 69,
+   "projeto": "PLAT",
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "pressa_do_squad": 1.98
+  },
+  {
+   "t": 12174,
+   "item": 64,
+   "projeto": "PLAT",
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "pressa_do_squad": 2.47
+  },
+  {
+   "t": 12206,
+   "item": 20,
+   "projeto": "PROD",
+   "funcao": "ler_quantidade",
+   "implementacao": "um_digito",
+   "pressa_do_squad": 2.26
+  },
+  {
+   "t": 13525,
+   "item": 13,
+   "projeto": "PROD",
+   "funcao": "montar_relatorio",
+   "implementacao": "sem_filtro",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 13667,
+   "item": 24,
+   "projeto": "PROD",
+   "funcao": "exportar_csv",
+   "implementacao": "n_mais_um",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 15639,
+   "item": 313,
+   "projeto": "PLAT",
+   "funcao": "normalizar_login",
+   "implementacao": "ascii",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 16391,
+   "item": 32,
+   "projeto": "PROD",
+   "funcao": "paginar",
+   "implementacao": "ultima_pagina",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 16536,
+   "item": 31,
+   "projeto": "PROD",
+   "funcao": "exportar_csv",
+   "implementacao": "n_mais_um",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 20785,
+   "item": 330,
+   "projeto": "PLAT",
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "pressa_do_squad": 0.71
+  },
+  {
+   "t": 22418,
+   "item": 110,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 2.4
+  },
+  {
+   "t": 22511,
+   "item": 416,
+   "projeto": "PLAT",
+   "funcao": "guardar_sessao",
+   "implementacao": "sem_expiracao",
+   "pressa_do_squad": 1.23
+  },
+  {
+   "t": 23587,
+   "item": 73,
+   "projeto": "PLAT",
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "pressa_do_squad": 0.79
+  },
+  {
+   "t": 25392,
+   "item": 108,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 2.0
+  },
+  {
+   "t": 25403,
+   "item": 106,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 2.0
+  },
+  {
+   "t": 31393,
+   "item": 116,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 2.09
+  },
+  {
+   "t": 32477,
+   "item": 111,
+   "projeto": "PROD",
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 32571,
+   "item": 60,
+   "projeto": "PLAT",
+   "funcao": "atualizar_conta",
+   "implementacao": "telefone",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 32721,
+   "item": 593,
+   "projeto": "PLAT",
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 32826,
+   "item": 697,
+   "projeto": "PLAT",
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 34011,
+   "item": 67,
+   "projeto": "PLAT",
+   "funcao": "normalizar_login",
+   "implementacao": "ascii",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 34283,
+   "item": 78,
+   "projeto": "PLAT",
+   "funcao": "emitir_nota",
+   "implementacao": "aliquota_regional",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 35576,
+   "item": 594,
+   "projeto": "PLAT",
+   "funcao": "enviar_email",
+   "implementacao": "nome_fantasia",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 35626,
+   "item": 454,
+   "projeto": "PROD",
+   "funcao": "normalizar_termo",
+   "implementacao": "ascii",
+   "pressa_do_squad": 2.5
+  },
+  {
+   "t": 42301,
+   "item": 491,
+   "projeto": "PROD",
+   "funcao": "exportar_csv",
+   "implementacao": "n_mais_um",
+   "pressa_do_squad": 1.3
+  },
+  {
+   "t": 42616,
+   "item": 185,
+   "projeto": "PLAT",
+   "funcao": "guardar_sessao",
+   "implementacao": "sem_expiracao",
+   "pressa_do_squad": 1.16
+  }
+ ],
+ "defeitos_barrados_antes_do_ar": [
+  {
+   "t": 5135,
+   "item": 17,
+   "funcao": "paginar",
+   "por": "qualidade"
+  },
+  {
+   "t": 5135,
+   "item": 17,
+   "funcao": "recomendar",
+   "por": "qualidade"
+  },
+  {
+   "t": 5257,
+   "item": 25,
+   "funcao": "ler_quantidade",
+   "por": "qualidade"
+  },
+  {
+   "t": 6314,
+   "item": 46,
+   "funcao": "paginar",
+   "por": "qualidade"
+  },
+  {
+   "t": 6314,
+   "item": 46,
+   "funcao": "recomendar",
+   "por": "qualidade"
+  },
+  {
+   "t": 10994,
+   "item": 65,
+   "funcao": "enviar_email",
+   "por": "revisão de código"
+  },
+  {
+   "t": 11004,
+   "item": 18,
+   "funcao": "paginar",
+   "por": "qualidade"
+  },
+  {
+   "t": 11004,
+   "item": 18,
+   "funcao": "recomendar",
+   "por": "qualidade"
+  },
+  {
+   "t": 12139,
+   "item": 69,
+   "funcao": "enviar_email",
+   "por": "qualidade"
+  },
+  {
+   "t": 12467,
+   "item": 64,
+   "funcao": "emitir_nota",
+   "por": "qualidade"
+  },
+  {
+   "t": 12506,
+   "item": 20,
+   "funcao": "ler_quantidade",
+   "por": "qualidade"
+  },
+  {
+   "t": 13686,
+   "item": 24,
+   "funcao": "exportar_csv",
+   "por": "revisão de código"
+  },
+  {
+   "t": 13783,
+   "item": 13,
+   "funcao": "montar_relatorio",
+   "por": "qualidade"
+  },
+  {
+   "t": 16419,
+   "item": 313,
+   "funcao": "normalizar_login",
+   "por": "revisão de código"
+  },
+  {
+   "t": 16968,
+   "item": 32,
+   "funcao": "paginar",
+   "por": "qualidade"
+  },
+  {
+   "t": 16968,
+   "item": 32,
+   "funcao": "recomendar",
+   "por": "qualidade"
+  },
+  {
+   "t": 17001,
+   "item": 31,
+   "funcao": "exportar_csv",
+   "por": "qualidade"
+  },
+  {
+   "t": 20963,
+   "item": 330,
+   "funcao": "enviar_email",
+   "por": "revisão de código"
+  },
+  {
+   "t": 22578,
+   "item": 110,
+   "funcao": "calcular_frete",
+   "por": "qualidade"
+  },
+  {
+   "t": 22787,
+   "item": 416,
+   "funcao": "guardar_sessao",
+   "por": "qualidade"
+  },
+  {
+   "t": 23993,
+   "item": 73,
+   "funcao": "emitir_nota",
+   "por": "qualidade"
+  },
+  {
+   "t": 25619,
+   "item": 108,
+   "funcao": "calcular_frete",
+   "por": "qualidade"
+  },
+  {
+   "t": 26547,
+   "item": 106,
+   "funcao": "calcular_frete",
+   "por": "qualidade"
+  },
+  {
+   "t": 32430,
+   "item": 116,
+   "funcao": "calcular_frete",
+   "por": "qualidade"
+  },
+  {
+   "t": 32689,
+   "item": 60,
+   "funcao": "atualizar_conta",
+   "por": "revisão de código"
+  },
+  {
+   "t": 32772,
+   "item": 111,
+   "funcao": "calcular_frete",
+   "por": "qualidade"
+  },
+  {
+   "t": 33875,
+   "item": 593,
+   "funcao": "enviar_email",
+   "por": "qualidade"
+  },
+  {
+   "t": 35142,
+   "item": 697,
+   "funcao": "emitir_nota",
+   "por": "qualidade"
+  },
+  {
+   "t": 36661,
+   "item": 454,
+   "funcao": "normalizar_termo",
+   "por": "qualidade"
+  },
+  {
+   "t": 37062,
+   "item": 594,
+   "funcao": "enviar_email",
+   "por": "qualidade"
+  },
+  {
+   "t": 42415,
+   "item": 67,
+   "funcao": "normalizar_login",
+   "por": "qualidade"
+  },
+  {
+   "t": 42521,
+   "item": 78,
+   "funcao": "emitir_nota",
+   "por": "qualidade"
+  },
+  {
+   "t": 42648,
+   "item": 185,
+   "funcao": "guardar_sessao",
+   "por": "revisão de código"
+  },
+  {
+   "t": 42665,
+   "item": 491,
+   "funcao": "exportar_csv",
+   "por": "qualidade"
+  }
+ ],
+ "quedas_do_processo_por_memoria": {
+  "erros_no_registro": [],
+  "sonda_parada": []
+ },
+ "pessoal": [
+  {
+   "t": 23040,
+   "tipo": "contratação",
+   "equipe": "atendimento"
+  },
+  {
+   "t": 24480,
+   "tipo": "saída",
+   "equipe": "qualidade"
+  }
+ ],
+ "chamados_por_causa": {
+  "defeito": 0,
+  "incidente": 30,
+  "queda do processo": 0,
+  "outros": 694
+ },
+ "atos": {},
+ "observacao_do_nulo": "nenhuma liberação levou defeito ao ar; os episódios de erros seguidos de chamados nesse nulo são só os incidentes listados em 'incidentes'"
+}
