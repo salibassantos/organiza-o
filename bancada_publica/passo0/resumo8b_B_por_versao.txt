@@ -1,0 +1,14 @@
+######## inteira (aprovada), sementes da bancada de referência (A 6000 a 6029, B 200 a 229) (resumo8b.py, parte B; critérios B1 a B5 do protocolo da bancada de referência)
+B lenta_abrupta  antes (permitido: a deriva é mudança) 30/30 (100% ± 0) | detecção 30/30 (100% ± 0) atraso med 56.0 | local 30/30 | extras med 1.0
+B lenta_poucas   rodadas com no máximo 2 alarmes 30/30 (100% ± 0) | alarmes por rodada med 2.0 max 2
+B lenta_real     antes (permitido: a deriva é mudança) 30/30 (100% ± 0) | detecção 27/30 (90% ± 5) atraso med 84.0 | local 27/27 | extras med 1.0
+B lenta_todas    rodadas com no máximo 2 alarmes 22/30 (73% ± 8) | alarmes por rodada med 2.0 max 3
+B nulo           rodadas sem alarme 30/30 (100% ± 0) | alarmes por rodada med 0.0 max 0
+B rampa_todas    exatamente 1 alarme na rampa e 0 antes 30/30 (100% ± 0) | alarmes por rodada med 1.0 max 1
+######## faixas (em uso), sementes da bancada de referência (A 6000 a 6029, B 200 a 229) (resumo8b.py, parte B; critérios B1 a B5 do protocolo da bancada de referência)
+B lenta_abrupta  antes (permitido: a deriva é mudança) 30/30 (100% ± 0) | detecção 30/30 (100% ± 0) atraso med 40.0 | local 27/30 | extras med 16.0
+B lenta_poucas   rodadas com no máximo 2 alarmes 0/30 (0% ± 0) | alarmes por rodada med 4.0 max 5
+B lenta_real     antes (permitido: a deriva é mudança) 30/30 (100% ± 0) | detecção 5/30 (17% ± 7) atraso med 54.0 | local 5/5 | extras med 16.0
+B lenta_todas    rodadas com no máximo 2 alarmes 0/30 (0% ± 0) | alarmes por rodada med 19.0 max 21
+B nulo           rodadas sem alarme 30/30 (100% ± 0) | alarmes por rodada med 0.0 max 0
+B rampa_todas    exatamente 1 alarme na rampa e 0 antes 0/30 (0% ± 0) | alarmes por rodada med 17.0 max 19
