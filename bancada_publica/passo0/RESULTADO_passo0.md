@@ -80,3 +80,14 @@ bancada de referência 58b7dae4... e b2982512...; resumidores congelados f75f69b
 referência), 893bad21... (contra a concorrência). Os corredores deste passo carregam os módulos do núcleo pelos nomes de arquivo
 originais e por isso ficam fora deste repositório: rodar_passo0.py 9082c851..., rodar_porta2_passo0.py 9d7eb52f..., passo0_tabela.py
 4f64d71c..., porta2_tabela.py 9b9abd45..., lote_passo0.sh dabba975..., lote_kit.sh 3ed369d2....
+
+## 5. Equivalência do código do detector com nomes neutros (preparação do congelamento)
+O código do detector com os nomes internos trocados por nomes neutros (seis arquivos: evidência, decisão, registro, trajetória, monitor
+e o pacote; sha256 do manifesto e4581ee9...) foi comparado com o original, item a item:
+- decisão: 3.000/3.000 listas de avisos idênticas (as 1.500 rodadas das partes A e B, nas duas versões);
+- registro vivo: 75/75 rodadas idênticas, 882 registros comparados campo a campo (fases 0, 200 e 500);
+- monitor (costume, escada de escala para campo parado, unidade mínima, trajetórias), contra a parte original copiada sem mudança do
+  arquivo original: 131/131 processos da empresa simulada idênticos (semente 1, 30 dias, nulo sem_defeito), 47.227 registros.
+Um erro de construção do comparador (o filtro de arquivo de "cov" e "sea" pegava também "cov_gradual", "sea_gradual" e "sea_grande")
+foi achado na primeira passada, corrigido (casar o tipo exato) e os quatro trabalhos afetados foram refeitos; o resultado acima é o
+da passada corrigida. Comparador: equivalencia.py 5c4a9319....
