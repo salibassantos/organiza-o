@@ -1,0 +1,23 @@
+t,equipe,tipo,texto
+2040,operação,pergunta,Como está a rota de pedido hoje?
+2430,atendimento,pergunta,Quantos chamados de pagamento estão abertos?
+3825,operação,pedido,Verifiquem a rota de frete depois da liberação de ontem
+4980,vendas,pergunta,Como está o funil este mês?
+6330,desenvolvimento,convocacao,Alinhamento sobre os bugs do catálogo
+10920,gestão,pergunta,Quantas pessoas estão de férias?
+12500,operação,pedido,"Verifiquem a busca, clientes reclamam de erro"
+13575,qualidade,pedido,Refaçam os testes do carrinho e do pedido
+15370,atendimento,pedido,Priorizem os chamados de login
+16430,produto,pergunta,O que está pronto para desenvolver?
+20850,operação,pergunta,Como está o volume do banco?
+22565,operação,pedido,Verifiquem a rota de catálogo depois da liberação
+23680,desenvolvimento,pedido,Olhem os erros no relatório
+25430,qualidade,pergunta,Quantos itens esperam teste?
+26480,vendas,pedido,Retomem as propostas paradas
+31090,operação,convocacao,Revisão dos alertas de produção
+32655,atendimento,pergunta,Como está a fila de chamados de frete?
+33750,gestão,pedido,Precisamos alinhar as prioridades do mês
+35515,operação,pedido,Verifiquem pagamento e pedido agora
+36670,produto,pedido,Registrem uma melhoria na exportação de relatórios
+40900,qualidade,convocacao,Retrospectiva dos defeitos do mês
+42740,desenvolvimento,pergunta,Quantos bugs abertos há no frete?

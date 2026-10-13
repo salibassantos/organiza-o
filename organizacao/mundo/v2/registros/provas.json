@@ -1,0 +1,458 @@
+{
+ "retomada": {
+  "vida": "semente 1, sete dias (t = 1 a 10080), os atos de exemplo da primeira semana e um dia de campanha (dia 3, das 8h às 18h)",
+  "salva_e_carregada_em": 4980,
+  "hash_dos_minutos_A": "5de1ae313e404305a45d6d6b8252a728b3d114d00b6f5f12fe960c55afc7f261",
+  "hash_dos_minutos_B": "5de1ae313e404305a45d6d6b8252a728b3d114d00b6f5f12fe960c55afc7f261",
+  "A_igual_a_B": true,
+  "C_salva_e_carregada_igual_a_A_minuto_a_minuto": true,
+  "respostas": 5,
+  "respostas_iguais_em_C": true,
+  "verdade_igual_em_C": true,
+  "verdade_por_minuto_igual_em_C": true,
+  "eventos_humanos_iguais_em_C": true,
+  "hash_da_verdade": "9ad79103a8d01fa4cbb18b9223836d2767c6345b9313584caf5f4a91005ac9b2",
+  "hash_da_verdade_por_minuto": "dbfd4545b08e5f9775ec9e8aa9ef4773e21e06de379383b1551fd049fa7506ed"
+ },
+ "ramos": {
+  "tronco": "semente 2, salva em t = 4800 (dia 3, quinta-feira, 8h); cada ramo carrega o mesmo estado e anda até t = 7680",
+  "sequencias": {
+   "A": {
+    "4860": [
+     [
+      "operação",
+      "pedido",
+      "Verifiquem a rota pagamento"
+     ]
+    ],
+    "4920": [
+     [
+      "qualidade",
+      "pedido",
+      "Refaçam os testes do catálogo"
+     ]
+    ]
+   },
+   "B": {
+    "4860": [
+     [
+      "atendimento",
+      "pedido",
+      "Priorizem os chamados de frete"
+     ]
+    ],
+    "4890": [
+     [
+      "gestão",
+      "convocacao",
+      "Alinhamento sobre o mês"
+     ]
+    ]
+   },
+   "C": {}
+  },
+  "hashes": {
+   "A": "cb61cfef9994ba5403f82ec65e2ccf90b57c0d778977cf284d3ca1651fedcdda",
+   "A2": "cb61cfef9994ba5403f82ec65e2ccf90b57c0d778977cf284d3ca1651fedcdda",
+   "B": "c08f54b613e736372ce927c2bfefad530b0412b63dc26b247c5d1d9ef860c0c9",
+   "B2": "c08f54b613e736372ce927c2bfefad530b0412b63dc26b247c5d1d9ef860c0c9",
+   "C": "fde3862ab2905988429957026acb493617f2d8c4513ea16d99b4d7804b51906a"
+  },
+  "A_reproduzivel": true,
+  "B_reproduzivel": true,
+  "A_diferente_de_B": true,
+  "A_diferente_de_C": true,
+  "B_diferente_de_C": true,
+  "primeiro_minuto_em_que_A_se_separa_de_C": 4860,
+  "primeiro_minuto_em_que_B_se_separa_de_C": 4860,
+  "pastas_de_historia_distintas": true,
+  "atos_do_ramo_A": [
+   {
+    "numero": 1,
+    "equipe": "operação",
+    "tipo": "pedido",
+    "texto": "Verifiquem a rota pagamento",
+    "recebido": 4860,
+    "demora_ate_ficar_disponivel_min": 31,
+    "pego_em": 4891,
+    "tratado_em": 4979,
+    "minutos_de_trabalho": 74,
+    "trabalho_adiado": {
+     "tarefa": "interno",
+     "item": null,
+     "minutos_que_faltavam": 38,
+     "pessoa": 43
+    },
+    "desfecho": "respondido",
+    "horas_extras_atribuidas": [
+     {
+      "t": 5398,
+      "pessoa": 43,
+      "equipe": "operação",
+      "minutos": 35,
+      "onde": [
+       "quadro da equipe de operação",
+       "horas extras no dia"
+      ]
+     }
+    ],
+    "efeito": {
+     "util": false,
+     "acoes": [
+      "rodou 3 testes de pagamento na versão no ar (cobertura 1.00)"
+     ]
+    },
+    "oito_horas_depois_do_tratamento_contra_o_ramo_sem_atos": {
+     "nao_encurta": [
+      {
+       "processo": "rota pagamento",
+       "campo": "respostas com erro no minuto",
+       "media_com_o_ato": 0.0,
+       "media_sem_o_ato": 0.0
+      },
+      {
+       "processo": "chamados de pagamento",
+       "campo": "abertos",
+       "media_com_o_ato": 1.129,
+       "media_sem_o_ato": 1.181
+      },
+      {
+       "processo": "chamados de pagamento",
+       "campo": "escalados",
+       "media_com_o_ato": 0.0,
+       "media_sem_o_ato": 0.0
+      }
+     ],
+     "colateral": [
+      {
+       "processo": "projeto Infraestrutura: itens",
+       "campo": "em andamento",
+       "media_com_o_ato": 0.0,
+       "media_sem_o_ato": 0.0
+      },
+      {
+       "processo": "quadro da equipe de operação",
+       "campo": "horas extras no dia",
+       "media_com_o_ato": 0.033,
+       "media_sem_o_ato": 0.0
+      }
+     ]
+    }
+   },
+   {
+    "numero": 2,
+    "equipe": "qualidade",
+    "tipo": "pedido",
+    "texto": "Refaçam os testes do catálogo",
+    "recebido": 4920,
+    "demora_ate_ficar_disponivel_min": 115,
+    "pego_em": 5035,
+    "tratado_em": 5066,
+    "minutos_de_trabalho": 32,
+    "trabalho_adiado": null,
+    "desfecho": "respondido",
+    "horas_extras_atribuidas": [],
+    "efeito": {
+     "util": false,
+     "acoes": [
+      "refez 8 testes de catálogo e busca na versão no ar (cobertura 1.00)"
+     ]
+    },
+    "oito_horas_depois_do_tratamento_contra_o_ramo_sem_atos": {
+     "nao_encurta": [
+      {
+       "processo": "chamados de catálogo e busca",
+       "campo": "abertos",
+       "media_com_o_ato": 2.431,
+       "media_sem_o_ato": 3.123
+      }
+     ],
+     "colateral": [
+      {
+       "processo": "projeto Produto: desenvolvimento",
+       "campo": "em qualidade",
+       "media_com_o_ato": 1.431,
+       "media_sem_o_ato": 1.431
+      },
+      {
+       "processo": "projeto Plataforma: desenvolvimento",
+       "campo": "em qualidade",
+       "media_com_o_ato": 0.719,
+       "media_sem_o_ato": 0.719
+      },
+      {
+       "processo": "quadro da equipe de qualidade",
+       "campo": "horas extras no dia",
+       "media_com_o_ato": 0.651,
+       "media_sem_o_ato": 0.651
+      }
+     ]
+    }
+   }
+  ],
+  "atos_do_ramo_B": [
+   {
+    "numero": 1,
+    "equipe": "atendimento",
+    "tipo": "pedido",
+    "texto": "Priorizem os chamados de frete",
+    "recebido": 4860,
+    "demora_ate_ficar_disponivel_min": 71,
+    "pego_em": 4931,
+    "tratado_em": 4966,
+    "minutos_de_trabalho": 36,
+    "trabalho_adiado": {
+     "tarefa": "interno",
+     "item": null,
+     "minutos_que_faltavam": 19,
+     "pessoa": 27
+    },
+    "desfecho": "respondido",
+    "horas_extras_atribuidas": [
+     {
+      "t": 5407,
+      "pessoa": 27,
+      "equipe": "atendimento",
+      "minutos": 18,
+      "onde": [
+       "quadro da equipe de atendimento",
+       "horas extras no dia"
+      ]
+     }
+    ],
+    "efeito": {
+     "util": false,
+     "acoes": [
+      "passou os chamados de frete para a frente da fila até 5206"
+     ]
+    },
+    "oito_horas_depois_do_tratamento_contra_o_ramo_sem_atos": {
+     "nao_encurta": [
+      {
+       "processo": "chamados de frete",
+       "campo": "escalados",
+       "media_com_o_ato": 0.0,
+       "media_sem_o_ato": 0.0
+      },
+      {
+       "processo": "bugs de frete",
+       "campo": "abertos",
+       "media_com_o_ato": 0.0,
+       "media_sem_o_ato": 0.0
+      },
+      {
+       "processo": "chamados de frete",
+       "campo": "abertos",
+       "media_com_o_ato": 0.046,
+       "media_sem_o_ato": 0.0
+      }
+     ],
+     "colateral": [
+      {
+       "processo": "projeto Suporte: prazos",
+       "campo": "chamados fora do prazo de primeira resposta",
+       "media_com_o_ato": 0.0,
+       "media_sem_o_ato": 0.0
+      },
+      {
+       "processo": "projeto Suporte: prazos",
+       "campo": "espera do chamado mais antigo sem resposta em minutos",
+       "media_com_o_ato": 1.248,
+       "media_sem_o_ato": 6.479
+      },
+      {
+       "processo": "quadro da equipe de atendimento",
+       "campo": "horas extras no dia",
+       "media_com_o_ato": 0.014,
+       "media_sem_o_ato": 0.0
+      }
+     ]
+    }
+   },
+   {
+    "numero": 2,
+    "equipe": "gestão",
+    "tipo": "convocacao",
+    "texto": "Alinhamento sobre o mês",
+    "recebido": 4890,
+    "demora_ate_ficar_disponivel_min": 144,
+    "pego_em": 5084,
+    "tratado_em": 5088,
+    "minutos_de_trabalho": 5,
+    "trabalho_adiado": null,
+    "desfecho": "respondido",
+    "horas_extras_atribuidas": [],
+    "efeito": {
+     "util": null,
+     "acoes": [
+      "marcou reunião para dia 3, 13h30 com 4 pessoas"
+     ]
+    }
+   }
+  ],
+  "atos_do_ramo_C": 0
+ },
+ "consequencia": {
+  "achado": true,
+  "semente": 1,
+  "defeito": {
+   "funcao": "calcular_frete",
+   "implementacao": "numerico",
+   "rota": "frete",
+   "liberado_em": 25395
+  },
+  "ramo_em": 25455,
+  "rota_sa_do_pedido_inutil": "login",
+  "ramos": {
+   "pedido certo": {
+    "defeito_saiu_do_ar_em": 25543,
+    "minutos_no_ar_depois_do_instante_do_ramo": 88,
+    "saiu_por": "reversão",
+    "saiu_pelo_ato": 1,
+    "erros_da_rota_em_dois_dias": 98,
+    "chamados_novos_do_componente_em_dois_dias": 3,
+    "chamados_abertos_do_componente_em_media": 2.01,
+    "horas_extras_da_operacao_somadas_no_fim_de_cada_dia": 0.0,
+    "ato": {
+     "demora_ate_ficar_disponivel_min": 21,
+     "pego_em": 25477,
+     "tratado_em": 25535,
+     "minutos_de_trabalho": 59,
+     "trabalho_adiado": {
+      "tarefa": "interno",
+      "item": null,
+      "minutos_que_faltavam": 2,
+      "pessoa": 43
+     },
+     "confianca_antes": 1.0,
+     "confianca_depois": 1.15,
+     "resposta": "Pedido tratado. Rota frete: 102 requisições, 24 com erro e latência média de 181 ms na última meia hora; versão 1.9, no ar há 2 h; volume do banco com 24% livre; fila de trabalhos com 6. Na versão no ar falha: frete para São Paulo. A falha veio com a última liberação; vamos voltar para a versão 1.7 e abrimos a correção.",
+     "efeito": {
+      "util": true,
+      "acoes": [
+       "rodou 3 testes de frete na versão no ar (cobertura 1.00)",
+       "abriu o bug PROD-120 como crítico (calcular_frete)",
+       "reverteu para a versão 1.7"
+      ],
+      "encurta": [
+       [
+        "rota frete",
+        "respostas com erro no minuto"
+       ],
+       [
+        "sessões dos clientes",
+        "sessões abandonadas depois de erro no minuto"
+       ]
+      ],
+      "nao_encurta": [
+       [
+        "chamados de frete",
+        "abertos"
+       ],
+       [
+        "chamados de frete",
+        "escalados"
+       ]
+      ],
+      "colateral": [
+       [
+        "projeto Infraestrutura: itens",
+        "em andamento"
+       ],
+       [
+        "implantação",
+        "implantações no minuto"
+       ],
+       [
+        "rota catálogo",
+        "latência média em ms"
+       ],
+       [
+        "rota frete",
+        "latência média em ms"
+       ],
+       [
+        "quadro da equipe de operação",
+        "horas extras no dia"
+       ]
+      ]
+     }
+    },
+    "confianca_da_operacao_no_fim": 1.135,
+    "demora_de_pedido_da_operacao_no_fim": 46.3
+   },
+   "pedido inútil": {
+    "defeito_saiu_do_ar_em": 26478,
+    "minutos_no_ar_depois_do_instante_do_ramo": 1023,
+    "saiu_por": "correção",
+    "saiu_pelo_ato": null,
+    "erros_da_rota_em_dois_dias": 228,
+    "chamados_novos_do_componente_em_dois_dias": 10,
+    "chamados_abertos_do_componente_em_media": 3.51,
+    "horas_extras_da_operacao_somadas_no_fim_de_cada_dia": 0.0,
+    "ato": {
+     "demora_ate_ficar_disponivel_min": 21,
+     "pego_em": 25477,
+     "tratado_em": 25535,
+     "minutos_de_trabalho": 59,
+     "trabalho_adiado": {
+      "tarefa": "interno",
+      "item": null,
+      "minutos_que_faltavam": 2,
+      "pessoa": 43
+     },
+     "confianca_antes": 1.0,
+     "confianca_depois": 0.8,
+     "resposta": "Pedido tratado. Rota login: 137 requisições, 0 com erro e latência média de 44 ms na última meia hora; versão 1.9, no ar há 2 h; volume do banco com 24% livre; fila de trabalhos com 6. Rodamos 7 testes de login e conta contra a versão no ar: todos passam.",
+     "efeito": {
+      "util": false,
+      "acoes": [
+       "rodou 7 testes de login e conta na versão no ar (cobertura 1.00)"
+      ],
+      "encurta": [],
+      "nao_encurta": [
+       [
+        "rota login",
+        "respostas com erro no minuto"
+       ],
+       [
+        "chamados de login e conta",
+        "abertos"
+       ],
+       [
+        "chamados de login e conta",
+        "escalados"
+       ]
+      ],
+      "colateral": [
+       [
+        "projeto Infraestrutura: itens",
+        "em andamento"
+       ],
+       [
+        "quadro da equipe de operação",
+        "horas extras no dia"
+       ]
+      ]
+     }
+    },
+    "confianca_da_operacao_no_fim": 0.82,
+    "demora_de_pedido_da_operacao_no_fim": 64.1
+   },
+   "sem ato": {
+    "defeito_saiu_do_ar_em": 26542,
+    "minutos_no_ar_depois_do_instante_do_ramo": 1087,
+    "saiu_por": "correção",
+    "saiu_pelo_ato": null,
+    "erros_da_rota_em_dois_dias": 290,
+    "chamados_novos_do_componente_em_dois_dias": 11,
+    "chamados_abertos_do_componente_em_media": 2.82,
+    "horas_extras_da_operacao_somadas_no_fim_de_cada_dia": 0.0,
+    "ato": null,
+    "confianca_da_operacao_no_fim": 1.0,
+    "demora_de_pedido_da_operacao_no_fim": 52.5
+   }
+  }
+ },
+ "segundos": 223.1
+}

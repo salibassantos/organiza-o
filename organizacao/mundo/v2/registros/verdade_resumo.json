@@ -1,0 +1,317 @@
+{
+ "incidentes": [
+  {
+   "inicio": 35179,
+   "fim": 35220,
+   "duracao_min": 41,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": 28,
+   "registros_apagados": 704171
+  },
+  {
+   "inicio": 71525,
+   "fim": 71547,
+   "duracao_min": 22,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": 30,
+   "registros_apagados": 800603
+  },
+  {
+   "inicio": 112860,
+   "fim": 112879,
+   "duracao_min": 19,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": 25,
+   "registros_apagados": 1040632
+  },
+  {
+   "inicio": 146499,
+   "fim": 146522,
+   "duracao_min": 23,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": 29,
+   "registros_apagados": 1007977
+  },
+  {
+   "inicio": 188110,
+   "fim": 188135,
+   "duracao_min": 25,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": 29,
+   "registros_apagados": 1078342
+  },
+  {
+   "inicio": 232605,
+   "fim": 232624,
+   "duracao_min": 19,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": 30,
+   "registros_apagados": 1082711
+  },
+  {
+   "inicio": 275926,
+   "fim": 275940,
+   "duracao_min": 14,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": null,
+   "registros_apagados": null
+  },
+  {
+   "inicio": 275945,
+   "fim": 275946,
+   "duracao_min": 1,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": 32,
+   "registros_apagados": 1291181
+  },
+  {
+   "inicio": 326823,
+   "fim": 326862,
+   "duracao_min": 39,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": 35,
+   "registros_apagados": 1568877
+  },
+  {
+   "inicio": 377965,
+   "fim": 377990,
+   "duracao_min": 25,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": 23,
+   "registros_apagados": 1588456
+  },
+  {
+   "inicio": 420091,
+   "fim": 420117,
+   "duracao_min": 26,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": 25,
+   "registros_apagados": 1179938
+  },
+  {
+   "inicio": 457157,
+   "fim": 457198,
+   "duracao_min": 41,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": 25,
+   "registros_apagados": 1306488
+  },
+  {
+   "inicio": 496013,
+   "fim": 496031,
+   "duracao_min": 18,
+   "causa": "volume do banco cheio",
+   "folga_dada_em_dias": 21,
+   "registros_apagados": 1264632
+  }
+ ],
+ "cadastros_adiados": [],
+ "teto_inicial": 477,
+ "platos": [
+  {
+   "inicio": 41760,
+   "fim": 151200,
+   "duracao_min": 109440,
+   "teto": 477,
+   "carteira_no_inicio": 461,
+   "carteira_no_fim": 509,
+   "causa": "a carteira chegou perto do teto do mercado e a chegada de leads secou",
+   "onde": [
+    [
+     "carteira de clientes",
+     "clientes ativos"
+    ],
+    [
+     "leads de site",
+     "novos no minuto"
+    ],
+    [
+     "leads de indicação",
+     "novos no minuto"
+    ],
+    [
+     "funil de vendas",
+     "leads"
+    ]
+   ],
+   "terminou_por": "o teto do mercado subiu de 477 para 640 clientes (expansão decidida antes)"
+  },
+  {
+   "inicio": 370080,
+   "fim": 501120,
+   "duracao_min": 131040,
+   "teto": 640,
+   "carteira_no_inicio": 620,
+   "carteira_no_fim": 662,
+   "causa": "a carteira chegou perto do teto do mercado e a chegada de leads secou",
+   "onde": [
+    [
+     "carteira de clientes",
+     "clientes ativos"
+    ],
+    [
+     "leads de site",
+     "novos no minuto"
+    ],
+    [
+     "leads de indicação",
+     "novos no minuto"
+    ],
+    [
+     "funil de vendas",
+     "leads"
+    ]
+   ],
+   "terminou_por": "o teto do mercado subiu de 640 para 740 clientes (expansão decidida antes)"
+  }
+ ],
+ "expansoes": [
+  {
+   "decidida_em": 113760,
+   "vale_a_partir_de": 151200,
+   "teto_antes": 477,
+   "teto_depois": 640,
+   "carteira_na_decisao": 488,
+   "causa": "o dono viu a carteira parada e decidiu abrir mercado novo (região e canal)"
+  },
+  {
+   "decidida_em": 473760,
+   "vale_a_partir_de": 501120,
+   "teto_antes": 640,
+   "teto_depois": 740,
+   "carteira_na_decisao": 655,
+   "causa": "o dono viu a carteira parada e decidiu abrir mercado novo (região e canal)"
+  }
+ ],
+ "carteira_a_cada_30_dias": [
+  [
+   1,
+   440
+  ],
+  [
+   43200,
+   463
+  ],
+  [
+   86400,
+   481
+  ],
+  [
+   129600,
+   508
+  ],
+  [
+   172800,
+   514
+  ],
+  [
+   216000,
+   542
+  ],
+  [
+   259200,
+   573
+  ],
+  [
+   302400,
+   580
+  ],
+  [
+   345600,
+   603
+  ],
+  [
+   388800,
+   628
+  ],
+  [
+   432000,
+   645
+  ],
+  [
+   475200,
+   657
+  ],
+  [
+   518400,
+   667
+  ]
+ ],
+ "campanhas": [
+  {
+   "inicio": 17761,
+   "fim": 18361,
+   "forca": 1.0
+  },
+  {
+   "inicio": 60961,
+   "fim": 61561,
+   "forca": 1.0
+  },
+  {
+   "inicio": 104161,
+   "fim": 104761,
+   "forca": 1.0
+  },
+  {
+   "inicio": 147361,
+   "fim": 147961,
+   "forca": 1.0
+  },
+  {
+   "inicio": 190561,
+   "fim": 191161,
+   "forca": 1.0
+  },
+  {
+   "inicio": 233761,
+   "fim": 234361,
+   "forca": 1.0
+  },
+  {
+   "inicio": 276961,
+   "fim": 277561,
+   "forca": 1.0
+  },
+  {
+   "inicio": 320161,
+   "fim": 320761,
+   "forca": 1.0
+  },
+  {
+   "inicio": 363361,
+   "fim": 363961,
+   "forca": 1.0
+  },
+  {
+   "inicio": 406561,
+   "fim": 407161,
+   "forca": 1.0
+  },
+  {
+   "inicio": 449761,
+   "fim": 450361,
+   "forca": 1.0
+  },
+  {
+   "inicio": 492961,
+   "fim": 493561,
+   "forca": 1.0
+  }
+ ],
+ "liberacoes": 205,
+ "liberacoes_com_defeito": 71,
+ "mudancas_de_regime": 28,
+ "atos": 261,
+ "atos_respondidos": 261,
+ "pedidos_uteis": 5,
+ "confianca_final": {
+  "produto": 0.626,
+  "desenvolvimento": 0.674,
+  "qualidade": 0.674,
+  "atendimento": 1.0,
+  "vendas": 1.0,
+  "operação": 0.575,
+  "gestão": 1.0
+ }
+}
