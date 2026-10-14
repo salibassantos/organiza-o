@@ -11,8 +11,8 @@
   "verdade_igual_em_C": true,
   "verdade_por_minuto_igual_em_C": true,
   "eventos_humanos_iguais_em_C": true,
-  "hash_da_verdade": "9ad79103a8d01fa4cbb18b9223836d2767c6345b9313584caf5f4a91005ac9b2",
-  "hash_da_verdade_por_minuto": "dbfd4545b08e5f9775ec9e8aa9ef4773e21e06de379383b1551fd049fa7506ed"
+  "hash_da_verdade": "28acd658b2e22cb6a88f0767fddc78441433452a0a0b7f6b35f1addf0ff8a225",
+  "hash_da_verdade_por_minuto": "5e06e5ca4c9d2f4bcbbacaccfcf34b3eada7c6ac41af1d991f0e9b8907dc4a0e"
  },
  "ramos": {
   "tronco": "semente 2, salva em t = 4800 (dia 3, quinta-feira, 8h); cada ramo carrega o mesmo estado e anda até t = 7680",
@@ -454,5 +454,5 @@
    }
   }
  },
- "segundos": 223.1
+ "segundos": 268.6
 }

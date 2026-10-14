@@ -86,3 +86,15 @@ ordem de `processos()` e de `campos`; a primeira linha tem os nomes "processo.ca
 
 ## Custo (v1.1)
 Noventa dias (129.600 chamadas de `passo()`) em menos de trinta minutos de máquina, abaixo de 2 GB.
+
+## v1.4: a causa dos chamados na verdade
+Só a verdade muda; o mundo, os minutos e as respostas ficam idênticos (conferido byte a byte nas gravações de `registros/semente1/`).
+- `verdade()["chamados"]`: cada chamado com `origem` (a rota e o instante em que o cliente sentiu o erro, depois de tentar de novo, ou
+  a lentidão, acima de 4 segundos) e `causa`: "defeito", "incidente", "queda do processo", "rota com erro", "rota lenta" ou "outros"
+  (sem rota: dúvida, fatura, cobrança, nota). `chamados_por_causa` ganhou "rota com erro" e "rota lenta", e "queda do processo" passou
+  a contar (antes ficava em "outros"). Cada incidente ganhou `chamados_por_rota_de_origem`.
+- `verdade()["causas"]`: as leis que ligam o erro e a lentidão de cada rota aos chamados do componente da rota (novos, abertos,
+  escalados, resolvidos) e às sessões abandonadas, com o mecanismo e o atraso; as janelas de rota em que a lei esteve ativa, com os
+  chamados que gerou; os campos que se mexem juntos quando o produto para; e as categorias de um par de campos: causa declarada,
+  causa comum (incidente ou queda do processo) e sem relação. `causas.classificar_par(verdade, de, para, inicio, fim)` classifica um
+  par. O formato está descrito em `organizacao/mundo/v2/VERDADE.md` (seções `chamados` e `causas`), igual no v1.

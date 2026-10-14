@@ -272,9 +272,11 @@ class Clientes:
                 estado, lat, falhou = produto.chamar(t, rota, req, c, u)
             if estado == "erro":
                 self.min["abandonos"] += 1
+                verdade.sentido(t, rota, "erro", falhou)
                 self._frustrar(t, c, rota, falhou, verdade, "erro")
                 continue
             if lat > 4000.0 and not lento:
+                verdade.sentido(t, rota, "lentidão")
                 sess[5] = True
                 if s.random() < 0.35:
                     self._frustrar(t, c, rota, None, verdade, "lentidão")
@@ -331,7 +333,7 @@ class Clientes:
             return
         if s.random() < p:
             atraso = int(s.lognormvariate(math.log(12), 0.75)) + 1
-            self._marcar_contato(t + atraso, c, "erro" if tipo == "erro" else "lentidão", comp, (falhou, t), None)
+            self._marcar_contato(t + atraso, c, "erro" if tipo == "erro" else "lentidão", comp, (falhou, t, rota), None)
 
     def _marcar_contato(self, quando, c, motivo, comp, causa, canal):
         self._seq += 1

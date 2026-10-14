@@ -101,7 +101,8 @@ O arquivo `verdade.json` de cada gravação traz tudo isso com instantes: `ciclo
 blocos do calendário embaralhado), `liberacoes`, `liberacoes_com_defeito`, `episodios_de_defeito_no_ar` (liberação, primeiro erro,
 primeiro chamado, primeira escalação, saída do ar), `incidentes`, `mudancas_de_regime` (com a latência média dos sete dias antes e
 depois), `deriva`, `sprints` e `sprints_de_pressa`, `defeitos_escritos`, `defeitos_barrados_antes_do_ar`, `pessoal`,
-`chamados_por_causa` e `atos`.
+`chamados_por_causa` e `atos`. Desde a v1.4, também `chamados` (a rota e o instante que motivaram cada chamado e a sua causa) e
+`causas` (as leis que ligam rota a chamados, as janelas em que agiram e as categorias de um par de campos; ver `CONTRATO.md`).
 
 ## Como se roda
 

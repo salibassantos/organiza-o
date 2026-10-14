@@ -340,5 +340,72 @@ class TesteNulos(unittest.TestCase):
                 self.assertGreater(len(v["ciclos"]["blocos_do_calendario"]), 2)
 
 
+class TesteCausas(unittest.TestCase):
+    """(v2.1) A causa dos chamados: num incidente, o par da lei é causa declarada e os outros pares são causa comum."""
+
+    @classmethod
+    def setUpClass(cls):
+        m = novo(2, "sem_defeito", nome="causas")
+        viver(m, 600)
+        p = m.produto
+        p.volume_paginas = p.paginas_ocupadas() + 5
+        p._aplicar_volume()
+        viver(m, D + 600)
+        cls.m, cls.v = m, m.verdade()
+
+    def test_cada_chamado_tem_origem_e_causa(self):
+        v = self.v
+        self.assertEqual(sum(v["chamados_por_causa"].values()), len(v["chamados"]))
+        for c in v["chamados"]:
+            self.assertIn(c["causa"], v["chamados_por_causa"])
+            if c["motivo"] in ("erro", "lentidão"):
+                self.assertIsNotNone(c["origem"])
+        inc = v["incidentes"][0]
+        self.assertEqual(sum(inc["chamados_por_rota_de_origem"].values()), inc["chamados"])
+
+    def test_as_categorias_do_incidente(self):
+        from organizacao.mundo.v2.causas import classificar_par
+        v = self.v
+        inc = v["incidentes"][0]
+        erro = lambda r: [f"rota {r}", "respostas com erro no minuto"]
+        esc = ["chamados de login e conta", "escalados"]
+        self.assertEqual(classificar_par(v, erro("login"), esc, inc["inicio"], inc["fim"])["categoria"], "causa declarada")
+        self.assertEqual(classificar_par(v, erro("catálogo"), esc, inc["inicio"], inc["fim"])["categoria"], "causa comum (incidente)")
+        self.assertEqual(classificar_par(v, erro("login"), ["funil de vendas", "leads"], inc["inicio"], inc["fim"])["categoria"], "sem relação")
+
+    def test_as_leis_falam_de_campos_da_porta(self):
+        campos = {(p.nome, c) for p in self.m.processos() for c in p.campos}
+        for lei in self.v["causas"]["leis"]:
+            for par in lei["de"] + lei["para"]:
+                self.assertIn(tuple(par), campos)
+        for par in self.v["causas"]["campos_quando_o_produto_para"]:
+            self.assertIn(tuple(par), campos)
+        self.assertTrue(any(j["chamados_gerados"] for j in self.v["causas"]["janelas_de_rota"]))
+
+
+class TesteCalendario(unittest.TestCase):
+    """(v2.1) Os motores do calendário declarados por campo, e a força medida quando registros/calendario.json existe."""
+
+    def test_motores_e_medida(self):
+        from organizacao.mundo.v2 import calendario
+        from organizacao.mundo.v2.causas import classificar_par
+        cal = calendario.para_a_verdade()
+        m = novo(1, nome="calendario")
+        nomes = {f"{p.nome}.{c}" for p in m.processos() for c in p.campos}
+        self.assertEqual(set(cal["campos"]), nomes)
+        sem_motor = {n for n, c in cal["campos"].items() if not c["motores"]}
+        self.assertTrue(all(n.endswith(("clientes ativos", "pessoas no quadro")) or n.startswith("sonda") for n in sem_motor))
+        if cal["medida"] is None:
+            self.skipTest("registros/calendario.json ainda não foi medido")
+        c = cal["campos"]
+        self.assertTrue(c["rota catálogo.requisições no minuto"]["movido_pelo_calendario"])
+        self.assertFalse(c["carteira de clientes.clientes ativos"]["movido_pelo_calendario"])
+        self.assertGreater(c["rota catálogo.requisições no minuto"]["fracao_da_variancia"],
+                           10 * c["rota catálogo.requisições no minuto"]["controle_embaralhado_pelo_relogio_da_porta"])
+        v = {"incidentes": [], "causas": {}, "calendario": cal}
+        r = classificar_par(v, ["rota catálogo", "requisições no minuto"], ["sessões dos clientes", "sessões iniciadas no minuto"])
+        self.assertEqual(r["categoria"], "causa comum (calendário)")
+
+
 if __name__ == "__main__":
     unittest.main()

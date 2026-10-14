@@ -15,6 +15,9 @@ O que se anota:
 - atos recebidos pela porta e as respostas."""
 from . import codigo
 from .cadastro import ROTAS, MINUTOS_DIA
+from .causas import Janelas, achar_janela, leis, campos_produto_parado, rota_proc, CATEGORIAS
+
+ANTES_DA_SONDA = 10                 # (v1.4) os clientes sentem o produto parado alguns minutos antes de a sonda o declarar
 
 
 class Verdade:
@@ -41,7 +44,11 @@ class Verdade:
         self.queda_processo = []
         self.quedas = []
         self._caindo = None
-        self.chamados_por_causa = {"defeito": 0, "incidente": 0, "queda do processo": 0, "outros": 0}
+        self.chamados_por_causa = {"defeito": 0, "incidente": 0, "queda do processo": 0, "rota com erro": 0, "rota lenta": 0, "outros": 0}
+        self.chamados = []                  # (v1.4) cada chamado com a sua origem e a sua causa
+        self._chamados = {}
+        self.janelas = Janelas()
+        self.janelas_de_rota = []
 
     # ---------- o código no ar ----------
     def implantacao(self, t, versao, tipo, antes, depois, funcionalidades, produto):
@@ -94,34 +101,67 @@ class Verdade:
 
     # ---------- chamados ----------
     def chamado_aberto(self, t, item, cliente, motivo, comp, causa):
+        """Um chamado chegou. (v1.4) Ele guarda de onde veio (a rota e o instante do erro ou da lentidão que o cliente sentiu) e a causa:
+        defeito, incidente, queda do processo, rota com erro, rota lenta, ou outros (sem rota: dúvida, fatura, cobrança, nota)."""
         funcao = causa[0] if causa else None
         quando = causa[1] if causa else None
+        rota = causa[2] if causa and len(causa) > 2 else None
+        evento = "erro" if motivo == "erro" else "lentidão"
+        reg = {"t": t, "item": item, "componente": comp, "motivo": motivo,
+               "origem": {"rota": rota, "processo": rota_proc(rota), "instante": quando, "evento": evento} if rota else None,
+               "causa": None, "registro_da_causa": None, "janela_de_rota": None, "escalado_em": None}
+        candidatos = list(self.no_ar.items()) + [((e["funcao"], e["implementacao"]), e) for e in self.episodios
+                                                 if e["saiu_do_ar"] is not None and quando is not None
+                                                 and e["liberado_em"] <= quando <= e["saiu_do_ar"]]
         achou = None
         if funcao is not None:
-            for (f, v), ep in list(self.no_ar.items()) + [((e["funcao"], e["implementacao"]), e) for e in self.episodios
-                                                          if e["saiu_do_ar"] is not None and quando is not None
-                                                          and e["liberado_em"] <= quando <= e["saiu_do_ar"]]:
-                if f == funcao:
-                    achou = ep
-                    break
+            achou = next((ep for (f, v), ep in candidatos if f == funcao), None)
+        elif rota is not None and motivo == "lentidão":
+            achou = next((ep for (f, v), ep in candidatos if ep["como_aparece"] == "lento" and f in ROTAS_FUNCOES.get(rota, ())), None)
         if achou is not None:
             achou["chamados"] += 1
             if achou["primeiro_chamado"] is None:
                 achou["primeiro_chamado"] = t
-            self.chamados_por_causa["defeito"] += 1
+            reg["causa"], reg["registro_da_causa"] = "defeito", {"episodio_de_defeito": achou["funcao"], "liberado_em": achou["liberado_em"]}
             self._causa_chamado(item, achou)
-            return
-        inc = self.incidente_aberto or (self.incidentes[-1] if self.incidentes else None)
-        if inc is not None and inc["causa"] != "volume do banco cheio":
-            inc = self.incidentes[-1] if self.incidentes else None
-        if motivo in ("erro", "lentidão") and inc is not None and quando is not None and inc["inicio"] <= quando <= (inc["fim"] or t):
-            inc["chamados"] += 1
-            if inc["primeiro_chamado"] is None:
-                inc["primeiro_chamado"] = t
-            self.chamados_por_causa["incidente"] += 1
-            self._causa_chamado(item, inc)
-            return
-        self.chamados_por_causa["outros"] += 1
+        elif motivo in ("erro", "lentidão") and quando is not None:
+            for lista, nome in ((self.incidentes, "incidente"), (self.quedas, "queda do processo")):
+                inc = next((i for i in reversed(lista) if i["inicio"] - ANTES_DA_SONDA <= quando <= (i["fim"] or t)), None)
+                if inc is not None:
+                    inc["chamados"] += 1
+                    if inc["primeiro_chamado"] is None:
+                        inc["primeiro_chamado"] = t
+                    if rota is not None:
+                        por = inc.setdefault("chamados_por_rota_de_origem", {})
+                        por[rota] = por.get(rota, 0) + 1
+                    reg["causa"], reg["registro_da_causa"] = nome, {nome: inc["inicio"]}
+                    self._causa_chamado(item, inc)
+                    break
+        if reg["causa"] is None:
+            reg["causa"] = ("rota com erro" if evento == "erro" else "rota lenta") if rota is not None else "outros"
+        self.chamados_por_causa[reg["causa"]] += 1
+        if rota is not None:
+            j = achar_janela(self.janelas_de_rota, rota, evento, quando)
+            if j is not None:
+                j["chamados_gerados"] += 1
+                if len(j["chamados"]) < 100:
+                    j["chamados"].append(item)
+                reg["janela_de_rota"] = j["inicio"]
+        self._chamados[item] = reg
+        self.chamados.append(reg)
+
+    def sentido(self, t, rota, tipo, falhou=None):
+        """(v1.4) Um cliente sentiu erro (desistiu depois de tentar de novo) ou lentidão (mais de 4 segundos) numa rota."""
+        inc = self.incidente_aberto
+        if inc is not None:
+            contexto = "incidente" if inc["causa"] == "volume do banco cheio" else "queda do processo"
+        elif tipo == "erro" and falhou is not None and any(f == falhou for f, _ in self.no_ar):
+            contexto = "defeito"
+        elif tipo == "lentidão" and any(ep["como_aparece"] == "lento" and f in ROTAS_FUNCOES.get(rota, ()) for (f, _), ep in self.no_ar.items()):
+            contexto = "defeito"
+        else:
+            contexto = "erro sem defeito" if tipo == "erro" else "rota lenta"
+        self.janelas.evento(t, rota, tipo, contexto, self.janelas_de_rota.append)
 
     def _causa_chamado(self, item, ep):
         self._causas = getattr(self, "_causas", {})
@@ -133,9 +173,17 @@ class Verdade:
             ep["escalacoes"] = ep.get("escalacoes", 0) + 1
             if ep.get("primeira_escalacao") is None:
                 ep["primeira_escalacao"] = t
+        reg = self._chamados.get(chamado)
+        if reg is not None and reg["escalado_em"] is None:
+            reg["escalado_em"] = t
+            if reg["origem"] is not None and reg["janela_de_rota"] is not None:
+                j = achar_janela(self.janelas_de_rota, reg["origem"]["rota"], reg["origem"]["evento"], reg["origem"]["instante"])
+                if j is not None:
+                    j["chamados_escalados"] += 1
 
     # ---------- o produto parado ----------
     def minuto_da_sonda(self, t, falhando, produto):
+        self.janelas.fechar_velhas(t)                 # (v1.4) as janelas de rota sem evento há mais de uma hora se fecham
         if falhando and self.incidente_aberto is None:
             livre = produto.volume_paginas - produto.paginas_ocupadas()
             self.incidente_aberto = {"inicio": t, "fim": None, "causa": "volume do banco cheio" if livre < 200 else "processo parado",
@@ -261,6 +309,24 @@ class Verdade:
             "quedas_do_processo_por_memoria": {"erros_no_registro": self.queda_processo, "sonda_parada": self.quedas},
             "pessoal": self.pessoal or [],
             "chamados_por_causa": self.chamados_por_causa,
+            "chamados": self.chamados,
+            "causas": {
+                "categorias": {
+                    "causa declarada": "há um mecanismo do mundo que leva de um campo ao outro: as leis abaixo (erro ou lentidão numa rota "
+                                       "levam a chamados do componente da rota) e o 'onde' dos episódios de defeito",
+                    "causa comum (incidente)": "durante um incidente (e até seis horas depois do fim, enquanto os chamados chegam e são "
+                                               "escalados), os campos de 'campos_quando_o_produto_para' se mexem juntos porque o produto "
+                                               "parou, sem que um cause o outro; o par da lei (rota para o componente dela) continua "
+                                               "sendo causa declarada",
+                    "causa comum (queda do processo)": "o mesmo, na queda curta do processo por falta de memória",
+                    "sem relação": "nenhuma das anteriores",
+                },
+                "ordem": [c for c in CATEGORIAS if c != "causa comum (calendário)"],
+                "leis": leis(),
+                "janelas_de_rota": self.janelas_de_rota,
+                "campos_quando_o_produto_para": campos_produto_parado(),
+                "como_classificar": "classificar_par(verdade, [processo, campo], [processo, campo], inicio, fim) em causas.py",
+            },
             "atos": self.atos,
         }
         if self.nulo == "sem_defeito":

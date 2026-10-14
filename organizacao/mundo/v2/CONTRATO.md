@@ -40,6 +40,13 @@ O v2 é lido do mesmo jeito que o v1: quem lê o v1 lê o v2 sem mudar nada alé
 - O formato da verdade está em `VERDADE.md`, campo a campo: o que aconteceu, onde (processo e campo), quando, por quanto tempo e por
   causa de quê.
 
+## v2.1: a causa dos chamados e o calendário na verdade
+
+Só a verdade muda; o mundo e os minutos ficam iguais. `verdade()` ganha `chamados` (a rota e o instante que motivaram cada chamado e
+a sua causa), `causas` (as leis que ligam rota a chamados, as janelas em que agiram e as três categorias de um par: causa declarada,
+causa comum, sem relação) e `calendario` (os motores do calendário por campo, com o caminho e a força medida). A verdade por minuto
+ganha 27 colunas no fim. Ver `VERDADE.md`.
+
 ## O mundo com consequência
 
 - Cada equipe é um agente com fila, capacidade (as pessoas presentes e livres), cansaço, atenção e memória de quem lhe pede

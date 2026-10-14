@@ -154,3 +154,22 @@ arquivos de um dia que não mudam mais, e os quatro nulos andando. `conferir.py`
 - A mesma vida em outra máquina depende das mesmas versões de Python, numpy e SQLite (a contagem de instruções do SQLite entra na
   latência), como no v1.
 - Sem a opção `historia`, cada mundo escreve a sua história numa pasta temporária que o sistema não apaga sozinho.
+
+## 9. v2.1: a causa dos chamados e o que o calendário move
+
+Só a verdade mudou; o mundo é o mesmo. Os minutos e as respostas de dez vidas de três dias (os cinco nulos, sementes 1 e 2, com atos)
+deram os mesmos hashes antes e depois, e as provas da seção 4 e 5 dão os mesmos hashes de minutos.
+
+- **A causa dos chamados.** Cada chamado guarda a rota e o instante em que o cliente sentiu o erro ou a lentidão que o motivou, e a sua
+  causa (defeito, incidente, queda do processo, rota com erro, rota lenta, outros). A verdade declara a lei que liga o erro e a
+  lentidão de cada rota aos chamados do componente da rota (novos, abertos, escalados, resolvidos) e às sessões abandonadas, com o
+  mecanismo e o atraso, e registra as janelas em que a lei agiu e os chamados que gerou. Um par de campos cai em uma de três
+  categorias: causa declarada, causa comum (incidente, queda do processo, calendário) ou sem relação; `causas.classificar_par` faz a
+  conta. O gabarito do pesquisador (19 pares em três vidas sem defeito, todos em incidentes) bate: "rota login → chamados de login e
+  conta" é causa declarada; os outros são causa comum pelo incidente. O contador "queda do processo" passou a contar.
+- **O calendário.** Onze motores declarados com os números do código e, para cada um dos 495 campos, os motores que chegam a ele e
+  por qual caminho. A força foi medida em três sementes de 42 dias na empresa normal e no nulo embaralhado: 185 campos são movidos
+  pelo calendário (fração da variância explicada pela hora da semana acima de 0,05, ao menos o dobro do controle e 0,05 acima dele);
+  nenhum campo aparece movido sem motor declarado. Os perfis por hora da semana estão em `registros/calendario.json`.
+- **No v1.** A mesma correção da causa dos chamados (v1.4), com as gravações de `registros/semente1/` regravadas: os minutos ficaram
+  idênticos e só `verdade.json` mudou.

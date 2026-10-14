@@ -14,7 +14,7 @@ quando, por quanto tempo e por causa de quê**.
 - `mundo.eventos_humanos() -> list[(t, texto)]`: o que uma pessoa da empresa veria acontecer.
 - A pasta de história (`mundo.pasta_da_historia()`; em `rodar.py`, `<pasta>/historia`) guarda o passado, um par de arquivos por dia
   real `d` (minutos `d x 1440` a `d x 1440 + 1439`):
-  - `dia_NNNNN.npz`: `t` (1440 instantes), `valores` (1440 x 82, float32) e `colunas` (os nomes);
+  - `dia_NNNNN.npz`: `t` (1440 instantes), `valores` (1440 x 109, float32) e `colunas` (os nomes);
   - `dia_NNNNN.json`: `{"dia", "registros": {lista: [registros]}, "eventos_humanos": [[t, texto]]}`. Um registro vai para o disco no
     fim do dia em que ficou definitivo há sete dias (sete dias depois de fechado, quando nenhum chamado ou escalação tardia ainda
     pode mudá-lo). Os registros abertos e os recentes ficam em memória e aparecem em `verdade()` do mesmo jeito.
@@ -49,7 +49,10 @@ quando, por quanto tempo e por causa de quê**.
 | `defeitos_escritos`, `defeitos_barrados_antes_do_ar` | defeitos que as pessoas escreveram; os que a revisão, a qualidade ou a regressão barraram |
 | `quedas_do_processo_por_memoria` | as quedas curtas do processo quando o defeito de memória está no ar |
 | `pessoal` | contratações e saídas |
-| `chamados_por_causa` | contagem total de chamados por causa: defeito, incidente, queda do processo, outros |
+| `chamados_por_causa` | contagem total de chamados por causa: defeito, incidente, queda do processo, rota com erro, rota lenta, outros (sem rota) |
+| `chamados` | (v2.1) cada chamado, com a rota e o instante que o motivaram e a sua causa |
+| `causas` | (v2.1) as leis que ligam rota a chamados, as janelas de rota, as três categorias de um par e os campos que se mexem juntos quando o produto para |
+| `calendario` | (v2.1) o que o calendário move em cada campo: motores declarados, caminho e força medida |
 | `atos` | cada ato recebido pela porta, com tudo o que a equipe fez e o que custou |
 | `latencia_por_dia` | a latência média de cada rota no horário comercial, dia a dia |
 | `volume_inicial_folga_dias` | quantos dias de folga o volume do banco tinha na criação |
@@ -102,6 +105,7 @@ erro que o motivou).
 | `causa` | "volume do banco cheio" |
 | `onde` | a sonda, o espaço livre do banco e os erros de todas as rotas |
 | `primeiro_chamado`, `chamados`, `primeira_escalacao`, `escalacoes` | os chamados e escalações que ele causou |
+| `chamados_por_rota_de_origem` | (v2.1) quantos desses chamados vieram de cada rota (a rota em que o cliente sentiu o erro) |
 | `causa_diagnosticada`, `tratado_em` | o que a operação achou e quando terminou o tratamento |
 | `folga_dada_em_dias`, `registros_apagados` | o volume novo (em dias de crescimento estimado) e a auditoria apagada |
 | `volume_paginas_no_inicio`, `paginas_livres_no_inicio` | o volume quando o produto parou |
@@ -119,7 +123,72 @@ na carteira.
 ### `quedas_do_processo_por_memoria`
 
 `erros_no_registro` (instantes dos erros "MemoryError" do processo) e `sonda_parada`: registros como os de `incidentes`, com causa
-"processo parado" e `onde` = a sonda e os reinícios do servidor.
+"processo parado" e `onde` = a sonda e os reinícios do servidor. Os chamados que nasceram dela contam em `chamados_por_causa`
+como "queda do processo" (antes da v2.1 caíam em "outros").
+
+### `chamados` (v2.1, um por chamado)
+
+| campo | o que é |
+|---|---|
+| `t`, `item`, `componente`, `motivo` | quando o chamado chegou, o item no fluxo, o componente e o motivo ("erro", "lentidão", "dúvida", "fatura", "cobrança em dobro", "nota não emitida", "cancelamento") |
+| `origem` | para erro e lentidão: `{rota, processo, instante, evento}`, a rota e o minuto em que o cliente sentiu o erro (desistiu depois de tentar de novo) ou a lentidão (mais de 4 segundos); `null` nos outros motivos |
+| `causa` | "defeito", "incidente", "queda do processo", "rota com erro" (sem defeito, incidente nem queda), "rota lenta" (sem defeito lento nem incidente) ou "outros" (sem rota por trás) |
+| `registro_da_causa` | o episódio de defeito (`funcao`, `liberado_em`), o incidente ou a queda (pelo `inicio`) |
+| `janela_de_rota` | o `inicio` da janela de rota de onde veio |
+| `escalado_em` | quando o atendimento o escalou (no incidente, ao item do incidente; com defeito, ao bug) |
+
+O chamado de lentidão numa rota que chama uma função com defeito lento no ar é do defeito. O cliente sente o produto parado alguns
+minutos antes de a sonda declarar o incidente; o chamado cujo erro aconteceu até 10 minutos antes do início do incidente é dele.
+
+### `causas` (v2.1): causa declarada, causa comum, sem relação
+
+- `leis`: uma lei por rota e por evento. `de`: os campos da rota (erro: "respostas com erro no minuto"; lentidão: "latência média em
+  ms" e "latência do percentil 95 em ms"). `para`: os campos dos chamados do componente da rota ("novos no minuto", "abertos",
+  "escalados", "resolvidos no minuto") e, no erro, "sessões abandonadas depois de erro no minuto". `mecanismo` e `atraso` por campo:
+  o chamado chega com atraso lognormal de mediana 12 minutos (90% em até 32, 99% em até 70); a escalação vem quando o atendimento o
+  pega (minutos a horas); a resolução, horas depois. Rota e componente: login e conta → login e conta; catálogo, busca e produto →
+  catálogo e busca; carrinho e pedido → pedido e carrinho; frete → frete; pagamento → pagamento; notas fiscais → fiscal; relatório e
+  exportação → relatórios.
+- `janelas_de_rota`: os trechos em que clientes sentiram erro ou lentidão numa rota (eventos a menos de uma hora um do outro):
+  `rota`, `tipo` ("erro" ou "lentidão"), `inicio`, `fim`, `duracao_min`, `sessoes_afetadas`, `contextos` ("incidente", "queda do
+  processo", "defeito", "erro sem defeito", "rota lenta"), `de` e `para` (os pares da lei, categoria "causa declarada"),
+  `chamados_gerados`, `chamados_escalados` e `chamados` (os itens). Uma janela sem chamado mostra a lei ativa e não realizada (os
+  chamados são sorteados por cliente).
+- `campos_quando_o_produto_para`: os campos que se mexem juntos num incidente ou numa queda do processo (as rotas, a sonda, o servidor,
+  o banco, a fila, as integrações, pedidos e pagamentos, as sessões, regiões e planos, os canais, os chamados de todos os componentes,
+  o Suporte, o fluxo do atendimento e da operação).
+- `categorias` e `ordem`: um par `[processo, campo] → [processo, campo]` é, na ordem:
+  1. **causa declarada**, quando uma lei o liga e agiu no intervalo olhado (há janela de rota nele; sem intervalo, em algum momento
+     da vida), ou quando o `onde` de um episódio de defeito no ar no intervalo o liga; a lei que não agiu aparece nas provas, sem
+     contar como causa;
+  2. **causa comum (incidente)** ou **causa comum (queda do processo)**, quando os dois campos estão em `campos_quando_o_produto_para`
+     e o intervalo olhado encosta num incidente ou numa queda (até seis horas depois do fim, enquanto os chamados chegam e são
+     escalados);
+  3. **causa comum (calendário)**, quando os dois campos são movidos pelo calendário (abaixo): o mesmo relógio mexe nos dois, pelo
+     mesmo motor ou por motores diferentes; as provas dizem os motores em comum e a correlação dos perfis por hora da semana;
+  4. **sem relação**, nenhuma das anteriores.
+  `causas.classificar_par(verdade, de, para, inicio, fim)` devolve a primeira categoria que vale, todas as que valem e as provas
+  (as janelas da lei no intervalo, o incidente, os motores em comum e a correlação dos perfis). Exemplo, num incidente: "rota login, respostas com erro" →
+  "chamados de login e conta, escalados" é causa declarada; "rota catálogo, respostas com erro" → "chamados de login e conta,
+  escalados" é causa comum (incidente).
+
+### `calendario` (v2.1): o que o calendário move em cada campo
+
+- `motores`: as regras do mundo que dependem do relógio, com os números do código: horário das lojas, semana das lojas, fim do mês das
+  lojas, pagamento das faturas, expediente das pessoas, agenda fixa, sprint, liberações, tarefas do servidor, mês da empresa,
+  horário do mercado.
+- `campos`: para cada `processo.campo`, `motores` e `caminhos` (cada motor com o caminho pelo qual chega ao campo) e a força medida:
+  `fracao_da_variancia` (a parte da variância do campo, minuto a minuto, que a hora da semana explica, na empresa normal),
+  `controle_embaralhado_pelo_relogio_da_porta` (a mesma conta no nulo embaralhado, onde o calendário não corresponde ao relógio: o
+  piso do acaso), `embaralhado_pelo_calendario_interno` (no mesmo nulo, contada pelo calendário em que as pessoas vivem: mostra que é o
+  calendário que move) e `movido_pelo_calendario`.
+- `regra`: o campo é movido pelo calendário quando tem motor declarado e a fração passa de 0,05, é ao menos o dobro da do controle e
+  fica ao menos 0,05 acima dela (nos campos que se acumulam devagar, como chamados abertos e horas extras do dia, o acaso sozinho
+  já explica uma fração maior, e o controle mostra quanto).
+  Dois campos movidos são **causa comum (calendário)**; `calendario.correlacao_dos_perfis(a, b)` dá a correlação dos seus perfis
+  (perto de 1, sobem e descem juntos; perto de -1, um sobe quando o outro desce).
+- `medida`: as sementes e os dias medidos e o viés do acaso. Os perfis (168 médias por campo, uma por hora da semana, de segunda 0h a
+  domingo 24h) ficam em `registros/calendario.json`, que `python -m organizacao.mundo.v2.calendario` refaz.
 
 ### `mudancas_de_regime`
 
@@ -218,7 +287,7 @@ com o descanso.
 | `volume_paginas_livres` | as páginas livres no volume |
 | `chamados_por_defeito` | chamados abertos neste minuto que nasceram de um defeito no ar |
 | `chamados_por_incidente` | chamados abertos neste minuto que nasceram do produto parado |
-| `chamados_de_outra_causa` | chamados abertos neste minuto sem defeito nem incidente por trás |
+| `chamados_de_outra_causa` | chamados abertos neste minuto sem rota por trás (dúvida, fatura, cobrança, nota que não chegou) |
 | `carteira` | clientes ativos |
 | `teto_do_mercado` | o teto da carteira que o mercado comporta agora (0 no nulo sem_deriva) |
 | `fase_da_deriva` | 0 crescendo, 1 platô (carteira no teto), 2 expansão decidida e ainda não valendo |
@@ -229,6 +298,11 @@ com o descanso.
 | `implantacao` | 1 se houve implantação neste minuto |
 | `atos_recebidos` | atos que viraram coisa dentro do mundo neste minuto |
 | `atos_tratados` | atos tratados (respondidos) neste minuto |
+| `chamados_por_queda` | (v2.1) chamados abertos neste minuto que nasceram da queda do processo |
+| `chamados_por_rota_lenta` | (v2.1) chamados abertos neste minuto que nasceram de lentidão sentida numa rota, sem defeito nem incidente |
+| `chamados_por_rota_com_erro` | (v2.1) chamados abertos neste minuto que nasceram de erro numa rota, sem defeito, incidente nem queda |
+| `sessoes_com_erro.<rota>` | (v2.1) sessões que desistiram por erro na rota neste minuto (uma coluna por rota) |
+| `sessoes_lentas.<rota>` | (v2.1) sessões que sentiram a rota acima de 4 segundos neste minuto (uma coluna por rota) |
 | `<equipe>.atos_na_fila` | atos esperando a equipe |
 | `<equipe>.atos_em_tratamento` | pessoas da equipe tratando um ato agora |
 | `<equipe>.cansaco` | cansaço da equipe (0 descansada; sobe com hora extra e com pedidos) |
@@ -237,7 +311,7 @@ com o descanso.
 | `<equipe>.ocupacao` | ocupação da equipe (gente presa em reunião ou urgência, e a fila regular) |
 | `<equipe>.demora_de_pedido` | minutos que um pedido levaria agora até alguém da equipe pegá-lo |
 
-`<equipe>` é uma das sete: produto, desenvolvimento, qualidade, atendimento, vendas, operação, gestão. São 82 colunas. A descrição
+`<equipe>` é uma das sete: produto, desenvolvimento, qualidade, atendimento, vendas, operação, gestão. São 109 colunas (82 até a v2.1; as novas vêm depois, sem mudar a posição das antigas). A descrição
 de cada uma também vem em `verdade()["verdade_por_minuto"]["colunas"]`.
 
 ## Os nulos na verdade
