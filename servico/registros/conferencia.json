@@ -1,0 +1,653 @@
+{
+ "dias": 60,
+ "sementes": [
+  {
+   "semente": 1,
+   "processos": 29,
+   "segundos_por_dia": 0.623,
+   "trocas_e_instrucoes": {
+    "conferidas": 10,
+    "certas": 10,
+    "detalhe": [
+     {
+      "o_que": "trocas_de_versao",
+      "t": 82948,
+      "variavel": "latencia",
+      "declarado": 0.6586,
+      "medido": 0.527,
+      "ok": true
+     },
+     {
+      "o_que": "trocas_de_versao",
+      "t": 82948,
+      "variavel": "erro",
+      "declarado": 0.6026,
+      "medido": 0.713,
+      "ok": true
+     },
+     {
+      "o_que": "trocas_de_versao",
+      "t": 82948,
+      "variavel": "recusa",
+      "declarado": 1.5354,
+      "medido": 1.457,
+      "ok": true
+     },
+     {
+      "o_que": "trocas_de_versao",
+      "t": 82948,
+      "variavel": "tamanho_saida",
+      "declarado": 0.6114,
+      "medido": 0.598,
+      "ok": true
+     },
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 26792,
+      "variavel": "recusa",
+      "declarado": 0.5019,
+      "medido": 0.503,
+      "ok": true
+     },
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 26792,
+      "variavel": "tamanho_saida",
+      "declarado": 0.718,
+      "medido": 0.733,
+      "ok": true
+     },
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 51193,
+      "variavel": "recusa",
+      "declarado": 1.6495,
+      "medido": 1.685,
+      "ok": true
+     },
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 51193,
+      "variavel": "tamanho_saida",
+      "declarado": 0.569,
+      "medido": 0.556,
+      "ok": true
+     },
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 62907,
+      "variavel": "recusa",
+      "declarado": 1.7756,
+      "medido": 1.677,
+      "ok": true
+     },
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 62907,
+      "variavel": "tamanho_saida",
+      "declarado": 1.6792,
+      "medido": 1.646,
+      "ok": true
+     }
+    ]
+   },
+   "incidentes": {
+    "conferidos": 6,
+    "certos": 6.0,
+    "detalhe": [
+     {
+      "inicio": 16627,
+      "tipo": "pico de chamadas",
+      "durante": 8954.7,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 33835,
+      "tipo": "pico de chamadas",
+      "durante": 28802.7,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 46705,
+      "tipo": "perda de capacidade",
+      "durante": 7.2,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 55691,
+      "tipo": "pico de chamadas",
+      "durante": 2535.6,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 72801,
+      "tipo": "perda de capacidade",
+      "durante": 2804.3,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 78479,
+      "tipo": "perda de capacidade",
+      "durante": 1190.3,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     }
+    ]
+   },
+   "degradacoes": {
+    "conferidas": 1,
+    "certas": 1,
+    "detalhe": [
+     {
+      "inicio": 14970,
+      "variavel": "repeticao",
+      "esperado_no_fim": 1.641,
+      "medido_no_fim": 1.633,
+      "antes_do_inicio": 1.0,
+      "ok": true
+     }
+    ]
+   },
+   "classes_novas": {
+    "conferidas": 1,
+    "certas": 1.0,
+    "detalhe": [
+     {
+      "t": 12120,
+      "classe": "resumo de documentos",
+      "chamadas_antes": 0.0,
+      "chamadas_no_primeiro_dia_depois": 197.0,
+      "ok": 1.0
+     }
+    ]
+   },
+   "nulos": {
+    "sem_troca": {
+     "tira": true,
+     "o_resto_igual": true
+    },
+    "sem_degradacao": {
+     "tira": true,
+     "o_resto_igual": true
+    },
+    "embaralhado": {
+     "o_resto_igual": true,
+     "fracao_da_hora_e_do_fim_de_semana_normal": 0.917,
+     "fracao_da_hora_e_do_fim_de_semana_embaralhado": 0.029,
+     "tira": true
+    }
+   },
+   "hash_dos_minutos": {
+    "normal": "ed0a7d23504900bf170fb8fd9aa007fa473107a1dc24f9ce27d2b230f2276875",
+    "embaralhado": "e7b2f3ee97e4df4185d408566e1e1b3ab487c760e0dece92cfbcc547a049db3a",
+    "sem_troca": "473ae540088b45132bb570dd206ea5e2ac82f2217270278d21faa45003013519",
+    "sem_degradacao": "61d295ed5b5f2c8ec6a63d6afe49ec1583d11435cab03011e467b0f96f1166ba"
+   },
+   "estrutura": {
+    "processos": [
+     "pedidos de agente com ferramentas",
+     "qualidade de agente com ferramentas",
+     "pedidos de extração de dados",
+     "qualidade de extração de dados",
+     "pedidos de redação longa",
+     "qualidade de redação longa",
+     "pedidos de análise de planilhas",
+     "qualidade de análise de planilhas",
+     "pedidos de classificação de textos",
+     "qualidade de classificação de textos",
+     "pedidos de tradução",
+     "qualidade de tradução",
+     "pedidos de resumo de documentos",
+     "qualidade de resumo de documentos",
+     "clientes de uso pessoal",
+     "clientes de integrações automáticas",
+     "ferramenta busca de documentos",
+     "ferramenta calculadora",
+     "ferramenta consulta a banco de dados",
+     "ferramenta agenda",
+     "ferramenta envio de mensagens",
+     "porta de entrada",
+     "serviço do modelo",
+     "erros do serviço",
+     "tokens do serviço",
+     "custo do serviço",
+     "implantação",
+     "atendimento",
+     "avaliações dos clientes"
+    ],
+    "classes": [
+     "agente com ferramentas",
+     "extração de dados",
+     "redação longa",
+     "análise de planilhas",
+     "classificação de textos",
+     "tradução",
+     "resumo de documentos"
+    ],
+    "segmentos": [
+     "uso pessoal",
+     "integrações automáticas"
+    ],
+    "clientes": 48,
+    "ferramentas": [
+     "busca de documentos",
+     "calculadora",
+     "consulta a banco de dados",
+     "agenda",
+     "envio de mensagens"
+    ]
+   }
+  },
+  {
+   "semente": 2,
+   "processos": 24,
+   "segundos_por_dia": 0.604,
+   "trocas_e_instrucoes": {
+    "conferidas": 2,
+    "certas": 2,
+    "detalhe": [
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 65425,
+      "variavel": "tamanho_saida",
+      "declarado": 1.9998,
+      "medido": 1.974,
+      "ok": true
+     },
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 81560,
+      "variavel": "tamanho_saida",
+      "declarado": 1.9256,
+      "medido": 19013.455,
+      "ok": true
+     }
+    ]
+   },
+   "incidentes": {
+    "conferidos": 7,
+    "certos": 7.0,
+    "detalhe": [
+     {
+      "inicio": 14997,
+      "tipo": "pico de chamadas",
+      "durante": 3360.8,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 20754,
+      "tipo": "perda de capacidade",
+      "durante": 3316.0,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 36839,
+      "tipo": "pico de chamadas",
+      "durante": 37556.0,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 46859,
+      "tipo": "pico de chamadas",
+      "durante": 5500.7,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 52671,
+      "tipo": "perda de capacidade",
+      "durante": 15317.7,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 69986,
+      "tipo": "pico de chamadas",
+      "durante": 76624.9,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 85865,
+      "tipo": "pico de chamadas",
+      "durante": 70786.6,
+      "dia_antes": 5906.1,
+      "ok": 1.0
+     }
+    ]
+   },
+   "degradacoes": {
+    "conferidas": 1,
+    "certas": 1,
+    "detalhe": [
+     {
+      "inicio": 27376,
+      "variavel": "latencia",
+      "esperado_no_fim": 1.613,
+      "medido_no_fim": 1.611,
+      "antes_do_inicio": 1.0,
+      "ok": true
+     }
+    ]
+   },
+   "classes_novas": {
+    "conferidas": 1,
+    "certas": 1.0,
+    "detalhe": [
+     {
+      "t": 16440,
+      "classe": "busca com ferramentas",
+      "chamadas_antes": 0.0,
+      "chamadas_no_primeiro_dia_depois": 147.0,
+      "ok": 1.0
+     }
+    ]
+   },
+   "nulos": {
+    "sem_troca": {
+     "tira": true,
+     "o_resto_igual": true
+    },
+    "sem_degradacao": {
+     "tira": true,
+     "o_resto_igual": true
+    },
+    "embaralhado": {
+     "o_resto_igual": true,
+     "fracao_da_hora_e_do_fim_de_semana_normal": 0.394,
+     "fracao_da_hora_e_do_fim_de_semana_embaralhado": 0.02,
+     "tira": true
+    }
+   },
+   "hash_dos_minutos": {
+    "normal": "a07fa2ef041031644799036544a61e666c2f97ed3e864db1a0687f3402145628",
+    "embaralhado": "edb3048c7560795c03f35eeba97fcaa7d3327fcac7c11034fb9e3f0ceb078a54",
+    "sem_troca": "e6f7cb8cd4f0aa9123ae2e585b8618a0c9ac85a9caec34b5e5e6dc90e108fed6",
+    "sem_degradacao": "ef36a21158433af4fad96a17b3a5076e83b5d5e92c5960a81030e8c2528fa2ff"
+   },
+   "estrutura": {
+    "processos": [
+     "pedidos de tradução",
+     "qualidade de tradução",
+     "pedidos de classificação de textos",
+     "qualidade de classificação de textos",
+     "pedidos de extração de dados",
+     "qualidade de extração de dados",
+     "pedidos de redação longa",
+     "qualidade de redação longa",
+     "pedidos de busca com ferramentas",
+     "qualidade de busca com ferramentas",
+     "clientes de empresas",
+     "clientes de desenvolvedores",
+     "clientes de uso pessoal",
+     "ferramenta calculadora",
+     "ferramenta agenda",
+     "ferramenta envio de mensagens",
+     "porta de entrada",
+     "serviço do modelo",
+     "erros do serviço",
+     "tokens do serviço",
+     "custo do serviço",
+     "implantação",
+     "atendimento",
+     "avaliações dos clientes"
+    ],
+    "classes": [
+     "tradução",
+     "classificação de textos",
+     "extração de dados",
+     "redação longa",
+     "busca com ferramentas"
+    ],
+    "segmentos": [
+     "empresas",
+     "desenvolvedores",
+     "uso pessoal"
+    ],
+    "clientes": 146,
+    "ferramentas": [
+     "calculadora",
+     "agenda",
+     "envio de mensagens"
+    ]
+   }
+  },
+  {
+   "semente": 3,
+   "processos": 26,
+   "segundos_por_dia": 0.604,
+   "trocas_e_instrucoes": {
+    "conferidas": 7,
+    "certas": 7,
+    "detalhe": [
+     {
+      "o_que": "trocas_de_versao",
+      "t": 42666,
+      "variavel": "latencia",
+      "declarado": 0.5994,
+      "medido": 0.762,
+      "ok": true
+     },
+     {
+      "o_que": "trocas_de_versao",
+      "t": 42666,
+      "variavel": "repeticao",
+      "declarado": 0.5928,
+      "medido": 0.704,
+      "ok": true
+     },
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 11086,
+      "variavel": "recusa",
+      "declarado": 1.3706,
+      "medido": 1.327,
+      "ok": true
+     },
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 11086,
+      "variavel": "tamanho_saida",
+      "declarado": 1.4941,
+      "medido": 1.476,
+      "ok": true
+     },
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 55675,
+      "variavel": "recusa",
+      "declarado": 1.9121,
+      "medido": 2.032,
+      "ok": true
+     },
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 55675,
+      "variavel": "tamanho_saida",
+      "declarado": 0.5705,
+      "medido": 0.572,
+      "ok": true
+     },
+     {
+      "o_que": "mudancas_de_instrucao",
+      "t": 77125,
+      "variavel": "tamanho_saida",
+      "declarado": 1.8954,
+      "medido": 1.988,
+      "ok": true
+     }
+    ]
+   },
+   "incidentes": {
+    "conferidos": 5,
+    "certos": 5.0,
+    "detalhe": [
+     {
+      "inicio": 20978,
+      "tipo": "pico de chamadas",
+      "durante": 27382.0,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 38017,
+      "tipo": "perda de capacidade",
+      "durante": 3212.8,
+      "dia_antes": 4.2,
+      "ok": 1.0
+     },
+     {
+      "inicio": 51237,
+      "tipo": "pico de chamadas",
+      "durante": 3405.0,
+      "dia_antes": 0.0,
+      "ok": 1.0
+     },
+     {
+      "inicio": 68580,
+      "tipo": "pico de chamadas",
+      "durante": 4512.4,
+      "dia_antes": 2.1,
+      "ok": 1.0
+     },
+     {
+      "inicio": 85901,
+      "tipo": "pico de chamadas",
+      "durante": 4460.2,
+      "dia_antes": 51.9,
+      "ok": 1.0
+     }
+    ]
+   },
+   "degradacoes": {
+    "conferidas": 1,
+    "certas": 1,
+    "detalhe": [
+     {
+      "inicio": 25847,
+      "variavel": "repeticao",
+      "esperado_no_fim": 1.398,
+      "medido_no_fim": 1.511,
+      "antes_do_inicio": 1.0,
+      "ok": true
+     }
+    ]
+   },
+   "classes_novas": {
+    "conferidas": 1,
+    "certas": 1.0,
+    "detalhe": [
+     {
+      "t": 22200,
+      "classe": "extração de dados",
+      "chamadas_antes": 0.0,
+      "chamadas_no_primeiro_dia_depois": 51.0,
+      "ok": 1.0
+     }
+    ]
+   },
+   "nulos": {
+    "sem_troca": {
+     "tira": true,
+     "o_resto_igual": true
+    },
+    "sem_degradacao": {
+     "tira": true,
+     "o_resto_igual": true
+    },
+    "embaralhado": {
+     "o_resto_igual": true,
+     "fracao_da_hora_e_do_fim_de_semana_normal": 0.872,
+     "fracao_da_hora_e_do_fim_de_semana_embaralhado": 0.045,
+     "tira": true
+    }
+   },
+   "hash_dos_minutos": {
+    "normal": "b0369d09cfcbefa0126bd1c592dcd3091d90ebea28f16581df687ded1edbd309",
+    "embaralhado": "6714f6e5427b32fab62f9475b47a91f008401ada30f94c3d58d9942acc591f20",
+    "sem_troca": "8b80e736e49d0561263da8b7e5d66536170c711c9d8fe3e37e3fb049af192d4d",
+    "sem_degradacao": "d7538921efcb4ac536db6d9fc5f50bd8cc5576d0adfb7b91c4bde99305865201"
+   },
+   "estrutura": {
+    "processos": [
+     "pedidos de revisão de textos",
+     "qualidade de revisão de textos",
+     "pedidos de agente com ferramentas",
+     "qualidade de agente com ferramentas",
+     "pedidos de perguntas e respostas",
+     "qualidade de perguntas e respostas",
+     "pedidos de redação longa",
+     "qualidade de redação longa",
+     "pedidos de extração de dados",
+     "qualidade de extração de dados",
+     "clientes de empresas",
+     "clientes de uso pessoal",
+     "clientes de integrações automáticas",
+     "ferramenta calculadora",
+     "ferramenta consulta a banco de dados",
+     "ferramenta agenda",
+     "ferramenta envio de mensagens",
+     "ferramenta leitura de planilhas",
+     "porta de entrada",
+     "serviço do modelo",
+     "erros do serviço",
+     "tokens do serviço",
+     "custo do serviço",
+     "implantação",
+     "atendimento",
+     "avaliações dos clientes"
+    ],
+    "classes": [
+     "revisão de textos",
+     "agente com ferramentas",
+     "perguntas e respostas",
+     "redação longa",
+     "extração de dados"
+    ],
+    "segmentos": [
+     "empresas",
+     "uso pessoal",
+     "integrações automáticas"
+    ],
+    "clientes": 57,
+    "ferramentas": [
+     "calculadora",
+     "consulta a banco de dados",
+     "agenda",
+     "envio de mensagens",
+     "leitura de planilhas"
+    ]
+   }
+  }
+ ],
+ "estruturas_diferentes": true,
+ "porta": {
+  "mesma_vida": true,
+  "salvar_e_carregar": true,
+  "surdo_igual_sem_atos": true,
+  "ato_util": {
+   "incidente": 16627,
+   "util_na_verdade": true,
+   "fila_com": 2140.0,
+   "fila_sem": 2432.0,
+   "tempo_esgotado_e_limite_com": 3409.0,
+   "tempo_esgotado_e_limite_sem": 6717.0,
+   "piorou_de_lado": [
+    [
+     "custo do serviço",
+     "custo de capacidade no minuto em reais"
+    ]
+   ],
+   "ok": true
+  }
+ },
+ "tudo_certo": true
+}

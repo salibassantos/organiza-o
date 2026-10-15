@@ -1,0 +1,24 @@
+{
+ "dias": 60,
+ "como": "sha256 de json.dumps(passo(), sort_keys=True, ensure_ascii=False) de cada minuto, em ordem",
+ "sementes": {
+  "1": {
+   "normal": "ed0a7d23504900bf170fb8fd9aa007fa473107a1dc24f9ce27d2b230f2276875",
+   "embaralhado": "e7b2f3ee97e4df4185d408566e1e1b3ab487c760e0dece92cfbcc547a049db3a",
+   "sem_troca": "473ae540088b45132bb570dd206ea5e2ac82f2217270278d21faa45003013519",
+   "sem_degradacao": "61d295ed5b5f2c8ec6a63d6afe49ec1583d11435cab03011e467b0f96f1166ba"
+  },
+  "2": {
+   "normal": "a07fa2ef041031644799036544a61e666c2f97ed3e864db1a0687f3402145628",
+   "embaralhado": "edb3048c7560795c03f35eeba97fcaa7d3327fcac7c11034fb9e3f0ceb078a54",
+   "sem_troca": "e6f7cb8cd4f0aa9123ae2e585b8618a0c9ac85a9caec34b5e5e6dc90e108fed6",
+   "sem_degradacao": "ef36a21158433af4fad96a17b3a5076e83b5d5e92c5960a81030e8c2528fa2ff"
+  },
+  "3": {
+   "normal": "b0369d09cfcbefa0126bd1c592dcd3091d90ebea28f16581df687ded1edbd309",
+   "embaralhado": "6714f6e5427b32fab62f9475b47a91f008401ada30f94c3d58d9942acc591f20",
+   "sem_troca": "8b80e736e49d0561263da8b7e5d66536170c711c9d8fe3e37e3fb049af192d4d",
+   "sem_degradacao": "d7538921efcb4ac536db6d9fc5f50bd8cc5576d0adfb7b91c4bde99305865201"
+  }
+ }
+}
