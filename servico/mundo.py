@@ -15,6 +15,7 @@ instantes. Ver VERDADE.md."""
 import math
 import os
 import pickle
+import re
 import unicodedata
 import zlib
 from dataclasses import dataclass, field
@@ -102,6 +103,18 @@ def _phi(z):
     return 0.5 * (1.0 + np.sign(z) * y)
 
 
+def _p_atraso_chamado():
+    """A chance de cada atraso do chamado, de 1 a 1001 minutos: o arredondamento de uma lognormal de mediana 30, cortado em 1000."""
+    cdf = lambda x: 0.5 * (1.0 + math.erf((math.log(x) - math.log(30)) / (0.8 * math.sqrt(2))))
+    bordas = [0.0] + [cdf(k + 0.5) for k in range(1000)] + [1.0]
+    p = np.diff(np.array(bordas))
+    return p / p.sum()
+
+
+GRANDE = 1_000_000                   # acima disto os atrasos saem por faixa (a mesma lei), e não um por chamado ou por avaliação
+P_ATRASO_CHAMADO = _p_atraso_chamado()
+
+
 def _perfil(tipo, fuso):
     """O perfil de uso de um segmento por dia da semana e hora (7 x 24, média 1)."""
     h = np.arange(24.0)
@@ -144,6 +157,44 @@ def _aplicar(atual, mult):
 
 def _simples(texto):
     return "".join(c for c in unicodedata.normalize("NFD", str(texto).lower()) if unicodedata.category(c) != "Mn")
+
+
+# ---- a leitura dos pedidos: só o trecho antes do primeiro ";", decidida pelo verbo; nome de parte ou de campo nunca é verbo
+TETO_CAPACIDADE = 8.0                # a capacidade não passa de 8 vezes a da criação
+PROVISIONAMENTO_MIN = 60             # cada aumento cobra de uma vez 60 minutos da capacidade acrescentada
+ESTADO_NORMAL = re.compile(r"\bvolt[a-z]*\s+(?:(?:a|ao|aos|as|para|pro|pra)\s+)?(?:ser\s+)?(?:o\s+|a\s+)?"
+                           r"(?:normal|normalidade|nivel normal|patamar normal|de antes|como antes|como era|que era)\b")
+
+
+def _verbo(palavra):
+    """O verbo de ação de uma palavra do pedido: "reverter", "aumentar" ou None."""
+    if palavra.startswith(("revert", "desfaz", "desfac", "desfiz", "volt", "retorn")):
+        return "reverter"
+    if palavra.startswith(("aument", "ampli", "expand", "acrescent", "escalon")) or palavra in (
+            "subam", "suba", "subir", "subirem", "dobrem", "dobre", "dobrar", "escalem", "escale", "escalar"):
+        return "aumentar"
+    return None
+
+
+def _objeto(palavra):
+    if palavra.startswith(("versao", "versoes", "implantac")) or palavra == "modelo":
+        return "versão"
+    if palavra.startswith(("instruc", "prompt")):
+        return "instruções"
+    if palavra.startswith(("capacidade", "maquina", "servidor")) or palavra == "escala":
+        return "capacidade"
+    return None
+
+
+def ler_pedido(texto, nomes):
+    """O que o pedido pede: os verbos de ação e as coisas sobre que eles agem. `nomes` são os nomes das partes e dos campos do mundo
+    (já simplificados), com o objeto que cada um nomeia ou "" (o nome some da leitura)."""
+    x = " " + _simples(str(texto).split(";", 1)[0]) + " "
+    for nome, objeto in nomes:
+        x = re.sub(r"(?<![a-z])" + re.escape(nome) + r"(?![a-z])", f" {objeto} ", x)
+    x = ESTADO_NORMAL.sub(" ", x)
+    palavras = re.findall(r"[a-z]+", x)
+    return {v for v in map(_verbo, palavras) if v}, {o for o in map(_objeto, palavras) if o}
 
 
 class Mundo:
@@ -319,6 +370,7 @@ class Mundo:
         self.instrucao_no_ar = 0
         self.pilha_instrucoes = []
         self.capacidade = self.capacidade_inicial
+        self._provisionamento = 0.0                                  # a taxa dos aumentos de capacidade, cobrada no minuto do aumento
         self.incidentes = []
         self.degradacao = None
         self.queda_ate = -1
@@ -387,7 +439,9 @@ class Mundo:
     @staticmethod
     def carregar(pasta):
         with open(os.path.join(pasta, "estado.pickle"), "rb") as f:
-            return pickle.load(f)
+            m = pickle.load(f)
+        m.__dict__.setdefault("_provisionamento", 0.0)               # um estado salvo antes da taxa de provisionamento
+        return m
 
     # ======================================================================================================== o calendário
     def _calendario(self, t):
@@ -525,7 +579,9 @@ class Mundo:
         # ---- o atendimento e as avaliações
         sa = self.s["atendimento"]
         n_ch = int(sa.poisson(float((falhas.sum(axis=1) * self.p_chamado).sum())))
-        if n_ch:
+        if n_ch > GRANDE:                                             # muitos de uma vez: a mesma lei por faixa, sem um sorteio por chamado
+            self.chamados_futuros[(t + 1 + np.arange(1001)) % 1024] += sa.multinomial(n_ch, P_ATRASO_CHAMADO)
+        elif n_ch:
             atrasos = np.minimum(1000, np.round(sa.lognormal(math.log(30), 0.8, size=n_ch))).astype(int) + 1
             np.add.at(self.chamados_futuros, (t + atrasos) % 1024, 1)
         p = t % 1024
@@ -537,7 +593,9 @@ class Mundo:
         self.chamados_abertos -= resolvidos
         fav = float((self.avalia * self.n_clientes).sum() / self.n_clientes.sum())
         neg = int(sa.poisson(fav * (0.15 * float((recusas + repet).sum()) + 0.05 * float(esgot.sum()))))
-        if neg:
+        if neg > GRANDE:
+            self.negativas_futuras[(t + np.arange(1, 11)) % 16] += sa.multinomial(neg, np.full(10, 0.1))
+        elif neg:
             np.add.at(self.negativas_futuras, (t + sa.integers(1, 11, size=neg)) % 16, 1)
         negativas = int(self.negativas_futuras[t % 16])
         self.negativas_futuras[t % 16] = 0
@@ -547,7 +605,8 @@ class Mundo:
         memoria = self.memoria_base + 0.8 * min(u, 1.5) + 0.000002 * resto
         te, ts = float(tok_e.sum()), float(tok_s.sum())
         custo_proc = te / 1000 * self.preco_entrada + ts / 1000 * self.preco_saida
-        custo_cap = self.capacidade / 1000 * self.preco_capacidade
+        custo_cap = self.capacidade / 1000 * self.preco_capacidade + self._provisionamento
+        self._provisionamento = 0.0
         # ---- para os atos e para a verdade
         self.ultima_hora[t % 60] = (A, float(falha_c.sum() + rejeitadas.sum()), float(self.fila.sum()), u, float(recusas.sum()),
                                     float(repet.sum()), float(lat.mean()), float(negativas))
@@ -618,7 +677,9 @@ class Mundo:
                 g = ev["segmento"]
                 mix = self.mix[g] * self.ativo
                 mix = mix / mix.sum()
-                ev["extra"] = ev["forca"] * self.capacidade / float((mix * self.trabalho).sum()) * mix   # chamadas a mais por minuto
+                # chamadas a mais por minuto, medidas pela capacidade da criação (a força do pico é da procura dos clientes, que não
+                # cresce com a capacidade que o serviço comprou depois)
+                ev["extra"] = ev["forca"] * self.capacidade_inicial / float((mix * self.trabalho).sum()) * mix
             self.incidentes.append(ev)
             reg = {"inicio": t, "fim": t + ev["duracao"], "duracao_min": ev["duracao"], "tipo": ev["tipo"],
                    "segmento": self.segmentos[ev["segmento"]] if ev["segmento"] is not None else None,
@@ -703,17 +764,7 @@ class Mundo:
     def _receber_atos(self, t):
         sa = self.s["atos"]
         for numero, equipe, tipo, texto in self.chegando:
-            x = _simples(texto)
-            acao = "pergunta"
-            if tipo == "pedido":
-                if equipe == "operação do serviço" and ("revert" in x or "volt" in x) and ("versao" in x or "modelo" in x):
-                    acao = "reverter versão"
-                elif equipe in ("operação do serviço", "produto") and ("instruc" in x or "prompt" in x):
-                    acao = "voltar instruções"
-                elif equipe == "operação do serviço" and ("capacidade" in x or "escala" in x or "maquina" in x or "servidor" in x):
-                    acao = "aumentar capacidade"
-                else:
-                    acao = "sem ação"
+            acao = "pergunta" if tipo != "pedido" else self.ler(equipe, texto)
             demora = int(sa.integers(5, 26)) if equipe == "operação do serviço" else int(sa.integers(20, 121))
             reg = {"numero": numero, "equipe": equipe, "tipo": tipo, "texto": texto, "recebido": t, "acao": acao,
                    "executado_em": t + demora, "efetivo_em": None, "util": None, "por_que": None, "encurtou": [], "piorou_de_lado": [],
@@ -721,6 +772,24 @@ class Mundo:
             self.r["atos"].append(reg)
             self.pendentes.append(reg)
         self.chegando = []
+
+    def _nomes_lidos(self):
+        """Os nomes das partes e dos campos, do mais longo ao mais curto, com o que cada um nomeia na leitura de um pedido: a capacidade,
+        o modelo e a implantação nomeiam a coisa (são objeto, nunca verbo); os outros somem da leitura."""
+        objeto = {"capacidade em mil tokens por minuto": "capacidade", "serviço do modelo": "modelo", "implantação": "implantacao"}
+        nomes = {p.nome for p in self._processos} | {c for p in self._processos for c in p.campos}
+        return sorted(((_simples(n), objeto.get(n, "")) for n in nomes), key=lambda x: -len(x[0]))
+
+    def ler(self, equipe, texto):
+        """A ação que um pedido a uma equipe pede: "reverter versão", "voltar instruções", "aumentar capacidade" ou "sem ação"."""
+        verbos, objetos = ler_pedido(texto, self._nomes_lidos())
+        if "reverter" in verbos and "instruções" in objetos and equipe in ("operação do serviço", "produto"):
+            return "voltar instruções"
+        if "reverter" in verbos and "versão" in objetos and equipe == "operação do serviço":
+            return "reverter versão"
+        if "aumentar" in verbos and "capacidade" in objetos and equipe == "operação do serviço":
+            return "aumentar capacidade"
+        return "sem ação"
 
     def _executar_atos(self, t):
         fica = []
@@ -799,21 +868,35 @@ class Mundo:
     def _ato_capacidade(self, t, reg):
         h = self._hora_passada()
         antes = self.capacidade
-        self.capacidade = antes * 1.5
+        teto = self.capacidade_inicial * TETO_CAPACIDADE
+        if antes >= teto * (1 - 1e-9):
+            reg.update(util=False, por_que=f"a capacidade já estava no teto ({TETO_CAPACIDADE:.0f} vezes a da criação)",
+                       resposta=f"Pedido recusado. A capacidade já está no teto de {teto / 1000:.1f} mil tokens por minuto "
+                                f"({TETO_CAPACIDADE:.0f} vezes a da criação); acima dele o serviço não cresce.")
+            return
+        self.capacidade = min(antes * 1.5, teto)
+        taxa = (self.capacidade - antes) / 1000 * self.preco_capacidade * PROVISIONAMENTO_MIN
+        self._provisionamento += taxa
         util = h["uso_maximo"] > 0.9 or h["fila_media"] > 0 or h["falhas"] > 0.02 * max(1, h["chamadas"])
         self.r["mudancas_de_capacidade"].append({"t": t, "de_mil_tokens_por_minuto": round(antes / 1000, 1),
-                                                 "para_mil_tokens_por_minuto": round(self.capacidade / 1000, 1), "pedida_pelo_ato": reg["numero"]})
+                                                 "para_mil_tokens_por_minuto": round(self.capacidade / 1000, 1),
+                                                 "no_teto": self.capacidade >= teto * (1 - 1e-9),
+                                                 "taxa_de_provisionamento_em_reais": round(taxa, 2), "pedida_pelo_ato": reg["numero"]})
         self.eventos.append((t, "a capacidade do serviço foi aumentada"))
+        no_teto = " e chegou ao teto" if self.capacidade >= teto * (1 - 1e-9) else ""
         reg.update(efetivo_em=t, util=bool(util),
                    encurtou=[["porta de entrada", "fila de espera"], ["porta de entrada", "espera na fila em ms"],
                              ["erros do serviço", "tempo esgotado no minuto"], ["erros do serviço", "limite excedido no minuto"]]
                    + [[f"pedidos de {c}", "latência média em ms"] for c in self.classes] if util else [],
                    piorou_de_lado=[["custo do serviço", "custo de capacidade no minuto em reais"], ["serviço do modelo", "capacidade em mil tokens por minuto"]],
-                   custo=f"o custo de capacidade sobe de {antes / 1000 * self.preco_capacidade:.2f} para "
+                   custo=f"a taxa de provisionamento de {taxa:.2f} reais, cobrada de uma vez no custo de capacidade do minuto, e o custo "
+                         f"de capacidade, que sobe de {antes / 1000 * self.preco_capacidade:.2f} para "
                          f"{self.capacidade / 1000 * self.preco_capacidade:.2f} reais por minuto",
                    por_que="na última hora o serviço passou de 90% de uso, teve fila ou mais de 2% de falhas" if util
                    else "na última hora o serviço não estava apertado",
-                   resposta=f"Pedido tratado. A capacidade passou de {antes / 1000:.1f} para {self.capacidade / 1000:.1f} mil tokens por minuto.")
+                   resposta=f"Pedido tratado. A capacidade passou de {antes / 1000:.1f} para {self.capacidade / 1000:.1f} mil tokens por "
+                            f"minuto{no_teto} (o teto é {teto / 1000:.1f}); a taxa de provisionamento foi de {taxa:.2f} reais e o custo de "
+                            f"capacidade passa a {self.capacidade / 1000 * self.preco_capacidade:.2f} reais por minuto.")
 
     # ======================================================================================================== a verdade
     def verdade(self) -> dict:
@@ -832,6 +915,9 @@ class Mundo:
             "segmentos": segs,
             "ferramentas": {f: {"chance_de_falha": round(float(self.p_falha_ferr[k]), 4)} for k, f in enumerate(self.ferramentas)},
             "capacidade_inicial_em_mil_tokens_por_minuto": round(self.capacidade_inicial / 1000, 1),
+            "teto_de_capacidade_em_mil_tokens_por_minuto": round(self.capacidade_inicial * TETO_CAPACIDADE / 1000, 1),
+            "taxa_de_provisionamento": f"cada aumento cobra de uma vez {PROVISIONAMENTO_MIN} minutos do custo da capacidade acrescentada, no "
+                                       f"custo de capacidade do minuto do aumento",
             "precos_em_reais": {"por_mil_tokens_de_entrada": round(self.preco_entrada, 4), "por_mil_tokens_de_saida": round(self.preco_saida, 4),
                                 "por_mil_tokens_de_capacidade_por_minuto": round(self.preco_capacidade, 4)},
         }

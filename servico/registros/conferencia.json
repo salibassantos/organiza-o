@@ -4,7 +4,7 @@
   {
    "semente": 1,
    "processos": 29,
-   "segundos_por_dia": 0.623,
+   "segundos_por_dia": 0.679,
    "trocas_e_instrucoes": {
     "conferidas": 10,
     "certas": 10,
@@ -246,7 +246,7 @@
   {
    "semente": 2,
    "processos": 24,
-   "segundos_por_dia": 0.604,
+   "segundos_por_dia": 0.689,
    "trocas_e_instrucoes": {
     "conferidas": 2,
     "certas": 2,
@@ -423,7 +423,7 @@
   {
    "semente": 3,
    "processos": 26,
-   "segundos_por_dia": 0.604,
+   "segundos_por_dia": 0.656,
    "trocas_e_instrucoes": {
     "conferidas": 7,
     "certas": 7,
@@ -647,6 +647,81 @@
     ]
    ],
    "ok": true
+  },
+  "leitura": {
+   "conferidas": 20,
+   "erradas": [],
+   "ok": true
+  },
+  "teto": {
+   "1": {
+    "aumentos": 6,
+    "recusas": 4,
+    "capacidade_final_em_vezes_a_inicial": 8.0,
+    "taxa_cobrada_no_minuto": true,
+    "recusa_diz_por_que": true,
+    "ok": true
+   },
+   "2": {
+    "aumentos": 6,
+    "recusas": 4,
+    "capacidade_final_em_vezes_a_inicial": 8.0,
+    "taxa_cobrada_no_minuto": true,
+    "recusa_diz_por_que": true,
+    "ok": true
+   },
+   "3": {
+    "aumentos": 6,
+    "recusas": 4,
+    "capacidade_final_em_vezes_a_inicial": 8.0,
+    "taxa_cobrada_no_minuto": true,
+    "recusa_diz_por_que": true,
+    "ok": true
+   }
+  },
+  "tempestade": {
+   "1": {
+    "pico": 16627,
+    "sem atos": {
+     "maior_chegada_no_minuto": 105.0,
+     "chamadas_a_mais_por_minuto": 36.1,
+     "chamados_abertos_no_fim": 0
+    },
+    "capacidade absurda": {
+     "maior_chegada_no_minuto": 67.0,
+     "chamadas_a_mais_por_minuto": 36.1,
+     "chamados_abertos_no_fim": 1
+    },
+    "ok": true
+   },
+   "2": {
+    "pico": 14997,
+    "sem atos": {
+     "maior_chegada_no_minuto": 171.0,
+     "chamadas_a_mais_por_minuto": 35.5,
+     "chamados_abertos_no_fim": 5
+    },
+    "capacidade absurda": {
+     "maior_chegada_no_minuto": 68.0,
+     "chamadas_a_mais_por_minuto": 35.5,
+     "chamados_abertos_no_fim": 0
+    },
+    "ok": true
+   },
+   "3": {
+    "pico": 20978,
+    "sem atos": {
+     "maior_chegada_no_minuto": 392.0,
+     "chamadas_a_mais_por_minuto": 13.5,
+     "chamados_abertos_no_fim": 38
+    },
+    "capacidade absurda": {
+     "maior_chegada_no_minuto": 99.0,
+     "chamadas_a_mais_por_minuto": 13.5,
+     "chamados_abertos_no_fim": 3
+    },
+    "ok": true
+   }
   }
  },
  "tudo_certo": true

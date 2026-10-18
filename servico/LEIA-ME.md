@@ -13,7 +13,7 @@ m = Mundo(1)                                  # ou Mundo(1, "embaralhado" | "sem
 for p in m.processos():                       # de 20 a 60 processos: nome, campos, equipe, resolução por campo
     ...
 valores = m.passo()                           # o minuto 1: {processo: [valores na ordem dos campos]}
-n = m.receber("operação do serviço", "pedido", "aumentem a capacidade")
+n = m.receber("operação do serviço", "pedido", "aumentem a capacidade")   # m.ler(equipe, texto) diz como a porta lê um pedido (VERDADE.md)
 for t, numero, equipe, texto in m.respostas():
     ...
 m.salvar("pausa"); m = Mundo.carregar("pausa")
@@ -39,6 +39,8 @@ python -m servico.conferir 60 1,2,3
 ```
 
 Confere três sementes de 60 dias contra a verdade (trocas, incidentes, degradações, classe nova, ciclos), que cada nulo tira só a lei
-dele, que as estruturas das sementes são diferentes, a mesma vida repetida e retomada, o nulo surdo e um ato útil. Grava
+dele, que as estruturas das sementes são diferentes, a mesma vida repetida e retomada, o nulo surdo, um ato útil, a leitura dos
+pedidos (só antes do ";", pelo verbo), o teto da capacidade (8 vezes a da criação, com taxa de provisionamento e recusa acima dele) e
+que uma capacidade absurda não faz tempestade de chamadas. Grava
 `registros/conferencia.json` e `registros/hashes.json` (o hash dos minutos de cada semente e de cada nulo). Um dia de mundo leva perto
 de 0,6 segundo de máquina. Python 3.11 e numpy; nada de rede.

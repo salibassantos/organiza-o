@@ -11,7 +11,11 @@
 2. cada nulo tira só a lei dele: os instantes das outras leis ficam iguais aos do mundo normal;
 3. duas sementes dão estruturas diferentes;
 4. a mesma semente repete a mesma vida, também depois de salvar e carregar; no nulo surdo os atos não mudam nada;
-5. um ato útil (mais capacidade durante um incidente) é registrado como útil e encurta a fila.
+5. um ato útil (mais capacidade durante um incidente) é registrado como útil e encurta a fila;
+6. a leitura dos pedidos: só o trecho antes do ";", pelo verbo, sem que nome de parte ou de campo conte como verbo;
+7. o teto da capacidade: os aumentos param em 8 vezes a capacidade da criação, cada um cobra a taxa de provisionamento, e o pedido
+   acima do teto é recusado dizendo por quê;
+8. a capacidade absurda não faz tempestade: com 5,5 x 10^13 tokens por minuto, o pico de chamadas é o mesmo da vida sem atos.
 Grava registros/conferencia.json e registros/hashes.json (o hash dos minutos de cada semente de exemplo).
 
     python -m servico.conferir [dias] [sementes]        (padrão: 60 dias, sementes 1,2,3)
@@ -28,9 +32,9 @@ import numpy as np
 
 if __package__ in (None, ""):
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-    from servico.mundo import Mundo, MINUTOS_DIA
+    from servico.mundo import Mundo, MINUTOS_DIA, TETO_CAPACIDADE, PROVISIONAMENTO_MIN
 else:
-    from .mundo import Mundo, MINUTOS_DIA
+    from .mundo import Mundo, MINUTOS_DIA, TETO_CAPACIDADE, PROVISIONAMENTO_MIN
 
 D = MINUTOS_DIA
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -239,6 +243,82 @@ def conferir_porta(semente):
     return out
 
 
+OP, PR, AT = "operação do serviço", "produto", "atendimento"
+RESPOSTA_OP = ("Na última hora: 812 chamadas, 3 falhas (tempo esgotado, limite ou erro), fila média de 0.0 chamadas, latência média de "
+               "2210 ms; capacidade de 13.0 mil tokens por minuto.")
+LEITURAS = [
+    (OP, "que serviço do modelo: chamadas atendidas volte ao normal; " + RESPOSTA_OP, "sem ação"),
+    (OP, "que serviço do modelo: capacidade em mil tokens por minuto volte ao normal; " + RESPOSTA_OP, "sem ação"),
+    (OP, "que custo do serviço: custo de capacidade no minuto em reais volte ao normal; Pedido tratado. A capacidade passou de 13.0 "
+         "para 19.4 mil tokens por minuto.", "sem ação"),
+    (OP, "que porta de entrada: fila de espera volte ao normal; " + RESPOSTA_OP, "sem ação"),
+    (OP, "que implantação: implantações no minuto volte ao normal; Pedido tratado. Voltamos para a versão 2.", "sem ação"),
+    (PR, "que avaliações dos clientes: avaliações negativas no minuto volte ao normal; Na última hora: 4 recusas.", "sem ação"),
+    (OP, "que serviço do modelo: memória em uso em GB volte a ser como antes", "sem ação"),
+    (OP, "que a versão anterior volte ao ar", "reverter versão"),
+    (OP, "a fila está alta; aumentem a capacidade", "sem ação"),
+    (OP, "aumentem a capacidade", "aumentar capacidade"),
+    (OP, "aumentem a capacidade do serviço", "aumentar capacidade"),
+    (OP, "que serviço do modelo: capacidade em mil tokens por minuto aumente", "aumentar capacidade"),
+    (OP, "ampliem os servidores; a fila está alta", "aumentar capacidade"),
+    (OP, "revertam a versão do modelo", "reverter versão"),
+    (OP, "voltem para a versão anterior", "reverter versão"),
+    (OP, "desfaçam a última implantação", "reverter versão"),
+    (PR, "voltem às instruções anteriores", "voltar instruções"),
+    (OP, "revertam o prompt", "voltar instruções"),
+    (PR, "revertam a versão", "sem ação"),
+    (AT, "aumentem a capacidade", "sem ação"),
+]
+
+
+def conferir_leitura(semente):
+    m = Mundo(semente)
+    lidas = [(e, x, m.ler(e, x), certa) for e, x, certa in LEITURAS]
+    erradas = [{"equipe": e, "texto": x, "lida": lida, "certa": certa} for e, x, lida, certa in lidas if lida != certa]
+    return {"conferidas": len(lidas), "erradas": erradas, "ok": not erradas}
+
+
+def conferir_teto(semente):
+    """Dez pedidos de aumento, um a cada meia hora: seis aumentos (o sexto até o teto) e quatro recusas."""
+    m = Mundo(semente)
+    atos = {60 + 30 * k: [(OP, "pedido", "aumentem a capacidade")] for k in range(10)}
+    r = viver(semente, None, 1, atos)
+    v, ini = r["v"], m.capacidade_inicial
+    mud = v["mudancas_de_capacidade"]
+    recusas = [a for a in v["atos"] if a["efetivo_em"] is None]
+    col = r["col"][("custo do serviço", "custo de capacidade no minuto em reais")]
+    cobrou = all(abs(r["X"][x["t"] - 1, col] - r["X"][x["t"] - 2, col] * x["para_mil_tokens_por_minuto"] / x["de_mil_tokens_por_minuto"]
+                     - x["taxa_de_provisionamento_em_reais"]) < 0.02 + 0.01 * x["para_mil_tokens_por_minuto"] / x["de_mil_tokens_por_minuto"]
+                 and x["taxa_de_provisionamento_em_reais"] > 0 for x in mud)
+    final = r["m"].capacidade
+    out = {"aumentos": len(mud), "recusas": len(recusas), "capacidade_final_em_vezes_a_inicial": round(final / ini, 3),
+           "taxa_cobrada_no_minuto": cobrou, "recusa_diz_por_que": all("teto" in a["resposta"] for a in recusas)}
+    out["ok"] = (len(mud) == 6 and len(recusas) == 4 and abs(final / ini - TETO_CAPACIDADE) < 1e-9 and mud[-1]["no_teto"] and cobrou
+                 and out["recusa_diz_por_que"])
+    return out
+
+
+def conferir_tempestade(semente):
+    """A capacidade posta em 5,5 x 10^13 tokens por minuto (sem passar pela porta) um minuto antes do primeiro pico de chamadas."""
+    m0 = Mundo(semente)
+    pico = min(t for t, evs in m0.agenda.items() for e in evs if e[0] == "incidente" and e[1]["tipo"] == "pico de chamadas")
+    fim = pico + next(e[1]["duracao"] for e in m0.agenda[pico] if e[0] == "incidente") + 120
+    vidas = {}
+    for nome, cap in (("sem atos", None), ("capacidade absurda", 5.5e13)):
+        m = Mundo(semente)
+        maior = 0.0
+        for _ in range(fim):
+            if cap is not None and m.t == pico - 1:
+                m.capacidade = cap
+            maior = max(maior, m.passo()["porta de entrada"][0])
+        inc = next(x for x in m.verdade()["incidentes_de_carga"] if x["inicio"] == pico)
+        vidas[nome] = {"maior_chegada_no_minuto": maior, "chamadas_a_mais_por_minuto": inc["chamadas_a_mais_por_minuto"],
+                       "chamados_abertos_no_fim": m.chamados_abertos}
+    a, b = vidas["sem atos"], vidas["capacidade absurda"]
+    return {"pico": pico, **vidas, "ok": a["chamadas_a_mais_por_minuto"] == b["chamadas_a_mais_por_minuto"]
+            and b["maior_chegada_no_minuto"] <= 2 * a["maior_chegada_no_minuto"]}
+
+
 def main(argv):
     dias = int(argv[0]) if argv else 60
     sementes = [int(x) for x in argv[1].split(",")] if len(argv) > 1 else [1, 2, 3]
@@ -255,9 +335,12 @@ def main(argv):
               f"classe nova {rel['classes_novas']['certas']}/{rel['classes_novas']['conferidas']}, nulos {rel['nulos']}", flush=True)
     relatorio["estruturas_diferentes"] = all(estruturas[i] != estruturas[j] for i in range(len(estruturas)) for j in range(i + 1, len(estruturas)))
     relatorio["porta"] = conferir_porta(sementes[0])
+    relatorio["porta"]["leitura"] = conferir_leitura(sementes[0])
+    relatorio["porta"]["teto"] = {str(s): conferir_teto(s) for s in sementes}
+    relatorio["porta"]["tempestade"] = {str(s): conferir_tempestade(s) for s in sementes}
     print("estruturas diferentes:", relatorio["estruturas_diferentes"], "porta:", relatorio["porta"], flush=True)
-    ok = relatorio["estruturas_diferentes"] and all(relatorio["porta"][k] if k != "ato_util" else relatorio["porta"][k]["ok"]
-                                                    for k in relatorio["porta"])
+    certo = lambda x: (x["ok"] if "ok" in x else all(map(certo, x.values()))) if isinstance(x, dict) else x
+    ok = relatorio["estruturas_diferentes"] and all(certo(x) for x in relatorio["porta"].values())
     for rel in relatorio["sementes"]:
         for k in ("trocas_e_instrucoes", "incidentes", "degradacoes", "classes_novas"):
             c = rel[k]
