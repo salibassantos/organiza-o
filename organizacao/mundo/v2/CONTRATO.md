@@ -48,7 +48,12 @@ a sua causa), `causas` (as leis que ligam rota a chamados, as janelas em que agi
 causa comum, sem relação) e `calendario` (os motores do calendário por campo, com o caminho e a força medida). A verdade por minuto
 ganha 27 colunas no fim. Ver `VERDADE.md`.
 
-## v2.2: a reversão própria e o nulo paciente
+## v2.2: a reversão própria, o nulo paciente e o ouvinte
+
+Versão v2.2: o código do mundo é o do commit `079d3a8` (ramo mundo-servico). Ele vem em três passos: `b6f7433` (a reversão própria e o
+nulo paciente: só campos novos na verdade, o resto byte a byte igual, com e sem atos), `6128b33` (o ouvinte: sem atos, byte a byte
+igual; com atos, a rota de cada texto é a mesma, e muda o que a equipe faz quando o pedido é de olhar e dizer ou não nomeia nada que
+ela reconheça) e `079d3a8` (a lei medida e as vidas de 90 dias, sem mudar o mundo).
 
 Os minutos, as respostas e a verdade de antes ficam iguais, byte a byte; só entram campos novos.
 
