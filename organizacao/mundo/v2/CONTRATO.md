@@ -55,7 +55,9 @@ Os minutos, as respostas e a verdade de antes ficam iguais, byte a byte; só ent
 - Cada episódio de defeito ganha `reverteria_sozinha_em`, `sairia_sozinha_por`, `persistente`, `antecipou_min`, `ramo_sem_ato`,
   `atos_recebidos_no_ar` e `atos_tratados_no_ar`, e o `efeito` de cada pedido tratado ganha `antecipou_min`. O instante em que a
   empresa tiraria o defeito sem nenhum ato sai de um ramo sem ato que o mundo anda por conta própria, fora do caminho vivido (ver
-  `VERDADE.md`). A lei da reversão própria, por classe de defeito, está em `VERDADE.md`.
+  `VERDADE.md`). A lei da reversão própria, por classe de defeito, escrita e medida, está em `VERDADE.md`.
+- `noventa.py` e `RESULTADO_90_dias.md`: por rota e por semente (1 a 8), os episódios de defeito, as reversões e as correções
+  em 90 dias do mundo sozinho, e o custo por dia simulado (perto de 6 s de processador, de 4 no começo a 7,5 no fim).
 - `Mundo(semente, nulo="paciente")`: as equipes sem atenção, cansaço nem confiança; a demora de um ato só pela base e pela ocupação;
   a confiança fixa em 1; os pedidos não lançam hora extra. Tudo o mais igual ao normal: sem atos, os minutos são os da vida normal da
   mesma semente.

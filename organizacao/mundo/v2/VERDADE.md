@@ -108,6 +108,46 @@ instante e a implantação dessa saída são `reverteria_sozinha_em` e `sairia_s
 minutos, as respostas e o resto da verdade são os mesmos de antes da v2.2. Um defeito em que nenhum ato chegou nem estava aberto
 não precisa de ramo: o caminho vivido já é o sem ato, e `reverteria_sozinha_em` é `saiu_do_ar`.
 
+**(v2.2) A lei da reversão própria: o que a empresa tira do ar sozinha, por quê e em quanto tempo.** Os defeitos entram no ar com
+as liberações regulares (terças e quintas a partir das 15h, e a sexta de fim de sprint às 11h), sempre no expediente. Daí em diante
+três caminhos os tiram sem nenhum ato:
+
+- *o alerta e a reversão*: a cada 5 minutos a operação olha cada rota; com 20 erros ou mais e 10% ou mais das requisições com erro
+  em 10 minutos, abre um alerta. Quem da operação estiver presente e livre (sem reunião nem urgência, só em trabalho interno) o pega,
+  com chance de 7% a cada minuto, e investiga de 12 a 35 minutos. Se a última implantação foi uma liberação regular há menos de 36
+  horas, os erros não existiam nas 10 horas antes dela e 25% ou mais das requisições da última meia hora falham, a operação reverte
+  para a versão anterior (de 8 a 18 minutos). Fora do expediente ninguém pega alerta: só o produto parado chama o plantão. A
+  reversão tira junto todos os defeitos daquela liberação (a reversão "de carona");
+- *o bug e a correção no ar*: o alerta que não reverte vira bug crítico (erros, memória) ou alto (lentidão, fila); o chamado de
+  cliente que o atendimento não resolve vira bug (alto com 3 chamados ligados, crítico com 6). O bug crítico sem dono é pego na hora
+  pelo plantão do squad; o bug crítico ou alto aprovado pela qualidade vai para a correção no ar, feita no expediente ou, se é
+  crítico, pelo plantonista da operação a qualquer hora;
+- *a liberação regular*: a correção de um bug de prioridade média, ou a troca do código por uma história, entra na próxima liberação
+  regular. Esse é o defeito *persistente*.
+
+Medido em oito vidas de 90 dias sem atos (sementes 1 a 8, `RESULTADO_90_dias.md`): 229 episódios; 75 saem por reversão própria, 35
+por reversão de carona, 110 por correção no ar e 9 por liberação regular (4%: são os persistentes). Por classe:
+
+- **exceção** (o código quebra numa entrada: login com acento, conta sem telefone, última página do catálogo, termo acentuado,
+  quantidade de dois algarismos, CEP com zero; 95 episódios). A rota dá erro em massa, o alerta vem em minutos e a operação reverte
+  sozinha: 71 por reversão própria, em 0,8 h de mediana e 1,3 h em 90%. Não revertem quando a taxa de erro da rota fica abaixo de 25%
+  (a entrada que quebra é rara) ou a liberação já tem mais de 36 horas: aí o bug crítico vira correção no ar (22, mediana de 17 h, 90%
+  em 3 dias). Uma persistiu até a liberação regular. Um pedido pode antecipar pouco aqui: a operação já reverte em menos de uma hora
+  e meia.
+- **lento** (o relatório lê todos os pedidos; a exportação faz uma consulta por pedido; 21 episódios). Não dá erro até a tabela
+  crescer: o alerta de lentidão (latência acima de 2,5 vezes a habitual e de 400 ms em 15 minutos) vira bug alto, sem reversão. Sai
+  por correção no ar (9, mediana de 2,9 dias, 90% em 21 dias), de carona numa reversão (7), por reversão própria quando o relatório
+  estoura em erro (4), ou na liberação regular (1). É a classe que fica mais tempo no ar sozinha.
+- **fila** (a nota fiscal falha fora do Sul e do Sudeste; o e-mail falha sem nome fantasia; 78 episódios). Falha na fila de trabalhos,
+  nenhuma rota dá erro: nunca há reversão própria. O alerta de fila (mais de 150 trabalhos pendentes) vira bug alto e correção no ar
+  (57, mediana de 23 h, 90% em 3 dias); 20 saem de carona e 1 na liberação regular.
+- **gravação dupla** (o clique duplo cobra duas vezes; 20 episódios, todos na rota pagamento). Silenciosa: nenhum erro, nenhum
+  alerta. Só os chamados de cobrança em dobro, escalados pelo atendimento, viram bug, que sobe para alto e crítico com os chamados
+  ligados: 16 saem por correção no ar (mediana de 21 h, 90% em 3 dias) e 4 de carona.
+- **memória** (as sessões nunca saem do cache; 15 episódios). A memória cresce em dias até o processo cair; com duas quedas em 24
+  horas, alerta de memória e bug crítico. Sai por correção no ar (6, mediana de 4,4 dias, 90% em 9 dias), pela liberação regular (6,
+  mediana de 6 dias, 90% em 12 dias: a classe mais persistente) ou de carona (3).
+
 A causa de um erro ou chamado é o defeito quando a exceção nasce na função defeituosa (o chamado guarda o instante e a função do
 erro que o motivou).
 
