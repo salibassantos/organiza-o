@@ -21,7 +21,8 @@ O v2 é lido do mesmo jeito que o v1: quem lê o v1 lê o v2 sem mudar nada alé
 - `mundo.receber(equipe, tipo, texto) -> int`: um ato ("pergunta", "pedido" ou "convocacao") para uma equipe; devolve o número do
   ato. O ato vira coisa dentro do mundo no passo seguinte.
 - `mundo.respostas() -> list[(t, numero, equipe, texto)]`: as respostas que chegaram desde a última chamada. A pergunta volta com
-  uma resposta; o pedido volta com um aviso de tratado (o texto começa com "Pedido tratado."); a convocação volta com a reunião
+  uma resposta; o pedido volta com um aviso de tratado (o texto começa com "Pedido tratado."; (v2.2) ou com "Pedido não entendido:"
+  quando a equipe não reconhece nada nele); a convocação volta com a reunião
   marcada. O que não for tratado até o fim do expediente do dia útil seguinte fica sem resposta.
 - `mundo.salvar(pasta)` e `Mundo.carregar(pasta)`: pausa e retomada; continuar depois de carregar dá exatamente a mesma vida que
   continuar sem parar.
@@ -58,6 +59,14 @@ Os minutos, as respostas e a verdade de antes ficam iguais, byte a byte; só ent
 - `Mundo(semente, nulo="paciente")`: as equipes sem atenção, cansaço nem confiança; a demora de um ato só pela base e pela ocupação;
   a confiança fixa em 1; os pedidos não lançam hora extra. Tudo o mais igual ao normal: sem atos, os minutos são os da vida normal da
   mesma semente.
+- O ouvinte (`ouvinte.py`): a porta lê o texto inteiro. A rota continua sendo achada como antes (os textos que já caíam numa rota
+  caem na mesma); além dela, a equipe entende o processo e o campo pelo nome dos painéis (qualquer processo), o tempo ("desde o dia
+  12, 10h", "há duas horas") e o tipo do pedido ("olhar e dizer", "corrigir ou reverter", "pôr à frente da fila"). A verdade de cada
+  ato guarda `entendido` e `pediu_esclarecimento`. Muda o que a equipe faz em dois casos: o pedido de olhar e dizer é respondido
+  com a leitura do painel, sem ação (`util` nulo), e o pedido em que a equipe não reconhece nada volta com uma pergunta, começando
+  por "Pedido não entendido:" (`util` nulo). Toda pergunta, e todo pedido de olhar e dizer, que nomeia um processo leva junto o que
+  o painel dele mostrou desde o instante entendido (ou na última hora): média, máximo e o valor de agora. Sem atos, nada disso
+  muda os minutos.
 
 ## O mundo com consequência
 

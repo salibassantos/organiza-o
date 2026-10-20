@@ -476,5 +476,79 @@ class TestePaciente(unittest.TestCase):
         self.assertTrue(all(a["horas_extras_atribuidas"] == [] for a in v["atos"]))
 
 
+
+class TesteOuvinte(unittest.TestCase):
+    """(v2.2) O ouvinte: processo, campo, tempo e tipo do pedido pelo texto inteiro; a rota de sempre; a pergunta de volta."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.m = novo(1, nome="ouvinte")
+        cls.o = cls.m.porta.ouvinte
+
+    def entender(self, equipe, texto, t=20 * D + 15 * 60):
+        from .atos import rota_do_texto
+        from .cadastro import ROTA_COMPONENTE
+        r = rota_do_texto(texto)
+        return self.o.entender(texto, equipe, t, r, ROTA_COMPONENTE[r] if r else None, 19 * D + 900)
+
+    def test_dez_frases_com_campo_e_tempo(self):
+        t = 20 * D + 15 * 60
+        casos = [
+            ("operação", "Olhem a rota busca, latência média, desde o dia 12, 10h, e digam como está",
+             ("rota busca", "latência média em ms", "olhar e dizer", 12 * D + 600)),
+            ("atendimento", "Quantos chamados de frete escalados há duas horas?", ("chamados de frete", "escalados", "olhar e dizer", t - 120)),
+            ("desenvolvimento", "Corrijam os erros da rota pagamento desde ontem",
+             ("rota pagamento", "respostas com erro no minuto", "corrigir ou reverter", 19 * D)),
+            ("atendimento", "Priorizem os chamados de login e conta abertos nas últimas 3 horas",
+             ("chamados de login e conta", "abertos", "pôr à frente da fila", t - 180)),
+            ("operação", "Digam como está a fila de trabalhos, trabalhos pendentes, desde as 9h",
+             ("fila de trabalhos", "trabalhos pendentes", "olhar e dizer", 20 * D + 540)),
+            ("operação", "Revertam a versão: respostas com erro na rota catálogo depois da última liberação",
+             ("rota catálogo", "respostas com erro no minuto", "corrigir ou reverter", 19 * D + 900)),
+            ("operação", "Mostrem o servidor da aplicação, memória em uso, na última hora",
+             ("servidor da aplicação", "memória em uso em MB", "olhar e dizer", t - 60)),
+            ("operação", "Como está o banco do produto, espaço livre no volume, desde o dia 20?",
+             ("banco do produto", "espaço livre no volume em MB", "olhar e dizer", 20 * D)),
+            ("desenvolvimento", "Ponham na frente os bugs de notificações abertos", ("bugs de notificações", "abertos", "pôr à frente da fila", None)),
+            ("operação", "Vejam e digam o percentil 95 da rota frete há 30 minutos",
+             ("rota frete", "latência do percentil 95 em ms", "olhar e dizer", t - 30)),
+        ]
+        for equipe, texto, (proc, campo, tipo, desde) in casos:
+            e = self.entender(equipe, texto)
+            self.assertEqual((e["processo"], e["campo"], e["tipo"], e["desde"]), (proc, campo, tipo, desde), texto)
+            self.assertTrue(e["reconhece"])
+
+    def test_sem_nada_reconhecivel(self):
+        for equipe, texto in (("operação", "vejam isso agora"), ("operação", "por favor resolvam"), ("produto", "melhorem isso"),
+                              ("qualidade", "está tudo estranho desde ontem")):
+            self.assertFalse(self.entender(equipe, texto)["reconhece"], texto)
+        for equipe, texto in (("vendas", "Retomem as propostas paradas"), ("gestão", "Precisamos alinhar as prioridades do mês"),
+                              ("operação", "Como está o volume do banco?")):
+            self.assertTrue(self.entender(equipe, texto)["reconhece"], texto)
+
+    def test_a_rota_de_sempre(self):
+        from .atos import rota_do_texto
+        with open(os.path.join(os.path.dirname(__file__), "atos_exemplo.csv"), encoding="utf-8") as f:
+            textos = [linha.split(",", 3)[3].strip().strip('"') for linha in f.readlines()[1:]]
+        for texto in textos + ["que rota frete: latência média em ms volte ao normal", "Quantos chamados de pagamento estão abertos?"]:
+            self.assertEqual(self.entender("operação", texto)["rota"], rota_do_texto(texto), texto)
+
+    def test_a_pergunta_de_volta_e_o_painel(self):
+        m = novo(1, nome="ouvinte_vida")
+        atos = {D + 600: [("operação", "pedido", "vejam isso agora")],
+                D + 610: [("operação", "pedido", "Digam como está a fila de trabalhos, trabalhos pendentes, desde as 9h")]}
+        _, resp = viver(m, D + 900, atos)
+        r = {n: x for _, n, _, x in resp}
+        self.assertTrue(r[1].startswith("Pedido não entendido"))
+        self.assertIn("No painel de fila de trabalhos, desde dia 1, 09h00: trabalhos pendentes", r[2])
+        a = {x["numero"]: x for x in m.verdade()["atos"]}
+        self.assertTrue(a[1]["pediu_esclarecimento"])
+        self.assertIsNone(a[1]["efeito"]["util"])
+        self.assertEqual(a[1]["confianca_antes"], a[1]["confianca_depois"])
+        self.assertFalse(a[2]["pediu_esclarecimento"])
+        self.assertEqual(a[2]["entendido"]["campo"], "trabalhos pendentes")
+        self.assertIsNone(a[2]["efeito"]["util"])
+
+
 if __name__ == "__main__":
     unittest.main()

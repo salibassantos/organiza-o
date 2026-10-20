@@ -198,6 +198,17 @@ de expediente em que todas estão livres; a resposta diz o dia e a hora. Quem es
 O ato custa de verdade: a pessoa que o trata deixa de fazer outra coisa, a reunião tira a equipe dos sistemas, o pedido à operação
 pode reverter uma versão, o foco do atendimento atrasa os outros chamados.
 
+**(v2.2) O que a equipe entende do texto** (`ouvinte.py`). A rota é achada como sempre. Além dela, a equipe entende o processo e o
+campo pelo nome dos painéis (de qualquer processo: "fila de trabalhos, trabalhos pendentes", "chamados de frete escalados", "rota
+busca, latência média"), o tempo de que o texto fala ("desde o dia 12, 10h", "há duas horas", "nas últimas 3 horas", "desde ontem",
+"desde as 9h", "depois da liberação") e o tipo do pedido: olhar e dizer ("digam", "mostrem", "quanto", "como está"), corrigir ou
+reverter ("corrijam", "revertam", "verifiquem", "refaçam os testes") ou pôr à frente da fila ("priorizem", "ponham na frente").
+O pedido de olhar e dizer é respondido como uma pergunta, com a leitura do painel e sem ação. Toda pergunta ou pedido de olhar e
+dizer que nomeia um processo leva junto o que o painel mostrou desde o instante entendido (ou na última hora): média, máximo e o
+valor de agora. Um pedido em que a equipe não reconhece nada (nem rota, componente, processo ou campo, nem as palavras do trabalho
+dela) volta com "Pedido não entendido: ... Qual rota, qual processo, qual campo?", sem ação. Os outros pedidos seguem a tabela
+acima.
+
 Cada tratamento devolve um efeito, que vai inteiro para a verdade do ato: o que a equipe fez, se resolveu algo, os campos que o
 tratamento encurta, os que não encurta e os que pioram de lado (ver `VERDADE.md`).
 

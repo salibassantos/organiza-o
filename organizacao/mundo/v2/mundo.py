@@ -37,6 +37,7 @@ from .verdade import Verdade, COLUNAS, COL, COMPONENTES_COM_CODIGO, FASES_DERIVA
 from .atos import Porta
 from .pessoas import Empresa, VALOR_PLANO, COMPONENTES_SQUAD, TEMAS
 from .conectores import Conectores
+from .ouvinte import Ouvinte, Painel
 from . import codigo
 
 NULOS = (None, "sem_defeito", "embaralhado", "sem_deriva", "surdo", "paciente")
@@ -150,6 +151,10 @@ class Mundo:
         self._estado_inicial()
         self._processos = [Processo(n, list(c), equipe_do_processo(n), [resolucao_do_campo(x) for x in c])
                            for n, c in self.conectores.processos]
+        # (v2.2) o ouvinte da porta e o painel que as equipes olham quando lhes pedem um campo
+        self.porta.ouvinte = Ouvinte(self._processos)
+        self.painel = Painel(self._processos)
+        self.sis["painel"] = self.painel
 
     # ======================================================================================================== a porta
     @property
@@ -217,6 +222,7 @@ class Mundo:
         self.registro.minuto_da_sonda(t, contas["sonda"][1] >= 6, prod)
         self.registro.latencia(t, cal, contas["rotas"])
         saida = self.conectores.ler(t, cal, self, contas)
+        self.painel.guardar(t, saida)
         self.registro.linha(t, self._linha_da_verdade(t, cal, contas))
         if t % MINUTOS_DIA == MINUTOS_DIA - 1:
             self.registro.fechar_dia(t, self.eventos)
@@ -317,6 +323,11 @@ class Mundo:
             self.__dict__.setdefault(k, v)
         self.registro.__dict__.setdefault("ramos_a_calcular", [])
         self.registro.__dict__.setdefault("com_ramo", set())
+        if "painel" not in self.__dict__:
+            self.painel = Painel(self._processos)
+            self.sis["painel"] = self.painel
+        if getattr(self.porta, "ouvinte", None) is None:
+            self.porta.ouvinte = Ouvinte(self._processos)
 
     # ======================================================================================================== (v2.2) os ramos sem ato
     def _guardar_ramo(self):

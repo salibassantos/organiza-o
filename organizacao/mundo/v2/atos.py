@@ -16,6 +16,7 @@ No v2 o ato tem consequência (ver equipes.py):
 O que não for tratado até o fim do dia útil seguinte fica sem resposta."""
 import unicodedata
 
+from .ouvinte import quando
 from .cadastro import EQUIPES, ROTAS, NOME_ROTA, ROTA_COMPONENTE, NOME_COMPONENTE, COMPONENTE_PROJETO, PROJETOS, MINUTOS_DIA
 from .produto import rodar_testes
 
@@ -71,6 +72,7 @@ class Porta:
         self.atos = {}
         self.fila = {e: [] for e in EQUIPES}
         self.saida = []
+        self.ouvinte = None                     # (v2.2) posto pelo Mundo
 
     # ---------- o lado de fora ----------
     def receber(self, equipe, tipo, texto):
@@ -96,6 +98,12 @@ class Porta:
         for numero, equipe, tipo, texto in chegando:
             rota = rota_do_texto(texto)
             comp = ROTA_COMPONENTE[rota] if rota else None
+            # (v2.2) o que a equipe entende do texto inteiro; a rota é a de sempre
+            ultima = sis["repo"].db.execute("SELECT t FROM implantacoes ORDER BY id DESC LIMIT 1").fetchone()
+            entendido = self.ouvinte.entender(texto, equipe, t, rota, comp, ultima[0] if ultima else None)
+            comp = entendido["componente"]
+            reconhece = entendido.pop("reconhece")
+            esclarecer = tipo == "pedido" and not reconhece
             titulo = texto[:120]
             if equipe == "atendimento":
                 item = fluxo.criar(t, "SUP", "chamado", titulo, prioridade="média", componente=comp, equipe=equipe, ator="porta",
@@ -121,7 +129,7 @@ class Porta:
             atraso = eq.atraso(tipo)
             self.atos[numero] = {"numero": numero, "equipe": equipe, "tipo": tipo, "texto": texto, "rota": rota, "componente": comp,
                                  "sistema": sistema, "item": item, "criado": t, "disponivel": t + int(round(atraso)), "prazo": prazo,
-                                 "estado": "aberto"}
+                                 "estado": "aberto", "entendido": entendido, "esclarecer": esclarecer}
             if tipo == "pedido":
                 k = 0
                 while k < len(self.fila[equipe]) and self.atos[self.fila[equipe][k]]["tipo"] == "pedido":
@@ -129,7 +137,7 @@ class Porta:
                 self.fila[equipe].insert(k, numero)               # o pedido passa à frente das perguntas
             else:
                 self.fila[equipe].append(numero)
-            sis["verdade"].ato(t, numero, equipe, tipo, texto, rota, comp, sistema, item, int(round(atraso)), eq.estado())
+            sis["verdade"].ato(t, numero, equipe, tipo, texto, rota, comp, sistema, item, int(round(atraso)), eq.estado(), entendido, esclarecer)
 
     def abertos(self):
         """(v2.2) Se há algum ato que chegou e ainda não foi respondido nem expirou."""
@@ -206,20 +214,56 @@ class Porta:
             elif r is not None:
                 sis["fluxo"].transitar(t, ato["item"], "em andamento", ato["equipe"])
             sis["fluxo"].comentar(t, ato["item"], ato["equipe"], "tratado")
+        ent = ato.get("entendido") or {}
+        da_equipe = getattr(self, "_" + {"produto": "produto", "desenvolvimento": "desenvolvimento", "qualidade": "qualidade",
+                                         "atendimento": "atendimento", "vendas": "vendas", "operação": "operacao",
+                                         "gestão": "gestao"}[ato["equipe"]])
+        olhar = ato["tipo"] == "pergunta" or (ato["tipo"] == "pedido" and ent.get("tipo") == "olhar e dizer")
         if ato["tipo"] == "convocacao":
             texto, efeito = self._convocar(ato, pessoa, t, cal, empresa)
+        elif ato["tipo"] == "pedido" and ato.get("esclarecer"):
+            # (v2.2) a equipe não reconhece nada no texto: pergunta de volta em vez de ler o painel
+            texto, efeito = ("Pedido não entendido: não sabemos de que parte se trata. Qual rota, qual processo, qual campo? Mandem de "
+                             "novo com o nome que aparece no painel."), _efeito(None, ["pediu esclarecimento"])
+        elif ato["tipo"] == "pedido" and olhar:
+            # (v2.2) pedido de olhar e dizer: a equipe olha e conta, sem agir
+            texto, efeito = da_equipe(dict(ato, tipo="pergunta"), pessoa, t, cal, empresa, eq)
+            efeito["util"] = None
         else:
-            texto, efeito = getattr(self, "_" + {"produto": "produto", "desenvolvimento": "desenvolvimento", "qualidade": "qualidade",
-                                                 "atendimento": "atendimento", "vendas": "vendas", "operação": "operacao",
-                                                 "gestão": "gestao"}[ato["equipe"]])(ato, pessoa, t, cal, empresa, eq)
+            texto, efeito = da_equipe(ato, pessoa, t, cal, empresa, eq)
+        if olhar and not ato.get("esclarecer"):
+            leitura = self._leitura(sis, ent, t)
+            if leitura:
+                texto += " " + leitura
+                efeito["acoes"].append(f"olhou o painel de {ent['processo']}" + (f", {ent['campo']}" if ent.get("campo") else ""))
         if ato["tipo"] == "pedido":
-            texto = "Pedido tratado. " + texto
+            if not ato.get("esclarecer"):
+                texto = "Pedido tratado. " + texto
             efeito["colateral"].append([f"quadro da equipe de {ato['equipe']}", "horas extras no dia"])
         antes, depois = eq.tratado(t, ato["tipo"], efeito["util"] if ato["tipo"] == "pedido" else None)
         ato["estado"] = "respondido"
         self._fechar(t, ato, sis, "concluído")
         self.saida.append((t, numero, ato["equipe"], texto))
         sis["verdade"].ato_tratado(t, numero, ato["pego"], minutos, adiada, efeito, antes, depois, eq.estado(), texto)
+
+    def _leitura(self, sis, ent, t):
+        """(v2.2) O que o painel mostrou no processo e no campo entendidos, desde o instante entendido (ou na última hora)."""
+        painel = sis.get("painel")
+        proc = ent.get("processo")
+        if painel is None or proc is None:
+            return ""
+        campos = [ent["campo"]] if ent.get("campo") else [c for p, cs in painel.nomes if p == proc for c in cs][:6]
+        partes = []
+        desde_de_fato = None
+        for c in campos:
+            r = painel.ler(proc, c, ent.get("desde"), t)
+            if r is None:
+                continue
+            media, maximo, agora, n, desde_de_fato = r
+            partes.append(f"{c}: média de {_num(media)}, máximo de {_num(maximo)}, agora {_num(agora)}")
+        if not partes:
+            return ""
+        return f"No painel de {proc}, desde {quando(desde_de_fato)}: " + "; ".join(partes) + "."
 
     # ---------- o que cada equipe olha e faz ----------
     def _rota_agora(self, sis, rota, minutos=30):
@@ -458,6 +502,10 @@ class Porta:
         return f"Reunião marcada para {_hora(ini)}, 30 minutos, com {len(membros)} pessoas da equipe de {ato['equipe']}.", \
             _efeito(None, [f"marcou reunião para {_hora(ini)} com {len(membros)} pessoas"],
                     colateral=[[f"agenda da equipe de {ato['equipe']}", "pessoas em reunião"], ["reuniões do tipo alinhamento", "em curso"]])
+
+
+def _num(x):
+    return f"{x:.0f}" if abs(x - round(x)) < 0.05 or abs(x) >= 100 else f"{x:.1f}"
 
 
 def ROTA_COMPONENTE_DE_FUNCAO(funcao):

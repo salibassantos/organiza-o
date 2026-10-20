@@ -391,7 +391,7 @@ class Verdade:
                                  "causa": "dia de campanha injetado de fora (Mundo.injetar_campanha)"}, fim)
 
     # ---------- atos ----------
-    def ato(self, t, numero, equipe, tipo, texto, rota, comp, sistema, item, demora, estado_equipe):
+    def ato(self, t, numero, equipe, tipo, texto, rota, comp, sistema, item, demora, estado_equipe, entendido=None, esclarecer=False):
         self.m_atos_recebidos += 1
         for ep in self.no_ar.values():
             ep["atos_recebidos_no_ar"] += 1
@@ -400,7 +400,8 @@ class Verdade:
             "virou": {"sistema": sistema, "item": item}, "demora_ate_ficar_disponivel_min": demora, "disponivel_em": t + demora,
             "equipe_ao_receber": estado_equipe, "pego_em": None, "tratado_em": None, "minutos_de_trabalho": None,
             "trabalho_adiado": None, "efeito": None, "confianca_antes": None, "confianca_depois": None, "equipe_ao_tratar": None,
-            "resposta": None, "desfecho": None, "horas_extras_atribuidas": []}, None)
+            "resposta": None, "desfecho": None, "horas_extras_atribuidas": [],
+            "entendido": entendido, "pediu_esclarecimento": bool(esclarecer)}, None)
 
     def ato_tratado(self, t, numero, pego, minutos, adiada, efeito, antes, depois, estado_equipe, texto):
         self.m_atos_tratados += 1

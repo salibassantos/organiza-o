@@ -253,7 +253,9 @@ verdadeiro quando a meta passa de 1,15 vez a capacidade. `fins_de_sprint` está 
 |---|---|
 | `numero`, `equipe`, `tipo`, `texto` | o ato como foi recebido ("pergunta", "pedido" ou "convocacao") |
 | `recebido` | o minuto em que virou coisa dentro do mundo (o passo seguinte ao `receber()`) |
-| `rota`, `componente` | a rota e o componente que o texto cita (ou `null`) |
+| `rota`, `componente` | a rota e o componente que o texto cita (ou `null`); a rota é lida como sempre (nome exato do processo, componente ou palavras); (v2.2) o componente também sai do processo citado ("chamados de notificações", "bugs de infraestrutura") |
+| `entendido` | (v2.2) o que a equipe entendeu do texto inteiro: `{processo, campo, rota, componente, tipo, desde, desde_texto}`. `processo` e `campo` pelos nomes de `processos()` (qualquer processo; o campo também pelo nome curto, sem a unidade, e por alguns nomes de uso: "erros", "latência", "percentil 95", "requisições"); `tipo` do pedido: "olhar e dizer", "corrigir ou reverter", "pôr à frente da fila" ou `null` (sem nenhum desses, a equipe faz o que sempre fez); `desde`: o instante de que o texto fala ("desde o dia 12, 10h", "há duas horas", "nas últimas 3 horas", "desde ontem", "desde as 9h", "depois da liberação"), e `desde_texto` o trecho lido |
+| `pediu_esclarecimento` | (v2.2) `true` quando o pedido não nomeia nada que a equipe reconheça (rota, componente, processo, campo ou as palavras do trabalho dela) e a equipe respondeu perguntando em vez de agir; aí `efeito.util` é `null` |
 | `virou` | `{sistema, item}`: o item criado no fluxo, no CRM ou no quadro |
 | `demora_ate_ficar_disponivel_min`, `disponivel_em` | a demora da equipe naquele momento e o instante em que o ato pôde ser pego |
 | `equipe_ao_receber`, `equipe_ao_tratar` | o estado da equipe (abaixo) nos dois momentos |
@@ -261,7 +263,7 @@ verdadeiro quando a meta passa de 1,15 vez a capacidade. `fins_de_sprint` está 
 | `trabalho_adiado` | `{tarefa, item, minutos_que_faltavam, pessoa}`: o que a pessoa largou para tratar o pedido (atrasou o tempo do pedido); `null` se ela estava livre |
 | `efeito` | `{util, acoes, encurta, nao_encurta, colateral}` (abaixo) |
 | `confianca_antes`, `confianca_depois` | a confiança da equipe em quem pede, antes e depois deste ato |
-| `resposta` | o texto devolvido pela porta (o pedido começa com "Pedido tratado.") |
+| `resposta` | o texto devolvido pela porta (o pedido começa com "Pedido tratado."; (v2.2) o pedido não entendido, com "Pedido não entendido:", e a pergunta "qual rota, qual processo, qual campo?") |
 | `desfecho` | "respondido" ou "sem resposta" (com `expirou_em`: o fim do expediente do dia útil seguinte) |
 | `horas_extras_atribuidas` | `{t, pessoa, equipe, minutos, onde}`: hora extra que alguém fez porque o dia foi tomado por pedidos |
 
