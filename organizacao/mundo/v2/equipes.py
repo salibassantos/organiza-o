@@ -9,7 +9,9 @@ como regra, e tudo é determinístico pela semente e pelos atos recebidos.
 - A pergunta gasta atenção. O pedido entra na frente da fila: a pessoa que o pega larga o que fazia, e o que ela fazia atrasa.
 - Pedido que resolveu algo aumenta a confiança em quem pede; pedido que não resolveu nada a diminui. A confiança também mexe no
   cuidado do tratamento: com pouca confiança a equipe verifica por cima.
-- O cansaço sobe com hora extra e com trabalho da porta, e desce com o descanso (noite, fim de semana)."""
+- O cansaço sobe com hora extra e com trabalho da porta, e desce com o descanso (noite, fim de semana).
+- (v2.2) No nulo "paciente" a equipe não tem atenção, cansaço nem confiança: a demora é só a base esticada pela ocupação, a confiança
+  fica no meio (1) sem subir nem descer, e a verificação é sempre inteira."""
 from .cadastro import EQUIPES, sorteio
 
 # minutos típicos até alguém da equipe pegar o ato: (responder, tratar)
@@ -19,8 +21,9 @@ CONFIANCA_MIN, CONFIANCA_MAX = 0.4, 1.6
 
 
 class Equipe:
-    def __init__(self, nome, semente):
+    def __init__(self, nome, semente, paciente=False):
         s = sorteio(semente, "equipe", nome)
+        self.paciente = paciente
         r, p = DEMORA_BASE[nome]
         self.nome = nome
         self.demora_resposta = round(r * s.uniform(0.8, 1.25), 1)
@@ -45,6 +48,10 @@ class Equipe:
 
     def tratado(self, t, tipo, util):
         antes = self.confianca
+        if self.paciente:
+            self.historico.append((t, tipo, util))
+            del self.historico[:-30]
+            return antes, self.confianca
         if tipo == "pedido" and util is not None:
             self.confianca = min(CONFIANCA_MAX, self.confianca + 0.15) if util else max(CONFIANCA_MIN, self.confianca - 0.2)
         self.atencao += 0.25 if tipo == "pergunta" else (0.5 if tipo == "pedido" else 0.35)
@@ -54,7 +61,7 @@ class Equipe:
 
     def minuto(self, trabalhando, alem_da_hora, presentes, em_reuniao_ou_urgente, fila_regular, membros):
         """Atualiza cansaço, atenção e ocupação a cada minuto."""
-        if alem_da_hora:
+        if alem_da_hora and not self.paciente:
             self.cansaco += 0.0012 * alem_da_hora / max(1, membros)
         if trabalhando == 0:
             self.cansaco *= 0.9985                       # descanso: meia-vida de umas oito horas
@@ -67,12 +74,13 @@ class Equipe:
 
     def memoria_do_dia(self):
         """A memória de quem pede se apaga devagar: a confiança volta um pouco para o meio a cada dia vivido."""
-        self.confianca += 0.05 * (1.0 - self.confianca)
+        if not self.paciente:
+            self.confianca += 0.05 * (1.0 - self.confianca)
 
     def estado(self):
         return {"demora_resposta": self.demora_resposta, "demora_tratamento": self.demora_tratamento, "cansaco": round(self.cansaco, 4),
                 "atencao": round(self.atencao, 4), "confianca": round(self.confianca, 4), "ocupacao": round(self.ocupacao, 4)}
 
 
-def criar_equipes(semente):
-    return {e: Equipe(e, semente) for e in EQUIPES}
+def criar_equipes(semente, paciente=False):
+    return {e: Equipe(e, semente, paciente) for e in EQUIPES}

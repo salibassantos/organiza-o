@@ -131,6 +131,19 @@ class Porta:
                 self.fila[equipe].append(numero)
             sis["verdade"].ato(t, numero, equipe, tipo, texto, rota, comp, sistema, item, int(round(atraso)), eq.estado())
 
+    def abertos(self):
+        """(v2.2) Se há algum ato que chegou e ainda não foi respondido nem expirou."""
+        return any(a["estado"] in ("aberto", "em tratamento") for a in self.atos.values())
+
+    def descartar_abertos(self, t, sis):
+        """(v2.2) Só no ramo sem ato: os atos abertos saem sem tratamento (o item que viraram é descartado)."""
+        for numero, ato in self.atos.items():
+            if ato["estado"] in ("aberto", "em tratamento"):
+                ato["estado"] = "sem resposta"
+                self._fechar(t, ato, sis, "descartado")
+                if numero in self.fila[ato["equipe"]]:
+                    self.fila[ato["equipe"]].remove(numero)
+
     def disponivel(self, equipe, t, tipo=None):
         for numero in self.fila[equipe]:
             ato = self.atos[numero]

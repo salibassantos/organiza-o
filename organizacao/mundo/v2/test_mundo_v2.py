@@ -330,7 +330,7 @@ class TesteVerdadeEmDisco(unittest.TestCase):
 
 class TesteNulos(unittest.TestCase):
     def test_os_nulos_andam(self):
-        for nulo in ("sem_defeito", "embaralhado", "sem_deriva", "surdo"):
+        for nulo in ("sem_defeito", "embaralhado", "sem_deriva", "surdo", "paciente"):
             m = novo(8, nulo)
             viver(m, 600)
             self.assertEqual(m.t, 600)
@@ -405,6 +405,75 @@ class TesteCalendario(unittest.TestCase):
         v = {"incidentes": [], "causas": {}, "calendario": cal}
         r = classificar_par(v, ["rota catálogo", "requisições no minuto"], ["sessões dos clientes", "sessões iniciadas no minuto"])
         self.assertEqual(r["categoria"], "causa comum (calendário)")
+
+
+
+class TesteReversaoPropria(unittest.TestCase):
+    """(v2.2) Na semente 2, a busca quebra com a liberação do dia 3 (t = 5253) e a operação a reverte sozinha em uma hora. Um pedido
+    certo à operação logo depois da liberação: o ramo sem ato diz quando a empresa a tiraria sozinha, e os minutos e a verdade de
+    antes do ato não mudam."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.sem = novo(2, nome="propria_sem")
+        cls.h_sem, _ = viver(cls.sem, 5253 + 3 * 60)
+        cls.com = novo(2, nome="propria_com")
+        cls.h_com, _ = viver(cls.com, 5253 + 3 * 60, {5260: [("operação", "pedido", "Verifiquem a rota busca")]})
+
+    @staticmethod
+    def episodio(m):
+        return next(e for e in m.verdade()["episodios_de_defeito_no_ar"] if e["funcao"] == "normalizar_termo" and e["liberado_em"] == 5253)
+
+    def test_sem_ato_o_vivido_e_o_ramo(self):
+        e = self.episodio(self.sem)
+        self.assertEqual(e["saiu_por"], "reversão")
+        self.assertIsNone(e["ramo_sem_ato"])
+        self.assertEqual(e["reverteria_sozinha_em"], e["saiu_do_ar"])
+        self.assertEqual((e["sairia_sozinha_por"], e["persistente"], e["antecipou_min"]), ("reversão", False, 0))
+
+    def test_com_ato_o_ramo_repete_a_vida_sem_ato(self):
+        sem, com = self.episodio(self.sem), self.episodio(self.com)
+        self.assertEqual(com["ramo_sem_ato"]["desde"], 5259)
+        self.assertEqual(com["atos_recebidos_no_ar"], 1)
+        self.assertEqual(com["reverteria_sozinha_em"], sem["saiu_do_ar"])
+        self.assertEqual(com["sairia_sozinha_por"], sem["saiu_por"])
+        self.assertEqual(com["antecipou_min"], com["reverteria_sozinha_em"] - com["saiu_do_ar"])
+        if com["saiu_pelo_ato"] is not None:
+            ato = next(a for a in self.com.verdade()["atos"] if a["numero"] == com["saiu_pelo_ato"])
+            self.assertEqual(ato["efeito"]["antecipou_min"], com["antecipou_min"])
+
+    def test_o_ramo_nao_muda_o_vivido(self):
+        m = novo(2, nome="propria_sem_ramos")
+        m.com_ramos = False
+        h, _ = viver(m, 5253 + 3 * 60, {5260: [("operação", "pedido", "Verifiquem a rota busca")]})
+        self.assertEqual(h, self.h_com)
+        tira = ("ramo_sem_ato", "reverteria_sozinha_em", "sairia_sozinha_por", "persistente", "antecipou_min")
+        limpa = lambda v: json.dumps([{k: x for k, x in e.items() if k not in tira} for e in v["episodios_de_defeito_no_ar"]]
+                                     + [{k: x for k, x in a.items() if k != "efeito"} for a in v["atos"]], sort_keys=True)
+        self.assertEqual(limpa(m.verdade()), limpa(self.com.verdade()))
+
+
+class TestePaciente(unittest.TestCase):
+    """(v2.2) O nulo paciente: sem atos, a vida normal; com atos, a equipe não se cansa, não gasta atenção nem muda de confiança."""
+
+    def test_sem_atos_e_a_vida_normal(self):
+        a, b = novo(3, nome="pac_normal"), novo(3, "paciente", nome="pac_pac")
+        self.assertEqual(viver(a, 2 * D)[0], viver(b, 2 * D)[0])
+
+    def test_com_atos_nada_de_atencao_cansaco_confianca_nem_hora_extra(self):
+        m = novo(1, "paciente", nome="pac_atos")
+        atos = {D + 540 + 20 * k: [("operação", "pedido", "verifiquem a rota login"), ("atendimento", "pergunta", "como está o frete?")]
+                for k in range(12)}
+        viver(m, 2 * D + 600, atos)
+        for e in m.empresa.equipes.values():
+            self.assertEqual((e.cansaco, e.atencao, e.confianca), (0.0, 0.0, 1.0))
+            self.assertAlmostEqual(e.atraso("pedido"), e.demora_tratamento * (1 + 1.5 * e.ocupacao))
+        v = m.verdade()
+        self.assertEqual(v["nulo"], "paciente")
+        tratados = [a for a in v["atos"] if a["desfecho"] == "respondido"]
+        self.assertGreater(len(tratados), 10)
+        self.assertTrue(all(a["confianca_antes"] == a["confianca_depois"] == 1.0 for a in tratados))
+        self.assertTrue(all(a["horas_extras_atribuidas"] == [] for a in v["atos"]))
 
 
 if __name__ == "__main__":

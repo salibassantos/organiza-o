@@ -39,7 +39,8 @@ from .pessoas import Empresa, VALOR_PLANO, COMPONENTES_SQUAD, TEMAS
 from .conectores import Conectores
 from . import codigo
 
-NULOS = (None, "sem_defeito", "embaralhado", "sem_deriva", "surdo")
+NULOS = (None, "sem_defeito", "embaralhado", "sem_deriva", "surdo", "paciente")
+HORIZONTE_RAMO = 28 * MINUTOS_DIA    # (v2.2) o ramo sem ato anda até o defeito sair ou até 28 dias depois de ele ter entrado no ar
 PAGINAS_POR_CLIENTE_DIA = 0.62       # o crescimento do banco por cliente por dia que a operação estimou ao montar o volume
 BANCOS = ("produto", "fluxo", "repositorio", "crm", "agenda", "quadro")
 TETO_MAXIMO = 2.6                    # o mercado nunca passa de 2,6 vezes o teto inicial: a carteira não cresce sem limite
@@ -142,6 +143,10 @@ class Mundo:
         # (v2) as campanhas injetadas: entradas do mundo como os atos
         self.campanhas = []
         self.campanha_forca = 0.0
+        # (v2.2) os ramos sem ato: o estado guardado logo antes do primeiro ato que chegou com um defeito no ar
+        self.campanhas_injetadas = []            # (injetada_em, inicio, duracao, forca), para repetir as campanhas nos ramos
+        self.ramos = []                          # {"t", "estado", "bancos", "eps"}
+        self.com_ramos = True
         self._estado_inicial()
         self._processos = [Processo(n, list(c), equipe_do_processo(n), [resolucao_do_campo(x) for x in c])
                            for n, c in self.conectores.processos]
@@ -167,6 +172,10 @@ class Mundo:
         return list(EQUIPES)
 
     def passo(self):
+        if self.registro.ramos_a_calcular:
+            self._calcular_ramos()
+        if self.com_ramos and self.registro.no_ar and (self.porta.chegando or self.porta.abertos()):
+            self._guardar_ramo()
         rel = self.relogio
         novo_dia = rel.avancar()
         t = rel.t
@@ -229,10 +238,13 @@ class Mundo:
         if duracao <= 0 or not (0.0 < forca <= 3.0):
             raise ValueError("a duração precisa ser positiva e a força estar entre 0 e 3")
         self.campanhas.append({"inicio": inicio, "fim": inicio + duracao, "forca": float(forca), "anotada": False})
+        self.campanhas_injetadas.append((self.t, inicio, duracao, float(forca)))
         self.campanhas.sort(key=lambda c: (c["inicio"], c["fim"]))
 
     def verdade(self) -> dict:
         """Só para a bancada: o que a empresa tem e quando aconteceu, até o minuto atual."""
+        if self.registro.ramos_a_calcular:
+            self._calcular_ramos()
         return self.registro.como_dict(self.relogio, self.relogio.embaralhado)
 
     def verdade_por_minuto(self, inicio: int = 0, fim: int | None = None):
@@ -277,25 +289,100 @@ class Mundo:
             m = pickle.load(f)
         cons = {}
         for nome in BANCOS:
-            mem = sqlite3.connect(":memory:", isolation_level=None, check_same_thread=False,
-                                  cached_statements=0 if nome == "produto" else 128)
+            mem = _banco_em_memoria(nome)
             origem = sqlite3.connect(os.path.join(pasta, nome + ".sqlite"))
             origem.backup(mem)
             origem.close()
             cons[nome] = mem
-        m.produto.ligar(cons["produto"])
-        m.fluxo.ligar_banco(cons["fluxo"])
-        m.repo.db = cons["repositorio"]
-        m.crm.ligar_banco(cons["crm"])
-        m.agenda.db = cons["agenda"]
-        m.quadro.db = cons["quadro"]
+        m._ligar_bancos(cons)
         nova = historia or tempfile.mkdtemp(prefix="mundo_v2_historia_")
         _copiar_historia(os.path.join(pasta, "historia"), nova, m.registro.dias_gravados)
         m.registro.pasta = nova
         return m
 
+    def _ligar_bancos(self, cons):
+        self.produto.ligar(cons["produto"])
+        self.fluxo.ligar_banco(cons["fluxo"])
+        self.repo.db = cons["repositorio"]
+        self.crm.ligar_banco(cons["crm"])
+        self.agenda.db = cons["agenda"]
+        self.quadro.db = cons["quadro"]
+
     def __getstate__(self):
         return dict(self.__dict__)
+
+    def __setstate__(self, d):
+        self.__dict__.update(d)
+        for k, v in (("campanhas_injetadas", []), ("ramos", []), ("com_ramos", True)):     # um estado salvo antes da v2.2
+            self.__dict__.setdefault(k, v)
+        self.registro.__dict__.setdefault("ramos_a_calcular", [])
+        self.registro.__dict__.setdefault("com_ramo", set())
+
+    # ======================================================================================================== (v2.2) os ramos sem ato
+    def _guardar_ramo(self):
+        """Há um ato chegando ou ainda aberto com um defeito no ar. Para cada defeito no ar que ainda não tem ramo, o estado de agora
+        (o fim do minuto anterior: até aqui nenhum ato agiu desde que ele entrou no ar) é guardado: dele sai o ramo sem ato."""
+        com = self.registro.com_ramo
+        novos = [ep for (f, v), ep in self.registro.no_ar.items() if (f, v, ep["liberado_em"]) not in com]
+        if not novos:
+            return
+        ramos, self.ramos = self.ramos, []
+        try:
+            estado = pickle.dumps(self, protocol=pickle.HIGHEST_PROTOCOL)
+        finally:
+            self.ramos = ramos
+        bancos = {nome: con.serialize() for nome, con in self._bancos().items()}
+        self.ramos.append({"t": self.t, "estado": estado, "bancos": bancos, "eps": novos})
+        for ep in novos:
+            com.add((ep["funcao"], ep["implementacao"], ep["liberado_em"]))
+
+    def _calcular_ramos(self):
+        """Anda cada ramo sem ato até o defeito sair (ou até o horizonte) e escreve o resultado no episódio."""
+        pendentes, self.registro.ramos_a_calcular = self.registro.ramos_a_calcular, []
+        for ep in pendentes:
+            ramo = next((r for r in self.ramos if any(e is ep for e in r["eps"])), None)
+            if ramo is None:                                   # sem estado guardado (um estado salvo antes da v2.2)
+                continue
+            saida, ate = self._rodar_ramo(ramo, ep)
+            self.registro.ramo_calculado(ep, ramo["t"], ate, saida)
+        self.ramos = [r for r in self.ramos if any(e["persistente"] is None for e in r["eps"])]
+
+    def _rodar_ramo(self, ramo, ep):
+        m = pickle.loads(ramo["estado"])
+        cons = {}
+        for nome, dados in ramo["bancos"].items():
+            con = _banco_em_memoria(nome)
+            con.deserialize(dados)
+            cons[nome] = con
+        m._ligar_bancos(cons)
+        pasta = tempfile.mkdtemp(prefix="mundo_v2_ramo_")
+        try:
+            _copiar_historia(self.registro.pasta, pasta, m.registro.dias_gravados)
+            m.registro.pasta = pasta
+            m.relogio.tempo_real = False
+            m.com_ramos = False
+            m.ramos = []
+            m.registro.ramos_a_calcular = []
+            m.porta.surdo = True                                  # daqui em diante nenhum ato chega ao mundo
+            m.porta.chegando = []
+            m.porta.descartar_abertos(m.t, m.sis)                 # e os que já tinham chegado não são tratados
+            for injetada, inicio, duracao, forca in self.campanhas_injetadas:
+                if ramo["t"] < injetada <= ep["saiu_do_ar"] and inicio > m.t:
+                    m.injetar_campanha(inicio, duracao, forca)
+            chave, desde = (ep["funcao"], ep["implementacao"]), ep["liberado_em"]
+            ate = desde + HORIZONTE_RAMO
+            while m.t < ate:
+                m.passo()
+                e = m.registro.no_ar.get(chave)
+                if e is None or e["liberado_em"] != desde:
+                    e = next(x for x in reversed(m.registro.mem["episodios_de_defeito_no_ar"])
+                             if (x["funcao"], x["implementacao"]) == chave and x["liberado_em"] == desde)
+                    return (e["saiu_do_ar"], e["saiu_por"]), m.t
+            return None, ate
+        finally:
+            for con in cons.values():
+                con.close()
+            shutil.rmtree(pasta, ignore_errors=True)
 
     # ======================================================================================================== o que move o mundo de fora
     def _nova_data(self, t, cal):
@@ -490,6 +577,10 @@ class Mundo:
                                     VALOR_PLANO[plano], estagio=estagio, proxima=s.randint(9 * 60, 3 * MINUTOS_DIA))
                 if estagio != "lead":
                     self.crm.assumir(nid, execs[i % len(execs)].id)
+
+
+def _banco_em_memoria(nome):
+    return sqlite3.connect(":memory:", isolation_level=None, check_same_thread=False, cached_statements=0 if nome == "produto" else 128)
 
 
 def _plano(s):

@@ -121,7 +121,7 @@ class Empresa:
         self.dia_alinhamento = -1
         self.escalacoes_dia = 0
         self.pressao_planejada = {}
-        self.equipes = criar_equipes(semente)         # (v2) cada equipe como agente diante da porta
+        self.equipes = criar_equipes(semente, nulo == "paciente")     # (v2) cada equipe como agente diante da porta
         self.fila_regular = {e: 0 for e in EQUIPES}
         self._pedidos_prontos = set()
         self._plano_inicial()
@@ -441,7 +441,7 @@ class Empresa:
         extra = self._ficar_base(p, t, cal)
         if p.porta_hoje > 0 and not (p.tarefa is not None and p.tarefa.get("urgente")):
             devido = int(p.porta_hoje * p.s_porta.uniform(0.4, 0.9))
-            if devido > extra:
+            if devido > extra and self.nulo != "paciente":            # (v2.2) no nulo paciente os pedidos não lançam hora extra
                 self.sis["verdade"].extra_por_ato(t, p.id, p.equipe, devido - extra, list(p.atos_hoje))
                 extra = devido
         return extra

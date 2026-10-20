@@ -93,6 +93,20 @@ recebeu.
 | `saiu_por` | "regular", "correção" ou "reversão" (a implantação que o tirou) |
 | `saiu_pelo_ato` | o ato que pediu a reversão que o tirou, se houve |
 | `atos_que_o_tocaram` | atos tratados sobre o componente do defeito enquanto ele estava no ar |
+| `atos_recebidos_no_ar`, `atos_tratados_no_ar` | (v2.2) quantos atos chegaram ao mundo e quantos foram tratados enquanto ele estava no ar (de qualquer equipe) |
+| `ramo_sem_ato` | (v2.2) `{desde, ate}`: o ramo sem ato que mediu a saída sozinha (ver abaixo); `null` quando nenhum ato chegou nem estava aberto enquanto ele esteve no ar (aí o caminho vivido é o ramo sem ato) |
+| `reverteria_sozinha_em` | (v2.2) o instante em que a empresa o tiraria do ar sem nenhum ato; `null` se no ramo ele ainda estava no ar no fim (`ramo_sem_ato.ate`) |
+| `sairia_sozinha_por` | (v2.2) "regular", "correção" ou "reversão": a implantação que o tiraria sem nenhum ato |
+| `persistente` | (v2.2) `true` quando, sem ato, ele dura até uma liberação regular (ou até o fim do ramo); `false` quando a operação o reverte ou o corrige no ar sozinha |
+| `antecipou_min` | (v2.2) `reverteria_sozinha_em` menos `saiu_do_ar`: o quanto os atos, juntos, anteciparam a saída (negativo quando a atrasaram; 0 quando ela teria vindo no mesmo minuto); sem saída no ramo, conta até o fim dele e é um mínimo; 0 sem ramo |
+
+**(v2.2) O ramo sem ato.** O mundo é determinístico pela semente e pelas entradas. Quando um ato chega ao mundo, ou ainda está aberto
+(recebido e não respondido), com um defeito no ar que ainda não tem ramo, o estado do fim do minuto anterior é guardado. Quando o
+defeito sai do ar, esse estado anda de novo, sem nenhum ato daí em diante (os atos abertos são descartados sem tratamento; as
+campanhas injetadas até a saída real continuam valendo), até o defeito sair no ramo ou até 28 dias depois de ter entrado no ar. O
+instante e a implantação dessa saída são `reverteria_sozinha_em` e `sairia_sozinha_por`. Os ramos andam fora do mundo vivido: os
+minutos, as respostas e o resto da verdade são os mesmos de antes da v2.2. Um defeito em que nenhum ato chegou nem estava aberto
+não precisa de ramo: o caminho vivido já é o sem ato, e `reverteria_sozinha_em` é `saiu_do_ar`.
 
 A causa de um erro ou chamado é o defeito quando a exceção nasce na função defeituosa (o chamado guarda o instante e a função do
 erro que o motivou).
@@ -251,7 +265,9 @@ verdadeiro quando a meta passa de 1,15 vez a capacidade. `fins_de_sprint` está 
 | `desfecho` | "respondido" ou "sem resposta" (com `expirou_em`: o fim do expediente do dia útil seguinte) |
 | `horas_extras_atribuidas` | `{t, pessoa, equipe, minutos, onde}`: hora extra que alguém fez porque o dia foi tomado por pedidos |
 
-O **`efeito`**: `util` diz se o pedido resolveu algo (`true`/`false`; `null` em pergunta e convocação); `acoes` é o que a equipe fez
+O **`efeito`**: `util` diz se o pedido resolveu algo (`true`/`false`; `null` em pergunta e convocação); (v2.2) `antecipou_min`, só
+nos pedidos, é `reverteria_sozinha_em` menos o instante da saída real do defeito quando a saída veio por este pedido (a reversão que
+ele pediu, `saiu_pelo_ato`), e `null` nos outros; `acoes` é o que a equipe fez
 nos sistemas (testes rodados e com que cobertura, bug aberto, reversão, prioridade mudada, foco, reunião marcada); `encurta` são os
 campos em que o tratamento encurta o problema; `nao_encurta`, os campos ligados ao problema que o tratamento não encurta;
 `colateral`, os campos de outros processos que pioram por causa do tratamento (fila de outra equipe, sprint, horas extras, prazos
@@ -321,3 +337,8 @@ de cada uma também vem em `verdade()["verdade_por_minuto"]["colunas"]`.
   vivido minuto a minuto.
 - **sem_deriva**: sem teto, platô nem expansão (`teto_inicial` nulo, `teto_do_mercado` 0); cada entrada leva a uma saída.
 - **surdo**: nenhum ato chega ao mundo; `atos` fica vazio e as colunas das equipes mostram só o trabalho regular.
+- **paciente** (v2.2): as equipes não têm atenção, cansaço nem confiança. A demora de um ato é só a base da equipe esticada pela
+  ocupação (`base x (1 + 1,5 x ocupação)`), a duração do trabalho não estica, a confiança fica em 1 (não sobe nem desce, e a
+  verificação é sempre inteira) e os pedidos não lançam hora extra (`horas_extras_atribuidas` vazio). As colunas `<equipe>.cansaco` e
+  `<equipe>.atencao` ficam em 0 e `<equipe>.confianca` em 1. Tudo o mais é a vida normal: sem atos, os minutos são os da vida normal
+  da mesma semente, byte a byte (a empresa, os defeitos e a deriva). A ocupação continua: quem trata um ato está ocupado.

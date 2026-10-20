@@ -135,7 +135,7 @@ Python 3.11 com numpy; o resto é biblioteca padrão (sqlite3). Nada de rede.
 import sys; sys.path.insert(0, "<pasta que contém organizacao>")
 from organizacao.mundo.v2 import Mundo
 
-m = Mundo(1)                       # ou Mundo(1, "sem_defeito" | "embaralhado" | "sem_deriva" | "surdo")
+m = Mundo(1)                       # ou Mundo(1, "sem_defeito" | "embaralhado" | "sem_deriva" | "surdo" | "paciente")
 for p in m.processos():
     print(p.nome, p.campos)
 valores = m.passo()                # o minuto 1: {processo: [valores na ordem dos campos]}

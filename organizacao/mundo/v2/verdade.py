@@ -97,6 +97,8 @@ class Verdade:
         self._chamados = {}                                # item -> registro do chamado (enquanto em memória)
         self.volume_inicial_folga_dias = None
         self.teto_inicial = None
+        self.ramos_a_calcular = []                         # (v2.2) episódios que saíram do ar depois de um ato e esperam o ramo sem ato
+        self.com_ramo = set()                              # (v2.2) (função, implementação, liberado_em) dos episódios que têm ramo guardado
         self.dia_aberto = 0
         self.linhas = np.full((MINUTOS_DIA, len(COLUNAS)), np.nan, dtype=np.float32)
         self._zerar_minuto()
@@ -137,6 +139,14 @@ class Verdade:
                 ep["saiu_por"] = tipo
                 ep["saiu_pelo_ato"] = por_ato
                 ep["_final"] = t
+                if (f, v, ep["liberado_em"]) not in self.com_ramo:
+                    # nenhum ato chegou nem estava aberto enquanto ele esteve no ar: o caminho vivido é o ramo sem ato
+                    ep["reverteria_sozinha_em"] = t
+                    ep["sairia_sozinha_por"] = tipo
+                    ep["persistente"] = tipo == "regular"
+                    ep["antecipou_min"] = 0
+                else:
+                    self.ramos_a_calcular.append(ep)
         for f, v in entram:
             tipo_def, descricao = codigo.DEFEITOS[(f, v)]
             comp = codigo.COMPONENTE_FUNCAO[f]
@@ -145,7 +155,11 @@ class Verdade:
                 "onde": [[f"rota {r}", "respostas com erro no minuto"] for r in _nomes_rotas(f)] + [[f"chamados de {_nome_comp(comp)}", "abertos"]],
                 "liberado_em": t, "versao": versao, "primeiro_erro": None, "erros": 0, "primeiro_chamado": None, "chamados": 0,
                 "primeira_escalacao": None, "escalacoes": 0, "saiu_do_ar": None, "duracao_no_ar_min": None, "saiu_por": None,
-                "saiu_pelo_ato": None, "atos_que_o_tocaram": []}, None)
+                "saiu_pelo_ato": None, "atos_que_o_tocaram": [],
+                # (v2.2) a reversão própria: quando a empresa o tiraria sem nenhum ato, e por onde
+                "atos_recebidos_no_ar": 0, "atos_tratados_no_ar": 0, "ramo_sem_ato": None, "reverteria_sozinha_em": None,
+                "sairia_sozinha_por": None,
+                "persistente": None, "antecipou_min": None}, None)
             self.no_ar[(f, v)] = ep
         for f in regime:
             rotas = sorted({r for r, fs in ROTAS_FUNCOES.items() if f in fs})
@@ -379,6 +393,8 @@ class Verdade:
     # ---------- atos ----------
     def ato(self, t, numero, equipe, tipo, texto, rota, comp, sistema, item, demora, estado_equipe):
         self.m_atos_recebidos += 1
+        for ep in self.no_ar.values():
+            ep["atos_recebidos_no_ar"] += 1
         self.atos[numero] = self._novo("atos", {
             "numero": numero, "equipe": equipe, "tipo": tipo, "texto": texto, "recebido": t, "rota": rota, "componente": comp,
             "virou": {"sistema": sistema, "item": item}, "demora_ate_ficar_disponivel_min": demora, "disponivel_em": t + demora,
@@ -394,10 +410,31 @@ class Verdade:
         a.update({"pego_em": pego, "tratado_em": t, "minutos_de_trabalho": minutos, "trabalho_adiado": adiada, "efeito": efeito,
                   "confianca_antes": round(antes, 4), "confianca_depois": round(depois, 4), "equipe_ao_tratar": estado_equipe,
                   "resposta": texto, "desfecho": "respondido", "_final": t})
+        if a["tipo"] == "pedido" and efeito is not None:
+            efeito["antecipou_min"] = None                    # (v2.2) preenchido quando a saída de um defeito vem por este pedido
+        for ep in self.no_ar.values():
+            ep["atos_tratados_no_ar"] += 1
         if a["componente"] is not None:
             for ep in self.no_ar.values():
                 if ep["componente"] == a["componente"]:
                     ep["atos_que_o_tocaram"].append(numero)
+
+    def ramo_calculado(self, ep, desde, ate, saida):
+        """(v2.2) O resultado do ramo sem ato de um episódio: `saida` é (instante, tipo) da implantação que o tirou no ramo, ou None
+        se no ramo ele ainda estava no ar em `ate`."""
+        ep["ramo_sem_ato"] = {"desde": desde, "ate": ate}
+        if saida is None:
+            ep["reverteria_sozinha_em"], ep["sairia_sozinha_por"], ep["persistente"] = None, None, True
+        else:
+            ep["reverteria_sozinha_em"], ep["sairia_sozinha_por"] = saida
+            ep["persistente"] = saida[1] == "regular"
+        # o quanto os atos, juntos, anteciparam a saída (negativo: atrasaram); sem saída no ramo, conta até o fim dele (é um mínimo)
+        ep["antecipou_min"] = (saida[0] if saida is not None else ate) - ep["saiu_do_ar"]
+        n = ep["saiu_pelo_ato"]
+        if n is not None:
+            a = self.atos.get(n)
+            if a is not None and a.get("efeito") is not None:
+                a["efeito"]["antecipou_min"] = ep["antecipou_min"]
 
     def ato_sem_resposta(self, t, numero):
         a = self.atos.get(numero)
@@ -609,6 +646,11 @@ class Verdade:
                                            "mudando a latência (está em 'mudancas_de_regime')")
         if self.nulo == "surdo":
             saida["observacao_do_nulo"] = "a porta aceita atos e devolve números, mas nenhum ato chega ao mundo e nada é respondido"
+        if self.nulo == "paciente":
+            saida["observacao_do_nulo"] = ("as equipes não têm atenção, cansaço nem confiança: a demora de um ato é só a base da equipe "
+                                           "esticada pela ocupação, a confiança fica em 1 sem subir nem descer, a verificação é sempre "
+                                           "inteira e os pedidos não lançam hora extra; a empresa, os defeitos e a deriva são os da vida "
+                                           "normal")
         return saida
 
 
