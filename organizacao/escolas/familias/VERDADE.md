@@ -13,6 +13,48 @@ As famílias com voz entregam as linhas por `vozes() -> [(t, canal, texto)]` (as
 delas como campo do processo do canal. Os atos de quem observa entram por `receber(equipe, tipo, texto)` e as respostas saem por
 `respostas() -> [(t, número, equipe, texto)]`, como no mundo.
 
+## Os tipos de campo (`base.py`)
+
+O vocabulário comum: `contagem` (por minuto, ruído de Poisson), `nível` (fila, abertos, presentes, volume; ruído normal), `latência`
+(em ms, ruído de 8% para cada lado), `taxa` (em %, ruído normal) e `carteira` (uma contagem grande que anda devagar). O nome do campo
+é do mundo; o tipo é da família. `estrutura` traz, por campo, `{tipo, base, desvio_do_ruido}`: o "desvio" de todo tamanho declarado é
+o desvio do ruído no nível daquele instante.
+
+## Escola 1: um campo (`escola1.py`)
+
+Processos (de 1 a 3): `<coisa> <do lugar>`, de tipos diferentes, com 1 a 4 campos. Nulos: `sem_incidente`, `sem_regime`, `sem_deriva`
+(cada um tira só a sua lei; as outras ficam nos mesmos instantes).
+
+| campo | o que é |
+|---|---|
+| `incidentes` | `{inicio, fim, duracao_min, onde, sentido ("subiu" ou "caiu"), tamanho_em_desvios, nivel_antes, lei}`: o campo sai do lugar de repente e volta |
+| `mudancas_de_regime` | `{t, onde, sentido, tamanho_em_desvios, patamar_antes, patamar_depois, lei}`: um patamar novo para sempre |
+| `deriva` | `{onde, inicio, taxa_por_semana, sentido, lei}`: o nível multiplicado por (1 + taxa) a cada semana; `null` no nulo |
+| `estrutura.leis` | as faixas sorteadas: incidente a cada 2 a 6 dias, de 30 a 300 minutos, de 4 a 12 desvios; 1 ou 2 regimes de 3 a 8 desvios; deriva de 3% a 12% por semana |
+
+Um acontecimento para baixo que levaria o campo abaixo de 40% da base, ou a menos de três desvios do zero, vai para cima (o tamanho
+declarado é o que aconteceu).
+
+## Escola 2: causa e efeito (`escola2.py`)
+
+Processos (de 2 a 8): `<coisa> <do lugar>`, um campo cada (contagem ou nível). Nulos: `embaralhado`, `sem_ligacao`.
+
+| campo | o que é |
+|---|---|
+| `estrutura.processos` | `{nome, campo, tipo, base, desvio_do_ruido, disparos_por_dia (os espontâneos), amplitude_desvios, volta_min}` |
+| `ligacoes` | `{de, para, atraso_tipico_min, folga (de 0,8 a 1,2 vezes), chance_de_passar, nasce, morre, intermitente}`; a intermitente nasce entre o 2º e o 5º dia e morre entre o 9º e o 14º |
+| `causas_comuns` | `{origem, efeitos}`: dois processos movidos pelo mesmo, sem que um mova o outro |
+| `disparos` | `{t, onde, causa ("sozinho", "ligação" ou o do nulo), ligacao (o índice em ligacoes), origem {t, onde}}` |
+
+## Escola 4: o tempo (`escola4.py`)
+
+Processos (de 1 a 4): `<coisa> <do lugar>`, com 1 ou 2 campos, cada um com 1 ou 2 ciclos. Nulos: `embaralhado`, `periodo_fixo`.
+
+| campo | o que é |
+|---|---|
+| `ciclos` | `{onde, periodo_min, fase_primeiro_pico, amplitude, amplitude_em_desvios, muda_em, periodo_depois_min}`: o nível mais amplitude vezes cos(2 pi (t - fase) / período); os períodos vão de 60 minutos a 13 dias, longe de um dia e de uma semana |
+| `mudancas_de_periodo` | os ciclos que já mudaram de período (a fase continua no instante da mudança) |
+
 ## Escola 3: gente que responde (`escola3.py`)
 
 Processos (de 7 a 12): por equipe, `quadro da <equipe>` (presentes agora; horas extras no dia), `fluxo da <equipe>` (itens abertos;
@@ -92,8 +134,8 @@ Exemplo (semente 1, 1 dia): `{"t": 42, "texto": "turbina pulou", "refere": {"pro
 
 `python -m organizacao.escolas.familias.conferir [sementes] [dias]` confere as três sementes de cada família (ver o próprio arquivo) e
 grava `registros/conferencia.json` e `registros/hashes.json`, o hash dos minutos de cada semente sem atos. Um dia de mundo leva de 0,01
-a 0,05 segundo de máquina.
+a 0,05 segundo de máquina. As escolas 1, 2 e 4 entraram em 22/10 depois das outras quatro; os hashes destas não mudaram.
 
 No corredor de escolas (`organizacao/escolas.py`), o módulo se chama `familias.<nome>` com `organizacao/escolas` no caminho (o nome
 `escolas` sozinho já é o arquivo `escolas.py`): por exemplo `PYTHONPATH=organizacao/escolas python organizacao/escolas.py corredor
-<pasta> familias.escola3 7 1`. As quatro passaram pelo corredor em sequência (liga, vive, desliga), com o ser de hoje, sem erro.
+<pasta> familias.escola3 7 1`. As sete passaram pelo corredor em sequência (liga, vive, desliga), com o ser de hoje, sem erro.

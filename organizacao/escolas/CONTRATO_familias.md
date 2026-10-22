@@ -46,6 +46,8 @@ Regras que valem para todas as famílias:
 - Verdade: cada acontecimento com instante, lugar, sentido e tamanho em desvios do próprio campo.
 - Nulos: `sem_incidente`, `sem_regime`, `sem_deriva` (cada um tira só a sua lei).
 - O que a escola ensina: abrir e fechar episódios, o normal novo, a deriva. Diploma: as linhas C, D, E e "nada inventado".
+- (22/10: `familias/escola1.py`) Um acontecimento para baixo que levaria o campo abaixo de 40% da base vai para cima; o tamanho
+  declarado é o que aconteceu, em desvios do ruído no nível daquele instante.
 
 ### Escola 2: causa e efeito
 - Mundo: de 2 a 8 processos ligados em pares e cadeias (A move B com atraso sorteado, de minutos a horas; B pode mover C), com uma
@@ -55,6 +57,9 @@ Regras que valem para todas as famílias:
 - Nulos: `embaralhado` (os mesmos disparos de A e de B sem a ligação), `sem_ligacao`.
 - Ensina: a sinapse com atraso, a morte da sinapse quando a ligação some, o pressentimento. Diploma: A, B (o atraso dentro de um
   terço a três vezes o sorteado), e "a ligação desligada morre em até N dias".
+- (22/10: `familias/escola2.py`) Cada processo dispara sozinho e cada ligação passa o disparo com uma chance e um atraso típico
+  (folga de 20%); a intermitente nasce entre o 2º e o 5º dia e morre entre o 9º e o 14º. No embaralhado, os disparos de efeito vão
+  para instantes sorteados, em mesmo número.
 
 ### Escola 3: gente que responde (reescrita em 22/10: `familias/escola3.py`)
 - Mundo: duas ou três equipes de gente e uma a três máquinas (de 7 a 12 processos). As equipes são agentes com estado, como no mundo
@@ -108,6 +113,8 @@ Regras que valem para todas as famílias:
 - Verdade: os períodos, as fases, as amplitudes e o instante da mudança, campo a campo (é o gabarito do calendário como sentido).
 - Nulos: `embaralhado` (as mesmas amplitudes sem período), `periodo_fixo`.
 - Ensina: a ideia de retorno com o período certo, o costume de si nas escalas longas. Diploma: F com o período sorteado, não 1.440.
+- (22/10: `familias/escola4.py`) Períodos de 60 minutos a 13 dias, longe de um dia e de uma semana; um ciclo muda de período entre 40%
+  e 60% de 45 dias, com a fase contínua; no embaralhado a fase pula a cada bloco de um décimo a um terço do período.
 
 ### Escola 5: a empresa
 É o mundo v2 (já entregue), com semente nova a cada prova e a verdade v2.1. Não é desta entrega.
@@ -116,7 +123,8 @@ Regras que valem para todas as famílias:
 
 - Uma pasta `organizacao/escolas/familias/` com um módulo por família (`escola1.py` a `escola4.py`), cada um com `Mundo(semente,
   nulo)` que cumpre o contrato, mais `NULOS` (a lista dos nulos da família) e `FAMILIA` (o nome). (22/10) Entregues: `escola3.py`,
-  `presenca.py`, `corpo.py` e `voz.py`, sobre `base.py` (o relógio, a porta, a pausa); as escolas 1, 2 e 4 ainda não.
+  `presenca.py`, `corpo.py` e `voz.py`, sobre `base.py` (o relógio, a porta, a pausa, os tipos de campo); e, no mesmo dia, as escolas
+  1, 2 e 4 (`escola1.py`, `escola2.py`, `escola4.py`).
 - `VERDADE.md` da pasta: o formato de `verdade()` de cada família, com os campos acima e um exemplo por família.
 - Um teste por família (`conferir.py`): gera três sementes, confere que a verdade bate com o que saiu pela porta (os acontecimentos
   declarados aparecem nos campos onde a verdade diz, com o atraso declarado), que o nulo tira só a lei dele, e que duas sementes dão
