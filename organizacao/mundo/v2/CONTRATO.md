@@ -5,7 +5,8 @@ O v2 é lido do mesmo jeito que o v1: quem lê o v1 lê o v2 sem mudar nada alé
 
 ## O que fica igual ao v1
 
-- `Mundo(semente: int, nulo: str | None = None)`: a mesma semente, a mesma empresa. Os nulos: "sem_defeito" (nenhuma liberação
+- `Mundo(semente: int, nulo: str | None = None)`: a mesma semente, a mesma empresa ((v2.3) e as opções `porta`, `relogio` e
+  `agenda_calada`, desligadas por padrão). Os nulos: "sem_defeito" (nenhuma liberação
   carrega defeito), "embaralhado" (o tempo dos processos sem ciclo), "sem_deriva" (a carteira não cresce) e "surdo" (nenhum ato
   chega ao mundo). (v2.2) "paciente": as equipes sem atenção, cansaço nem confiança (ver abaixo).
 - `mundo.processos() -> list[Processo]`: a lista fixa dos 131 processos. Cada `Processo` tem `nome`, `campos`, **`equipe`** (a equipe
@@ -74,6 +75,28 @@ Os minutos, as respostas e a verdade de antes ficam iguais, byte a byte; só ent
   por "Pedido não entendido:" (`util` nulo). Toda pergunta, e todo pedido de olhar e dizer, que nomeia um processo leva junto o que
   o painel dele mostrou desde o instante entendido (ou na última hora): média, máximo e o valor de agora. Sem atos, nada disso
   muda os minutos.
+
+## v2.3: a porta da equipe e o relógio como campos, a agenda calada e o ouvinte
+
+Três opções novas, **todas desligadas por padrão**: desligadas, os processos, os minutos, as respostas e a verdade são os da v2.2, byte a
+byte. Cada uma liga pelo argumento de `Mundo(...)` ou, sem o argumento, por uma variável de ambiente (para ligar sem tocar no código que
+monta o mundo). O formato está em `opcoes.py` e em `VERDADE.md`.
+
+- `porta=True` (ou `MUNDO_PORTA=1`): um processo por equipe, `porta da equipe de <equipe>`, depois dos 131 da v2.2, com dois campos de
+  contagem: `textos chegados no minuto` (o que chegou dela pela porta naquele minuto: respostas, avisos de tratado, pedidos de
+  esclarecimento) e `itens abertos` (os atos que chegaram a ela e ainda não foram respondidos nem expiraram: o que um sistema de
+  chamados mostra a quem pediu). Só contagens: o campo não diz a que ato uma chegada responde. O texto continua chegando por
+  `respostas()`. O interior da equipe (fila, cansaço, atenção, confiança) continua só na verdade. No nulo surdo os dois ficam em zero.
+- `relogio=True` (ou `MUNDO_RELOGIO=1`): um processo `relógio`, o último, com `hora do dia` (0 a 23), `dia da semana` (0 = segunda) e
+  `minuto do mundo`, no relógio da porta (no nulo embaralhado também). O mesmo vale para o v1 (`Mundo(semente, nulo, relogio=True)`).
+- `agenda_calada=(inicio, fim)` (ou `MUNDO_AGENDA_CALADA=inicio,fim`), em minutos do mundo: o feriado coletivo. As datas cuja
+  meia-noite cai no trecho viram dias sem expediente para a empresa e para os clientes: ninguém trabalha, a agenda não marca nem
+  realiza reunião, não há evento de equipe (contratação, saída, sprint), os clientes usam o produto como num domingo; as tarefas
+  agendadas do servidor continuam. A verdade ganha `opcoes` e `agenda_calada` (o trecho pedido, as datas e o trecho efetivo).
+- O ouvinte lê três coisas que a v2.2 não lia, só nas palavras de quem pede (antes do primeiro ";") e só onde a v2.2 não tinha achado
+  nada: "verificar" como corrigir ou reverter; "olhar ... e dizer" com o processo e o campo no meio como olhar e dizer; o campo pela
+  palavra que o distingue dentro do processo ("falhas" para "verificações com falha no minuto" da sonda). O que a v2.2 lia continua
+  igual: os pedidos de hoje caem nas mesmas rotas, com o mesmo tipo e o mesmo campo.
 
 ## O mundo com consequência
 

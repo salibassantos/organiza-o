@@ -6,8 +6,9 @@ O mundo é um processo no tempo. Quem o observa não é parte dele e não está 
 - `Mundo(semente: int, nulo: str | None = None)`: cria a empresa inteira com a semente (a mesma semente, a mesma empresa). `nulo`
   liga uma das versões nulas: "sem_defeito" (nenhuma liberação carrega defeito), "embaralhado" (o tempo dos processos sem ciclo),
   "sem_deriva" (a carteira não cresce).
-- `mundo.processos() -> list[Processo]`: a lista fixa dos processos observáveis, cada um com `nome` (português, legível, único) e
-  `campos` (lista de nomes de campos, português, legíveis). Entre cem e trezentos processos; cada um com um a oito campos
+- `mundo.processos() -> list[Processo]`: a lista fixa dos processos observáveis, cada um com `nome` (português, legível, único),
+  `campos` (lista de nomes de campos, português, legíveis) `equipe` (o nome da equipe responsável por ele, para a porta de entrada) e `resolucao` (uma lista do tamanho de `campos`
+  com a unidade mínima de cada medida: 1 chamado, 1 pessoa, 1 milissegundo, 0,5 ponto de processador; é a escala do instrumento, não dado). Entre cem e trezentos processos; cada um com um a oito campos
   numéricos. Nenhum campo pode ser a verdade disfarçada (um campo "houve liberação com defeito" conta a resposta).
 - `mundo.passo() -> dict[str, list[float]]`: faz acontecer um minuto (as pessoas agem, os clientes batem no produto, o código roda,
   os bancos mudam) e devolve, para cada processo pelo nome, os valores dos campos naquele minuto, na ordem de `campos`. Um minuto
@@ -25,67 +26,63 @@ O mundo é um processo no tempo. Quem o observa não é parte dele e não está 
 Nenhum texto sobre o que importa. Nenhum rótulo de "normal" ou "anormal". Nenhum dado de pessoa: só agregados por equipe, projeto,
 fila, rota, etapa, agenda, quadro, carteira.
 
+## v1.1: o mundo recebe atos
+- `mundo.receber(equipe, tipo, texto) -> int`: um ato de quem observa, para uma equipe; `tipo` é "pergunta", "pedido" ou
+  "convocacao"; vira item na fila da equipe (ou reunião na agenda), tratado pelas pessoas como qualquer outro, no horário, fora de
+  reunião, com atraso humano; devolve o número do item; acontece no próximo `passo()`. O pedido muda o mundo (a equipe faz algo);
+  a pergunta só consome tempo de pessoa; a convocação marca reunião. Muitos atos atrasam a equipe, e isso emerge.
+- `mundo.respostas() -> list[tuple[int, int, str, str]]`: (t, número do item, equipe, texto) das respostas chegadas desde a última
+  chamada; texto curto em português montado a partir do que os sistemas da equipe têm naquele momento, nunca a verdade.
+- Nulo "surdo": `receber` aceita e nada acontece; `respostas` fica vazio.
+- Dentro do mundo a origem desses itens se chama "porta"; nada os marca por fora.
+
+## v1.2: a ordem de custo dos atos
+- `atos.CUSTO = ("pergunta", "pedido", "convocacao")`: a ordem em que os atos custam à empresa, do mais barato ao mais caro. A
+  pergunta só consome tempo de uma pessoa; o pedido faz a equipe agir; a convocação tira várias pessoas para uma reunião. É verdade
+  do mundo declarada no contrato, para que quem observa não a escreva por conta própria. É ordem, não peso, e serve só para
+  desempatar dois atos que renderam igual; não decide qual ato tentar primeiro. Olhar não passa pela porta e não custa nada.
+
+## v1.3: os defeitos têm sequência própria, independente dos atos
+- Erro de construção achado em 12/10 (pergunta do Fable sobre a linha B): cada pessoa tinha uma sequência de sorte só, e o tratamento
+  de um ato de quem observa sorteava dela. Qualquer ato, mesmo só perguntas, deslocava toda a sorte do trabalho dessa pessoa e de quem
+  dependia dela, e a mesma semente tinha outros defeitos: na semente 3, em 30 dias, 6 liberações com defeito sem atos e 2 com uma
+  pergunta por dia útil a cada equipe.
+- Correção: o tratamento de um ato sorteia de uma sequência própria da pessoa ("porta"). A escrita de um defeito, a revisão de código
+  e o teste da qualidade sorteiam de uma sequência presa à história (projeto, título e quantas vezes esse título já foi feito, e a
+  passagem pela etapa); a regressão, de uma sequência presa ao projeto e ao dia. Na mesma medida, as perguntas passam a mudar no máximo
+  uma liberação com defeito (sementes 1 a 3: 4 e 4, 3 e 3, 4 e 3).
+- O que continua mudando é caminho de verdade, como o contrato já diz: os atos tomam tempo das pessoas e mudam quando cada história
+  fica pronta e em que liberação ela vai, e o pedido faz a equipe agir (cria tarefa, reverte, conserta).
+- Toda medida feita no mundo grande antes da v1.3 é do mundo anterior e não se compara com as de depois.
+
+## Decisões fixadas
+- `t = 0` é a criação (segunda-feira, 0h); cada `passo()` avança `t` e faz acontecer o minuto `t`; 30 dias vão de 1 a 43.200.
+- "embaralhado": calendário interno sorteado em blocos (hora, dia da semana e dia do mês de cada bloco); durações e atrasos
+  causais no minuto real; `verdade()` registra o calendário sorteado.
+- "sem_defeito": o incidente de infraestrutura fica; `verdade()` o marca.
+- "sem_deriva": só a carteira; a versão que muda a latência entra em `verdade()` como "mudança de regime", não como deriva.
+- Incidente, versão que muda a latência e sprint de pressa acontecem por lei e se repetem em corridas longas.
+- Contagens por prioridade podem sair pela porta; nenhum campo calculado para dizer "anormal" sai.
+- Gravações em csv.gz, primeira linha "processo.campo" na ordem de `processos()`.
+
+## O formato de `verdade()` (para a bancada ler sem adivinhar)
+Um dicionário com estas chaves, todas presentes (lista vazia ou `None` quando o nulo tira a coisa). Cada acontecimento diz onde ele
+bate, em pares `[processo, campo]` com os nomes exatos de `processos()`, na ordem da causa, e o atraso típico em minutos entre eles.
+- `liberacoes`: lista de `{"t": int, "defeito": bool, "onde": [[processo, campo], ...], "atrasos": [int, ...], "correcao_t": int | None}`.
+  Para a liberação com defeito, `onde` começa pelo campo de erros da rota atingida e segue pelos chamados do componente (e o que
+  mais a liberação atinge); `atrasos[i]` é o atraso típico, em minutos, entre `onde[i]` e `onde[i+1]`.
+- `incidentes`: lista de `{"inicio": int, "fim": int, "onde": [[processo, campo], ...]}`.
+- `mudancas_de_regime`: lista de `{"t": int, "onde": [[processo, campo]], "sentido": "subiu" | "desceu"}` (a versão nova que muda a latência de uma rota para sempre).
+- `deriva`: `{"onde": [[processo, campo]], "taxa_por_semana": float, "sentido": "subiu" | "desceu"}` ou `None`.
+- `sprints_de_pressa`: lista de `{"inicio": int, "fim": int, "projeto": str, "onde": [[processo, campo], ...]}`.
+- `ciclos`: `{"dia": {"onde": [[processo, campo], ...]}, "semana": {"onde": [...]}, "mes": {"onde": [...]}}` ou, no nulo embaralhado, `None`
+  com `calendario_embaralhado` preenchido (os blocos sorteados).
+- `nulo`: o nome do nulo ou `None`; `semente`: a semente; `minutos_por_instante`: 1.
+
 ## Custo
 Trinta dias (43.200 chamadas de `passo()`) em menos de dez minutos de máquina, abaixo de 2 GB. Python 3.11; numpy e sqlite3
 (biblioteca padrão). Nada de rede.
 
-## Esclarecimentos da v1.0 (decididos antes da construção)
-- **O relógio.** `t = 0` é a criação da empresa (segunda-feira, meia-noite). Cada `passo()` avança `t` e faz acontecer o minuto `t`;
-  os valores devolvidos, `dia()`, `minuto_do_dia()`, `dia_da_semana()` e os instantes de `verdade()` se referem a esse mesmo `t`.
-  Trinta dias vão de `t = 1` a `t = 43.200`.
-- **`Processo`** tem `nome` e `campos` e nada mais. A lista não muda enquanto o mundo anda.
-- **Nulo "embaralhado".** A empresa vive por um calendário interno sorteado em blocos de duração variável (de 25 a 240 minutos);
-  cada bloco recebe uma hora, um dia da semana e um dia do mês sorteados, e dentro do bloco o calendário corre minuto a minuto.
-  Pessoas, clientes, reuniões, liberações e tarefas agendadas do servidor seguem esse calendário; as durações e os atrasos de causa e
-  efeito seguem o minuto real. Some todo ciclo de hora, dia da semana, sprint e mês; o mundo continua andando um minuto por chamada
-  e nunca sozinho. `verdade()` registra o calendário sorteado: os blocos, com início, fim e a hora, o dia da semana e o dia do mês
-  que cada um recebeu. O relógio da porta (`t`, `dia()`...) continua o real.
-- **Nulo "sem_defeito".** Nenhuma liberação com defeito chega ao ar: as pessoas continuam escrevendo defeitos, mas a qualidade roda
-  a bateria inteira de testes e barra todos. O incidente de infraestrutura fica (não é liberação); a verdade o marca como o único
-  episódio de erros seguidos de chamados nesse nulo.
-- **Nulo "sem_deriva".** Só a carteira deixa de crescer: cada cliente que entra leva à saída do cliente mais insatisfeito em até dois
-  dias. A versão nova continua mudando a latência; em `verdade()` ela entra como "mudança de regime" (um degrau com instante),
-  separada de "deriva" (o que cresce devagar).
-- **Prioridade pode sair** pela porta (contagens de itens e chamados por prioridade), porque é o que as pessoas põem nos sistemas.
-  Nenhum campo de alerta sai, nem qualquer campo calculado para dizer que algo está fora do normal.
-- **O dono e o administrativo** formam a equipe "gestão" nos agregados; nenhum agregado sai de uma pessoa só.
-- **As leis se repetem.** Incidente, versão que muda a latência e sprint de pressa acontecem por lei do mundo, não por calendário: o
-  volume do banco enche com o uso e a operação dá folga de três a cinco semanas a cada vez; as funcionalidades dos épicos mudam o
-  trabalho de uma rota em uma parte das liberações; o sprint de pressa nasce quando o planejado passa da capacidade. Nos primeiros
-  30 dias cada um acontece ao menos uma vez (o estado inicial da empresa garante) e em 90 dias cada um se repete.
-
-## v1.1: o mundo recebe atos
-Quem observa a empresa também age nela. O ato vira coisa dentro do mundo, as pessoas tratam a coisa como tratam o resto, e a
-resposta volta pela porta com atraso humano.
-- `mundo.equipes() -> list[str]`: os nomes das equipes ("produto", "desenvolvimento", "qualidade", "atendimento", "vendas",
-  "operação", "gestão").
-- `mundo.receber(equipe: str, tipo: str, texto: str) -> int`: registra um ato para a equipe. `tipo` é "pergunta", "pedido" ou
-  "convocacao". Devolve o número do ato (o protocolo que o item criado carrega no sistema da equipe). O ato acontece no próximo
-  `passo()`: vira um item no fluxo de trabalho (produto, desenvolvimento, qualidade, operação), um chamado no atendimento, uma
-  tarefa no CRM de vendas ou uma solicitação à gestão. Dentro do mundo a origem desses itens se chama "porta"; nos agregados eles são
-  itens como os outros (fila, abertos, idade).
-  - "pergunta": alguém da equipe trata o item na ordem da fila, dentro do horário e fora de reunião, entre uma tarefa e outra; a
-    resposta é um texto curto montado com o que os sistemas da equipe mostram naquele momento, nunca a verdade.
-  - "pedido": como a pergunta, mas a equipe age: a operação roda os testes da rota contra a versão no ar e, se falham, reverte (se a
-    falha veio com a última liberação) ou abre a correção com prioridade crítica; a qualidade refaz os testes na versão no ar e
-    reabre o item que causou a falha; o atendimento responde primeiro os chamados do componente nas quatro horas seguintes; o
-    desenvolvimento passa o bug do componente para crítico ou procura a falha; o produto registra a história; vendas retoma as
-    propostas paradas; a gestão marca um alinhamento das lideranças.
-  - "convocacao": vira uma reunião na agenda da equipe no primeiro horário livre de todos; quem está nela não age nos sistemas
-    enquanto dura; a resposta diz quando a reunião ficou marcada.
-  Cada ato consome tempo de pessoa; muitos atos atrasam a equipe (a fila cresce, o prazo piora), sem penalidade escrita.
-- `mundo.respostas() -> list[tuple[int, int, str, str]]`: as respostas que chegaram desde a última chamada, como
-  `(t, número do ato, equipe, texto)`. Um ato não tratado até o fim do expediente do dia útil seguinte fica sem resposta.
-- Nulo **"surdo"**: `receber()` aceita e devolve número, e nada acontece; `respostas()` fica vazio.
-- `rodar.py <pasta> <dias> <semente> [nulo] [--atos arquivo.csv]`: o arquivo de atos tem cabeçalho `t,equipe,tipo,texto`; o ato da
-  linha `t` é entregue logo antes do passo que faz o minuto `t`. As respostas são gravadas com instante em `respostas.csv`.
-
-## Gravações
-`rodar.py` grava `minutos.csv.gz`: uma linha por minuto (a linha `i` depois do cabeçalho é o minuto `t = i`), com os valores na
-ordem de `processos()` e de `campos`; a primeira linha tem os nomes "processo.campo".
-
-## Custo (v1.1)
-Noventa dias (129.600 chamadas de `passo()`) em menos de trinta minutos de máquina, abaixo de 2 GB.
 
 ## v1.4: a causa dos chamados na verdade
 Só a verdade muda; o mundo, os minutos e as respostas ficam idênticos (conferido byte a byte nas gravações de `registros/semente1/`).
@@ -98,3 +95,7 @@ Só a verdade muda; o mundo, os minutos e as respostas ficam idênticos (conferi
   chamados que gerou; os campos que se mexem juntos quando o produto para; e as categorias de um par de campos: causa declarada,
   causa comum (incidente ou queda do processo) e sem relação. `causas.classificar_par(verdade, de, para, inicio, fim)` classifica um
   par. O formato está descrito em `organizacao/mundo/v2/VERDADE.md` (seções `chamados` e `causas`), igual no v1.
+
+## v1.5: o relógio como campo (opção, desligada por padrão)
+- `Mundo(semente, nulo, relogio=True)` (ou `MUNDO_RELOGIO=1`): um processo `relógio`, o último, com `hora do dia` (0 a 23), `dia da
+  semana` (0 = segunda) e `minuto do mundo`, no relógio da porta. Desligado, o mundo é o de antes, byte a byte.

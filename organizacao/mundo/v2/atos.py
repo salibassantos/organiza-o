@@ -73,6 +73,7 @@ class Porta:
         self.fila = {e: [] for e in EQUIPES}
         self.saida = []
         self.ouvinte = None                     # (v2.2) posto pelo Mundo
+        self.textos_do_minuto = {}              # (v2.3) equipe -> textos que chegaram dela pela porta neste minuto
 
     # ---------- o lado de fora ----------
     def receber(self, equipe, tipo, texto):
@@ -244,6 +245,7 @@ class Porta:
         ato["estado"] = "respondido"
         self._fechar(t, ato, sis, "concluído")
         self.saida.append((t, numero, ato["equipe"], texto))
+        self.textos_do_minuto[ato["equipe"]] = self.textos_do_minuto.get(ato["equipe"], 0) + 1
         sis["verdade"].ato_tratado(t, numero, ato["pego"], minutos, adiada, efeito, antes, depois, eq.estado(), texto)
 
     def _leitura(self, sis, ent, t):

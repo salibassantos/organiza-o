@@ -14,6 +14,8 @@ from .cadastro import EQUIPES, ROTAS, NOME_ROTA, ROTA_COMPONENTE, NOME_COMPONENT
 from .produto import rodar_testes
 
 TIPOS = ("pergunta", "pedido", "convocacao")
+CUSTO = ("pergunta", "pedido", "convocacao")   # (contrato v1.2) a ordem de custo dos atos para a empresa, do mais barato ao mais caro: a pergunta só gasta tempo de
+                                               # uma pessoa; o pedido faz a equipe agir; a convocação tira várias pessoas para uma reunião. Ordem, não peso; só desempate.
 PALAVRAS_ROTA = {"login": ("login", "entrar", "acesso", "senha"), "catalogo": ("catalogo",), "busca": ("busca", "pesquisa"),
                  "produto": ("produto",), "carrinho": ("carrinho",), "frete": ("frete", "cep", "entrega", "transportadora"),
                  "pedido": ("pedido", "compra", "quantidade"), "pagamento": ("pagamento", "cartao", "cobranca"),
@@ -188,7 +190,7 @@ class Porta:
             return texto
         repo = sis["repo"]
         comp = ROTA_COMPONENTE[rota]
-        n, falhas = rodar_testes(repo.versoes[repo.no_ar], comp, pessoa.s, 1.0, todos=True)
+        n, falhas = rodar_testes(repo.versoes[repo.no_ar], comp, pessoa.s_porta, 1.0, todos=True)
         repo.registrar_testes(t, comp, "no ar", n, len(falhas), "operação")
         if not falhas:
             return texto + f" Rodamos {n} testes de {NOME_COMPONENTE[comp]} contra a versão no ar: todos passam."
@@ -205,7 +207,7 @@ class Porta:
         fluxo.comentar(t, bug, "operação", "testes que falham: " + nomes)
         if veio_agora and empresa.reverter is None:
             empresa.reverter = repo.anterior
-            pessoa.tarefa = {"tipo": "reverter", "resta": pessoa.s.randint(8, 15), "urgente": True}
+            pessoa.tarefa = {"tipo": "reverter", "resta": pessoa.s_porta.randint(8, 15), "urgente": True}
             return texto + f" Na versão no ar falha: {nomes}. A falha veio com a última liberação; vamos voltar para a versão {repo.anterior} e abrimos a correção."
         return texto + f" Na versão no ar falha: {nomes}. Abrimos a correção com prioridade crítica."
 
@@ -220,7 +222,7 @@ class Porta:
         comp = ato["componente"]
         if ato["tipo"] != "pedido" or comp is None:
             return texto
-        n, falhas = rodar_testes(repo.versoes[repo.no_ar], comp, pessoa.s, 1.0, todos=True)
+        n, falhas = rodar_testes(repo.versoes[repo.no_ar], comp, pessoa.s_porta, 1.0, todos=True)
         repo.registrar_testes(t, comp, "no ar", n, len(falhas), "qualidade")
         if not falhas:
             return texto + f" Refizemos os {n} testes de {NOME_COMPONENTE[comp]} na versão no ar: passam."
@@ -260,7 +262,7 @@ class Porta:
                 fluxo.priorizar(alvo["id"], "crítica")
             return texto + f" Passamos o {alvo['chave']} para prioridade crítica; quem estiver livre pega agora."
         repo = sis["repo"]
-        n, falhas = rodar_testes(repo.versoes[repo.no_ar], comp, pessoa.s, 1.0, todos=True)
+        n, falhas = rodar_testes(repo.versoes[repo.no_ar], comp, pessoa.s_porta, 1.0, todos=True)
         repo.registrar_testes(t, comp, "no ar", n, len(falhas), "desenvolvimento")
         if not falhas:
             return texto + f" Rodamos os {n} testes do componente na versão no ar: passam."

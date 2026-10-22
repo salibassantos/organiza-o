@@ -306,6 +306,8 @@ class Clientes:
             fator = np.where(self.sabado[:n] & (8 * 60 <= m) & (m < 12 * 60), 0.6, 0.03)
         else:
             fator = 0.02
+        if getattr(cal, "feriado", False):
+            fator = 0.02                                       # (v2.3) o feriado coletivo: os clientes param como num domingo
         if cal.fim_do_mes():
             fator = fator * 1.12
         if self.campanha:

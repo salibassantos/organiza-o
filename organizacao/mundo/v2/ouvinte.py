@@ -56,6 +56,13 @@ _TIPO = (
 )
 
 
+# (v2.3) os tipos que a v2.2 não lia: o infinitivo e o presente de "verificar"; "olhar ... e dizer" com o campo no meio
+_TIPO_V23 = (
+    ("corrigir ou reverter", r"\bverific(ar|a|ou|ando|arem)\b"),
+    ("olhar e dizer", r"\b(olhar|olhem|olhe|ver|vejam|veja|conferir|confiram)\b.{0,120}\b(dizer|digam|diga|contar|contem|informar|informem)\b"),
+)
+
+
 def simples(texto):
     return "".join(c for c in unicodedata.normalize("NFD", str(texto).lower()) if unicodedata.category(c) != "Mn")
 
@@ -110,6 +117,29 @@ class Ouvinte:
         formas.sort(key=lambda x: -len(x[0]))
         return formas
 
+    def apelidos_do_processo(self, processo):
+        """(v2.3) Os campos de um processo pela palavra que os distingue: "falhas" para "verificações com falha no minuto", "erros"
+        para "cotações com erro no minuto", "falhas" para "falhas de trabalho no minuto"; no plural e no singular."""
+        cache = self.__dict__.setdefault("_apelidos", {})
+        if processo not in cache:
+            formas = []
+            for _, s, campos in self.processos:
+                if _ != processo:
+                    continue
+                for c in campos:
+                    sc = simples(c)
+                    m = re.search(r"\bcom (\w+)", sc) or re.match(r"(\w+)", sc)
+                    if m:
+                        w = m.group(1)
+                        for forma in {w, w[:-1] if w.endswith("s") else w + "s"}:
+                            if len(forma) >= 4:
+                                formas.append((forma, c))
+            nomes = {}
+            for forma, c in formas:
+                nomes.setdefault(forma, set()).add(c)
+            cache[processo] = sorted(((f, next(iter(cs))) for f, cs in nomes.items() if len(cs) == 1), key=lambda x: -len(x[0]))
+        return cache[processo]
+
     # ---------- o processo e o campo ----------
     def processo_e_campo(self, x, rota):
         processo = None
@@ -154,6 +184,13 @@ class Ouvinte:
         comp = componente if componente is not None else self.componente_do_processo(processo)
         desde, desde_texto = self.tempo(x, t, ultima_implantacao)
         tipo = next((nome for nome, padrao in _TIPO if re.search(padrao, x)), None)
+        # (v2.3) o que a leitura da v2.2 não achava, procurado só nas palavras de quem pede (antes do primeiro ";"): nunca muda o que
+        # ela já achou
+        proprio = simples(str(texto).split(";", 1)[0])
+        if tipo is None:
+            tipo = next((nome for nome, padrao in _TIPO_V23 if re.search(padrao, proprio)), None)
+        if processo is not None and campo is None:
+            campo = next((c for forma, c in self.apelidos_do_processo(processo) if _contem(proprio, forma)), None)
         reconhece = rota is not None or comp is not None or processo is not None or campo is not None or \
             any(re.search(r"(?<![a-z])" + re.escape(p), x) for p in VOCABULARIO.get(equipe, ()))
         return {"processo": processo, "campo": campo, "rota": rota, "componente": comp, "tipo": tipo, "desde": desde,

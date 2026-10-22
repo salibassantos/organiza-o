@@ -43,9 +43,12 @@ class Processo:
 
 
 class Mundo:
-    def __init__(self, semente: int, nulo: str | None = None, tempo_real: bool = False):
+    def __init__(self, semente: int, nulo: str | None = None, tempo_real: bool = False, relogio: bool | None = None):
         if nulo not in NULOS:
             raise ValueError(f"nulo desconhecido: {nulo}; os nulos são {', '.join(n for n in NULOS if n)}")
+        # (v1.5) o relógio como campo: um processo "relógio" (hora do dia, dia da semana, minuto do mundo) no relógio da porta.
+        # Desligado por padrão (o mundo é o de antes, byte a byte); liga pelo argumento ou por MUNDO_RELOGIO=1.
+        self.com_relogio = relogio if relogio is not None else os.environ.get("MUNDO_RELOGIO", "").strip().lower() in ("1", "sim", "true", "ligado")
         self.semente = int(semente)
         self.nulo = nulo
         self.relogio = Relogio(self.semente, embaralhado=(nulo == "embaralhado"), tempo_real=tempo_real)
@@ -79,6 +82,8 @@ class Mundo:
         self.sorte_dia = sorteio(self.semente, "dias vividos")
         self._estado_inicial()
         self._processos = [Processo(n, list(c)) for n, c in self.conectores.processos]
+        if self.com_relogio:
+            self._processos.append(Processo("relógio", ["hora do dia", "dia da semana", "minuto do mundo"]))
 
     # ======================================================================================================== a porta
     @property
@@ -134,7 +139,10 @@ class Mundo:
         contas = prod.fechar_minuto(t, cal)
         self.registro.minuto_da_sonda(t, contas["sonda"][1] >= 6, prod)
         self.registro.latencia(t, cal, contas["rotas"])
-        return self.conectores.ler(t, cal, self, contas)
+        saida = self.conectores.ler(t, cal, self, contas)
+        if getattr(self, "com_relogio", False):
+            saida["relógio"] = [float((t % 1440) // 60), float((t // 1440) % 7), float(t)]
+        return saida
 
     def receber(self, equipe: str, tipo: str, texto: str) -> int:
         return self.porta.receber(equipe, tipo, texto)

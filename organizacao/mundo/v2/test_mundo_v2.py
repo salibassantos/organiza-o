@@ -550,5 +550,111 @@ class TesteOuvinte(unittest.TestCase):
         self.assertIsNone(a[2]["efeito"]["util"])
 
 
+
+class TesteOpcoesV23(unittest.TestCase):
+    """(v2.3) A porta da equipe e o relógio como processos, e a agenda calada (o feriado coletivo); desligadas, nada muda."""
+
+    def test_desligadas_nada_muda(self):
+        a, b = novo(5, nome="v23_a"), Mundo(5, historia=pasta("v23_b"), porta=False, relogio=False, agenda_calada=None)
+        self.assertEqual([p.nome for p in a.processos()], [p.nome for p in b.processos()])
+        self.assertEqual(len(a.processos()), 131)
+        atos = {D + 600: [("operação", "pedido", "verifiquem a rota login")]}
+        self.assertEqual(viver(a, D + 900, atos), viver(b, D + 900, atos))
+        self.assertNotIn("opcoes", a.verdade())
+
+    def test_porta_e_relogio(self):
+        m = Mundo(1, historia=pasta("v23_porta"), porta=True, relogio=True)
+        nomes = [p.nome for p in m.processos()]
+        self.assertEqual(nomes[-8:], [f"porta da equipe de {e}" for e in EQUIPES] + ["relógio"])
+        atos = {D + 600: [("operação", "pedido", "verifiquem a rota login"), ("atendimento", "pergunta", "como está o frete?")]}
+        chegou, abertos, relogio = {}, [], None
+        while m.t < D + 900:
+            for x in atos.get(m.t + 1, ()):
+                m.receber(*x)
+            v = m.passo()
+            for e in EQUIPES:
+                chegou[e] = chegou.get(e, 0) + v[f"porta da equipe de {e}"][0]
+            abertos.append(v["porta da equipe de operação"][1])
+            if m.t == D + 601:
+                relogio = v["relógio"]
+        self.assertEqual(relogio, [10.0, 1.0, float(D + 601)])
+        resp = m.respostas()
+        self.assertEqual(chegou["operação"], sum(1 for x in resp if x[2] == "operação"))
+        self.assertEqual(chegou["atendimento"], sum(1 for x in resp if x[2] == "atendimento"))
+        self.assertEqual(chegou["vendas"], 0)
+        self.assertEqual(abertos[D + 600 - 1], 1.0)                 # o pedido aberto desde o minuto em que chegou
+        self.assertEqual(abertos[-1], 0.0)                          # e fechado depois da resposta
+        self.assertEqual(m.verdade()["opcoes"], {"porta": True, "relogio": True, "agenda_calada": None})
+
+    def test_surdo_nenhuma_chegada(self):
+        m = Mundo(1, "surdo", historia=pasta("v23_surdo"), porta=True)
+        atos = {D + 600: [("operação", "pedido", "verifiquem a rota login")]}
+        tot = 0
+        while m.t < D + 900:
+            for x in atos.get(m.t + 1, ()):
+                m.receber(*x)
+            v = m.passo()
+            tot += sum(v[f"porta da equipe de {e}"][0] + v[f"porta da equipe de {e}"][1] for e in EQUIPES)
+        self.assertEqual(tot, 0)
+
+    def test_agenda_calada_e_um_feriado(self):
+        m = Mundo(1, historia=pasta("v23_feriado"), agenda_calada=(2 * D, 3 * D))
+        dia = {}
+        while m.t < 4 * D:
+            v = m.passo()
+            d = dia.setdefault(m.t // D, [0, 0, 0])
+            d[0] += v["sessões dos clientes"][0]
+            d[1] += sum(v[f"agenda da equipe de {e}"][1] for e in EQUIPES)
+            d[2] = max(d[2], sum(v[f"quadro da equipe de {e}"][1] for e in EQUIPES))
+        self.assertEqual(dia[2][1:], [0, 0])                        # nenhuma reunião, ninguém presente
+        self.assertLess(dia[2][0], 0.1 * dia[1][0])                 # os clientes quase param
+        self.assertGreater(dia[3][2], 30)                           # e no dia seguinte tudo volta
+        v = m.verdade()
+        self.assertEqual((v["agenda_calada"]["datas"], v["agenda_calada"]["inicio"], v["agenda_calada"]["fim"]), ([2], 2 * D, 3 * D))
+        _, linhas, colunas = m.verdade_por_minuto(2 * D + 600, 2 * D + 600)
+        self.assertEqual(linhas[0][colunas.index("dia_util")], 0.0)
+
+    def test_variavel_de_ambiente(self):
+        os.environ["MUNDO_RELOGIO"] = "1"
+        try:
+            self.assertEqual(Mundo(1, historia=pasta("v23_env")).processos()[-1].nome, "relógio")
+        finally:
+            del os.environ["MUNDO_RELOGIO"]
+
+    def test_o_relogio_no_v1(self):
+        from organizacao.mundo.v1 import Mundo as MundoV1
+        m = MundoV1(1, relogio=True)
+        self.assertEqual(m.processos()[-1].nome, "relógio")
+        for _ in range(61):
+            v = m.passo()
+        self.assertEqual(v["relógio"], [1.0, 0.0, 61.0])
+        self.assertNotEqual(MundoV1(1).processos()[-1].nome, "relógio")
+
+
+class TesteOuvinteV23(unittest.TestCase):
+    """(v2.3) As três lacunas: "verificar", "olhar X ... e dizer", "falhas" da sonda; o que a v2.2 lia continua igual."""
+
+    def entender(self, equipe, texto):
+        from .atos import rota_do_texto
+        from .cadastro import ROTA_COMPONENTE
+        o = novo(1, nome="ouvinte_v23").porta.ouvinte
+        r = rota_do_texto(texto)
+        return o.entender(texto, equipe, 20 * D + 15 * 60, r, ROTA_COMPONENTE[r] if r else None)
+
+    def test_as_frases(self):
+        e = self.entender("operação", "Vocês podem verificar a rota busca?")
+        self.assertEqual((e["processo"], e["tipo"]), ("rota busca", "corrigir ou reverter"))
+        e = self.entender("operação", "Olhar a fila de trabalhos, trabalhos pendentes, desde as 9h e dizer como está")
+        self.assertEqual((e["processo"], e["campo"], e["tipo"]), ("fila de trabalhos", "trabalhos pendentes", "olhar e dizer"))
+        e = self.entender("operação", "Olhem a sonda de disponibilidade e me digam as falhas desde ontem")
+        self.assertEqual((e["processo"], e["campo"], e["tipo"], e["desde"]),
+                         ("sonda de disponibilidade", "verificações com falha no minuto", "olhar e dizer", 19 * D))
+
+    def test_o_pedido_dele_nao_muda(self):
+        texto = "que sonda de disponibilidade: verificações com falha no minuto volte ao normal; Sem rota indicada, não rodamos verificação."
+        e = self.entender("operação", texto)
+        self.assertEqual((e["processo"], e["campo"], e["tipo"]), ("sonda de disponibilidade", "verificações com falha no minuto", None))
+
+
 if __name__ == "__main__":
     unittest.main()

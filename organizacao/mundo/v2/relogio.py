@@ -18,7 +18,7 @@ DIAS_REFERENCIA = 364                    # o ano de onde o calendário embaralha
 
 class Calendario:
     """O que a folhinha e o relógio de parede dizem a quem trabalha na empresa naquele minuto."""
-    __slots__ = ("absoluto", "data", "minuto", "dia_semana", "dia_mes", "dias_no_mes", "mes", "util", "sprint", "dia_sprint")
+    __slots__ = ("absoluto", "data", "minuto", "dia_semana", "dia_mes", "dias_no_mes", "mes", "util", "sprint", "dia_sprint", "feriado")
 
     def ajustar(self, absoluto):
         self.absoluto = absoluto
@@ -71,10 +71,25 @@ class Relogio:
     def dia_da_semana(self):
         return self.dia() % 7
 
+    # ---------- (v2.3) a agenda calada: o feriado coletivo, nas datas do relógio da porta ----------
+    def _avancar_com_feriado(self):
+        feriados, self.feriados = self.feriados, None
+        try:
+            self.t -= 1
+            novo = self.avancar()
+        finally:
+            self.feriados = feriados
+        cal = self.cal
+        cal.feriado = (self.t // MINUTOS_DIA) in feriados
+        cal.util = cal.dia_semana < 5 and not cal.feriado
+        return novo
+
     # ---------- um minuto ----------
     def avancar(self):
         """Avança o relógio um minuto e devolve True quando o calendário entra numa data nova."""
         self.t += 1
+        if getattr(self, "feriados", None):
+            return self._avancar_com_feriado()
         if not self.embaralhado:
             return self.cal.ajustar(self.t)
         if self.bloco is None or self.t >= self.bloco[1]:

@@ -136,6 +136,7 @@ import sys; sys.path.insert(0, "<pasta que contém organizacao>")
 from organizacao.mundo.v2 import Mundo
 
 m = Mundo(1)                       # ou Mundo(1, "sem_defeito" | "embaralhado" | "sem_deriva" | "surdo" | "paciente")
+# (v2.3) opções, desligadas por padrão: Mundo(1, porta=True, relogio=True, agenda_calada=(inicio, fim)); ver opcoes.py
 for p in m.processos():
     print(p.nome, p.campos)
 valores = m.passo()                # o minuto 1: {processo: [valores na ordem dos campos]}

@@ -38,6 +38,7 @@ from .atos import Porta
 from .pessoas import Empresa, VALOR_PLANO, COMPONENTES_SQUAD, TEMAS
 from .conectores import Conectores
 from .ouvinte import Ouvinte, Painel
+from . import opcoes as _opcoes
 from . import codigo
 
 NULOS = (None, "sem_defeito", "embaralhado", "sem_deriva", "surdo", "paciente")
@@ -96,12 +97,17 @@ class Processo:
 
 
 class Mundo:
-    def __init__(self, semente: int, nulo: str | None = None, tempo_real: bool = False, historia: str | None = None):
+    def __init__(self, semente: int, nulo: str | None = None, tempo_real: bool = False, historia: str | None = None,
+                 porta: bool | None = None, relogio: bool | None = None, agenda_calada=None):
         if nulo not in NULOS:
             raise ValueError(f"nulo desconhecido: {nulo}; os nulos são {', '.join(n for n in NULOS if n)}")
         self.semente = int(semente)
         self.nulo = nulo
         self.relogio = Relogio(self.semente, embaralhado=(nulo == "embaralhado"), tempo_real=tempo_real)
+        # (v2.3) as opções, desligadas por padrão (ver opcoes.py)
+        self.opcoes = _opcoes.ler(porta, relogio, agenda_calada)
+        if self.opcoes["agenda_calada"]:
+            self.relogio.feriados = _opcoes.datas_do_feriado(self.opcoes["agenda_calada"])
         partida = sorteio(self.semente, "partida")
         self.clientes = Clientes(self.semente, partida.randint(380, 440), nulo)
         regs, usuarios = self.clientes.registros_iniciais
@@ -150,7 +156,7 @@ class Mundo:
         self.com_ramos = True
         self._estado_inicial()
         self._processos = [Processo(n, list(c), equipe_do_processo(n), [resolucao_do_campo(x) for x in c])
-                           for n, c in self.conectores.processos]
+                           for n, c in self.conectores.processos + _opcoes.processos_novos(self.opcoes)]
         # (v2.2) o ouvinte da porta e o painel que as equipes olham quando lhes pedem um campo
         self.porta.ouvinte = Ouvinte(self._processos)
         self.painel = Painel(self._processos)
@@ -222,6 +228,9 @@ class Mundo:
         self.registro.minuto_da_sonda(t, contas["sonda"][1] >= 6, prod)
         self.registro.latencia(t, cal, contas["rotas"])
         saida = self.conectores.ler(t, cal, self, contas)
+        if self.opcoes["porta"] or self.opcoes["relogio"]:
+            _opcoes.ler_minuto(self, t, saida)
+        self.porta.textos_do_minuto.clear()
         self.painel.guardar(t, saida)
         self.registro.linha(t, self._linha_da_verdade(t, cal, contas))
         if t % MINUTOS_DIA == MINUTOS_DIA - 1:
@@ -251,7 +260,9 @@ class Mundo:
         """Só para a bancada: o que a empresa tem e quando aconteceu, até o minuto atual."""
         if self.registro.ramos_a_calcular:
             self._calcular_ramos()
-        return self.registro.como_dict(self.relogio, self.relogio.embaralhado)
+        v = self.registro.como_dict(self.relogio, self.relogio.embaralhado)
+        v.update(_opcoes.para_a_verdade(self))
+        return v
 
     def verdade_por_minuto(self, inicio: int = 0, fim: int | None = None):
         """Só para a bancada: a verdade minuto a minuto entre inicio e fim (instantes, matriz, nomes das colunas)."""
@@ -319,13 +330,15 @@ class Mundo:
 
     def __setstate__(self, d):
         self.__dict__.update(d)
-        for k, v in (("campanhas_injetadas", []), ("ramos", []), ("com_ramos", True)):     # um estado salvo antes da v2.2
+        for k, v in (("campanhas_injetadas", []), ("ramos", []), ("com_ramos", True),     # um estado salvo antes da v2.2
+                     ("opcoes", {"porta": False, "relogio": False, "agenda_calada": None})):   # ou antes da v2.3
             self.__dict__.setdefault(k, v)
         self.registro.__dict__.setdefault("ramos_a_calcular", [])
         self.registro.__dict__.setdefault("com_ramo", set())
         if "painel" not in self.__dict__:
             self.painel = Painel(self._processos)
             self.sis["painel"] = self.painel
+        self.porta.__dict__.setdefault("textos_do_minuto", {})
         if getattr(self.porta, "ouvinte", None) is None:
             self.porta.ouvinte = Ouvinte(self._processos)
 

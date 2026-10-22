@@ -47,6 +47,7 @@ class Pessoa:
         self.id = ident
         self.equipe, self.papel, self.projeto, self.grupo = equipe, papel, projeto, GRUPO[papel]
         self.s = s
+        self.s_porta = sorteio(semente, "porta", ident)   # (v1.3) o que a pessoa sorteia ao tratar um ato de quem observa: sequência própria, para que os atos não mudem a sorte do resto do trabalho dela (os defeitos que ela escreve)
         self.inicio = int(max(7 * 60 + 15, min(10 * 60, s.gauss(8 * 60 + 45, 35))))
         self.almoco = int(s.gauss(12 * 60 + 5, 25))
         self.sexta_cedo = s.choice((0, 0, 30, 45, 60))
@@ -336,7 +337,7 @@ class Empresa:
         if p.grupo not in ("dono",):
             ato = porta.proximo(p.equipe, t)
             if ato is not None:
-                dur = {"pergunta": p.s.randint(10, 25), "pedido": p.s.randint(30, 80), "convocacao": p.s.randint(5, 12)}[ato["tipo"]]
+                dur = {"pergunta": p.s_porta.randint(10, 25), "pedido": p.s_porta.randint(30, 80), "convocacao": p.s_porta.randint(5, 12)}[ato["tipo"]]
                 return {"tipo": "ato", "resta": dur, "ato": ato["numero"]}
         return getattr(self, "_escolher_" + p.grupo)(p, t, cal)
 
@@ -785,13 +786,14 @@ class Empresa:
         rush = max(0.0, self.pressa.get(p.projeto, 1.0) - 1.0)
         chance = 1.0 - math.exp(-0.05 * pts * (1.0 + 2.0 * min(1.0, rush)) * p.cuidado)
         if comp in COMPONENTES_SQUAD.get(r["projeto"], ()) or comp == "login":
-            if p.s.random() < chance:
+            sd = self._sorte_da_historia(r, "defeito")
+            if sd.random() < chance:
                 ramo = repo.codigo_do_ramo(r["id"])
                 ramo.update(mudancas)
                 opcoes = [(f, v) for (f, v) in codigo.DEFEITOS if codigo.COMPONENTE_FUNCAO[f] == comp
                           and ramo[f] == repo.correta[f] and f not in mudancas]
                 if opcoes:
-                    f, v = p.s.choice(sorted(opcoes))
+                    f, v = sd.choice(sorted(opcoes))
                     mudancas[f] = v
                     self.sis["verdade"].defeito_escrito(t, r["id"], r["projeto"], f, v, self.pressa.get(p.projeto, 1.0))
         linhas = int(pts * p.s.randint(25, 90))
@@ -816,6 +818,17 @@ class Empresa:
             fluxo.atribuir(r["id"], None)
         fluxo.comentar(t, r["id"], "desenvolvimento", "corrigido; pode testar de novo")
 
+    def _sorte_da_historia(self, r, etapa):
+        """(v1.3) A sorte de uma etapa da vida de um defeito (escrever, revisar, testar), presa à história e não à ordem do trabalho de
+        quem a faz: a história é o projeto, o título e quantas vezes esse título já foi feito; cada nova passagem pela etapa sorteia de
+        novo. Assim os atos de quem observa, que tomam tempo das pessoas, não mudam quais defeitos nascem e quais escapam."""
+        if not hasattr(self, "historia_de"): self.historia_de, self.vezes_titulo, self.passagens = {}, {}, {}
+        h = self.historia_de.get(r["id"])
+        if h is None:
+            k = (r["projeto"], r["titulo"]); self.vezes_titulo[k] = self.vezes_titulo.get(k, 0) + 1; h = self.historia_de[r["id"]] = k + (self.vezes_titulo[k],)
+        n = self.passagens[(r["id"], etapa)] = self.passagens.get((r["id"], etapa), 0) + 1
+        return sorteio(self.semente, etapa, *h, n)
+
     def _fim_revisar(self, p, tar, t, cal):
         fluxo = self.sis["fluxo"]
         repo = self.sis["repo"]
@@ -825,7 +838,7 @@ class Empresa:
         ramo = repo.ramos.get(r["id"], {})
         defeitos = [f for f, v in ramo.items() if (f, v) in codigo.DEFEITOS]
         rush = max(0.0, min(1.0, self.pressa.get(p.projeto, 1.0) - 1.0))
-        if defeitos and p.s.random() < 0.3 * (1.0 - 0.5 * rush):
+        if defeitos and self._sorte_da_historia(r, "revisão").random() < 0.3 * (1.0 - 0.5 * rush):
             repo.registrar_revisao(t, r["id"], "pediu mudanças")
             self.reprovacoes[r["id"]] = defeitos
             fluxo.transitar(t, r["id"], "em andamento" if r["tipo"] == "tarefa" else "em desenvolvimento", "desenvolvimento")
@@ -924,7 +937,7 @@ class Empresa:
         todos = r["tipo"] == "bug" or self.nulo == "sem_defeito"
         cobertura = p.cobertura * (1.0 - 0.5 * rush)
         cod = repo.codigo_do_ramo(r["id"])
-        n, falhas = rodar_testes(cod, comp, p.s, cobertura, todos=todos) if comp else (0, [])
+        n, falhas = rodar_testes(cod, comp, self._sorte_da_historia(r, "qualidade"), cobertura, todos=todos) if comp else (0, [])
         repo.registrar_testes(t, comp or "", "ramo", n, len(falhas), "qualidade")
         if falhas:
             funcoes = sorted({f for f, _, _ in falhas})
@@ -946,8 +959,9 @@ class Empresa:
         repo = self.sis["repo"]
         fluxo = self.sis["fluxo"]
         comps = COMPONENTES_SQUAD[p.projeto]
-        for comp in p.s.sample(list(comps), 2):
-            n, falhas = rodar_testes(repo.principal, comp, p.s, 0.4)
+        sr = sorteio(self.semente, "regressão", p.projeto, t // MINUTOS_DIA)          # (v1.3) presa ao dia e ao projeto, não à ordem do trabalho
+        for comp in sr.sample(list(comps), 2):
+            n, falhas = rodar_testes(repo.principal, comp, sr, 0.4)
             repo.registrar_testes(t, comp, "principal", n, len(falhas), "qualidade")
             for funcao in sorted({f for f, _, _ in falhas}):
                 origem = repo.autoria.get(funcao)

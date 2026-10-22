@@ -327,6 +327,20 @@ com o descanso.
 
 `{dia, t, media_no_horario_comercial_ms: {rota: média}}`.
 
+### `opcoes` e `agenda_calada` (v2.3, só quando alguma opção está ligada)
+
+`opcoes`: `{porta, relogio, agenda_calada}`, as opções com que o mundo foi criado (ver `CONTRATO.md`). Desligadas todas, a chave não
+aparece e a verdade é a da v2.2.
+
+`agenda_calada`: `{pedido: {inicio, fim}, datas, inicio, fim, como, onde}`. `pedido` é o trecho declarado; `datas` são os dias do
+relógio da porta cuja meia-noite cai nele (os dias de feriado); `inicio` e `fim` são o trecho efetivo, da meia-noite da primeira data
+à meia-noite depois da última. Nesses dias `dia_util` da verdade por minuto é 0: ninguém trabalha, a agenda não marca nem realiza
+reunião, não há evento de equipe, os clientes usam o produto como num domingo. O que o calendário move em cada campo está em
+`calendario.campos`.
+
+Os processos das opções (`porta da equipe de X`, `relógio`) não têm verdade própria: são contagens do que a porta fez (os atos e as
+respostas estão em `atos`) e o relógio da porta.
+
 ## A verdade por minuto (colunas de `dia_NNNNN.npz` e de `verdade_por_minuto()`)
 
 | coluna | o que mede |
