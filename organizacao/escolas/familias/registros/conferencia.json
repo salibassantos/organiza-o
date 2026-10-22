@@ -5,12 +5,249 @@
   3
  ],
  "familias": {
+  "escola1": {
+   "dias": 21,
+   "sementes": {
+    "1": {
+     "comuns": {
+      "segundos_por_dia": 0.0166,
+      "hash": "431ac4f310094282771e8b753a92e39cac5ea97569f96215761dfc3a05651856",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "incidentes_no_campo": {
+       "conferidos": 5,
+       "certos": 5,
+       "ok": true
+      },
+      "regimes_no_campo": {
+       "conferidos": 2,
+       "certos": 2,
+       "ok": true
+      },
+      "deriva": {
+       "declarada_por_semana": -0.0508,
+       "medida_por_semana": -0.0524,
+       "ok": true
+      },
+      "cada_nulo_tira_so_a_sua": true,
+      "ok": true
+     }
+    },
+    "2": {
+     "comuns": {
+      "segundos_por_dia": 0.0275,
+      "hash": "2f86ad2fb2977c5970fb29c3d13df0381e4cffadd0126f5e7449dd002d98dbab",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "incidentes_no_campo": {
+       "conferidos": 5,
+       "certos": 5,
+       "ok": true
+      },
+      "regimes_no_campo": {
+       "conferidos": 1,
+       "certos": 1,
+       "ok": true
+      },
+      "deriva": {
+       "declarada_por_semana": 0.1157,
+       "medida_por_semana": 0.1145,
+       "ok": true
+      },
+      "cada_nulo_tira_so_a_sua": true,
+      "ok": true
+     }
+    },
+    "3": {
+     "comuns": {
+      "segundos_por_dia": 0.0073,
+      "hash": "061ec96bff1c044a2db01e5fbe1575d757adfc6faf4a5ba7bb5dcfdf0d9c387c",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "incidentes_no_campo": {
+       "conferidos": 6,
+       "certos": 6,
+       "ok": true
+      },
+      "regimes_no_campo": {
+       "conferidos": 2,
+       "certos": 2,
+       "ok": true
+      },
+      "deriva": {
+       "declarada_por_semana": -0.0343,
+       "medida_por_semana": -0.0311,
+       "ok": true
+      },
+      "cada_nulo_tira_so_a_sua": true,
+      "ok": true
+     }
+    }
+   },
+   "estruturas_diferentes": true
+  },
+  "escola2": {
+   "dias": 21,
+   "sementes": {
+    "1": {
+     "comuns": {
+      "segundos_por_dia": 0.0127,
+      "hash": "fa7ec534158bb3395b5d704f2a23c50a455cb24b82fc81a7c0981cbc4491e8fa",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "ligacoes": [
+       {
+        "de": "secadora do Moinho",
+        "para": "prensa do Cais",
+        "atraso": 135,
+        "normal": 0.8,
+        "embaralhado": 0.4,
+        "sem_ligacao": 0.4,
+        "depois_de_morrer": 0.07407407407407407,
+        "morreu": true,
+        "ok": true
+       }
+      ],
+      "ligacoes_ok": true,
+      "o_disparo_aparece_no_campo": true,
+      "os_espontaneos_iguais_nos_nulos": true,
+      "sem_ligacao_sem_efeito": true,
+      "ok": true
+     }
+    },
+    "2": {
+     "comuns": {
+      "segundos_por_dia": 0.0315,
+      "hash": "f446d9989064fdd45a5ab52f8fe8f61a78d64ab3f2073da6be18136ca63ac62e",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "ligacoes": [
+       {
+        "de": "bomba do Vale",
+        "para": "peneira do Cais",
+        "atraso": 202,
+        "normal": 0.7450980392156863,
+        "embaralhado": 0.23529411764705882,
+        "sem_ligacao": 0.13725490196078433,
+        "ok": true
+       },
+       {
+        "de": "bomba do Vale",
+        "para": "câmara fria do Arco",
+        "atraso": 14,
+        "normal": 0.8431372549019608,
+        "embaralhado": 0.0,
+        "sem_ligacao": 0.0,
+        "ok": true
+       },
+       {
+        "de": "peneira do Cais",
+        "para": "tanque da Fonte",
+        "atraso": 15,
+        "normal": 0.6470588235294118,
+        "embaralhado": 0.0,
+        "sem_ligacao": 0.0,
+        "depois_de_morrer": 0.0,
+        "morreu": true,
+        "ok": true
+       },
+       {
+        "de": "misturadora da Ponte",
+        "para": "comporta do Porto",
+        "atraso": 65,
+        "normal": 0.9047619047619048,
+        "embaralhado": 0.0,
+        "sem_ligacao": 0.0,
+        "ok": true
+       }
+      ],
+      "ligacoes_ok": true,
+      "o_disparo_aparece_no_campo": true,
+      "os_espontaneos_iguais_nos_nulos": true,
+      "sem_ligacao_sem_efeito": true,
+      "ok": true
+     }
+    },
+    "3": {
+     "comuns": {
+      "segundos_por_dia": 0.0255,
+      "hash": "fa835920a96f2a62ef004cfd77cc5b05adcba6f701d4d0416b33a0bd715011c0",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "ligacoes": [
+       {
+        "de": "esteira do Vale",
+        "para": "moenda da Ilha",
+        "atraso": 131,
+        "normal": 1.0,
+        "embaralhado": 0.13043478260869565,
+        "sem_ligacao": 0.043478260869565216,
+        "ok": true
+       },
+       {
+        "de": "moenda da Ilha",
+        "para": "misturadora da Fonte",
+        "atraso": 35,
+        "normal": 0.7636363636363637,
+        "embaralhado": 0.037037037037037035,
+        "sem_ligacao": 0.03125,
+        "ok": true
+       },
+       {
+        "de": "moenda da Ilha",
+        "para": "balança do Moinho",
+        "atraso": 130,
+        "normal": 0.8333333333333334,
+        "embaralhado": 0.17647058823529413,
+        "sem_ligacao": 0.2222222222222222,
+        "depois_de_morrer": 0.03225806451612903,
+        "morreu": true,
+        "ok": true
+       },
+       {
+        "de": "moenda da Ilha",
+        "para": "serra do Jardim",
+        "atraso": 150,
+        "normal": 0.8909090909090909,
+        "embaralhado": 0.2037037037037037,
+        "sem_ligacao": 0.03125,
+        "ok": true
+       }
+      ],
+      "ligacoes_ok": true,
+      "o_disparo_aparece_no_campo": true,
+      "os_espontaneos_iguais_nos_nulos": true,
+      "sem_ligacao_sem_efeito": true,
+      "ok": true
+     }
+    }
+   },
+   "estruturas_diferentes": true
+  },
   "escola3": {
    "dias": 21,
    "sementes": {
     "1": {
      "comuns": {
-      "segundos_por_dia": 0.0286,
+      "segundos_por_dia": 0.0294,
       "hash": "7d7a4dfab562e97618f468e9957e99d9c4ab08571351cbbf85700ed575be9a80",
       "mesma_vida": true,
       "salvar_e_carregar": true,
@@ -52,7 +289,7 @@
     },
     "2": {
      "comuns": {
-      "segundos_por_dia": 0.0397,
+      "segundos_por_dia": 0.0438,
       "hash": "9580896192ac198b56c052dcab4b50e9a5c7fc9d5c08dec1da1ea5eb01165b89",
       "mesma_vida": true,
       "salvar_e_carregar": true,
@@ -94,7 +331,7 @@
     },
     "3": {
      "comuns": {
-      "segundos_por_dia": 0.0431,
+      "segundos_por_dia": 0.0341,
       "hash": "c9e8d204b0ffa7207c35d8699c2d02ee842a2eaf44669327ff444e085f0103df",
       "mesma_vida": true,
       "salvar_e_carregar": true,
@@ -137,12 +374,122 @@
    },
    "estruturas_diferentes": true
   },
+  "escola4": {
+   "dias": 45,
+   "sementes": {
+    "1": {
+     "comuns": {
+      "segundos_por_dia": 0.018,
+      "hash": "c9f323021c6dc0b5383ea4df7c711f12f157e60a7081f80b7169685f79e4e787",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "amplitude_no_periodo_antes_da_mudanca": [
+       1.003,
+       1.001,
+       0.999,
+       1.001,
+       0.989,
+       0.989
+      ],
+      "embaralhado": [
+       0.095,
+       0.415,
+       0.041,
+       0.394,
+       0.286,
+       0.153
+      ],
+      "depois_da_mudanca": {
+       "no_periodo_novo": 0.991,
+       "periodo_fixo_no_velho": 0.988
+      },
+      "ok": true
+     }
+    },
+    "2": {
+     "comuns": {
+      "segundos_por_dia": 0.0174,
+      "hash": "81ef9a8d6c9f38043e0a50d0aa932c46f9157f5d5f875059c2d8a172aa271f75",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "amplitude_no_periodo_antes_da_mudanca": [
+       1.001,
+       1.0,
+       1.006,
+       0.882
+      ],
+      "embaralhado": [
+       0.124,
+       0.075,
+       0.034,
+       0.192
+      ],
+      "depois_da_mudanca": {
+       "no_periodo_novo": 1.001,
+       "periodo_fixo_no_velho": 1.001
+      },
+      "ok": true
+     }
+    },
+    "3": {
+     "comuns": {
+      "segundos_por_dia": 0.0299,
+      "hash": "9e0544945f3a6da00a040308851ce2b7257489969b0c57306d9b6f15de151557",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "amplitude_no_periodo_antes_da_mudanca": [
+       1.0,
+       0.999,
+       1.004,
+       1.001,
+       1.002,
+       1.001,
+       1.001,
+       1.002,
+       0.92,
+       0.926,
+       1.001,
+       1.001
+      ],
+      "embaralhado": [
+       0.106,
+       0.006,
+       0.18,
+       0.038,
+       0.105,
+       0.364,
+       0.086,
+       0.105,
+       0.028,
+       0.104,
+       0.111,
+       0.017
+      ],
+      "depois_da_mudanca": {
+       "no_periodo_novo": 0.999,
+       "periodo_fixo_no_velho": 0.999
+      },
+      "ok": true
+     }
+    }
+   },
+   "estruturas_diferentes": true
+  },
   "presenca": {
    "dias": 28,
    "sementes": {
     "1": {
      "comuns": {
-      "segundos_por_dia": 0.0076,
+      "segundos_por_dia": 0.0085,
       "hash": "311953c98b7824bd96dd93117d8f6f6f5fac1bd8928303f3b7b498bc7ea8838a",
       "mesma_vida": true,
       "salvar_e_carregar": true,
@@ -168,7 +515,7 @@
     },
     "2": {
      "comuns": {
-      "segundos_por_dia": 0.0108,
+      "segundos_por_dia": 0.0079,
       "hash": "33f6f2368aeac474a8ce99401941c659978f07a9c5498b4339ef6310b7e96e03",
       "mesma_vida": true,
       "salvar_e_carregar": true,
@@ -194,7 +541,7 @@
     },
     "3": {
      "comuns": {
-      "segundos_por_dia": 0.0083,
+      "segundos_por_dia": 0.0073,
       "hash": "68377a3b9c950ac4ae02490c1f82972046b5a4248a0e1601edd4bb4687423d93",
       "mesma_vida": true,
       "salvar_e_carregar": true,
@@ -226,7 +573,7 @@
    "sementes": {
     "1": {
      "comuns": {
-      "segundos_por_dia": 0.014,
+      "segundos_por_dia": 0.0138,
       "hash": "8963f41fe2f7a9ddbab8f344c5abcce3215c798bd8376b2c2875db4856901885",
       "mesma_vida": true,
       "salvar_e_carregar": true,
@@ -244,7 +591,7 @@
     },
     "2": {
      "comuns": {
-      "segundos_por_dia": 0.0202,
+      "segundos_por_dia": 0.0189,
       "hash": "86c97db72e211950b95c67a75215c1f2ea1f71d2e4bf6f9b594ab1d4ae12f25f",
       "mesma_vida": true,
       "salvar_e_carregar": true,
@@ -262,7 +609,7 @@
     },
     "3": {
      "comuns": {
-      "segundos_por_dia": 0.013,
+      "segundos_por_dia": 0.0145,
       "hash": "b87dda0c8608b0783df92ebb1f34bb829f084b9d42a875283e0f47bee5f48aaa",
       "mesma_vida": true,
       "salvar_e_carregar": true,
@@ -286,7 +633,7 @@
    "sementes": {
     "1": {
      "comuns": {
-      "segundos_por_dia": 0.0136,
+      "segundos_por_dia": 0.0137,
       "hash": "a815e69ebdb050d5346977c6af8801d6258b0790967de4ecee208e21ec1e44f8",
       "mesma_vida": true,
       "salvar_e_carregar": true,
@@ -312,7 +659,7 @@
     },
     "2": {
      "comuns": {
-      "segundos_por_dia": 0.0153,
+      "segundos_por_dia": 0.0121,
       "hash": "0ac7012ee37f07b0e7b4154e191bc320759779006d9c2bca9561d07db4e6bf77",
       "mesma_vida": true,
       "salvar_e_carregar": true,
@@ -338,7 +685,7 @@
     },
     "3": {
      "comuns": {
-      "segundos_por_dia": 0.013,
+      "segundos_por_dia": 0.0119,
       "hash": "f9e436ca20c12d2ddaf221b94514a551159662d310e8684ade672ceec68b9ea3",
       "mesma_vida": true,
       "salvar_e_carregar": true,

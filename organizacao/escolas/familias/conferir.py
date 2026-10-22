@@ -4,6 +4,12 @@
 
 Para cada família e cada semente: a mesma vida duas vezes e depois de salvar e carregar (os mesmos minutos); duas sementes dão
 estruturas diferentes; o custo de um dia; e o que cada família declara:
+- escola 1: cada incidente e cada mudança de regime aparecem no campo, no sentido declarado e com ao menos metade do tamanho em
+  desvios; a deriva tem a taxa por semana declarada; cada nulo tira só a sua lei (as outras nos mesmos instantes);
+- escola 2: o disparo de origem é seguido do de efeito dentro da folga do atraso típico; a ligação que morre deixa de agir; o
+  embaralhado e o sem ligação perdem isso; o disparo aparece no campo;
+- escola 4: a amplitude medida no período declarado (por mínimos quadrados) é a declarada; depois da mudança, no período novo; no
+  embaralhado some; no período fixo o período velho continua;
 - escola 3: os textos chegados no minuto são as respostas daquele minuto; os itens abertos são os atos sem resposta; as horas extras
   nascem dos pedidos no normal e não no paciente; a equipe só responde com gente presente; no surdo nada chega; em ninguém resolve
   nenhum pedido é útil; o defeito aparece nas falhas da máquina; os episódios do defeito começam nos mesmos instantes em todos os nulos;
@@ -15,6 +21,7 @@ estruturas diferentes; o custo de um dia; e o que cada família declara:
   vocabulário permutado as palavras não ficam presas a um sentido; a voz surda não fala.
 Grava registros/conferencia.json e registros/hashes.json (o hash dos minutos de cada semente, sem atos)."""
 import collections
+import math
 import json
 import os
 import sys
@@ -22,11 +29,11 @@ import tempfile
 import time
 
 from .base import MINUTOS_DIA, hash_dos_minutos
-from . import escola3, presenca, corpo, voz
+from . import escola1, escola2, escola3, escola4, presenca, corpo, voz
 
 D = MINUTOS_DIA
 AQUI = os.path.dirname(os.path.abspath(__file__))
-FAMILIAS = {"escola3": escola3, "presenca": presenca, "corpo": corpo, "voz": voz}
+FAMILIAS = {"escola1": escola1, "escola2": escola2, "escola3": escola3, "escola4": escola4, "presenca": presenca, "corpo": corpo, "voz": voz}
 
 
 def viver(m, dias, atos=None):
@@ -220,7 +227,171 @@ def conferir_voz(semente, dias):
     return out
 
 
-ESPECIFICOS = {"escola3": conferir_escola3, "presenca": conferir_presenca, "corpo": conferir_corpo, "voz": conferir_voz}
+# ---------------------------------------------------------------------------------------------------- escola 1
+def _col(m, s, proc, campo):
+    procs = m.processos()
+    k = [p.nome for p in procs].index(proc)
+    j = procs[k].campos.index(campo)
+    return [x[proc][j] for x in s]
+
+
+def conferir_escola1(semente, dias):
+    import statistics as st
+    out = {}
+    vidas = {nulo: None for nulo in (None,) + escola1.NULOS}
+    for nulo in vidas:
+        m = escola1.Mundo(semente, nulo)
+        s, _, _ = viver(m, dias)
+        vidas[nulo] = (m, s, m.verdade())
+    m, s, v = vidas[None]
+    def medido(serie, ini, fim, antes=120):
+        a = serie[max(0, ini - 1 - antes):ini - 1]
+        b = serie[ini + 1:min(fim - 1, len(serie))]
+        if len(a) < 10 or len(b) < 5:
+            return None
+        return (st.mean(b) - st.mean(a)) / (st.pstdev(a) or 1.0)
+    inc = []
+    for i in v["incidentes"]:
+        x = medido(_col(m, s, *i["onde"][0]), i["inicio"], i["fim"])
+        if x is not None:
+            inc.append(x * (1 if i["sentido"] == "subiu" else -1) >= 0.5 * i["tamanho_em_desvios"])
+    out["incidentes_no_campo"] = {"conferidos": len(inc), "certos": sum(inc), "ok": bool(inc) and all(inc)}
+    reg = []
+    for r in v["mudancas_de_regime"]:
+        serie = _col(m, s, *r["onde"][0])
+        fora = lambda t: not any(i["onde"] == r["onde"] and i["inicio"] - 5 <= t <= i["fim"] + 5 for i in v["incidentes"])
+        a = [serie[t - 1] for t in range(max(1, r["t"] - 720), r["t"]) if fora(t)]
+        b = [serie[t - 1] for t in range(r["t"] + 1, min(len(serie), r["t"] + 720)) if fora(t)]
+        if len(a) > 30 and len(b) > 30:
+            x = (st.mean(b) - st.mean(a)) / (st.pstdev(a) or 1.0)
+            reg.append(x * (1 if r["sentido"] == "subiu" else -1) >= 0.5 * r["tamanho_em_desvios"])
+    out["regimes_no_campo"] = {"conferidos": len(reg), "certos": sum(reg), "ok": all(reg)}
+    d = v["deriva"]
+    if d is not None:
+        serie = _col(m, s, *d["onde"][0])
+        mexe = lambda t: any(i["onde"] == d["onde"] and i["inicio"] - 5 <= t <= i["fim"] + 5 for i in v["incidentes"]) or \
+            any(r["onde"] == d["onde"] and abs(t - r["t"]) < 5 for r in v["mudancas_de_regime"])
+        dias_ok = [(t // D, serie[t - 1]) for t in range(d["inicio"] + 1, len(serie) + 1) if not mexe(t)]
+        por_dia = collections.defaultdict(list)
+        for dd, x in dias_ok:
+            por_dia[dd].append(x)
+        regs = sorted(r["t"] for r in v["mudancas_de_regime"] if r["onde"] == d["onde"])
+        # a taxa medida: a reta do logaritmo das médias diárias, dia inteiro depois do início, em cada trecho entre mudanças de regime
+        import numpy as np
+        cortes = [d["inicio"]] + regs + [len(serie) + 1]
+        inclinacoes, pesos = [], []
+        for a, b in zip(cortes[:-1], cortes[1:]):
+            xs = [dd for dd in sorted(por_dia) if a // D < dd < b // D and st.mean(por_dia[dd]) > 0]
+            if len(xs) >= 4:
+                inclinacoes.append(np.polyfit(xs, [math.log(st.mean(por_dia[dd])) for dd in xs], 1)[0])
+                pesos.append(len(xs))
+        medida = math.expm1(7 * sum(i * w for i, w in zip(inclinacoes, pesos)) / sum(pesos)) if pesos else None
+        out["deriva"] = {"declarada_por_semana": d["taxa_por_semana"], "medida_por_semana": round(medida, 4) if medida is not None else None,
+                         "ok": medida is not None and medida * d["taxa_por_semana"] > 0 and 0.5 <= medida / d["taxa_por_semana"] <= 2.0}
+    instantes = lambda v: ([i["inicio"] for i in v["incidentes"]], [r["t"] for r in v["mudancas_de_regime"]], (v["deriva"] or {}).get("inicio"))
+    n = instantes(v)
+    out["cada_nulo_tira_so_a_sua"] = all(
+        (instantes(vidas[nulo][2])[0] == ([] if nulo == "sem_incidente" else n[0])) and
+        (instantes(vidas[nulo][2])[1] == ([] if nulo == "sem_regime" else n[1])) and
+        (instantes(vidas[nulo][2])[2] == (None if nulo == "sem_deriva" else n[2])) for nulo in escola1.NULOS)
+    out["ok"] = all(x if isinstance(x, bool) else x.get("ok", True) for x in out.values())
+    return out
+
+
+# ---------------------------------------------------------------------------------------------------- escola 2
+def conferir_escola2(semente, dias):
+    out = {}
+    vidas = {}
+    for nulo in (None,) + escola2.NULOS:
+        m = escola2.Mundo(semente, nulo)
+        s, _, _ = viver(m, dias)
+        vidas[nulo] = (m, s, m.verdade())
+    def acerto(v, L, ini, fim):
+        orig = [d["t"] for d in v["disparos"] if d["onde"][0] == L["de"] and ini <= d["t"] < fim]
+        dest = [d["t"] for d in v["disparos"] if d["onde"][0] == L["para"]]
+        a = L["atraso_tipico_min"]
+        return (sum(1 for t in orig if any(0.8 * a - 1 <= u - t <= 1.2 * a + 1 for u in dest)) / len(orig)) if orig else None
+    v = vidas[None][2]
+    res = []
+    for L in v["ligacoes"]:
+        fim = L["morre"] if L["morre"] is not None else dias * D
+        n, e, sl = acerto(v, L, L["nasce"], fim), acerto(vidas["embaralhado"][2], L, L["nasce"], fim), acerto(vidas["sem_ligacao"][2], L, L["nasce"], fim)
+        r = {"de": L["de"][0], "para": L["para"][0], "atraso": L["atraso_tipico_min"], "normal": n, "embaralhado": e, "sem_ligacao": sl}
+        if L["intermitente"] and L["morre"] is not None and L["morre"] < dias * D:
+            r["depois_de_morrer"] = acerto(v, L, L["morre"], dias * D)
+            r["morreu"] = not any(d["ligacao"] == v["ligacoes"].index(L) and d["t"] > L["morre"] + 1.2 * L["atraso_tipico_min"] + 1 for d in v["disparos"])
+        r["ok"] = n is not None and n >= 0.6 and (e is None or n - e >= 0.2) and (sl is None or n - sl >= 0.2) and r.get("morreu", True)
+        res.append(r)
+    out["ligacoes"] = res
+    out["ligacoes_ok"] = bool(res) and all(r["ok"] for r in res)
+    m, s, _ = vidas[None]
+    sobe = []
+    for d in v["disparos"]:
+        p, c = d["onde"][0]
+        t = d["t"]
+        if 2 <= t <= len(s) - 2:
+            proc = next(x for x in v["estrutura"]["processos"] if x["nome"] == p)
+            serie = _col(m, s, p, c)
+            sobe.append(serie[t - 1] - proc["base"] > 3 * proc["desvio_do_ruido"])
+    out["o_disparo_aparece_no_campo"] = bool(sobe) and sum(sobe) / len(sobe) > 0.8
+    esp = lambda v: [(d["t"], tuple(d["onde"][0])) for d in v["disparos"] if d["causa"] == "sozinho"]
+    out["os_espontaneos_iguais_nos_nulos"] = esp(v) == esp(vidas["embaralhado"][2]) == esp(vidas["sem_ligacao"][2])
+    out["sem_ligacao_sem_efeito"] = all(d["causa"] == "sozinho" for d in vidas["sem_ligacao"][2]["disparos"])
+    out["ok"] = out["ligacoes_ok"] and out["o_disparo_aparece_no_campo"] and out["os_espontaneos_iguais_nos_nulos"] and out["sem_ligacao_sem_efeito"]
+    return out
+
+
+# ---------------------------------------------------------------------------------------------------- escola 4
+def conferir_escola4(semente, dias):
+    import numpy as np
+    out = {}
+    vidas = {}
+    for nulo in (None,) + escola4.NULOS:
+        m = escola4.Mundo(semente, nulo)
+        s, _, _ = viver(m, dias)
+        vidas[nulo] = (m, s, m.verdade())
+    def amplitudes(m, s, v, ini, fim, usar_depois):
+        """Por mínimos quadrados, a amplitude de cada ciclo no período declarado (o de antes ou o de depois da mudança)."""
+        out = []
+        por_campo = collections.defaultdict(list)
+        for c in v["ciclos"]:
+            por_campo[tuple(c["onde"][0])].append(c)
+        for (p, campo), cs in por_campo.items():
+            y = np.array(_col(m, s, p, campo)[ini:fim], dtype=float)
+            t = np.arange(ini + 1, fim + 1, dtype=float)
+            cols = [np.ones_like(t)]
+            for c in cs:
+                P = c["periodo_depois_min"] if (usar_depois and c["muda_em"] is not None) else c["periodo_min"]
+                cols += [np.cos(2 * np.pi * t / P), np.sin(2 * np.pi * t / P)]
+            coef, *_ = np.linalg.lstsq(np.column_stack(cols), y, rcond=None)
+            for i, c in enumerate(cs):
+                out.append((c, float(np.hypot(coef[1 + 2 * i], coef[2 + 2 * i]))))
+        return out
+    m, s, v = vidas[None]
+    muda = next((c for c in m.ciclos if c["muda_em"] is not None), None)
+    corte = muda["muda_em"] if muda is not None and muda["muda_em"] < len(s) else len(s)
+    antes = amplitudes(m, s, v, 0, corte, False)
+    out["amplitude_no_periodo_antes_da_mudanca"] = [round(a / c["amplitude"], 3) for c, a in antes]
+    ok_antes = all(0.7 <= a / c["amplitude"] <= 1.3 for c, a in antes if c["periodo_min"] * 1.5 <= corte)
+    me, se, ve = vidas["embaralhado"]
+    emb = amplitudes(me, se, ve, 0, corte, False)
+    out["embaralhado"] = [round(a / c["amplitude"], 3) for c, a in emb]
+    ok_emb = all(a / c["amplitude"] < 0.5 for c, a in emb if c["periodo_min"] * 1.5 <= corte)
+    ok_depois = True
+    if muda is not None and corte < len(s):
+        depois = amplitudes(m, s, v, corte, len(s), True)
+        alvo = next(a / c["amplitude"] for c, a in depois if c["muda_em"] is not None)
+        mf, sf, vf = vidas["periodo_fixo"]
+        fixo = next(a / c["amplitude"] for c, a in amplitudes(mf, sf, vf, corte, len(sf), False) if c["periodo_min"] == muda["periodo"]
+                    and c["onde"] == [[m.proc[muda["k"]]["nome"], m.proc[muda["k"]]["campos"][muda["j"]].nome]])
+        out["depois_da_mudanca"] = {"no_periodo_novo": round(alvo, 3), "periodo_fixo_no_velho": round(fixo, 3)}
+        longo = (len(s) - corte) >= 1.5 * muda["periodo_depois"]
+        ok_depois = (not longo) or (0.7 <= alvo <= 1.3 and 0.7 <= fixo <= 1.3)
+    out["ok"] = ok_antes and ok_emb and ok_depois
+    return out
+
+
+ESPECIFICOS = {"escola1": conferir_escola1, "escola2": conferir_escola2, "escola4": conferir_escola4, "escola3": conferir_escola3, "presenca": conferir_presenca, "corpo": conferir_corpo, "voz": conferir_voz}
 
 
 def main(argv):

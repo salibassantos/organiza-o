@@ -135,3 +135,70 @@ COISAS = ("prensa", "caldeira", "esteira", "forno", "bomba", "turbina", "balanç
           "secadora", "peneira", "misturadora", "serra", "tanque", "torre de resfriamento", "câmara fria", "fornalha", "elevador")
 def nomes_sem_repetir(s, lista, n):
     return s.sample(list(lista), n)
+
+
+# ---------------------------------------------------------------------------------------------------- os tipos de campo (vocabulário comum)
+import math as _math
+
+TIPOS_DE_CAMPO = {
+    "contagem": ("chegadas no minuto", "pedidos no minuto", "eventos no minuto", "leituras no minuto"),
+    "nível": ("itens na fila", "itens abertos", "pessoas presentes", "volume no tanque"),
+    "latência": ("tempo de resposta em ms", "espera em ms"),
+    "taxa": ("taxa de erro em %", "ocupação em %"),
+    "carteira": ("clientes ativos", "contas abertas"),
+}
+
+
+class Campo:
+    """Um campo de um tipo do vocabulário: o nome é do mundo, o tipo é da família. `base` é o nível de referência; `desvio` é o
+    desvio-padrão do ruído minuto a minuto em torno dele (a régua do 'tamanho em desvios' da verdade)."""
+
+    def __init__(self, s, tipo, nome):
+        self.tipo, self.nome = tipo, nome
+        if tipo == "contagem":
+            self.base = round(s.uniform(3, 40), 2)
+        elif tipo == "nível":
+            self.base = round(s.uniform(10, 80), 1)
+        elif tipo == "latência":
+            self.base = round(s.uniform(80, 600), 1)
+        elif tipo == "taxa":
+            self.base = round(s.uniform(2, 30), 2)
+        else:
+            self.base = float(s.randint(300, 3000))
+        self.ruido = {"contagem": None, "nível": round(s.uniform(1.0, 4.0), 2), "latência": 0.08, "taxa": round(s.uniform(0.3, 1.5), 2),
+                      "carteira": round(s.uniform(1.0, 3.0), 2)}[tipo]
+        self.resolucao = {"contagem": 1.0, "nível": 1.0, "latência": 0.1, "taxa": 0.1, "carteira": 1.0}[tipo]
+
+    def desvio(self, nivel=None):
+        mu = self.base if nivel is None else max(0.01, nivel)
+        if self.tipo == "contagem":
+            return _math.sqrt(mu)
+        if self.tipo == "latência":
+            return mu * self.ruido
+        return self.ruido
+
+    def valor(self, s, nivel):
+        """O que sai pela porta neste minuto, com o nível de agora."""
+        if self.tipo == "contagem":
+            return float(_poisson(s, max(0.0, nivel)))
+        if self.tipo == "latência":
+            return round(max(1.0, nivel) * _math.exp(s.gauss(0, self.ruido)), 1)
+        if self.tipo == "taxa":
+            return round(min(100.0, max(0.0, nivel + s.gauss(0, self.ruido))), 1)
+        return float(max(0, round(nivel + s.gauss(0, self.ruido))))
+
+    def lei(self):
+        return {"tipo": self.tipo, "base": self.base, "desvio_do_ruido": round(self.desvio(), 3)}
+
+
+def _poisson(s, lam):
+    if lam <= 0:
+        return 0
+    if lam > 60:
+        return max(0, int(round(s.gauss(lam, _math.sqrt(lam)))))
+    L, k, p = _math.exp(-lam), 0, 1.0
+    while True:
+        p *= s.random()
+        if p < L:
+            return k
+        k += 1
