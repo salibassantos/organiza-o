@@ -78,6 +78,10 @@ Os minutos, as respostas e a verdade de antes ficam iguais, byte a byte; só ent
 
 ## v2.3: a porta da equipe e o relógio como campos, a agenda calada e o ouvinte
 
+Versão v2.3: o código é o do commit `46008f2` (ramo mundo-servico), em dois passos: `157b994` (o mundo: as três opções e o ouvinte;
+com as opções desligadas, o ser no recorte mini e na união, 10 dias, semente 4, `RECORTE_BASE=grande2`, dá os mesmos barramento,
+diário, itens e itens de dentro da v2.2) e `46008f2` (as escolas em `organizacao/escolas/familias/`, arquivos novos).
+
 Três opções novas, **todas desligadas por padrão**: desligadas, os processos, os minutos, as respostas e a verdade são os da v2.2, byte a
 byte. Cada uma liga pelo argumento de `Mundo(...)` ou, sem o argumento, por uma variável de ambiente (para ligar sem tocar no código que
 monta o mundo). O formato está em `opcoes.py` e em `VERDADE.md`.
