@@ -1,0 +1,31 @@
+{
+ "como": "sha256 de json.dumps(passo(), sort_keys=True, ensure_ascii=False) de cada minuto, sem atos",
+ "dias": {
+  "escola3": 21,
+  "presenca": 28,
+  "corpo": 21,
+  "voz": 21
+ },
+ "hashes": {
+  "escola3": {
+   "1": "7d7a4dfab562e97618f468e9957e99d9c4ab08571351cbbf85700ed575be9a80",
+   "2": "9580896192ac198b56c052dcab4b50e9a5c7fc9d5c08dec1da1ea5eb01165b89",
+   "3": "c9e8d204b0ffa7207c35d8699c2d02ee842a2eaf44669327ff444e085f0103df"
+  },
+  "presenca": {
+   "1": "311953c98b7824bd96dd93117d8f6f6f5fac1bd8928303f3b7b498bc7ea8838a",
+   "2": "33f6f2368aeac474a8ce99401941c659978f07a9c5498b4339ef6310b7e96e03",
+   "3": "68377a3b9c950ac4ae02490c1f82972046b5a4248a0e1601edd4bb4687423d93"
+  },
+  "corpo": {
+   "1": "8963f41fe2f7a9ddbab8f344c5abcce3215c798bd8376b2c2875db4856901885",
+   "2": "86c97db72e211950b95c67a75215c1f2ea1f71d2e4bf6f9b594ab1d4ae12f25f",
+   "3": "b87dda0c8608b0783df92ebb1f34bb829f084b9d42a875283e0f47bee5f48aaa"
+  },
+  "voz": {
+   "1": "a815e69ebdb050d5346977c6af8801d6258b0790967de4ecee208e21ec1e44f8",
+   "2": "0ac7012ee37f07b0e7b4154e191bc320759779006d9c2bca9561d07db4e6bf77",
+   "3": "f9e436ca20c12d2ddaf221b94514a551159662d310e8684ade672ceec68b9ea3"
+  }
+ }
+}

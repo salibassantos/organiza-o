@@ -1,0 +1,370 @@
+{
+ "sementes": [
+  1,
+  2,
+  3
+ ],
+ "familias": {
+  "escola3": {
+   "dias": 21,
+   "sementes": {
+    "1": {
+     "comuns": {
+      "segundos_por_dia": 0.0286,
+      "hash": "7d7a4dfab562e97618f468e9957e99d9c4ab08571351cbbf85700ed575be9a80",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "textos_chegados_sao_as_respostas": true,
+      "itens_abertos_com_os_atos": true,
+      "so_responde_com_gente_presente": true,
+      "horas_extras": {
+       "normal": 30.62,
+       "paciente": 0.0,
+       "atribuidas_aos_atos": 28,
+       "ok": true
+      },
+      "surdo_nada_chega": true,
+      "ninguem_resolve_sem_util": true,
+      "algum_pedido_util_no_normal": true,
+      "defeito_nas_falhas": {
+       "falhas_por_minuto_com_defeito": 3.348,
+       "no_resto": 0.575,
+       "ok": true
+      },
+      "o_defeito_nos_mesmos_instantes_sem_atos": true,
+      "quartis_da_resposta": {
+       "equipe da Estação": [
+        930,
+        1073,
+        1357
+       ],
+       "equipe do Farol": [
+        281,
+        1001,
+        1129
+       ]
+      },
+      "ok": true
+     }
+    },
+    "2": {
+     "comuns": {
+      "segundos_por_dia": 0.0397,
+      "hash": "9580896192ac198b56c052dcab4b50e9a5c7fc9d5c08dec1da1ea5eb01165b89",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "textos_chegados_sao_as_respostas": true,
+      "itens_abertos_com_os_atos": true,
+      "so_responde_com_gente_presente": true,
+      "horas_extras": {
+       "normal": 16.7,
+       "paciente": 0.0,
+       "atribuidas_aos_atos": 27,
+       "ok": true
+      },
+      "surdo_nada_chega": true,
+      "ninguem_resolve_sem_util": true,
+      "algum_pedido_util_no_normal": true,
+      "defeito_nas_falhas": {
+       "falhas_por_minuto_com_defeito": 3.918,
+       "no_resto": 0.237,
+       "ok": true
+      },
+      "o_defeito_nos_mesmos_instantes_sem_atos": true,
+      "quartis_da_resposta": {
+       "equipe do Farol": [
+        177,
+        422,
+        1158
+       ],
+       "equipe do Rio": [
+        284,
+        966,
+        1121
+       ]
+      },
+      "ok": true
+     }
+    },
+    "3": {
+     "comuns": {
+      "segundos_por_dia": 0.0431,
+      "hash": "c9e8d204b0ffa7207c35d8699c2d02ee842a2eaf44669327ff444e085f0103df",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "textos_chegados_sao_as_respostas": true,
+      "itens_abertos_com_os_atos": true,
+      "so_responde_com_gente_presente": true,
+      "horas_extras": {
+       "normal": 69.58,
+       "paciente": 0.0,
+       "atribuidas_aos_atos": 27,
+       "ok": true
+      },
+      "surdo_nada_chega": true,
+      "ninguem_resolve_sem_util": true,
+      "algum_pedido_util_no_normal": true,
+      "defeito_nas_falhas": {
+       "falhas_por_minuto_com_defeito": 1.604,
+       "no_resto": 0.298,
+       "ok": true
+      },
+      "o_defeito_nos_mesmos_instantes_sem_atos": true,
+      "quartis_da_resposta": {
+       "equipe da Colina": [
+        275,
+        972,
+        1124
+       ],
+       "equipe da Fonte": [
+        1066,
+        1192,
+        1338
+       ]
+      },
+      "ok": true
+     }
+    }
+   },
+   "estruturas_diferentes": true
+  },
+  "presenca": {
+   "dias": 28,
+   "sementes": {
+    "1": {
+     "comuns": {
+      "segundos_por_dia": 0.0076,
+      "hash": "311953c98b7824bd96dd93117d8f6f6f5fac1bd8928303f3b7b498bc7ea8838a",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "linhas_so_com_ela_presente": true,
+      "costume": {
+       "normal": 1.0,
+       "sorteado": 0.622,
+       "ok": true
+      },
+      "sorteado_mesmas_sessoes": true,
+      "contingencia": {
+       "respostas_a_ele_normal": 16,
+       "surdo": 0,
+       "ok": true
+      },
+      "calada_nao_fala": true,
+      "campo_conta_as_linhas": true,
+      "ok": true
+     }
+    },
+    "2": {
+     "comuns": {
+      "segundos_por_dia": 0.0108,
+      "hash": "33f6f2368aeac474a8ce99401941c659978f07a9c5498b4339ef6310b7e96e03",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "linhas_so_com_ela_presente": true,
+      "costume": {
+       "normal": 1.0,
+       "sorteado": 0.507,
+       "ok": true
+      },
+      "sorteado_mesmas_sessoes": true,
+      "contingencia": {
+       "respostas_a_ele_normal": 18,
+       "surdo": 0,
+       "ok": true
+      },
+      "calada_nao_fala": true,
+      "campo_conta_as_linhas": true,
+      "ok": true
+     }
+    },
+    "3": {
+     "comuns": {
+      "segundos_por_dia": 0.0083,
+      "hash": "68377a3b9c950ac4ae02490c1f82972046b5a4248a0e1601edd4bb4687423d93",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "linhas_so_com_ela_presente": true,
+      "costume": {
+       "normal": 1.0,
+       "sorteado": 0.507,
+       "ok": true
+      },
+      "sorteado_mesmas_sessoes": true,
+      "contingencia": {
+       "respostas_a_ele_normal": 7,
+       "surdo": 0,
+       "ok": true
+      },
+      "calada_nao_fala": true,
+      "campo_conta_as_linhas": true,
+      "ok": true
+     }
+    }
+   },
+   "estruturas_diferentes": true
+  },
+  "corpo": {
+   "dias": 21,
+   "sementes": {
+    "1": {
+     "comuns": {
+      "segundos_por_dia": 0.014,
+      "hash": "8963f41fe2f7a9ddbab8f344c5abcce3215c798bd8376b2c2875db4856901885",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "volta_sozinho_no_instante_previsto": true,
+      "so_com_ato_volta_com_ato": true,
+      "sem_ato_nao_volta": true,
+      "desvios_nas_rajadas": true,
+      "calma_sem_rajada_e_os_mesmos_desvios": true,
+      "o_desvio_aparece_no_nivel": true,
+      "ok": true
+     }
+    },
+    "2": {
+     "comuns": {
+      "segundos_por_dia": 0.0202,
+      "hash": "86c97db72e211950b95c67a75215c1f2ea1f71d2e4bf6f9b594ab1d4ae12f25f",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "volta_sozinho_no_instante_previsto": true,
+      "so_com_ato_volta_com_ato": true,
+      "sem_ato_nao_volta": true,
+      "desvios_nas_rajadas": true,
+      "calma_sem_rajada_e_os_mesmos_desvios": true,
+      "o_desvio_aparece_no_nivel": true,
+      "ok": true
+     }
+    },
+    "3": {
+     "comuns": {
+      "segundos_por_dia": 0.013,
+      "hash": "b87dda0c8608b0783df92ebb1f34bb829f084b9d42a875283e0f47bee5f48aaa",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "volta_sozinho_no_instante_previsto": true,
+      "so_com_ato_volta_com_ato": true,
+      "sem_ato_nao_volta": true,
+      "desvios_nas_rajadas": true,
+      "calma_sem_rajada_e_os_mesmos_desvios": true,
+      "o_desvio_aparece_no_nivel": true,
+      "ok": true
+     }
+    }
+   },
+   "estruturas_diferentes": true
+  },
+  "voz": {
+   "dias": 21,
+   "sementes": {
+    "1": {
+     "comuns": {
+      "segundos_por_dia": 0.0136,
+      "hash": "a815e69ebdb050d5346977c6af8801d6258b0790967de4ecee208e21ec1e44f8",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "fala_no_instante": {
+       "normal": 1.0,
+       "hora_sorteada": 0.0,
+       "vocabulario_permutado": 1.0,
+       "ok": true
+      },
+      "a_palavra_do_processo": {
+       "normal": 1.0,
+       "permutado": 0.215,
+       "ok": true
+      },
+      "voz_surda_nao_fala": true,
+      "campo_conta_as_linhas": true,
+      "o_acontecimento_aparece_no_campo": true,
+      "ok": true
+     }
+    },
+    "2": {
+     "comuns": {
+      "segundos_por_dia": 0.0153,
+      "hash": "0ac7012ee37f07b0e7b4154e191bc320759779006d9c2bca9561d07db4e6bf77",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "fala_no_instante": {
+       "normal": 1.0,
+       "hora_sorteada": 0.0,
+       "vocabulario_permutado": 1.0,
+       "ok": true
+      },
+      "a_palavra_do_processo": {
+       "normal": 1.0,
+       "permutado": 0.23,
+       "ok": true
+      },
+      "voz_surda_nao_fala": true,
+      "campo_conta_as_linhas": true,
+      "o_acontecimento_aparece_no_campo": true,
+      "ok": true
+     }
+    },
+    "3": {
+     "comuns": {
+      "segundos_por_dia": 0.013,
+      "hash": "f9e436ca20c12d2ddaf221b94514a551159662d310e8684ade672ceec68b9ea3",
+      "mesma_vida": true,
+      "salvar_e_carregar": true,
+      "relogio": true
+     },
+     "lei": {
+      "fala_no_instante": {
+       "normal": 1.0,
+       "hora_sorteada": 0.0,
+       "vocabulario_permutado": 1.0,
+       "ok": true
+      },
+      "a_palavra_do_processo": {
+       "normal": 1.0,
+       "permutado": 0.233,
+       "ok": true
+      },
+      "voz_surda_nao_fala": true,
+      "campo_conta_as_linhas": true,
+      "o_acontecimento_aparece_no_campo": true,
+      "ok": true
+     }
+    }
+   },
+   "estruturas_diferentes": true
+  }
+ },
+ "tudo_certo": true
+}
